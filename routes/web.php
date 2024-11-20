@@ -37,6 +37,7 @@ use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\UrlController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\SubscriptionController;
 
 /* students */
 use App\Http\Controllers\Students\AuthController as sauth;
@@ -145,6 +146,7 @@ Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     Route::resource('discussion', discussion::class);
     Route::resource('message', message::class);
     Route::resource('coupon', coupon::class);
+    Route::resource('subscription', SubscriptionController::class);
     Route::resource('enrollment', enrollment::class);
     Route::get('permission/{role}', [permission::class, 'index'])->name('permission.list');
     Route::post('permission/{role}', [permission::class, 'save'])->name('permission.save'); 
@@ -196,7 +198,7 @@ Route::middleware(['checkstudent'])->prefix('students')->group(function () {
     Route::post('/quiz/update-progress', [QuizController::class, 'updateProgress']);  
     Route::get('/certificate/{id}', [CertificateController::class, 'showCertificate'])
     ->name('certificate.show');    
-    
+
 });
 
 //----------instructor routes --------------------------------
