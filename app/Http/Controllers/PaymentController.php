@@ -45,7 +45,9 @@ class PaymentController extends Controller
         $currency_type = null;
 
         foreach ($cart_details['cart'] as $course) {
-            $currency_type = $course['currency_type']; // Get currency_type from the first item in the cart
+            $currency_type = $course['currency_type']; 
+            $courseId = $course['course_id'];
+            $instructorId = $course['instructor_id'];
             break; // Exit loop after retrieving the first currency_type
         }
 

@@ -440,7 +440,7 @@
                             <span class="nav-text">Payments</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="javascript:void()"><i class="las la-money-bill"></i>Course Payments</a></li>
+                            <li><a href="{{route('courseFee')}}"><i class="las la-money-bill"></i>Course Payments</a></li>
                             <li><a href="javascript:void()"><i class="las la-money-bill"></i>Subscription</a></li>                            
                         </ul>
                     </li> 

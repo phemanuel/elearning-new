@@ -318,6 +318,11 @@ class CourseController extends Controller
         }
     }
 
+    public function courseFee()
+    {
+        return view('backend.course.courses.course-fees');
+    }
+
     /**
      * Remove the specified resource from storage.
      */

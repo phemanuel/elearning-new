@@ -126,6 +126,7 @@ Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     Route::resource('instructor', instructor::class);
     Route::resource('courseCategory', courseCategory::class);
     Route::resource('course', course::class);
+    Route::get('course-fee/', [course::class, 'courseFee'])->name('courseFee');
     Route::resource('certificates', CertificateController::class);
     Route::resource('segment', segment::class);
     Route::get('segment/add/{id}', [segment::class, 'createSegment'])->name('segment.createNew');

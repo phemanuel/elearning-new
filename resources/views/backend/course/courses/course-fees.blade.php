@@ -15,7 +15,7 @@
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
-                    <h4>Course Material - {{$lesson->title}}</h4>
+                    <h4>Payments </h4>
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -43,17 +43,16 @@
                     <div id="list-view" class="tab-pane fade active show col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">All Course Payment List </h4>
-                                <!-- <a href="{{ route('material.createNew', encryptor('encrypt', $material->first()?->lesson?->id)) }}" 
-                                class="btn btn-primary">+ Add new material</a>
-                            </div> -->
+                                <h4 class="card-title">All Course Payment List </h4>                               
+                            </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    @if($auth()->user()->role_id == 1)
+                                    @if(auth()->user()->role_id == 1)
                                     <table id="example3" class="display" style="min-width: 845px">
                                         <thead>
                                             <tr>
                                                 <th>{{__('#')}}</th>
+                                                <th>{{__('Student Name')}}</th>
                                                 <th>{{__('Course')}}</th>
                                                 <th>{{__('Amount')}}</th>
                                                 <th>{{__('Payout')}}</th>
@@ -61,106 +60,37 @@
                                                 <!-- <th>{{__('Action')}}</th> -->
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            @forelse ($material as $key => $m)
+                                        <tbody>                                            
                                             <tr>
-                                                <td>{{$key + 1}}</td>
-                                                <!-- <td>{{$m->title}}</td> -->
-                                                <td>{{$m->lesson?->title}}</td>  
-                                                <td>{{$m->title}}</td>                                                
-                                                <td>
-                                                    {{ $m->type == 'video' ? __('Video') : ($m->type == 'text' ?
-                                                    __('Text') : __('Quiz')) }}
-                                                </td>                                               
-                                                @if($m->type == 'video')
-                                                <td>
-                                                <video width="200" height="100" controls>
-                                                    <source src="{{asset('uploads/courses/contents/'.$m->content)}}" type="video/mp4">
-                                                    Your browser does not support the video tag.
-                                                </video>
-                                                </td>
-                                                @else
-                                                <td></td>
-                                                @endif
-                                                <!-- <td>{{$m->content_url}}</td> -->
-                                                <td>
-                                                    <a href="{{route('material.edit', encryptor('encrypt',$m->id))}}"
-                                                        class="btn btn-sm btn-primary" title="Edit"><i
-                                                            class="la la-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"
-                                                        title="Delete" onclick="$('#form{{$m->id}}').submit()"><i
-                                                            class="la la-trash-o"></i></a>
-                                                    <form id="form{{$m->id}}"
-                                                        action="{{route('material.destroy', encryptor('encrypt',$m->id))}}"
-                                                        method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                            @empty
-                                            <tr>
-                                                <th colspan="6" class="text-center">No Course Material Found</th>
-                                            </tr>
-                                            @endforelse
+                                                <td>1</td>
+                                                <td>Maxwell Akinyooye</td>
+                                                <td>Freelance Bootcamp</td>  
+                                                <td>{{number_format(27600,2)}}</td>
+                                                <td>{{number_format(25600,2)}}</td>
+                                                <td>20th November, 2024</td>
                                         </tbody>
                                     </table>
                                     @else
                                     <table id="example3" class="display" style="min-width: 845px">
-                                        <thead>
+                                    <thead>
                                             <tr>
                                                 <th>{{__('#')}}</th>
-                                                <!-- <th>{{__('Title')}}</th> -->
-                                                <th>{{__('Lesson')}}</th>
-                                                <th>{{__('Title')}}</th>
-                                                <th>{{__('Material Type')}}</th>
-                                                <th>{{__('Content')}}</th>
-                                                <!-- <th>{{__('Content Url')}}</th> -->
-                                                <th>{{__('Action')}}</th>
+                                                <th>{{__('Student Name')}}</th>
+                                                <th>{{__('Course')}}</th>
+                                                <th>{{__('Amount')}}</th>
+                                                <th>{{__('Payout')}}</th>
+                                                <th>{{__('Payment Date')}}</th>
+                                                <!-- <th>{{__('Action')}}</th> -->
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            @forelse ($material as $key => $m)
+                                        <tbody>                                            
                                             <tr>
-                                                <td>{{$key + 1}}</td>
-                                                <!-- <td>{{$m->title}}</td> -->
-                                                <td>{{$m->lesson?->title}}</td>  
-                                                <td>{{$m->title}}</td>                                                
-                                                <td>
-                                                    {{ $m->type == 'video' ? __('Video') : ($m->type == 'text' ?
-                                                    __('Text') : __('Quiz')) }}
-                                                </td>                                               
-                                                @if($m->type == 'video')
-                                                <td>
-                                                <video width="200" height="100" controls>
-                                                    <source src="{{asset('uploads/courses/contents/'.$m->content)}}" type="video/mp4">
-                                                    Your browser does not support the video tag.
-                                                </video>
-                                                </td>
-                                                @else
-                                                <td></td>
-                                                @endif
-                                                <!-- <td>{{$m->content_url}}</td> -->
-                                                <td>
-                                                    <a href="{{route('material.edit', encryptor('encrypt',$m->id))}}"
-                                                        class="btn btn-sm btn-primary" title="Edit"><i
-                                                            class="la la-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"
-                                                        title="Delete" onclick="$('#form{{$m->id}}').submit()"><i
-                                                            class="la la-trash-o"></i></a>
-                                                    <form id="form{{$m->id}}"
-                                                        action="{{route('material.destroy', encryptor('encrypt',$m->id))}}"
-                                                        method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                            @empty
-                                            <tr>
-                                                <th colspan="6" class="text-center">No Course Material Found</th>
-                                            </tr>
-                                            @endforelse
+                                                <td>1</td>
+                                                <td>Maxwell Akinyooye</td>
+                                                <td>Freelance Bootcamp</td>  
+                                                <td>{{number_format(27600,2)}}</td>
+                                                <td>{{number_format(25600,2)}}</td>
+                                                <td>20th November, 2024</td>
                                         </tbody>
                                     </table>
                                     @endif
