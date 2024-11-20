@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2024 at 02:33 PM
+-- Generation Time: Nov 20, 2024 at 11:05 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -115,7 +115,8 @@ CREATE TABLE `checkouts` (
 
 INSERT INTO `checkouts` (`id`, `cart_data`, `student_id`, `txnid`, `currency`, `currency_code`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'eyJjYXJ0Ijp7IjMiOnsiaWQiOjMsInRpdGxlX2VuIjoiU01NIEZyZWVsYW5jZSBCb290Y2FtcCIsInF1YW50aXR5IjoxLCJwcmljZSI6IjI3NTAwLjAwIiwib2xkX3ByaWNlIjoiMzUwMDAuMDAiLCJjdXJyZW5jeV90eXBlIjoiPU49IiwiaW1hZ2UiOiI3MTgxNzI4MTQ2NTgzLmpwZyIsImRpZmZpY3VsdHkiOiJiZWdpbm5lciIsImluc3RydWN0b3IiOiJNaXJhY2xlIFBldGVyIiwiaW5zdHJ1Y3Rvcl9pZCI6NH19LCJjYXJ0X2RldGFpbHMiOnsiY2FydF90b3RhbCI6Mjc1MDAsInRvdGFsX2Ftb3VudCI6Mjc1MDB9fQ==', 12, 'KDH670aca79d981f', 'NAIRA', '=N=', 1, '2024-10-13 02:14:01', '2024-10-13 02:14:01', NULL),
-(2, 'eyJjYXJ0Ijp7IjIiOnsiaWQiOjIsInRpdGxlX2VuIjoiSW50cm9kdWN0aW9uIHRvIERhdGEgU2NpZW5jZSIsInF1YW50aXR5IjoxLCJwcmljZSI6IjAuMDAiLCJvbGRfcHJpY2UiOiIwLjAwIiwiY3VycmVuY3lfdHlwZSI6Ij1OPSIsImltYWdlIjoiNzIxMTcyNzQ0NDkwMS5wbmciLCJkaWZmaWN1bHR5IjoiYmVnaW5uZXIiLCJpbnN0cnVjdG9yIjoiQWRleWlua2EgVGVtaWxvbHV3YSIsImluc3RydWN0b3JfaWQiOjN9fSwiY2FydF9kZXRhaWxzIjp7ImNhcnRfdG90YWwiOjAsInRvdGFsX2Ftb3VudCI6MH19', 12, 'KDH6739b2243eba3', 'NAIRA', '=N=', 1, '2024-11-17 17:06:44', '2024-11-17 17:06:44', NULL);
+(2, 'eyJjYXJ0Ijp7IjIiOnsiaWQiOjIsInRpdGxlX2VuIjoiSW50cm9kdWN0aW9uIHRvIERhdGEgU2NpZW5jZSIsInF1YW50aXR5IjoxLCJwcmljZSI6IjAuMDAiLCJvbGRfcHJpY2UiOiIwLjAwIiwiY3VycmVuY3lfdHlwZSI6Ij1OPSIsImltYWdlIjoiNzIxMTcyNzQ0NDkwMS5wbmciLCJkaWZmaWN1bHR5IjoiYmVnaW5uZXIiLCJpbnN0cnVjdG9yIjoiQWRleWlua2EgVGVtaWxvbHV3YSIsImluc3RydWN0b3JfaWQiOjN9fSwiY2FydF9kZXRhaWxzIjp7ImNhcnRfdG90YWwiOjAsInRvdGFsX2Ftb3VudCI6MH19', 12, 'KDH6739b2243eba3', 'NAIRA', '=N=', 1, '2024-11-17 17:06:44', '2024-11-17 17:06:44', NULL),
+(10, 'eyJjYXJ0Ijp7IjEiOnsiaWQiOjEsInRpdGxlX2VuIjoiV2hhdCBpcyBEYXRhIFNjaWVuY2U/IiwicXVhbnRpdHkiOjEsInByaWNlIjoiMTAwLjAwIiwib2xkX3ByaWNlIjoiMTAwLjAwIiwiY3VycmVuY3lfdHlwZSI6Ij1OPSIsImltYWdlIjoiNTgwMTcyNzQ0NDYyNC5wbmciLCJkaWZmaWN1bHR5IjoiYmVnaW5uZXIiLCJpbnN0cnVjdG9yIjoiQWRleWlua2EgVGVtaWxvbHV3YSIsImluc3RydWN0b3JfaWQiOjN9fSwiY2FydF9kZXRhaWxzIjp7ImNhcnRfdG90YWwiOjEwMCwidG90YWxfYW1vdW50IjoxMDB9fQ==', 12, 'KDH20241120zv3U', 'NAIRA', '=N=', 1, '2024-11-21 06:03:29', '2024-11-21 06:03:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -266,7 +267,8 @@ CREATE TABLE `enrollments` (
 
 INSERT INTO `enrollments` (`id`, `student_id`, `course_id`, `instructor_id`, `enrollment_date`, `segment`, `completed`, `completion_date`, `certificate_link`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 12, 3, 4, '2024-10-12 07:00:00', 2, 1, '2024-11-08 08:00:00', 'UiQtrf0BOi', '2024-10-13 02:14:01', '2024-10-13 02:14:01', NULL),
-(2, 12, 2, 3, '2024-11-17 08:00:00', 1, 0, '2024-11-17 08:00:00', NULL, '2024-11-17 17:06:44', '2024-11-17 17:06:44', NULL);
+(2, 12, 2, 3, '2024-11-17 08:00:00', 1, 0, '2024-11-17 08:00:00', NULL, '2024-11-17 17:06:44', '2024-11-17 17:06:44', NULL),
+(9, 12, 1, 3, '2024-11-20 08:00:00', 1, 0, '2024-11-20 08:00:00', NULL, '2024-11-21 06:03:29', '2024-11-21 06:03:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -602,7 +604,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (63, '2024_10_23_213541_add_last_time_attempt_to_progress_table', 31),
 (64, '2024_11_06_184043_create_certificates_table', 32),
 (65, '2024_11_07_190617_add_completion_date_to_enrollments_table', 33),
-(66, '2024_11_08_074010_add_cert_link_to_enrollments_table', 34);
+(66, '2024_11_08_074010_add_cert_link_to_enrollments_table', 34),
+(67, '2024_11_20_214859_add_course_id_to_payments_table', 35);
 
 -- --------------------------------------------------------
 
@@ -681,6 +684,8 @@ INSERT INTO `password_reset_tokens` (`email`, `token`, `created_at`) VALUES
 CREATE TABLE `payments` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `student_id` bigint(20) DEFAULT NULL,
+  `course_id` int(11) NOT NULL,
+  `instructor_id` int(11) NOT NULL,
   `currency` varchar(255) DEFAULT NULL,
   `currency_code` varchar(255) DEFAULT NULL,
   `amount` decimal(10,2) DEFAULT NULL,
@@ -697,9 +702,10 @@ CREATE TABLE `payments` (
 -- Dumping data for table `payments`
 --
 
-INSERT INTO `payments` (`id`, `student_id`, `currency`, `currency_code`, `amount`, `currency_value`, `method`, `txnid`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 12, 'NAIRA', '=N=', 27500.00, 1.00, 'Paystack', 'KDH670aca79d981f', 1, '2024-10-13 02:14:01', '2024-10-13 02:14:01', NULL),
-(2, 12, 'NAIRA', '=N=', 0.00, 1.00, 'Paystack', 'KDH6739b2243eba3', 1, '2024-11-17 17:06:44', '2024-11-17 17:06:44', NULL);
+INSERT INTO `payments` (`id`, `student_id`, `course_id`, `instructor_id`, `currency`, `currency_code`, `amount`, `currency_value`, `method`, `txnid`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 12, 3, 4, 'NAIRA', '=N=', 27500.00, 1.00, 'Paystack', 'KDH670aca79d981f', 1, '2024-10-13 02:14:01', '2024-10-13 02:14:01', NULL),
+(2, 12, 2, 3, 'NAIRA', '=N=', 0.00, 1.00, 'Paystack', 'KDH6739b2243eba3', 1, '2024-11-17 17:06:44', '2024-11-17 17:06:44', NULL),
+(9, 12, 1, 3, 'NAIRA', '=N=', 100.00, 1.00, 'Paystack', 'KDH20241120zv3U', 1, '2024-11-21 06:03:29', '2024-11-21 06:03:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -1393,7 +1399,7 @@ ALTER TABLE `certificates`
 -- AUTO_INCREMENT for table `checkouts`
 --
 ALTER TABLE `checkouts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `coupons`
@@ -1423,7 +1429,7 @@ ALTER TABLE `discussions`
 -- AUTO_INCREMENT for table `enrollments`
 --
 ALTER TABLE `enrollments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -1459,7 +1465,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `news_letters`
@@ -1477,7 +1483,7 @@ ALTER TABLE `options`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `permissions`

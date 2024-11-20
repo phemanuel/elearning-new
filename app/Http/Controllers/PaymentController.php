@@ -46,7 +46,7 @@ class PaymentController extends Controller
 
         foreach ($cart_details['cart'] as $course) {
             $currency_type = $course['currency_type']; 
-            $courseId = $course['course_id'];
+            $courseId = $course['id'];
             $instructorId = $course['instructor_id'];
             break; // Exit loop after retrieving the first currency_type
         }
@@ -76,6 +76,8 @@ class PaymentController extends Controller
         $deposit->student_id = $user->id;
         $deposit->currency_code = $currency_type;
         $deposit->currency = $currency;
+        $deposit->course_id = $courseId;
+        $deposit->instructor_id = $instructorId;
         $deposit->amount = session('cart_details')['total_amount'];
         $deposit->currency_value = 1;
         $deposit->method = 'Free';
@@ -121,8 +123,8 @@ class PaymentController extends Controller
 
         // Make an HTTP GET request to Paystack API
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer sk_live_3cd4de2321edddfa4adc4cf77aeecc1f31f50e19',
-            // 'Authorization' => 'Bearer sk_test_a68da4cd7971e573aa675946d8b2549ca819044e',
+           // 'Authorization' => 'Bearer sk_live_3cd4de2321edddfa4adc4cf77aeecc1f31f50e19',
+            'Authorization' => 'Bearer sk_test_a68da4cd7971e573aa675946d8b2549ca819044e',
             'Cache-Control' => 'no-cache',
         ])->get($url);
 
@@ -179,7 +181,9 @@ class PaymentController extends Controller
         $currency_type = null;
 
         foreach ($cart_details['cart'] as $course) {
-            $currency_type = $course['currency_type']; // Get currency_type from the first item in the cart
+            $currency_type = $course['currency_type']; 
+            $courseId = $course['id'];
+            $instructorId = $course['instructor_id'];
             break; // Exit loop after retrieving the first currency_type
         }
 
@@ -214,6 +218,8 @@ class PaymentController extends Controller
         $deposit->student_id = $user->id;
         $deposit->currency_code = $currency_type;
         $deposit->currency = $currency;
+        $deposit->course_id = $courseId;
+        $deposit->instructor_id = $instructorId;
         $deposit->amount = session('cart_details')['total_amount'];
         $deposit->currency_value = 1;
         $deposit->method = 'Paystack';
