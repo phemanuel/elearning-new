@@ -48,48 +48,53 @@ class SubscriptionController extends Controller
             return back()->with('error', 'Please select a valid subscription plan and duration.');
         }
 
-        // Check if the instructor already has a subscription for the selected plan
-        $existingSubscription = Subscription::where('instructor_id', $instructorId)
-            ->where('plan_id', $planId)
-            ->first();
-
-        if ($existingSubscription) {
-            return back()->with('error', 'Instructor is already subscribed to this plan. Please upgrade.');
-        }
-
-        // Fetch the amount for the selected plan
+        // Fetch the instructor and plan
+        $instructor = Instructor::find($instructorId);
         $plan = SubscriptionPlan::find($planId);
 
-        if (!$plan) {
-            return back()->with('error', 'Selected subscription plan does not exist.');
+        if (!$instructor || !$plan) {
+            return back()->with('error', 'Invalid instructor or subscription plan.');
         }
 
-        $amount = $plan->amount; // Assuming the 'amount' column exists in the subscription_plans table
+        $amount = $plan->amount;
         $totalAmount = $amount * $duration;
-
-        // Calculate subscription dates
         $startDate = now();
         $endDate = $startDate->copy()->addMonths($duration);
 
-        // Create the subscription record
-        Subscription::create([
-            'instructor_id' => $instructorId,
-            'plan_id' => $planId,
-            'no_of_months' => $duration,
-            'start_date' => $startDate,
-            'end_date' => $endDate,
-            'total_amount' => $totalAmount,
-            'status' => 'Active',
-        ]);
+        // Check if the instructor already has an active subscription
+        $existingSubscription = Subscription::where('instructor_id', $instructorId)
+            ->where('status', 'Active')
+            ->first();
 
-        // Update the current_plan attribute in the instructor table
-        $instructor = Instructor::find($instructorId);
-        if ($instructor) {
-            $instructor->current_plan = $planId;
-            $instructor->save();
+        if ($existingSubscription) {
+            // Update the existing subscription
+            $existingSubscription->update([
+                'plan_id' => $planId,
+                'no_of_months' => $duration,
+                'start_date' => $startDate,
+                'end_date' => $endDate,
+                'total_amount' => $totalAmount,
+            ]);
+            $message = 'Subscription updated successfully.';
+        } else {
+            // Create a new subscription
+            Subscription::create([
+                'instructor_id' => $instructorId,
+                'plan_id' => $planId,
+                'no_of_months' => $duration,
+                'start_date' => $startDate,
+                'end_date' => $endDate,
+                'total_amount' => $totalAmount,
+                'status' => 'Active',
+            ]);
+            $message = 'Subscription created successfully.';
         }
 
-        return back()->with('success', 'Subscription added and current plan updated successfully.');
+        // Update the instructor's current plan
+        $instructor->current_plan = $planId;
+        $instructor->save();
+
+        return back()->with('success', $message);
     }
 
     /**
@@ -114,6 +119,11 @@ class SubscriptionController extends Controller
     public function update(Request $request, Subscription $subscription)
     {
         //
+    }
+
+    public function upgrade($id)
+    {
+
     }
 
     /**

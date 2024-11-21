@@ -149,6 +149,8 @@ Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     Route::resource('message', message::class);
     Route::resource('coupon', coupon::class);
     Route::resource('subscription', SubscriptionController::class);
+    Route::post('/subscription/upgrade', [SubscriptionController::class, 'upgrade'])
+    ->name('subscription.upgrade');
     Route::resource('subscriptionPlan', SubscriptionPlanController::class);
     Route::resource('enrollment', enrollment::class);
     Route::get('permission/{role}', [permission::class, 'index'])->name('permission.list');
