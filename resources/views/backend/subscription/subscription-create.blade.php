@@ -79,7 +79,7 @@
                                                 </td>
                                                 <td>
                                                     <!-- If the instructor already has a plan, disable the dropdown -->
-                                                    <select name="subscriptionPlan[{{ $d->id }}]" class="form-control" {{ $d->subscriptionPlan ? 'disabled' : '' }}>
+                                                    <select name="subscriptionPlan[{{ $d->id }}]" class="form-control" >
                                                         @foreach($subscriptionPlan as $s)
                                                             <option value="{{ $s->id }}" {{ old("subscriptionPlan[{$d->id}]") == $s->id ? 'selected' : '' }}>{{ $s->name }}</option>
                                                         @endforeach
