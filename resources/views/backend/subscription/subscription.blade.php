@@ -48,51 +48,57 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 845px">
-                                        <thead>
-                                            <tr>
-                                                <th>{{__('#')}}</th>
-                                                <th>{{__('Instructor Name')}}</th>
-                                                <th>{{__('Subscription Name')}}</th>
-                                                <th>{{__('Course Upload')}}</th>
-                                                <th>{{__('Student Upload')}}</th>
-                                                <th>{{__('Allocated Space')}}</th>
-                                                <th>{{__('Amount/Month')}}</th>
-                                                <th>{{__('Action')}}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($instructorPlan as $key => $d)
-                                            <tr>
-                                                <td><strong>{{$key + 1}}</strong></td>
-                                                <td><strong>{{$d->name}}</strong></td> 
-                                                <td><strong>{{$d->subscriptionPlan?->name ?? 'No Plan Assigned'}}</strong></td>                                                
-                                                <td><strong>{{$d->subscriptionPlan?->course_upload}}</strong></td>
-                                                <td><strong>{{$d->subscriptionPlan?->student_upload}}</strong></td>
-                                                <td><strong>{{$d->subscriptionPlan?->allocated_space}}</strong></td>
-                                                <td><strong>{{number_format($d->subscriptionPlan?->amount, 2)}}</strong></td>
-                                                <td>
-                                                    <a href="{{route('subscription.edit', encryptor('encrypt', $d->id))}}"
+                                <table id="example3" class="display" style="min-width: 845px">
+                                <thead>
+                                    <tr>
+                                        <th>{{ __('#') }}</th>
+                                        <th>{{ __('Instructor Name') }}</th>
+                                        <th>{{ __('Subscription Name') }}</th>
+                                        <th>{{ __('Amount/Month') }}</th>
+                                        <th>{{ __('No of Months') }}</th>
+                                        <th>{{ __('Total Amount') }}</th>
+                                        <th>{{ __('Course Upload') }}</th>
+                                        <th>{{ __('Student Upload') }}</th>
+                                        <th>{{ __('Allocated Space') }}</th>
+                                        <th>{{ __('Actions') }}</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($subscriptions as $key => $subscription)
+                                    <tr>
+                                        <td><strong>{{ $key + 1 }}</strong></td>
+                                        <td><strong>{{ $subscription->instructor?->name_en ?? 'No Instructor' }}</strong></td>
+                                        <td><strong>{{ $subscription->subscriptionPlan?->name ?? 'No Plan Assigned' }}</strong></td>
+                                        <td><strong>{{ number_format($subscription->subscriptionPlan?->amount ?? 0, 2) }}</strong></td>
+                                        <td><strong>{{ $subscription->no_of_months }}</strong></td>
+                                        <td><strong>{{ $subscription->total_amount }}</strong></td>
+                                        <td><strong>{{ $subscription->subscriptionPlan?->course_upload ?? 'N/A' }}</strong></td>
+                                        <td><strong>{{ $subscription->subscriptionPlan?->student_upload ?? 'N/A' }}</strong></td>
+                                        <td><strong>{{ $subscription->subscriptionPlan?->allocated_space ?? 'N/A' }}Gb</strong></td>
+                                        <td>
+                                                    <!-- <a href="{{route('subscription.edit', encryptor('encrypt', $subscription->id))}}"
                                                         class="btn btn-sm btn-primary" title="Edit"><i
-                                                            class="la la-pencil"></i></a>
+                                                            class="la la-pencil"></i></a> -->
                                                     <a href="javascript:void(0);" class="btn btn-sm btn-danger"
-                                                        title="Delete" onclick="$('#form{{$d->id}}').submit()"><i
+                                                        title="Delete" onclick="$('#form{{$subscription->id}}').submit()"><i
                                                             class="la la-trash-o"></i></a>
-                                                    <form id="form{{$d->id}}"
-                                                        action="{{route('subscription.destroy', $d->id)}}"
+                                                    <form id="form{{$subscription->id}}"
+                                                        action="{{route('subscription.destroy', $subscription->id)}}"
                                                         method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>
                                                 </td>
-                                            </tr>
-                                            @empty
-                                            <tr>
-                                                <th colspan="7" class="text-center">No subscriptions found</th>
-                                            </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
+                                        
+                                    </tr>
+                                    @empty
+                                    <tr>
+                                        <th colspan="7" class="text-center">No subscriptions found</th>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
                                 </div>
                             </div>
                         </div>

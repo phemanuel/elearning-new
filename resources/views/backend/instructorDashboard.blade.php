@@ -176,9 +176,12 @@
                     </div>
                     <div class="card-body">
                         <div class="widget-todo dz-scroll" style="height: 370px;" id="DZ_W_Notifications">
+                            @if($subscriptions->count() == 0)
+                            <h4>You have no plan subscribed to</h4>
+                            @else
                             <!-- Image representing the plan -->
                             <div class="text-center mb-4">
-                                <img src="{{asset('images/basic.png')}}" alt="Starter Plan" class="img-fluid" style="max-height: 150px; width: auto;">
+                                <img src="{{asset('images/' . $imageUrl)}}" alt="Starter Plan" class="img-fluid" style="max-height: 150px; width: auto;">
                             </div>
 
                             <!-- Plan details -->
@@ -204,6 +207,7 @@
                                     </a>
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
 

@@ -16,9 +16,8 @@ class SubscriptionController extends Controller
     public function index()
     {
         //
-        $instructorPlan = Instructor::where('current_plan', '!=' , 0)
-        ->paginate(10);        
-        return view('backend.subscription.subscription', compact('instructorPlan'));
+        $subscriptions = Subscription::with(['instructor', 'subscriptionPlan'])->paginate(10);
+        return view('backend.subscription.subscription', compact('subscriptions'));
         
     }    
 
@@ -129,8 +128,26 @@ class SubscriptionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Subscription $subscription)
+    public function destroy($id)
     {
-        //
+        // Find the subscription
+        $subscription = Subscription::findOrFail($id);
+
+        // Get the instructor associated with this subscription
+        $instructor = Instructor::find($subscription->instructor_id);
+
+        // Delete the subscription
+        if ($subscription->delete()) {
+            // Update the instructor's current_plan to 0
+            if ($instructor) {
+                $instructor->current_plan = 0;
+                $instructor->save();
+            }
+
+            return redirect()->back()->with('success', 'Subscription deleted and instructor plan updated successfully.');
+        }
+
+        return redirect()->back()->with('error', 'Failed to delete the subscription.');
     }
+
 }
