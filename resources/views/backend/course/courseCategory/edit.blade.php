@@ -19,7 +19,7 @@
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
-                    <h4>Add Category</h4>
+                    <h4>Edit Category</h4>
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -73,8 +73,8 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <button type="submit" class="btn btn-light">Cencel</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="submit" class="btn btn-light">Cancel</button>
                                 </div>
                             </div>
                         </form>

@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('subscription_plans', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('course_upload');
-            $table->integer('student_upload');
-            $table->integer('allocated_space');
-            $table->string('image');
+            $table->unsignedInteger('course_upload');
+            $table->unsignedInteger('student_upload');
+            $table->unsignedInteger('allocated_space')->comment('Storage allocated in gb');
+            $table->string('image')->nullable();
+            $table->enum('status', ['Active', 'Inactive'])->default('Active')->index();
+            $table->decimal('amount', 10, 2);
             $table->timestamps();
         });
     }

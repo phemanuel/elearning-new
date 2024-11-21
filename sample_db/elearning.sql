@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2024 at 11:05 PM
+-- Generation Time: Nov 21, 2024 at 02:15 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -326,6 +326,7 @@ CREATE TABLE `instructors` (
   `social_linkedin` varchar(255) DEFAULT NULL,
   `social_youtube` varchar(255) DEFAULT NULL,
   `instructor_url` varchar(255) NOT NULL,
+  `current_plan` int(11) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -336,10 +337,10 @@ CREATE TABLE `instructors` (
 -- Dumping data for table `instructors`
 --
 
-INSERT INTO `instructors` (`id`, `name_en`, `name_bn`, `contact_en`, `contact_bn`, `email`, `role_id`, `bio`, `title`, `designation`, `image`, `status`, `password`, `language`, `access_block`, `social_facebook`, `social_twitter`, `social_instagram`, `social_linkedin`, `social_youtube`, `instructor_url`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(3, 'Adeyinka Temiloluwa', NULL, '08053608799', NULL, 'emmanexitconsult@gmail.com', 3, '<p><span style=\"font-size: 14.992px;\">I am a professional responsible for analyzing financial data and providing insights to help businesses make informed investment and strategic decisions. I assess economic performance, forecast future financial trends, and offer recommendations based on their analysis. I often work with financial models, examining variables such as revenues, expenses, and market trends, to determine the financial health of companies or projects.</span></p><p><span style=\"font-size: 14.992px;\">Key skills include proficiency in financial software, data analysis, understanding of accounting principles, and strong communication abilities and often work in investment firms, banks, insurance companies, or corporate finance departments. I typically holds a degree in finance, economics, or a related field and may possess certifications like CFA (Chartered Financial Analyst).</span></p>', 'Mrs', 'Financial Analyst', 'Instructor_Adeyinka Temiloluwa_197.jpg', 1, '$2y$12$oRlxxgjJXDhVFgDjAY21j.LBVn60MgaQUy4P0ysqnCZEWqjp0D91O', 'en', NULL, 'https://www.facebook.com/temi-akinyooye', NULL, 'https://www.instgram.com/temi-akinyooye', NULL, NULL, 'OVLbufn7RLj0NxlvY0ftcTanFCN6zFJhKiCW2DPA', 'FJGu91BMdWdNlASbolOq3o4caqnR6Ro9Esnxptv9', '2024-09-27 18:36:41', '2024-10-21 21:17:48', NULL),
-(4, 'Miracle Peters', NULL, '08104196102', NULL, 'miracle.kingsbranding@gmail.com', 3, '<p>As a Digital Marketer, I specialize in creating impactful online campaigns that boost brand visibility and drive engagement. With expertise in social media, SEO, email marketing, and paid ads, I tailor strategies to connect with target audiences and generate leads. I’m passionate about using data-driven insights to optimize campaigns and help businesses grow in the digital landscape. Skilled in content creation and digital tools, I continuously adapt to new trends and technologies to stay ahead in the ever-evolving world of digital marketing.<br></p>', 'Miss', 'Digital Marketer', 'Instructor_Miracle Peter_629.jpg', 1, '$2y$12$uh2TKhMQCGp/S4n7Ps0BhedkDlJkmqipqxvvDkGtNBpa7DFgqr7k6', 'en', NULL, NULL, NULL, NULL, NULL, NULL, '85zlG17M2I4WAM9b4YtGqnckzTtOpKNZcXzcBoNL', NULL, '2024-09-29 03:06:36', '2024-11-13 08:01:41', NULL),
-(5, 'Olayimika Omotayo', NULL, '08053708699', NULL, 'olaoluwayimika72@yahoo.com', 3, '<p>As an Executive Assistant, I provide high-level administrative support to executives, ensuring smooth day-to-day operations. With a strong focus on organization and attention to detail, I manage calendars, coordinate meetings, handle communications, and oversee special projects. I excel at multitasking and problem-solving, allowing executives to focus on strategic priorities. My role involves confidential tasks, managing travel arrangements, and preparing reports, all while maintaining professionalism and efficiency. Passionate about streamlining processes, I thrive in fast-paced environments and am committed to helping leadership achieve their goals effectively.<br></p>', 'Mrs', 'Executive Assistant', 'Instructor_Olayimika Omotayo_791.jpg', 1, '$2y$12$KivcsAkNgW05fba/oIrb9eCsasvKVXrfejZZlEB27zjbpja3JoIma', 'en', NULL, NULL, NULL, NULL, NULL, NULL, 'DL9bwHBPP5yRb5vopodNYvWZS9dONGCowDLT832M', NULL, '2024-09-29 03:14:02', '2024-10-21 21:27:09', NULL);
+INSERT INTO `instructors` (`id`, `name_en`, `name_bn`, `contact_en`, `contact_bn`, `email`, `role_id`, `bio`, `title`, `designation`, `image`, `status`, `password`, `language`, `access_block`, `social_facebook`, `social_twitter`, `social_instagram`, `social_linkedin`, `social_youtube`, `instructor_url`, `current_plan`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(3, 'Adeyinka Temiloluwa', NULL, '08053608799', NULL, 'emmanexitconsult@gmail.com', 3, '<p><span style=\"font-size: 14.992px;\">I am a professional responsible for analyzing financial data and providing insights to help businesses make informed investment and strategic decisions. I assess economic performance, forecast future financial trends, and offer recommendations based on their analysis. I often work with financial models, examining variables such as revenues, expenses, and market trends, to determine the financial health of companies or projects.</span></p><p><span style=\"font-size: 14.992px;\">Key skills include proficiency in financial software, data analysis, understanding of accounting principles, and strong communication abilities and often work in investment firms, banks, insurance companies, or corporate finance departments. I typically holds a degree in finance, economics, or a related field and may possess certifications like CFA (Chartered Financial Analyst).</span></p>', 'Mrs', 'Financial Analyst', 'Instructor_Adeyinka Temiloluwa_197.jpg', 1, '$2y$12$oRlxxgjJXDhVFgDjAY21j.LBVn60MgaQUy4P0ysqnCZEWqjp0D91O', 'en', NULL, 'https://www.facebook.com/temi-akinyooye', NULL, 'https://www.instgram.com/temi-akinyooye', NULL, NULL, 'OVLbufn7RLj0NxlvY0ftcTanFCN6zFJhKiCW2DPA', 0, 'FJGu91BMdWdNlASbolOq3o4caqnR6Ro9Esnxptv9', '2024-09-27 18:36:41', '2024-10-21 21:17:48', NULL),
+(4, 'Miracle Peters', NULL, '08104196102', NULL, 'miracle.kingsbranding@gmail.com', 3, '<p>As a Digital Marketer, I specialize in creating impactful online campaigns that boost brand visibility and drive engagement. With expertise in social media, SEO, email marketing, and paid ads, I tailor strategies to connect with target audiences and generate leads. I’m passionate about using data-driven insights to optimize campaigns and help businesses grow in the digital landscape. Skilled in content creation and digital tools, I continuously adapt to new trends and technologies to stay ahead in the ever-evolving world of digital marketing.<br></p>', 'Miss', 'Digital Marketer', 'Instructor_Miracle Peter_629.jpg', 1, '$2y$12$uh2TKhMQCGp/S4n7Ps0BhedkDlJkmqipqxvvDkGtNBpa7DFgqr7k6', 'en', NULL, NULL, NULL, NULL, NULL, NULL, '85zlG17M2I4WAM9b4YtGqnckzTtOpKNZcXzcBoNL', 0, NULL, '2024-09-29 03:06:36', '2024-11-13 08:01:41', NULL),
+(5, 'Olayimika Omotayo', NULL, '08053708699', NULL, 'olaoluwayimika72@yahoo.com', 3, '<p>As an Executive Assistant, I provide high-level administrative support to executives, ensuring smooth day-to-day operations. With a strong focus on organization and attention to detail, I manage calendars, coordinate meetings, handle communications, and oversee special projects. I excel at multitasking and problem-solving, allowing executives to focus on strategic priorities. My role involves confidential tasks, managing travel arrangements, and preparing reports, all while maintaining professionalism and efficiency. Passionate about streamlining processes, I thrive in fast-paced environments and am committed to helping leadership achieve their goals effectively.<br></p>', 'Mrs', 'Executive Assistant', 'Instructor_Olayimika Omotayo_791.jpg', 1, '$2y$12$KivcsAkNgW05fba/oIrb9eCsasvKVXrfejZZlEB27zjbpja3JoIma', 'en', NULL, NULL, NULL, NULL, NULL, NULL, 'DL9bwHBPP5yRb5vopodNYvWZS9dONGCowDLT832M', 0, NULL, '2024-09-29 03:14:02', '2024-10-21 21:27:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -605,7 +606,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (64, '2024_11_06_184043_create_certificates_table', 32),
 (65, '2024_11_07_190617_add_completion_date_to_enrollments_table', 33),
 (66, '2024_11_08_074010_add_cert_link_to_enrollments_table', 34),
-(67, '2024_11_20_214859_add_course_id_to_payments_table', 35);
+(67, '2024_11_20_214859_add_course_id_to_payments_table', 35),
+(68, '2024_11_21_121553_create_subscription_plans_table', 36),
+(69, '2024_11_21_121827_add_current_plan_to_instructors_table', 36);
 
 -- --------------------------------------------------------
 
@@ -1056,7 +1059,11 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `name_en`, `name_bn`, `contact_en`, `contact_bn`, `email`, `email_verified_status`, `email_verified_at`, `date_of_birth`, `gender`, `image`, `bio`, `profession`, `nationality`, `address`, `city`, `state`, `postcode`, `country`, `status`, `password`, `language`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(12, 'Maxwell Akinyooye', NULL, '07032689329', NULL, 'phemanuel@yahoo.com', 1, '2024-09-27 18:33:33', NULL, 'male', '6731727565536.jpg', 'I am a driven individual, ready to take on challenges.', 'Web Developer', 'Nigeria', NULL, NULL, NULL, NULL, NULL, 1, '$2y$12$5DaPILO9PASOzB2phTtETe5olNtmZg//GYHZagD2EOBm4YuN0d6p.', 'en', 'Roy3mfNDYQjGdDTMllja6qg56kbUYdJtuTcSfpx9', '2024-09-27 18:32:50', '2024-10-23 18:15:56', NULL);
+(12, 'Maxwell Akinyooye', NULL, '07032689329', NULL, 'phemanuel@yahoo.com', 1, '2024-09-27 18:33:33', NULL, 'male', '6731727565536.jpg', 'I am a driven individual, ready to take on challenges.', 'Web Developer', 'Nigeria', NULL, NULL, NULL, NULL, NULL, 1, '$2y$12$5DaPILO9PASOzB2phTtETe5olNtmZg//GYHZagD2EOBm4YuN0d6p.', 'en', 'Roy3mfNDYQjGdDTMllja6qg56kbUYdJtuTcSfpx9', '2024-09-27 18:32:50', '2024-10-23 18:15:56', NULL),
+(13, 'Awolola Paul', NULL, NULL, NULL, 'awopaul@gmail.com', 1, '2024-11-21 10:57:02', NULL, NULL, 'blank.jpg', NULL, NULL, 'n/a', NULL, NULL, NULL, NULL, NULL, 1, '$2y$12$Ft8Y2R10pueS4o1uM.0Ya.VeZB85PLXuelRkSNfeTX0zjY6Eh48Ue', 'en', 'hw8EFe3I2quqixmvcnVlhrZO8PLGaFbFj3hsDWz4', '2024-11-21 18:39:16', '2024-11-21 18:39:16', NULL),
+(19, 'Olateju Tosin', NULL, NULL, NULL, 'olatejutosin@gmail.com', 1, '2024-11-21 10:57:02', NULL, NULL, 'blank.jpg', NULL, NULL, 'n/a', NULL, NULL, NULL, NULL, NULL, 1, '$2y$12$Qd0BOTZlTQf8TS7B2Pqwj.2AOwr.Un/kVn0qkGerpMrxuLZCpO1Cm', 'en', 'alvsmbfE3vyUeHfBXTtfUT3LRRuUisdjVQATpl5S', '2024-11-21 18:53:12', '2024-11-21 18:53:12', NULL),
+(20, 'Jason Peter', NULL, NULL, NULL, 'jasonpeter@gmail.com', 1, '2024-11-21 10:57:02', NULL, NULL, 'blank.jpg', NULL, NULL, 'n/a', NULL, NULL, NULL, NULL, NULL, 1, '$2y$12$T3tkr8NMDsRMjwLA3GWEa.1jTFDgcejwdU0rvjkXeqfy2vOcbsXtW', 'en', 'T7PuI8IGOO2UJQviMpEeB6kDnc0s6ZHeJ7oSrWkR', '2024-11-21 18:54:57', '2024-11-21 18:54:57', NULL),
+(21, 'Adeleke Iyanu', NULL, NULL, NULL, 'iyanuola@gmail.com', 1, '2024-11-21 10:57:02', NULL, NULL, 'blank.jpg', NULL, NULL, 'n/a', NULL, NULL, NULL, NULL, NULL, 1, '$2y$12$6EZcvR2UMz0cvkn88qDHlO1Ji.nUboiOR5ijIjdEyspKd8NNTdX5y', 'en', 'zrnLfAAAsqHytbTR3x82nKAT2nv61GsuwuCMGrIC', '2024-11-21 18:55:32', '2024-11-21 18:55:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -1075,6 +1082,23 @@ CREATE TABLE `subscriptions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscription_plans`
+--
+
+CREATE TABLE `subscription_plans` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `course_upload` int(11) NOT NULL,
+  `student_upload` int(11) NOT NULL,
+  `allocated_space` int(11) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1115,7 +1139,11 @@ INSERT INTO `users` (`id`, `name_en`, `name_bn`, `email`, `contact_en`, `email_v
 (9, 'Maxwell Akinyooye', NULL, 'phemanuel@yahoo.com', '07032689329', 1, '2024-09-27 18:33:33', NULL, 4, '$2y$12$3SSWI2dT8VYugHwFB3UFPuwQ.nPnxlbzRYumJES56BFozM2XTHW.a', 'en', 'blank.jpg', 0, 1, '2h1SSbyJAUUnxvFeCJHYfcfDIBFJgogCl0cHKwtgVv464k71HOxuiNqeUPXa', NULL, 12, '2024-09-27 18:32:50', '2024-10-23 18:15:56', NULL),
 (10, 'Adeyinka Temiloluwa', NULL, 'emmanexitconsult@gmail.com', '08053608799', NULL, NULL, NULL, 3, '$2y$12$2XNRWEPv4lqZxtFMqFZqiuupjCyqs48hoZXdmcEfNykUQwsGhhIZi', 'en', 'Instructor_Adeyinka Temiloluwa_197.jpg', 0, 1, 'edlGrH8QxK40cUmRmGODHAL6pvV4sMXf2JqSTMheXTQycInI1qGHHjmL1xpQ', 3, NULL, '2024-09-27 18:36:42', '2024-10-05 18:23:30', NULL),
 (11, 'Miracle Peters', NULL, 'miracle.kingsbranding@gmail.com', '08104196102', NULL, NULL, NULL, 3, '$2y$12$qj22czl2dsjA8NNfUslAt.rAX1MpyVuIBVL69sdOTSqikQoZICy7S', 'en', 'Instructor_Miracle Peter_629.jpg', 0, 1, NULL, 4, NULL, '2024-09-29 03:06:36', '2024-11-13 08:01:42', NULL),
-(12, 'Olayimika Omotayo', NULL, 'olaoluwayimika72@yahoo.com', '08053708699', NULL, NULL, NULL, 3, '$2y$12$cCZiRvsZH1X/il831Cq5XOoat/hdAERPxG0CK/AReRKXcVmT.WW6m', 'en', 'Instructor_Olayimika Omotayo_791.jpg', 0, 1, NULL, 5, NULL, '2024-09-29 03:14:03', '2024-09-29 03:14:03', NULL);
+(12, 'Olayimika Omotayo', NULL, 'olaoluwayimika72@yahoo.com', '08053708699', NULL, NULL, NULL, 3, '$2y$12$cCZiRvsZH1X/il831Cq5XOoat/hdAERPxG0CK/AReRKXcVmT.WW6m', 'en', 'Instructor_Olayimika Omotayo_791.jpg', 0, 1, NULL, 5, NULL, '2024-09-29 03:14:03', '2024-09-29 03:14:03', NULL),
+(13, 'Awolola Paul', NULL, 'awopaul@gmail.com', '08000000000000', 1, '2024-11-21 10:56:05', NULL, 4, '$2y$12$VN3QLDwU/kv/3XIwt5eXMuBhAy.BpVKgS5Aa.wVhjEoPEAoon3kXy', 'en', 'blank.jpg', 0, 1, 'hw8EFe3I2quqixmvcnVlhrZO8PLGaFbFj3hsDWz4', NULL, 13, '2024-11-21 18:39:16', '2024-11-21 18:39:16', NULL),
+(18, 'Olateju Tosin', NULL, 'olatejutosin@gmail.com', '08037153582', 1, '2024-11-21 10:56:05', NULL, 4, '$2y$12$AwON/R/W6RqRAiQ5uMW.9ukIAdpLKC1UxrS4K5iTC8yAhT0Tnq8mm', 'en', 'blank.jpg', 0, 1, 'alvsmbfE3vyUeHfBXTtfUT3LRRuUisdjVQATpl5S', NULL, 19, '2024-11-21 18:53:13', '2024-11-21 18:53:13', NULL),
+(19, 'Jason Peter', NULL, 'jasonpeter@gmail.com', '08070257011', 1, '2024-11-21 10:56:05', NULL, 4, '$2y$12$vI0jkCM01vF.SXn66xJE4OqiXy/Pp51SKKCBEtJmblSgXqjtIGXAO', 'en', 'blank.jpg', 0, 1, 'T7PuI8IGOO2UJQviMpEeB6kDnc0s6ZHeJ7oSrWkR', NULL, 20, '2024-11-21 18:54:57', '2024-11-21 18:54:57', NULL),
+(20, 'Adeleke Iyanu', NULL, 'iyanuola@gmail.com', '08062459088', 1, '2024-11-21 10:56:05', NULL, 4, '$2y$12$i5x2RUKZ6lwP6X.5bMT0x.lQTwI5NuO3leu6cQTZmXs3Al5xThppa', 'en', 'blank.jpg', 0, 1, 'zrnLfAAAsqHytbTR3x82nKAT2nv61GsuwuCMGrIC', NULL, 21, '2024-11-21 18:55:32', '2024-11-21 18:55:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -1358,6 +1386,12 @@ ALTER TABLE `subscriptions`
   ADD KEY `subscriptions_course_id_index` (`course_id`);
 
 --
+-- Indexes for table `subscription_plans`
+--
+ALTER TABLE `subscription_plans`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -1465,7 +1499,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `news_letters`
@@ -1543,7 +1577,7 @@ ALTER TABLE `segments`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `subscriptions`
@@ -1552,10 +1586,16 @@ ALTER TABLE `subscriptions`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `subscription_plans`
+--
+ALTER TABLE `subscription_plans`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `watchlists`

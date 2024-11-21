@@ -44,7 +44,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">All Subscription Plans </h4>
-                                <a href="{{route('subscription.create')}}" class="btn btn-primary">+ Add new</a>
+                                <a href="{{route('subscriptionPlan.create')}}" class="btn btn-primary">+ Add new</a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -56,6 +56,7 @@
                                                 <th>{{__('Course Upload')}}</th>
                                                 <th>{{__('Student Upload')}}</th>
                                                 <th>{{__('Allocated Space')}}</th>
+                                                <th>{{__('Amount/Month')}}</th>
                                                 <th>{{__('Action')}}</th>
                                             </tr>
                                         </thead>
@@ -67,15 +68,16 @@
                                                 <td><strong>{{$d->course_upload}}</strong></td>
                                                 <td><strong>{{$d->student_upload}}</strong></td>
                                                 <td><strong>{{$d->allocated_space}}</strong></td>
+                                                <td><strong>{{number_format($d->amount, 2)}}</strong></td>
                                                 <td>
-                                                    <a href="{{route('subscription.edit', $d->id)}}"
+                                                    <a href="{{route('subscriptionPlan.edit', encryptor('encrypt', $d->id))}}"
                                                         class="btn btn-sm btn-primary" title="Edit"><i
                                                             class="la la-pencil"></i></a>
                                                     <a href="javascript:void(0);" class="btn btn-sm btn-danger"
                                                         title="Delete" onclick="$('#form{{$d->id}}').submit()"><i
                                                             class="la la-trash-o"></i></a>
                                                     <form id="form{{$d->id}}"
-                                                        action="{{route('subscription.destroy', $d->id)}}"
+                                                        action="{{route('subscriptionPlan.destroy', $d->id)}}"
                                                         method="post">
                                                         @csrf
                                                         @method('DELETE')

@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class SubscriptionPlan extends Model
 {
     use HasFactory;
+    protected $table = 'subscription_plans';
+
+    protected $fillable = [
+        'name',
+        'course_upload',
+        'student_upload',
+        'allocated_space',
+        'image',
+
+    ];
 
     public function instructors()
     {
