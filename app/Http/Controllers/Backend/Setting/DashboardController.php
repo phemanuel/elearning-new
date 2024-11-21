@@ -31,10 +31,12 @@ class DashboardController extends Controller
         ->orderBy('enrollment_date', 'desc')
         ->paginate(10);
         $allEnrollment = Enrollment::paginate(10);  
-        $instructorPlan = Instructor::all();
+        $instructorPlan = Instructor::paginate(10);
 
         if (fullAccess()){
-            $courseShow = Course::withCount('segment')->paginate(5);
+            $courseShow = Course::withCount('segment')
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
             $totalCourseFee = Payment::sum('amount');
            return view('backend.adminDashboard', compact('student','course','allEnrollment','allCourse',
            'allEnrollments','totalCourseFee','courseShow','instructorPlan'));  
@@ -42,6 +44,7 @@ class DashboardController extends Controller
         elseif ($user->role = 'Instructor'){
             $instructor = Instructor::where('id', $user_id)->first();
             $courseShow = Course::where('instructor_id', $instructor->id)
+            ->orderBy('created_at', 'desc')
             ->withCount('segment')->paginate(5);            
             $totalCourseFee = Payment::where('instructor_id', $instructor->id)->sum('amount');
             return view('backend.instructorDashboard', compact('student','course','enrollments','course',

@@ -366,6 +366,7 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('courseFee')}}"><i class="las la-money-bill"></i>Course Payments</a></li>
+                            <li><a href="{{route('subscription.index')}}"><i class="las la-money-bill"></i>Subscription Plans</a></li>
                             <li><a href="javascript:void()"><i class="las la-money-bill"></i>Subscription Fees</a></li>
                             <li><a href="{{route('coupon.index')}}"><i class="las la-tags"></i>Coupons</a></li>
                         </ul>

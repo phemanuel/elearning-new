@@ -14,6 +14,8 @@ class SubscriptionController extends Controller
     public function index()
     {
         //
+        $subscriptionPlan = Subscription::all();
+        return view('backend.subscription.index', compact('subscriptionPlan'));
         
     }    
 

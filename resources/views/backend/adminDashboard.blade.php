@@ -142,32 +142,30 @@
             <div class="col-xl-4 col-xxl-4 col-lg-4 col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                    <h5 class="card-title"><strong>Current Plan</strong></h5>
+                    <h5 class="card-title"><strong>Subscription Plan</strong></h5>
                     </div>
                     <div class="card-body">
                         <div class="widget-todo dz-scroll" style="height: 370px;" id="DZ_W_Notifications">
-                            <!-- Image representing the plan -->
-                            <div class="text-center mb-4">
-                                <img src="{{asset('images/basic.png')}}" alt="Starter Plan" class="img-fluid" style="max-height: 150px; width: auto;">
-                            </div>
-
-                            <!-- Plan details -->
-                            <div class="plan-details text-center">
-                                <!-- Features -->
-                                <ul class="list-group text-left mt-3">
-                                    <li class="list-group-item"><i class="la la-upload mr-2"></i> Upload up to 5 courses</li>
-                                    <li class="list-group-item"><i class="la la-user mr-2"></i> On-board up to 100 students</li>
-                                    <li class="list-group-item"><i class="la la-hdd mr-2"></i> 1 GB storage for materials</li>
-                                    <!-- <li class="list-group-item"><i class="la la-chart-bar mr-2"></i> Basic analytics</li> -->
-                                    <li class="list-group-item"><i class="la la-envelope mr-2"></i> Email support</li>
-                                </ul>
-
-                                <!-- Pricing -->
-                                <div class="mt-3">
-                                    <h5 class="text-primary">Price: $10/month or $100/year</h5>
-                                    <!-- <h6 class="text-muted">or $100/year</h6> -->
-                                </div>
-                            </div>
+                        <table class="table table-sm mb-0 table-striped">
+                            <!-- <table class="table table-sm mb-0 table-striped"> -->
+                            <thead>
+                                <tr>
+                                    <th class="px-5 py-3">#</th>
+                                    <th class="px-5 py-3">Instructor</th>
+                                    <th class="py-3">Plan</th>
+                                                                            
+                                </tr>
+                            </thead>
+                            <tbody id="customers">
+                                @foreach($instructorPlan as $key => $p)
+                                <tr class="btn-reveal-trigger">                                    
+                                    <td class="py-2">{{ $key + 1 }}</td>
+                                    <td class="py-2">{{ $p->name_en }}</td>                                    
+                                    <td class="py-2">{{ $instructor->subscriptionPlan?->name ?? 'No Plan Assigned' }}</td>                                       
+                                </tr>
+                                @endforeach
+                            </tbody>                       
+                            </table>   
                         </div>
                     </div>
 

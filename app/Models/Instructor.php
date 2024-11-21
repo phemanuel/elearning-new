@@ -40,5 +40,9 @@ class Instructor extends Model
         return $this->hasMany(Course::class);
     }
 
+    public function subscriptionPlan()
+    {
+        return $this->belongsTo(SubscriptionPlan::class);
+    }
     
 }

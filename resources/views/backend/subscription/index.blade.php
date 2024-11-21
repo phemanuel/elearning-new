@@ -1,5 +1,5 @@
 @extends('backend.layouts.app')
-@section('title', 'Coupon List')
+@section('title', 'Category List')
 
 @push('styles')
 <!-- Datatable -->
@@ -18,26 +18,33 @@
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
-                    <h4>Coupon List</h4>
+                    <h4>Subscription Plan</h4>
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('coupon.index')}}">Coupons</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('coupon.index')}}">All Coupon</a></li>
+                    <li class="breadcrumb-item active"><a href="#">Subscription Plan</a></li>
                 </ol>
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-12">
+                <ul class="nav nav-pills mb-3">
+                    <li class="nav-item"><a href="#list-view" data-toggle="tab"
+                            class="nav-link btn-primary mr-1 show active">List View</a></li>
+                    <!-- <li class="nav-item"><a href="#grid-view" data-toggle="tab" class="nav-link btn-primary">Grid
+                            View</a></li> -->
+                </ul>
+            </div>
+            <div class="col-lg-12">
                 <div class="row tab-content">
                     <div id="list-view" class="tab-pane fade active show col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">All Coupons List </h4>
-                                <a href="{{route('coupon.create')}}" class="btn btn-primary">+ Add new</a>
+                                <h4 class="card-title">All Subscription Plans </h4>
+                                <a href="{{route('subscription.create')}}" class="btn btn-primary">+ Add new</a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -45,32 +52,30 @@
                                         <thead>
                                             <tr>
                                                 <th>{{__('#')}}</th>
-                                                <th>{{__('Course')}}</th>
-                                                <th>{{__('Coupon Code')}}</th>
-                                                <th>{{__('Discount')}}</th>
-                                                <th>{{__('Valid From')}}</th>
-                                                <th>{{__('Valid Until')}}</th>
+                                                <th>{{__('Subscription Name')}}</th>
+                                                <th>{{__('Course Upload')}}</th>
+                                                <th>{{__('Student Upload')}}</th>
+                                                <th>{{__('Allocated Space')}}</th>
                                                 <th>{{__('Action')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @forelse ($coupon as $key => $c)
+                                            @forelse ($subscriptionPlan as $key => $d)
                                             <tr>
-                                                <td>{{$key + 1}}</td>
-                                                <td>{{ $c->course ? $c->course->title_en : 'No Course' }}</td>
-                                                <td><strong>{{$c->code}}</strong></td>
-                                                <td><strong>{{$c->discount}}</strong></td>
-                                                <td>{{$c->valid_from}}</td>
-                                                <td>{{$c->valid_until}}</td>
+                                                <td><strong>{{$key + 1}}</strong></td>
+                                                <td><strong>{{$d->name}}</strong></td> 
+                                                <td><strong>{{$d->course_upload}}</strong></td>
+                                                <td><strong>{{$d->student_upload}}</strong></td>
+                                                <td><strong>{{$d->allocated_space}}</strong></td>
                                                 <td>
-                                                    <a href="{{route('coupon.edit', encryptor('encrypt', $c->id))}}"
+                                                    <a href="{{route('subscription.edit', $d->id)}}"
                                                         class="btn btn-sm btn-primary" title="Edit"><i
                                                             class="la la-pencil"></i></a>
                                                     <a href="javascript:void(0);" class="btn btn-sm btn-danger"
-                                                        title="Delete" onclick="$('#form{{$c->id}}').submit()"><i
+                                                        title="Delete" onclick="$('#form{{$d->id}}').submit()"><i
                                                             class="la la-trash-o"></i></a>
-                                                    <form id="form{{$c->id}}"
-                                                        action="{{route('coupon.destroy', $c->id)}}"
+                                                    <form id="form{{$d->id}}"
+                                                        action="{{route('subscription.destroy', $d->id)}}"
                                                         method="post">
                                                         @csrf
                                                         @method('DELETE')
@@ -79,7 +84,7 @@
                                             </tr>
                                             @empty
                                             <tr>
-                                                <th colspan="7" class="text-center">No Coupon Found</th>
+                                                <th colspan="7" class="text-center">No subscription plan Found</th>
                                             </tr>
                                             @endforelse
                                         </tbody>
@@ -88,6 +93,7 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>

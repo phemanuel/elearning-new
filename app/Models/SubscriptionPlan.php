@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class SubscriptionPlan extends Model
 {
     use HasFactory;
+
+    public function instructors()
+    {
+        return $this->hasMany(Instructor::class, 'current_plan');
+    }
 }

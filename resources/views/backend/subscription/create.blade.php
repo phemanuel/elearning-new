@@ -1,5 +1,5 @@
 @extends('backend.layouts.app')
-@section('title', 'Add Coupon')
+@section('title', 'Add Category')
 
 @push('styles')
 <!-- Pick date -->
@@ -11,7 +11,7 @@
 
 <!--**********************************
             Content body start
- ***********************************-->
+        ***********************************-->
 <div class="content-body">
     <!-- row -->
     <div class="container-fluid">
@@ -19,14 +19,14 @@
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
-                    <h4>Add Coupon</h4>
+                    <h4>Add Category</h4>
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('coupon.index')}}">Coupons</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('coupon.create')}}">Add Coupon</a>
+                    <li class="breadcrumb-item active"><a href="{{route('courseCategory.index')}}">Categories</a></li>
+                    <li class="breadcrumb-item active"><a href="#">Add Category</a>
                     </li>
                 </ol>
             </div>
@@ -36,73 +36,40 @@
             <div class="col-xl-12 col-xxl-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">Coupon Info</h5>
+                        <h5 class="card-title">Category Info</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('coupon.store')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{route('courseCategory.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label class="form-label">Course</label>
-                                        <select name="course_id" id="course_id" class="form-control">
-                                            @forelse($course as $co)
-                                                <option value="{{$co->id}}">{{$co->title_en}}</option>
-                                            @empty
-                                                <option value="">You do not have a course to add a coupon.</option>
-                                            @endforelse
+                                        <label class="form-label">Category Name</label>
+                                        <input type="text" class="form-control" name="category_name"
+                                            value="{{old('category_name')}}">
+                                    </div>
+                                    @if($errors->has('category_name'))
+                                    <span class="text-danger"> {{ $errors->first('category_name') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Status</label>
+                                        <select class="form-control" name="category_status">
+                                            <option value="1" @if(old('category_status')==1) selected @endif>Active
+                                            </option>
+                                            <option value="0" @if(old('category_status')==0) selected @endif>Inactive
+                                            </option>
                                         </select>
-
-                                        @if(!empty($course) && count($course) > 0)                                            
-                                            <input type="hidden" name="instructor_id" value="{{$course->first()->instructor_id}}">
-                                        @endif
                                     </div>
-                                    @if($errors->has('course_id'))
-                                    <span class="text-danger"> {{$errors->first('course_id')}}</span>
-                                    @endif
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label class="form-label">Coupon Code</label>
-                                        <input type="text" class="form-control" name="code"
-                                            value="{{old('code')}}">
-                                    </div>
-                                    @if($errors->has('code'))
-                                    <span class="text-danger"> {{$errors->first('code')}}</span>
-                                    @endif
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label class="form-label">Discount(%)</label>
-                                        <input type="text" class="form-control" name="discount"
-                                            value="{{old('discount')}}">
-                                    </div>
-                                    @if($errors->has('discount'))
-                                    <span class="text-danger"> {{$errors->first('discount')}}</span>
-                                    @endif
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label class="form-label">Valid From</label>
-                                        <input type="date" class="form-control" name="valid_from"
-                                            value="{{old('valid_from')}}">
-                                    </div>
-                                    @if($errors->has('valid_from'))
-                                    <span class="text-danger"> {{$errors->first('valid_from')}}</span>
-                                    @endif
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label class="form-label">Valid Until</label>
-                                        <input type="date" class="form-control" name="valid_until"
-                                            value="{{old('valid_until')}}">
-                                    </div>
-                                    @if($errors->has('valid_until'))
-                                    <span class="text-danger"> {{$errors->first('valid_until')}}</span>
-                                    @endif
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    
+                                    <label class="form-label">Image</label>
+                                    <div class="form-group fallback w-100">
+                                        <input type="file" class="dropify" data-default-file="" name="category_image">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                     <button type="submit" class="btn btn-light">Cancel</button>
                                 </div>
@@ -117,7 +84,7 @@
 </div>
 <!--**********************************
             Content body end
-***********************************-->
+        ***********************************-->
 
 @endsection
 

@@ -172,7 +172,7 @@
             <div class="col-xl-4 col-xxl-4 col-lg-4 col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                    <h5 class="card-title"><strong>Current Plan</strong></h5>
+                    <h5 class="card-title"><strong>Subscription Plan</strong></h5>
                     </div>
                     <div class="card-body">
                         <div class="widget-todo dz-scroll" style="height: 370px;" id="DZ_W_Notifications">
