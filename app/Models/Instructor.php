@@ -42,7 +42,7 @@ class Instructor extends Model
 
     public function subscriptionPlan()
     {
-        return $this->belongsTo(SubscriptionPlan::class);
+        return $this->belongsTo(SubscriptionPlan::class, 'current_plan');
     }
     
 }
