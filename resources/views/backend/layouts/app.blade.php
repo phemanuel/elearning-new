@@ -365,7 +365,7 @@
                             <span class="nav-text">Payments</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="javascript:void()"><i class="las la-money-bill"></i>Course Payments</a></li>
+                            <li><a href="{{route('courseFee')}}"><i class="las la-money-bill"></i>Course Payments</a></li>
                             <li><a href="javascript:void()"><i class="las la-money-bill"></i>Subscription Fees</a></li>
                             <li><a href="{{route('coupon.index')}}"><i class="las la-tags"></i>Coupons</a></li>
                         </ul>
@@ -410,12 +410,8 @@
                         window.location.href = "{{ route('logOut') }}";
                     </script>
                     @endif                     
-                <li class="nav-label">Main Menu</li>
-                <li><a href="{{route('instructor.index')}}">
-                        <i class="las la-chalkboard-teacher"></i>Instructors List
-                    </a>
-                </li>
-                <li><a href="{{route('student.index')}}"><i class="las la-book-reader"></i>Students List</a></li>
+                <li class="nav-label">Main Menu</li>                
+                <!-- <li><a href="{{route('student.index')}}"><i class="las la-book-reader"></i>Students List</a></li> -->
                 <li><a href="{{route('course.index')}}"><i class="las la-book-open"></i>My Courses</a></li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="las la-tasks"></i>
@@ -433,8 +429,11 @@
                         </a>
                     </li>
                     <li><a href="{{route('coupon.index')}}"><i class="las la-tags"></i>Coupons</a></li>
-                <!-- <li><a href="{{route('lesson.index')}}"><i class="las la-chalkboard"></i>Course Lessons</a></li> -->
-                <!-- <li><a href="{{route('material.index')}}"><i class="las la-atom"></i></i>Course Materials</a></li> -->
+                    <li><a class="" href="{{route('enrollment.index')}}" aria-expanded="false">
+                            <i class="las la-bullseye"></i>
+                            <span class="nav-text">Enrollments</span>
+                        </a>
+                    </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="las la-money-check"></i>
                             <span class="nav-text">Payments</span>
@@ -444,6 +443,10 @@
                             <li><a href="javascript:void()"><i class="las la-money-bill"></i>Subscription</a></li>                            
                         </ul>
                     </li> 
+                    <li><a href="{{route('instructor.index')}}">
+                        <i class="las la-chalkboard-teacher"></i>Instructors List
+                    </a>
+                </li>
                 <!-- <li><a href="{{route('enrollment.index')}}"><i class="las la-bullseye"></i>Enrollments</a></li> -->
                 <li><a href="{{route('logOut')}}"><i class="lab la-gg-circle"></i>Logout</a></li>
             </ul>

@@ -77,4 +77,9 @@ class Course extends Model
     {
         return $this->hasMany(Progress::class, 'segments_id', 'id');
     }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'course_id');
+    }
 }

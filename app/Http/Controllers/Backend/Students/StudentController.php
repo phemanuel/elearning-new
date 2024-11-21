@@ -22,7 +22,7 @@ class StudentController extends Controller
     {
         $user = auth()->user();
         if($user){
-            $data = Student::paginate();
+            $data = Student::paginate(20);
         return view('backend.student.index', compact('data'));
         }       
         return redirect()->route('logOut');

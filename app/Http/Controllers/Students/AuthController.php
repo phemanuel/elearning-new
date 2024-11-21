@@ -52,7 +52,8 @@ class AuthController extends Controller
                 $user->student_id = $student->id; // Set student_id
                 $user->name_en = $request->name;
                 $user->email = $request->email;
-                $user->contact_en = '08000000000000';
+                $noGen = random_int(10000000, 99999999); 
+                $user->contact_en = '080' . $noGen;
                 $user->role_id = 4; // Assuming 4 is the role for student
                 $user->status = 1;
                 $user->image = 'blank.jpg';
@@ -72,7 +73,7 @@ class AuthController extends Controller
                 session(['email_message' => $email_message]);               
                 
                 return redirect()->route('send-mail');
-                // return redirect()->route($back_route)->with('success', 'Successfully Logged In');
+                // return redirect()->route('register')->with('success', 'Account cerated successfully.');
             }
         } catch (Exception $e) {
             Log::error('SignUpStore Error: ' . $e->getMessage());

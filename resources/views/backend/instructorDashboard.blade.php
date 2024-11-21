@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{asset('vendor/jqvmap/css/jqvmap.min.css')}}">
 <link rel="stylesheet" href="{{asset('vendor/chartist/css/chartist.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/skin-2.css')}}">
+<link href="{{asset('vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -85,7 +86,7 @@
                 <div class="widget-stat card bg-danger overflow-hidden">
                     <div class="card-header pb-3">
                         <h3 class="card-title text-white">Fees Collection</h3>
-                        <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i>0</h5>
+                        <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i>{{ number_format($totalCourseFee, 2) }}</h5>
                     </div>
                     <div class="card-body p-0 mt-1">
                         <span class="peity-line-2" data-width="100%">7,6,8,7,3,8,3,3,6,5,9,2,8</span>
@@ -112,255 +113,18 @@
                     </div>
                 </div>
             </div> -->
-            <!-- <div class="col-xl-8 col-xxl-8 col-lg-8 col-md-12 col-sm-12">
+            <div class="col-xl-8 col-xxl-8 col-lg-8 col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">Assign Task</h5>
+                        <h5 class="card-title"><strong>Enrolled Students</strong></h5>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table header-border table-hover verticle-middle">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Task</th>
-                                        <th scope="col">Assigned Professors</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Progress</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>1</th>
-                                        <td>Working Design report</td>
-                                        <td>Herman Beck</td>
-                                        <td><span class="badge badge-rounded badge-primary">DONE</span></td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 70%;" role="progressbar">
-                                                    <span class="sr-only">70% Complete</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>2</th>
-                                        <td>Fees Collection report</td>
-                                        <td>Emma Watson</td>
-                                        <td><span class="badge badge-rounded badge-warning">Panding</span></td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-warning" style="width: 70%;"
-                                                    role="progressbar">
-                                                    <span class="sr-only">70% Complete</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>3</th>
-                                        <td>Management report</td>
-                                        <td>Mary Adams</td>
-                                        <td><span class="badge badge-rounded badge-warning">Panding</span></td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-warning" style="width: 70%;"
-                                                    role="progressbar">
-                                                    <span class="sr-only">70% Complete</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>4</th>
-                                        <td>Library book status</td>
-                                        <td>Caleb Richards</td>
-                                        <td><span class="badge badge-rounded badge-danger">Suspended</span></td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-danger" style="width: 70%;"
-                                                    role="progressbar">
-                                                    <span class="sr-only">70% Complete</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>5</th>
-                                        <td>Placement status</td>
-                                        <td>June Lane</td>
-                                        <td><span class="badge badge-rounded badge-warning">Panding</span></td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-warning" style="width: 70%;"
-                                                    role="progressbar">
-                                                    <span class="sr-only">70% Complete</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>6</th>
-                                        <td>Working Design report</td>
-                                        <td>Herman Beck</td>
-                                        <td><span class="badge badge-rounded badge-primary">DONE</span></td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 70%;" role="progressbar">
-                                                    <span class="sr-only">70% Complete</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-xxl-4 col-lg-4 col-md-12 col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Notifications</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="widget-todo dz-scroll" style="height:370px;" id="DZ_W_Notifications">
-                            <ul class="timeline">
-                                <li>
-                                    <div class="timeline-badge primary"></div>
-                                    <a class="timeline-panel text-muted mb-3 d-flex align-items-center"
-                                        href="javascript:void(0);">
-                                        <img class="rounded-circle" alt="image" width="50"
-                                            src="{{asset('images/profile/education/pic1.jpg')}}">
-                                        <div class="col">
-                                            <h5 class="mb-1">Dr sultads Send you Photo</h5>
-                                            <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="timeline-badge warning"></div>
-                                    <a class="timeline-panel text-muted mb-3 d-flex align-items-center"
-                                        href="javascript:void(0);">
-                                        <img class="rounded-circle" alt="image" width="50"
-                                            src="{{asset('images/profile/education/pic2.jpg')}}">
-                                        <div class="col">
-                                            <h5 class="mb-1">Resport created successfully</h5>
-                                            <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="timeline-badge danger"></div>
-                                    <a class="timeline-panel text-muted mb-3 d-flex align-items-center"
-                                        href="javascript:void(0);">
-                                        <img class="rounded-circle" alt="image" width="50"
-                                            src="{{asset('images/profile/education/pic3.jpg')}}">
-                                        <div class="col">
-                                            <h5 class="mb-1">Reminder : Treatment Time!</h5>
-                                            <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="timeline-badge success"></div>
-                                    <a class="timeline-panel text-muted mb-3 d-flex align-items-center"
-                                        href="javascript:void(0);">
-                                        <img class="rounded-circle" alt="image" width="50"
-                                            src="{{asset('images/profile/education/pic4.jpg')}}">
-                                        <div class="col">
-                                            <h5 class="mb-1">Dr sultads Send you Photo</h5>
-                                            <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="timeline-badge warning"></div>
-                                    <a class="timeline-panel text-muted mb-3 d-flex align-items-center"
-                                        href="javascript:void(0);">
-                                        <img class="rounded-circle" alt="image" width="50"
-                                            src="{{asset('images/profile/education/pic5.jpg')}}">
-                                        <div class="col">
-                                            <h5 class="mb-1">Resport created successfully</h5>
-                                            <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="timeline-badge dark"></div>
-                                    <a class="timeline-panel text-muted mb-3 d-flex align-items-center"
-                                        href="javascript:void(0);">
-                                        <img class="rounded-circle" alt="image" width="50"
-                                            src="{{asset('images/profile/education/pic6.jpg')}}">
-                                        <div class="col">
-                                            <h5 class="mb-1">Reminder : Treatment Time!</h5>
-                                            <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="timeline-badge info"></div>
-                                    <a class="timeline-panel text-muted mb-3 d-flex align-items-center"
-                                        href="javascript:void(0);">
-                                        <img class="rounded-circle" alt="image" width="50"
-                                            src="{{asset('images/profile/education/pic7.jpg')}}">
-                                        <div class="col">
-                                            <h5 class="mb-1">Dr sultads Send you Photo</h5>
-                                            <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="timeline-badge danger"></div>
-                                    <a class="timeline-panel text-muted mb-3 d-flex align-items-center"
-                                        href="javascript:void(0);">
-                                        <img class="rounded-circle" alt="image" width="50"
-                                            src="{{asset('images/profile/education/pic8.jpg')}}">
-                                        <div class="col">
-                                            <h5 class="mb-1">Resport created successfully</h5>
-                                            <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="timeline-badge success"></div>
-                                    <a class="timeline-panel text-muted mb-3 d-flex align-items-center"
-                                        href="javascript:void(0);">
-                                        <img class="rounded-circle" alt="image" width="50"
-                                            src="{{asset('images/profile/education/pic9.jpg')}}">
-                                        <div class="col">
-                                            <h5 class="mb-1">Reminder : Treatment Time!</h5>
-                                            <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="timeline-badge warning"></div>
-                                    <a class="timeline-panel text-muted d-flex align-items-center"
-                                        href="javascript:void(0);">
-                                        <img class="rounded-circle" alt="image" width="50"
-                                            src="{{asset('images/profile/education/pic10.jpg')}}">
-                                        <div class="col">
-                                            <h5 class="mb-1">Dr sultads Send you Photo</h5>
-                                            <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Enrolled Student List </h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped">
+                            <table id="example3" class="table table-sm mb-0 table-striped">
+                            <!-- <table class="table table-sm mb-0 table-striped"> -->
                             <thead>
                                 <tr>
+                                    <th class="px-5 py-3">#</th>
                                     <th class="px-5 py-3">Student Name</th>
                                     <th class="py-3">Course</th>
                                     <th class="py-3">Total Segments</th>
@@ -377,13 +141,11 @@
                                             <div class="media d-flex align-items-center">
                                                 <div class="avatar avatar-xl mr-2">
                                                     <img class="rounded-circle img-fluid" src="{{asset('uploads/students/' . $enrollment->student->image)}}" width="30" alt="">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h5 class="mb-0 fs--1">{{ $enrollment->student->name_en }}</h5>
-                                                </div>
+                                                </div>                                               
                                             </div>
                                         </a>
                                     </td>
+                                    <td class="py-2">{{ $enrollment->student->name_en }}</td>
                                     <td class="py-2">{{ $enrollment->course->title_en }}</td>
                                     <!-- Display Total Segments -->
                                     <td class="py-2">{{ $enrollment->course->segments_count ?? 0 }}</td>
@@ -400,8 +162,107 @@
                                     <td class="py-2">{{ $enrollment->created_at->format('d/m/Y') }}</td>                                        
                                 </tr>
                                 @endforeach
+                            </tbody>                       
+                            </table>
+                            {{$enrollments->links()}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-xxl-4 col-lg-4 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                    <h5 class="card-title"><strong>Current Plan</strong></h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="widget-todo dz-scroll" style="height: 370px;" id="DZ_W_Notifications">
+                            <!-- Image representing the plan -->
+                            <div class="text-center mb-4">
+                                <img src="{{asset('images/basic.png')}}" alt="Starter Plan" class="img-fluid" style="max-height: 150px; width: auto;">
+                            </div>
+
+                            <!-- Plan details -->
+                            <div class="plan-details text-center">
+                                <!-- Features -->
+                                <ul class="list-group text-left mt-3">
+                                    <li class="list-group-item"><i class="la la-upload mr-2"></i> Upload up to 5 courses</li>
+                                    <li class="list-group-item"><i class="la la-user mr-2"></i> On-board up to 100 students</li>
+                                    <li class="list-group-item"><i class="la la-hdd mr-2"></i> 1 GB storage for materials</li>
+                                    <!-- <li class="list-group-item"><i class="la la-chart-bar mr-2"></i> Basic analytics</li> -->
+                                    <li class="list-group-item"><i class="la la-envelope mr-2"></i> Email support</li>
+                                </ul>
+
+                                <!-- Pricing -->
+                                <div class="mt-3">
+                                    <h5 class="text-primary">Price: $10/month or $100/year</h5>
+                                    <!-- <h6 class="text-muted">or $100/year</h6> -->
+                                </div>
+                                <!-- Upgrade Button -->
+                                <div class="mt-3">
+                                    <a href="#" class="btn btn-success btn-lg text-white">
+                                        <i class="la la-arrow-up mr-2"></i> Upgrade Plan
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title"><strong>My Courses</strong> </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                        <table id="example3" class="table table-sm mb-0 table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="px-5 py-3">#</th>
+                                    <th class="px-5 py-3"></th>
+                                    <th class="py-3">Course Name</th>
+                                    <th class="py-3">Total Segments</th>
+                                    <th class="py-3">Difficulty</th>
+                                    <th class="py-3">Category</th>
+                                    <th class="py-3">Price</th>
+                                    <th class="py-3">Status</th>                                       
+                                </tr>
+                            </thead>
+                            <tbody id="customers">
+                                @foreach($courseShow as $key => $d)
+                                <tr class="btn-reveal-trigger">
+                                <td class="py-2">{{$key + 1}}</td>
+                                    <td class="p-3">
+                                        <a href="javascript:void(0);">
+                                            <div class="media d-flex align-items-center">
+                                                <div class="avatar avatar-xl mr-2">
+                                                    <img class="rounded-circle img-fluid" src="{{asset('uploads/courses/'.$d->image)}}" width="30" alt="">
+                                                </div>                                                
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td class="py-2">{{$d->title_en}}</td>
+                                    <!-- Display Total Segments -->
+                                    <td class="py-2">{{$d->segment_count}}</td>
+                                    <td class="py-2"><strong>{{ $d->difficulty == 'beginner' ? __('Beginner') :
+                                                        ($d->difficulty == 'intermediate' ? __('Intermediate') :
+                                                        __('Advanced')) }}</strong></td>
+                                    <!-- Status Check -->                                    
+                                    <td class="py-2">{{$d->courseCategory?->category_name}}</td>
+                                    <td class="py-2">{{number_format($d->price,2)}}</td>
+                                    <td>
+                                        @if($d->status == 2)
+                                            <span class="badge badge-rounded badge-success">Active</span>
+                                        @elseif($d->status == 1)
+                                            <span class="badge badge-rounded badge-warning">Pending</span>
+                                        @endif
+                                    </td>                                       
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
+                        {{$courseShow->links()}}
                         </div>
                     </div>
                 </div>
@@ -424,4 +285,6 @@
 
 <!-- Demo scripts -->
 <script src="{{asset('js/dashboard/dashboard-3.js')}}"></script>
+<script src="{{asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('js/plugins-init/datatables.init.js')}}"></script>
 @endpush

@@ -254,7 +254,8 @@ Route::get('/instructors/courses/{id}', [SearchInstructorController::class, 'ins
 ->name('instructorCourse');
 Route::get('/courses/{course_url}', [UrlController::class, 'courseUrl'])
 ->name('course-url');
-
+Route::get('/test/dashboard', [dashboard::class, 'testDashboard'])
+->name('testDashboard');
 
 Route::get('/cert/{url}', [CertificateController::class, 'certificateUrl'])
     ->name('certificate-url');

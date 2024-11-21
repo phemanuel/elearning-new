@@ -14,6 +14,7 @@ use App\Models\Segments;
 use App\Models\Material;
 use App\Models\Coupon;
 use App\Models\Enrollment;
+use App\Models\Payment;
 use App\Models\Student;
 use Illuminate\Support\Str;
 use Exception;
@@ -320,7 +321,22 @@ class CourseController extends Controller
 
     public function courseFee()
     {
-        return view('backend.course.courses.course-fees');
+        // Fetch all payments and their related courses and instructors
+        $userRoleId = auth()->user()->role_id;
+        if ($userRoleId == 1) {
+            $payments = Payment::with(['student', 'course', 'course.instructor'])
+            ->orderBy('created_at')
+            ->get();
+        }
+        elseif ($userRoleId == 3) {
+            $instructorId = auth()->user()->instructor_id;
+            $payments = Payment::where('instructor_id', '=', $instructorId)
+            ->with(['student', 'course', 'course.instructor'])
+            ->orderBy('created_at')
+            ->get();
+        }       
+
+        return view('backend.course.courses.course-fees', compact('payments'));
     }
 
     /**

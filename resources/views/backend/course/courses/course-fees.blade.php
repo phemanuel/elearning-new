@@ -46,14 +46,16 @@
                                 <h4 class="card-title">All Course Payment List </h4>                               
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    @if(auth()->user()->role_id == 1)
+                                <div class="table-responsive">                                    
                                     <table id="example3" class="display" style="min-width: 845px">
                                         <thead>
                                             <tr>
                                                 <th>{{__('#')}}</th>
                                                 <th>{{__('Student Name')}}</th>
                                                 <th>{{__('Course')}}</th>
+                                                @if(auth()->user()->role_id == 1)
+                                                <th>{{__('Instructor')}}</th>
+                                                @endif
                                                 <th>{{__('Amount')}}</th>
                                                 <th>{{__('Payout')}}</th>
                                                 <th>{{__('Payment Date')}}</th>
@@ -61,39 +63,23 @@
                                             </tr>
                                         </thead>
                                         <tbody>                                            
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Maxwell Akinyooye</td>
-                                                <td>Freelance Bootcamp</td>  
-                                                <td>{{number_format(27600,2)}}</td>
-                                                <td>{{number_format(25600,2)}}</td>
-                                                <td>20th November, 2024</td>
+                                        @foreach($payments as $index => $payment)
+                                        <tr>
+                                            <td>{{ $index + 1 }}</td>
+                                            <!-- Check if student exists before displaying the name -->
+                                            <td>{{ $payment->student ? $payment->student->name_en : 'N/A' }}</td>
+                                            <td>{{ $payment->course->title_en }}</td>
+                                            @if(auth()->user()->role_id == 1)
+                                            <td>{{ $payment->course->instructor->name_en ?? 'N/A' }}</td>
+                                            @endif
+                                            <td>{{ number_format($payment->amount, 2) }}</td>
+                                            <td>{{ number_format($payment->payout, 2) }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($payment->created_at)->format('jS F, Y') }}</td>
+                                        </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
-                                    @else
-                                    <table id="example3" class="display" style="min-width: 845px">
-                                    <thead>
-                                            <tr>
-                                                <th>{{__('#')}}</th>
-                                                <th>{{__('Student Name')}}</th>
-                                                <th>{{__('Course')}}</th>
-                                                <th>{{__('Amount')}}</th>
-                                                <th>{{__('Payout')}}</th>
-                                                <th>{{__('Payment Date')}}</th>
-                                                <!-- <th>{{__('Action')}}</th> -->
-                                            </tr>
-                                        </thead>
-                                        <tbody>                                            
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Maxwell Akinyooye</td>
-                                                <td>Freelance Bootcamp</td>  
-                                                <td>{{number_format(27600,2)}}</td>
-                                                <td>{{number_format(25600,2)}}</td>
-                                                <td>20th November, 2024</td>
-                                        </tbody>
-                                    </table>
-                                    @endif
+                                    
                                 </div>
                             </div>
                         </div>

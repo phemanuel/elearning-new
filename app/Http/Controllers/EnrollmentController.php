@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Enrollment;
 use App\Http\Controllers\Controller;
+use App\Models\Student;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class EnrollmentController extends Controller
@@ -13,7 +15,16 @@ class EnrollmentController extends Controller
      */
     public function index()
     {
-        $enrollment = Enrollment::get();
+        $userRoleId = auth()->user()->role_id;
+        if ($userRoleId == 1) {
+            $enrollment = Enrollment::get();
+        }
+        elseif ($userRoleId == 3) {
+            $instructorId = auth()->user()->instructor_id;
+            $enrollment = Enrollment::where('instructor_id', '=', $instructorId)
+            ->get();
+        }
+
         return view('backend.enrollment.index', compact('enrollment'));
     }
 
@@ -23,7 +34,15 @@ class EnrollmentController extends Controller
     public function create()
     {
         //
-        return redirect()->back()->with('error', 'This feature is not available. Please try again later.');
+        $user = auth()->user();
+        if($user){
+            $data = Student::paginate(20);
+            $course = Course::where('instructor_id', $user->instructor_id)->get();
+        return view('backend.enrollment.view', compact('data','course'));
+        }       
+        return redirect()->route('logOut');
+
+        //return redirect()->back()->with('error', 'This feature is not available. Please try again later.');
     }
 
     /**

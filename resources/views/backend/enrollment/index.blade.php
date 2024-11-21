@@ -34,7 +34,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">All Enrollments List </h4>
-                                <a href="{{route('enrollment.create')}}" class="btn btn-primary">+ Add new</a>
+                                <a href="{{route('enrollment.create')}}" class="btn btn-primary">+ Enroll</a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -45,9 +45,9 @@
                                                 <th>{{__('Student Name')}}</th>
                                                 <th>{{__('Course Name')}}</th>
                                                 <th>{{__('Course Image')}}</th>
-                                                <th>{{__('Course Value')}}</th>
+                                                <th>{{__('Amount')}}</th>
                                                 <th>{{__('Enrollment Date')}}</th>
-                                                <th>{{__('Action')}}</th>
+                                                <!-- <th>{{__('Action')}}</th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -63,9 +63,11 @@
                                                         src="{{asset('uploads/courses/'.$e->course?->image)}}"
                                                         alt="">
                                                 </td>
-                                                <td><strong>{{$e->course?->price==null?'Free':$e->course?->currency_type.$e->course?->price}}</strong></td>
+                                                <td><strong>
+        {{ $e->course?->price == null ? 'Free': $e->course?->currency_type . number_format($e->course?->price, 2) }}
+    </strong></td>
                                                 <td><strong>{{$e->enrollment_date}}</strong></td>
-                                                <td>
+                                                <!-- <td>
                                                     <a href="{{route('enrollment.edit', encryptor('encrypt',$e->id))}}"
                                                         class="btn btn-sm btn-primary" title="Edit"><i
                                                             class="la la-pencil"></i></a>
@@ -78,7 +80,7 @@
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>
-                                                </td>
+                                                </td> -->
                                             </tr>
                                             @empty
                                             <tr>

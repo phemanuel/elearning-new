@@ -9,6 +9,7 @@ use App\Models\Student;
 use App\Models\Course;
 use App\Models\Enrollment;
 use App\Models\Instructor;
+use App\Models\Payment;
 
 class DashboardController extends Controller
 {
@@ -21,20 +22,40 @@ class DashboardController extends Controller
         $allCourse = Course::all();       
         $enrollments = Enrollment::with(['student', 'course' => function($query) {
             $query->withCount('segments');
-        }])->where('instructor_id', $user_id)->get();
+        }])->where('instructor_id', $user_id)
+        ->orderBy('enrollment_date', 'desc')
+        ->paginate(10);
         $allEnrollments = Enrollment::with(['student', 'course' => function($query) {
             $query->withCount('segments');
-        }])->get();
-        $allEnrollment = Enrollment::all();
-        $instructor = Instructor::where('id', $user_id)->first();
-        
-        
-        if (fullAccess())
-            return view('backend.adminDashboard', compact('student','course','allEnrollment','allCourse','allEnrollments')); 
-        else
-        if ($user->role = 'Instructor')
-            return view('backend.instructorDashboard', compact('student','course','enrollments','course','instructor')); 
-        else
-            return view('backend.dashboard', compact('student','course','enrollments','course'));        
+        }])
+        ->orderBy('enrollment_date', 'desc')
+        ->paginate(10);
+        $allEnrollment = Enrollment::paginate(10);  
+        $instructorPlan = Instructor::all();
+
+        if (fullAccess()){
+            $courseShow = Course::withCount('segment')->paginate(5);
+            $totalCourseFee = Payment::sum('amount');
+           return view('backend.adminDashboard', compact('student','course','allEnrollment','allCourse',
+           'allEnrollments','totalCourseFee','courseShow','instructorPlan'));  
+        }            
+        elseif ($user->role = 'Instructor'){
+            $instructor = Instructor::where('id', $user_id)->first();
+            $courseShow = Course::where('instructor_id', $instructor->id)
+            ->withCount('segment')->paginate(5);            
+            $totalCourseFee = Payment::where('instructor_id', $instructor->id)->sum('amount');
+            return view('backend.instructorDashboard', compact('student','course','enrollments','course',
+            'instructor','totalCourseFee','courseShow')); 
+        }            
+        else{
+            return view('backend.dashboard', compact('student','course','enrollments','course'));  
+        }
+                  
+    }
+
+
+    public function testDashboard() 
+    {
+        return view('backend.test-dashboard');
     }
 }
