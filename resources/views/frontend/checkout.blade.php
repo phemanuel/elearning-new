@@ -322,8 +322,7 @@ const paymentForm = document.getElementById('paymentForm');
 paymentForm.addEventListener("submit", payWithPaystack, false);
 
 function payWithPaystack(){
-    var handler = PaystackPop.setup({
-        // key: 'pk_live_af75db5adac1cb07ba98e7e4d0d7d23adef8d6a6',
+    var handler = PaystackPop.setup({        
         key: 'pk_test_7e47750741148423f3607736bee347b8620fd0c2',
         email: document.getElementById("email_addy").value,
         amount: {{ number_format($finalTotal, 2) * 100 }}, // Amount in kobo (100 kobo = 1 Naira)

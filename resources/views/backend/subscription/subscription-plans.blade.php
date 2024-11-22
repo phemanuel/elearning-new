@@ -54,8 +54,8 @@
                                 </ul>      
                                 <!-- Pricing -->
                                 <div class="mt-3">
-                                <h5 class="text-primary"><strong><img src="{{asset('images/naira_sign.png')}}" alt="">&nbsp;{{ number_format($d->amount, 0) }}/month 
-                                    or {{ number_format($d->amount * 12 * 0.9, 0) }}/year</strong>                                    
+                                <h5 class="text-primary"><strong>₦{{ number_format($d->amount, 0) }}/month 
+                                    or ₦{{number_format($d->amount * 12 * 0.9, 0) }}/year</strong>                                    
                                 </h5>                                  
                                 </div>                          
                                 <!-- Buy Button -->

@@ -148,6 +148,7 @@ Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     Route::resource('discussion', discussion::class);
     Route::resource('message', message::class);
     Route::resource('coupon', coupon::class);
+    // -Subscription routes
     Route::resource('subscription', SubscriptionController::class);
     Route::post('/subscription/upgrade', [SubscriptionController::class, 'upgrade'])
     ->name('subscription.upgrade');
@@ -157,7 +158,18 @@ Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     ->name('subscribe.view');
     Route::post('/subscribePlan/{id}', [SubscriptionController::class, 'subscribePlansStore'])
     ->name('subscribe.store');
+    Route::get('/subPlan/verifyTransaction/{ref}', [SubscriptionController::class, 'verifyTransaction'])
+    ->name('sub.verify-transaction');    
+    Route::get('/subPlan/cancel-transaction', [SubscriptionController::class, 'cancelTransaction'])
+    ->name('sub.cancel-transaction');
+    Route::get('/subPlan/error-transaction', [SubscriptionController::class, 'errorTransaction'])
+    ->name('sub.error-transaction');
+    Route::get('/subPlan/success-transaction', [SubscriptionController::class, 'successTransaction'])
+    ->name('sub.success-transaction');
+    Route::post('/subPlan/storeNoOfMonths', [SubscriptionController::class, 'storeNoOfMonths'])
+    ->name('sub.storeNoOfMonths');
     Route::resource('subscriptionPlan', SubscriptionPlanController::class);
+    //----------------------------------------------------------------
     Route::resource('enrollment', enrollment::class);
     Route::get('permission/{role}', [permission::class, 'index'])->name('permission.list');
     Route::post('permission/{role}', [permission::class, 'save'])->name('permission.save'); 

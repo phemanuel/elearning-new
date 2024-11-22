@@ -122,8 +122,7 @@ class PaymentController extends Controller
         $url = "https://api.paystack.co/transaction/verify/" . rawurlencode($ref);
 
         // Make an HTTP GET request to Paystack API
-        $response = Http::withHeaders([
-           // 'Authorization' => 'Bearer sk_live_3cd4de2321edddfa4adc4cf77aeecc1f31f50e19',
+        $response = Http::withHeaders([            
             'Authorization' => 'Bearer sk_test_a68da4cd7971e573aa675946d8b2549ca819044e',
             'Cache-Control' => 'no-cache',
         ])->get($url);
