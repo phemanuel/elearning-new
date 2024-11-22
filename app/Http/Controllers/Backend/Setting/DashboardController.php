@@ -50,7 +50,7 @@ class DashboardController extends Controller
             $totalCourseFee = Payment::where('instructor_id', $instructor->id)->sum('amount');
             $subscriptions = Subscription::where('instructor_id', $instructor->id)->first();
             if ($subscriptions && $subscriptions->subscriptionPlan) {
-                $imageUrl = $subscriptions->subscriptionPlan->image_url; 
+                $imageUrl = $subscriptions->subscriptionPlan->image; 
             } else {
                 $imageUrl = null; 
             }

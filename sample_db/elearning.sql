@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2024 at 02:15 PM
+-- Generation Time: Nov 22, 2024 at 12:19 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -338,8 +338,8 @@ CREATE TABLE `instructors` (
 --
 
 INSERT INTO `instructors` (`id`, `name_en`, `name_bn`, `contact_en`, `contact_bn`, `email`, `role_id`, `bio`, `title`, `designation`, `image`, `status`, `password`, `language`, `access_block`, `social_facebook`, `social_twitter`, `social_instagram`, `social_linkedin`, `social_youtube`, `instructor_url`, `current_plan`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(3, 'Adeyinka Temiloluwa', NULL, '08053608799', NULL, 'emmanexitconsult@gmail.com', 3, '<p><span style=\"font-size: 14.992px;\">I am a professional responsible for analyzing financial data and providing insights to help businesses make informed investment and strategic decisions. I assess economic performance, forecast future financial trends, and offer recommendations based on their analysis. I often work with financial models, examining variables such as revenues, expenses, and market trends, to determine the financial health of companies or projects.</span></p><p><span style=\"font-size: 14.992px;\">Key skills include proficiency in financial software, data analysis, understanding of accounting principles, and strong communication abilities and often work in investment firms, banks, insurance companies, or corporate finance departments. I typically holds a degree in finance, economics, or a related field and may possess certifications like CFA (Chartered Financial Analyst).</span></p>', 'Mrs', 'Financial Analyst', 'Instructor_Adeyinka Temiloluwa_197.jpg', 1, '$2y$12$oRlxxgjJXDhVFgDjAY21j.LBVn60MgaQUy4P0ysqnCZEWqjp0D91O', 'en', NULL, 'https://www.facebook.com/temi-akinyooye', NULL, 'https://www.instgram.com/temi-akinyooye', NULL, NULL, 'OVLbufn7RLj0NxlvY0ftcTanFCN6zFJhKiCW2DPA', 0, 'FJGu91BMdWdNlASbolOq3o4caqnR6Ro9Esnxptv9', '2024-09-27 18:36:41', '2024-10-21 21:17:48', NULL),
-(4, 'Miracle Peters', NULL, '08104196102', NULL, 'miracle.kingsbranding@gmail.com', 3, '<p>As a Digital Marketer, I specialize in creating impactful online campaigns that boost brand visibility and drive engagement. With expertise in social media, SEO, email marketing, and paid ads, I tailor strategies to connect with target audiences and generate leads. I’m passionate about using data-driven insights to optimize campaigns and help businesses grow in the digital landscape. Skilled in content creation and digital tools, I continuously adapt to new trends and technologies to stay ahead in the ever-evolving world of digital marketing.<br></p>', 'Miss', 'Digital Marketer', 'Instructor_Miracle Peter_629.jpg', 1, '$2y$12$uh2TKhMQCGp/S4n7Ps0BhedkDlJkmqipqxvvDkGtNBpa7DFgqr7k6', 'en', NULL, NULL, NULL, NULL, NULL, NULL, '85zlG17M2I4WAM9b4YtGqnckzTtOpKNZcXzcBoNL', 0, NULL, '2024-09-29 03:06:36', '2024-11-13 08:01:41', NULL),
+(3, 'Adeyinka Temiloluwa', NULL, '08053608799', NULL, 'emmanexitconsult@gmail.com', 3, '<p><span style=\"font-size: 14.992px;\">I am a professional responsible for analyzing financial data and providing insights to help businesses make informed investment and strategic decisions. I assess economic performance, forecast future financial trends, and offer recommendations based on their analysis. I often work with financial models, examining variables such as revenues, expenses, and market trends, to determine the financial health of companies or projects.</span></p><p><span style=\"font-size: 14.992px;\">Key skills include proficiency in financial software, data analysis, understanding of accounting principles, and strong communication abilities and often work in investment firms, banks, insurance companies, or corporate finance departments. I typically holds a degree in finance, economics, or a related field and may possess certifications like CFA (Chartered Financial Analyst).</span></p>', 'Mrs', 'Financial Analyst', 'Instructor_Adeyinka Temiloluwa_197.jpg', 1, '$2y$12$oRlxxgjJXDhVFgDjAY21j.LBVn60MgaQUy4P0ysqnCZEWqjp0D91O', 'en', NULL, 'https://www.facebook.com/temi-akinyooye', NULL, 'https://www.instgram.com/temi-akinyooye', NULL, NULL, 'OVLbufn7RLj0NxlvY0ftcTanFCN6zFJhKiCW2DPA', 0, 'FJGu91BMdWdNlASbolOq3o4caqnR6Ro9Esnxptv9', '2024-09-27 18:36:41', '2024-11-22 07:03:48', NULL),
+(4, 'Miracle Peters', NULL, '08104196102', NULL, 'miracle.kingsbranding@gmail.com', 3, '<p>As a Digital Marketer, I specialize in creating impactful online campaigns that boost brand visibility and drive engagement. With expertise in social media, SEO, email marketing, and paid ads, I tailor strategies to connect with target audiences and generate leads. I’m passionate about using data-driven insights to optimize campaigns and help businesses grow in the digital landscape. Skilled in content creation and digital tools, I continuously adapt to new trends and technologies to stay ahead in the ever-evolving world of digital marketing.<br></p>', 'Miss', 'Digital Marketer', 'Instructor_Miracle Peter_629.jpg', 1, '$2y$12$uh2TKhMQCGp/S4n7Ps0BhedkDlJkmqipqxvvDkGtNBpa7DFgqr7k6', 'en', NULL, NULL, NULL, NULL, NULL, NULL, '85zlG17M2I4WAM9b4YtGqnckzTtOpKNZcXzcBoNL', 1, NULL, '2024-09-29 03:06:36', '2024-11-22 07:04:25', NULL),
 (5, 'Olayimika Omotayo', NULL, '08053708699', NULL, 'olaoluwayimika72@yahoo.com', 3, '<p>As an Executive Assistant, I provide high-level administrative support to executives, ensuring smooth day-to-day operations. With a strong focus on organization and attention to detail, I manage calendars, coordinate meetings, handle communications, and oversee special projects. I excel at multitasking and problem-solving, allowing executives to focus on strategic priorities. My role involves confidential tasks, managing travel arrangements, and preparing reports, all while maintaining professionalism and efficiency. Passionate about streamlining processes, I thrive in fast-paced environments and am committed to helping leadership achieve their goals effectively.<br></p>', 'Mrs', 'Executive Assistant', 'Instructor_Olayimika Omotayo_791.jpg', 1, '$2y$12$KivcsAkNgW05fba/oIrb9eCsasvKVXrfejZZlEB27zjbpja3JoIma', 'en', NULL, NULL, NULL, NULL, NULL, NULL, 'DL9bwHBPP5yRb5vopodNYvWZS9dONGCowDLT832M', 0, NULL, '2024-09-29 03:14:02', '2024-10-21 21:27:09', NULL);
 
 -- --------------------------------------------------------
@@ -608,7 +608,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (66, '2024_11_08_074010_add_cert_link_to_enrollments_table', 34),
 (67, '2024_11_20_214859_add_course_id_to_payments_table', 35),
 (68, '2024_11_21_121553_create_subscription_plans_table', 36),
-(69, '2024_11_21_121827_add_current_plan_to_instructors_table', 36);
+(69, '2024_11_21_121827_add_current_plan_to_instructors_table', 36),
+(70, '2024_11_21_185609_create_subscriptions_table', 37);
 
 -- --------------------------------------------------------
 
@@ -1073,16 +1074,23 @@ INSERT INTO `students` (`id`, `name_en`, `name_bn`, `contact_en`, `contact_bn`, 
 
 CREATE TABLE `subscriptions` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `student_id` bigint(20) UNSIGNED NOT NULL,
-  `course_id` bigint(20) UNSIGNED NOT NULL,
-  `plan` enum('monthly','yearly') NOT NULL,
+  `instructor_id` bigint(20) UNSIGNED NOT NULL,
+  `plan_id` int(10) NOT NULL,
+  `no_of_months` int(10) NOT NULL,
+  `total_amount` double(10,2) NOT NULL,
   `start_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `end_date` timestamp NULL DEFAULT NULL,
   `status` enum('active','canceled','expired') NOT NULL DEFAULT 'active',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `subscriptions`
+--
+
+INSERT INTO `subscriptions` (`id`, `instructor_id`, `plan_id`, `no_of_months`, `total_amount`, `start_date`, `end_date`, `status`, `created_at`, `updated_at`) VALUES
+(3, 4, 1, 3, 6000.00, '2024-11-22 07:04:25', '2025-02-22 07:04:25', 'active', '2024-11-22 07:04:25', '2024-11-22 07:04:25');
 
 -- --------------------------------------------------------
 
@@ -1096,10 +1104,21 @@ CREATE TABLE `subscription_plans` (
   `course_upload` int(11) NOT NULL,
   `student_upload` int(11) NOT NULL,
   `allocated_space` int(11) NOT NULL,
+  `amount` double(10,2) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
+  `status` enum('Active','Inactive') NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `subscription_plans`
+--
+
+INSERT INTO `subscription_plans` (`id`, `name`, `course_upload`, `student_upload`, `allocated_space`, `amount`, `image`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'BASIC', 2, 100, 2, 2000.00, '9521732211248.png', 'Active', '2024-11-22 01:47:28', '2024-11-22 02:13:51'),
+(2, 'GROWTH', 5, 200, 5, 5000.00, '1821732211398.png', 'Active', '2024-11-22 01:49:58', '2024-11-22 02:14:11'),
+(3, 'PROFESSIONAL', 10, 500, 10, 10000.00, '4861732211466.png', 'Active', '2024-11-22 01:51:06', '2024-11-22 02:14:30');
 
 -- --------------------------------------------------------
 
@@ -1382,8 +1401,7 @@ ALTER TABLE `students`
 --
 ALTER TABLE `subscriptions`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `subscriptions_student_id_index` (`student_id`),
-  ADD KEY `subscriptions_course_id_index` (`course_id`);
+  ADD KEY `subscriptions_instructor_id_index` (`instructor_id`);
 
 --
 -- Indexes for table `subscription_plans`
@@ -1499,7 +1517,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `news_letters`
@@ -1583,13 +1601,13 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `subscriptions`
 --
 ALTER TABLE `subscriptions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `subscription_plans`
 --
 ALTER TABLE `subscription_plans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1698,13 +1716,6 @@ ALTER TABLE `quizzes`
 ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_course_id_foreign` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `reviews_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `subscriptions`
---
-ALTER TABLE `subscriptions`
-  ADD CONSTRAINT `subscriptions_course_id_foreign` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `subscriptions_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `users`

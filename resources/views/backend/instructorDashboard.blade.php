@@ -181,23 +181,31 @@
                             @else
                             <!-- Image representing the plan -->
                             <div class="text-center mb-4">
-                                <img src="{{asset('images/' . $imageUrl)}}" alt="Starter Plan" class="img-fluid" style="max-height: 150px; width: auto;">
+                                <img src="{{asset('uploads/subscriptions/' . $imageUrl)}}" alt="Starter Plan" class="img-fluid" style="max-height: 150px; width: auto;">
                             </div>
 
                             <!-- Plan details -->
                             <div class="plan-details text-center">
                                 <!-- Features -->
                                 <ul class="list-group text-left mt-3">
-                                    <li class="list-group-item"><i class="la la-upload mr-2"></i> Upload up to 5 courses</li>
-                                    <li class="list-group-item"><i class="la la-user mr-2"></i> On-board up to 100 students</li>
-                                    <li class="list-group-item"><i class="la la-hdd mr-2"></i> 1 GB storage for materials</li>
+                                    <li class="list-group-item"><i class="la la-upload mr-2"></i> {{$subscriptions->subscriptionPlan->course_upload}} Courses Upload</li>
+                                    <li class="list-group-item"><i class="la la-user mr-2"></i> {{$subscriptions->subscriptionPlan->student_upload}} Students On-board </li>
+                                    <li class="list-group-item"><i class="la la-hdd mr-2"></i> {{$subscriptions->subscriptionPlan->allocated_space}} GB storage for materials</li>
                                     <!-- <li class="list-group-item"><i class="la la-chart-bar mr-2"></i> Basic analytics</li> -->
-                                    <li class="list-group-item"><i class="la la-envelope mr-2"></i> Email support</li>
+                                    <!-- <li class="list-group-item"><i class="la la-envelope mr-2"></i> Email support</li> -->
+                                    <li class="list-group-item">
+                                        <i class="la la-calendar mr-2"></i>{{ \Carbon\Carbon::parse($subscriptions->start_date)->format('F d, Y') }} 
+                                        <i class="la la-arrow-right mx-2"></i>
+                                        {{ \Carbon\Carbon::parse($subscriptions->end_date)->format('F d, Y') }}
+                                    </li>
                                 </ul>
 
                                 <!-- Pricing -->
                                 <div class="mt-3">
-                                    <h5 class="text-primary">Price: $10/month or $100/year</h5>
+                                <!-- <h5 class="text-primary"><strong>=N={{ number_format($subscriptions->subscriptionPlan->amount, 2) }}/month 
+                                    or =N={{ number_format($subscriptions->subscriptionPlan->amount * 12 * 0.9, 2) }}/year</strong>
+                                    
+                                </h5> -->
                                     <!-- <h6 class="text-muted">or $100/year</h6> -->
                                 </div>
                                 <!-- Upgrade Button -->
