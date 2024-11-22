@@ -1,5 +1,5 @@
 @extends('backend.layouts.app')
-@section('title', 'Edit Category')
+@section('title', 'Edit Subscription')
 
 @push('styles')
 <!-- Pick date -->

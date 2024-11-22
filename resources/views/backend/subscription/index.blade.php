@@ -1,5 +1,5 @@
 @extends('backend.layouts.app')
-@section('title', 'Category List')
+@section('title', 'Subscription List')
 
 @push('styles')
 <!-- Datatable -->

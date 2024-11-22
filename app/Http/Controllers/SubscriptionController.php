@@ -96,10 +96,15 @@ class SubscriptionController extends Controller
         return back()->with('success', $message);
     }
 
+    public function subscriptionPlans()
+    {
+        return view('backend.subscription.subscription-plans');
+    }
+
     /**
      * Display the specified resource.
      */
-    public function show(Subscription $subscription)
+    public function show()
     {
         //
     }
