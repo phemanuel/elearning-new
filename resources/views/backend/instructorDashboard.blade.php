@@ -210,7 +210,7 @@
                                 </div>
                                 <!-- Upgrade Button -->
                                 <div class="mt-3">
-                                    <a href="#" class="btn btn-success btn-lg text-white">
+                                    <a href="{{route('subscription.view')}}" class="btn btn-success btn-lg text-white">
                                         <i class="la la-arrow-up mr-2"></i> Upgrade Plan
                                     </a>
                                 </div>

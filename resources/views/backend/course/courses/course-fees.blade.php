@@ -1,5 +1,5 @@
 @extends('backend.layouts.app')
-@section('title', 'Course Material List')
+@section('title', 'Course Fees')
 
 @push('styles')
 <!-- Datatable -->
@@ -21,7 +21,6 @@
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a href="">Payment</a>
                     <li class="breadcrumb-item active"><a href="">Course Fees</a>
                     </li>
                 </ol>
@@ -73,7 +72,7 @@
                                             <td>{{ $payment->course->instructor->name_en ?? 'N/A' }}</td>
                                             @endif
                                             <td>{{ number_format($payment->amount, 2) }}</td>
-                                            <td>{{ number_format($payment->payout, 2) }}</td>
+                                            <td>{{ number_format($payment->amount, 2) }}</td>
                                             <td>{{ \Carbon\Carbon::parse($payment->created_at)->format('jS F, Y') }}</td>
                                         </tr>
                                         @endforeach

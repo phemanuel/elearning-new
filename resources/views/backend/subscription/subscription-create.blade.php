@@ -83,11 +83,12 @@
                                                         @foreach($subscriptionPlan as $s)
                                                             <option value="{{ $s->id }}" {{ old("subscriptionPlan[{$d->id}]") == $s->id ? 'selected' : '' }}>{{ $s->name }}</option>
                                                         @endforeach
+                                                        <option value="4">Unlimited</option>
                                                     </select>
                                                 </td>
                                                 <td>
                                                     <!-- Subscription Duration -->
-                                                    <input type="number" name="subscriptionDuration[{{ $d->id }}]" class="form-control" value="1" min="1">
+                                                    <input type="number" name="subscriptionDuration[{{ $d->id }}]" class="form-control" value="1" min="1" max="12">
                                                 </td>
                                                 <td>
                                                     <!-- Action Button: Subscribe or Upgrade -->

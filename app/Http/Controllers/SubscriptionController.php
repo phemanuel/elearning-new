@@ -98,7 +98,87 @@ class SubscriptionController extends Controller
 
     public function subscriptionPlans()
     {
-        return view('backend.subscription.subscription-plans');
+        $instructorId = auth()->user()->instructor_id;
+        $subscriptionPlans = SubscriptionPlan::all();
+        $subscriptions = Subscription::where('instructor_id', $instructorId)->first();
+        return view('backend.subscription.subscription-plans', compact('subscriptionPlans', 'subscriptions'));
+    }
+
+    public function subscribePlans($id)
+    {
+        $decryptedId = encryptor('decrypt', $id);
+        $instructorId = auth()->user()->instructor_id;
+        $currentPlan = Subscription::where('instructor_id' , $instructorId)->first();
+
+        $subscriptionPlans = SubscriptionPlan::where('id', $decryptedId)->first();
+
+        return view('backend.subscription.subscribe-plan', compact('subscriptionPlans', 'currentPlan'));
+    }
+
+    public function subscribePlansStore(Request $request ,  $id)
+    {
+        $decryptedId = encryptor('decrypt', $id);
+        $instructorId = auth()->user()->instructor_id;
+        $planId = $decryptedId;
+        $duration = $request->noOfMonth;
+
+        //check if no of month is passed
+        if(empty($request->noOfMonth))
+        {
+            return back()->with('error', 'Select the no of months you are subscribing for.');
+        }
+
+        if (!$planId || !$duration) {
+            return back()->with('error', 'A valid subscription plan and duration is not selected.');
+        }
+
+        // Fetch the instructor and plan
+        $instructor = Instructor::find($instructorId);
+        $plan = SubscriptionPlan::find($planId);
+
+        if (!$instructor || !$plan) {
+            return back()->with('error', 'Invalid instructor or subscription plan.');
+        }
+
+        $amount = $plan->amount;
+        $totalAmount = $amount * $duration;
+        $startDate = now();
+        $endDate = $startDate->copy()->addMonths($duration);
+
+        // Check if the instructor already has an active subscription
+        $existingSubscription = Subscription::where('instructor_id', $instructorId)
+            ->where('status', 'Active')
+            ->first();
+
+        if ($existingSubscription) {
+            // Update the existing subscription
+            $existingSubscription->update([
+                'plan_id' => $planId,
+                'no_of_months' => $duration,
+                'start_date' => $startDate,
+                'end_date' => $endDate,
+                'total_amount' => $totalAmount,
+            ]);
+            $message = 'Subscription upgraded successfully.';
+        } else {
+            // Create a new subscription
+            Subscription::create([
+                'instructor_id' => $instructorId,
+                'plan_id' => $planId,
+                'no_of_months' => $duration,
+                'start_date' => $startDate,
+                'end_date' => $endDate,
+                'total_amount' => $totalAmount,
+                'status' => 'Active',
+            ]);
+            $message = 'Subscription successful.';
+        }
+
+        // Update the instructor's current plan
+        $instructor->current_plan = $planId;
+        $instructor->save();
+
+        return redirect()->route('subscription.view')->with('success', $message);
     }
 
     /**

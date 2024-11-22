@@ -153,6 +153,10 @@ Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     ->name('subscription.upgrade');
     Route::get('/subscriptionPlan/view', [SubscriptionController::class, 'subscriptionPlans'])
     ->name('subscription.view');
+    Route::get('/subscribePlan/{id}', [SubscriptionController::class, 'subscribePlans'])
+    ->name('subscribe.view');
+    Route::post('/subscribePlan/{id}', [SubscriptionController::class, 'subscribePlansStore'])
+    ->name('subscribe.store');
     Route::resource('subscriptionPlan', SubscriptionPlanController::class);
     Route::resource('enrollment', enrollment::class);
     Route::get('permission/{role}', [permission::class, 'index'])->name('permission.list');
