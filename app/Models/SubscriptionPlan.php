@@ -21,6 +21,6 @@ class SubscriptionPlan extends Model
 
     public function instructors()
     {
-        return $this->hasMany(Instructor::class, 'current_plan');
+        return $this->hasMany(Instructor::class, 'current_plan', 'id');
     }
 }

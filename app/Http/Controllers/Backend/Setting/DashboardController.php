@@ -32,7 +32,7 @@ class DashboardController extends Controller
         ->orderBy('enrollment_date', 'desc')
         ->paginate(10);
         $allEnrollment = Enrollment::paginate(10);  
-        $instructorPlan = Instructor::paginate(10);
+        $instructorPlan = Instructor::with('currentPlan')->paginate(10);
 
         if (fullAccess()){
             $courseShow = Course::withCount('segment')

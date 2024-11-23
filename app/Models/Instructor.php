@@ -44,5 +44,10 @@ class Instructor extends Model
     {
         return $this->belongsTo(SubscriptionPlan::class, 'current_plan');
     }
+
+    public function currentPlan()
+    {
+        return $this->belongsTo(SubscriptionPlan::class, 'current_plan', 'id');
+    }
     
 }

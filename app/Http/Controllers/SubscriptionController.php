@@ -214,7 +214,7 @@ class SubscriptionController extends Controller
 
             // Connect the save enrolle function           
             $this->saveSubscription($status, $reference, $cus_email, $cus_amount);            
-            return redirect()->route('dashboard')->with('success', 'Transaction and Subscription was successful.');
+            return redirect()->route('dashboard')->with('success', 'Payment Transaction and Subscription was successful.');
         } else {
             // Log the response or handle the error
             // Optionally, you can pass the error message to the session or view
@@ -256,10 +256,12 @@ class SubscriptionController extends Controller
         // Save payment details
         $payment = SubscriptionPayment::create([
             'instructor_id' => $instructorId,
-            'amount' => $totalAmount,
+            'amount' => $amount,
             'txnid' => $reference,
             'plan_id' => $planId,
             'status' => 1,
+            'no_of_months' => $duration,
+            'total_amount' => $totalAmount,
             'method' => 'Paystack',
             'currency' => 'Naira',
         ]);

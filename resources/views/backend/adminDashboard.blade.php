@@ -142,12 +142,11 @@
             <div class="col-xl-4 col-xxl-4 col-lg-4 col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                    <h5 class="card-title"><strong>Subscription Plan</strong></h5>
+                    <h5 class="card-title"><strong>Subscription Plans</strong></h5>
                     </div>
                     <div class="card-body">
-                        <div class="widget-todo dz-scroll" style="height: 370px;" id="DZ_W_Notifications">
-                        <table class="table table-sm mb-0 table-striped">
-                            <!-- <table class="table table-sm mb-0 table-striped"> -->
+                        <div class="widget-todo dz-scroll" style="height: 370px;" id="DZ_W_Notifications">                        
+                            <table class="table table-sm mb-0 table-striped">
                             <thead>
                                 <tr>
                                     <th class="px-5 py-3">#</th>
@@ -161,7 +160,7 @@
                                 <tr class="btn-reveal-trigger">                                    
                                     <td class="py-2">{{ $key + 1 }}</td>
                                     <td class="py-2">{{ $p->name_en }}</td>                                    
-                                    <td class="py-2">{{ $instructor->subscriptionPlan?->name ?? 'No Plan Assigned' }}</td>                                       
+                                    <td class="py-2">{{ $p->currentPlan->name ?? 'No Plan' }}</td>                                       
                                 </tr>
                                 @endforeach
                             </tbody>                       
@@ -174,7 +173,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title"><strong>My Courses</strong> </h5>
+                        <h5 class="card-title"><strong>Courses</strong> </h5>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -212,7 +211,7 @@
                                                         __('Advanced')) }}</strong></td>
                                     <!-- Status Check -->                                    
                                     <td class="py-2">{{$d->courseCategory?->category_name}}</td>
-                                    <td class="py-2">{{number_format($d->price,2)}}</td>
+                                    <td class="py-2">{{ $d->price == 0 ? 'Free' : number_format($d->price, 2) }}</td>
                                     <td>
                                         @if($d->status == 2)
                                             <span class="badge badge-rounded badge-success">Active</span>

@@ -90,13 +90,24 @@
                                     <div class="mt-3">
                                         <strong>Total Amount: ₦<span id="total_amount">{{ number_format($subscriptionPlans->amount, 2) }}</span></strong>
                                     </div>
+                                    <div class="mt-3">
+                                        <strong>Transaction Charges: ₦<span id="transaction_charges">{{ number_format(($subscriptionPlans->amount * 0.015) + 100, 2) }}</span></strong>
+                                    </div>
+                                    <div class="mt-3">
+                                        <strong>Total Payable: ₦<span id="total_with_charges">{{ number_format($subscriptionPlans->amount + (($subscriptionPlans->amount * 0.015) + 100), 2) }}</span></strong>
+                                    </div>
+
+                                    <input type="hidden" id="hidden_total_amount" value="{{ $subscriptionPlans->amount + (($subscriptionPlans->amount * 0.015) + 100) }}">
+                                    <input type="hidden" id="hidden_transaction_charges" value="{{ ($subscriptionPlans->amount * 0.015) + 100 }}">
                                     </div> 
                                     @if($errors->has('noOfMonth'))
                                     <span class="text-danger"> {{$errors->first('noOfMonth')}}</span>
                                     @endif                                   
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12">                                    
-                                <input type="hidden" id="hidden_total_amount" name="total_amount" value="{{ $subscriptionPlans->amount }}">
+                                <div class="col-lg-12 col-md-12 col-sm-12">                                  
+                                
+                                <input type="hidden" id="hidden_total_amount" value="{{ $subscriptionPlans->amount }}">
+                                <input type="hidden" id="hidden_transaction_charges" value="0">
                                 <input type="hidden" name="email_addy" id="email_addy" value="{{auth()->user()->email}}">
                                 <script src="https://js.paystack.co/v1/inline.js"></script>
                                 <a class="btn btn-success btn-lg text-white" onClick="payWithPaystack()"> Click Here to Subscribe</a>                                     
@@ -131,7 +142,8 @@
     const amountPerMonth = {{ $subscriptionPlans->amount }};
 
         function calculateTotalAmount() {
-        const noOfMonths = parseInt(document.getElementById('no_of_months').value, 10);
+        // Default to 1 month if no value is selected
+        const noOfMonths = parseInt(document.getElementById('no_of_months')?.value || 1, 10);
         let totalAmount = amountPerMonth * noOfMonths;
 
         // Apply 10% discount if the number of months is 12
@@ -139,12 +151,30 @@
             totalAmount -= totalAmount * 0.10; // Subtract 10% of the total amount
         }
 
+        // Calculate transaction charges: 1.5% of total amount + 100
+        const transactionCharges = (totalAmount * 0.015) + 100;
+
+        // Calculate total payable amount
+        const totalWithCharges = totalAmount + transactionCharges;
+
         // Update the total amount displayed
         document.getElementById('total_amount').textContent = totalAmount.toLocaleString('en-US', { minimumFractionDigits: 2 });
 
-        // Update the hidden input value
-        document.getElementById('hidden_total_amount').value = totalAmount.toFixed(2);
+        // Update the transaction charges displayed
+        document.getElementById('transaction_charges').textContent = transactionCharges.toLocaleString('en-US', { minimumFractionDigits: 2 });
+
+        // Update the total payable amount displayed
+        document.getElementById('total_with_charges').textContent = totalWithCharges.toLocaleString('en-US', { minimumFractionDigits: 2 });
+
+        // Update hidden input values
+        document.getElementById('hidden_total_amount').value = totalWithCharges.toFixed(2);
+        document.getElementById('hidden_transaction_charges').value = transactionCharges.toFixed(2);
     }
+
+    // Run the calculation on page load with default 1 month
+    document.addEventListener('DOMContentLoaded', () => {
+        calculateTotalAmount();
+    });
 
     function payWithPaystack() {
         // Generate the custom reference

@@ -60,6 +60,7 @@
                                         <th>{{ __('Course Upload') }}</th>
                                         <th>{{ __('Student Upload') }}</th>
                                         <th>{{ __('Allocated Space') }}</th>
+                                        <th>{{ __('Payment Date') }}</th>
                                         <th>{{ __('Actions') }}</th>
                                         
                                     </tr>
@@ -76,6 +77,7 @@
                                         <td><strong>{{ $subscription->subscriptionPlan?->course_upload ?? 'N/A' }}</strong></td>
                                         <td><strong>{{ $subscription->subscriptionPlan?->student_upload ?? 'N/A' }}</strong></td>
                                         <td><strong>{{ $subscription->subscriptionPlan?->allocated_space ?? 'N/A' }}Gb</strong></td>
+                                        <td><strong>{{ \Carbon\Carbon::parse($subscription->created_at)->format('F d, Y') }}</strong></td>
                                         <td>
                                                     <!-- <a href="{{route('subscription.edit', encryptor('encrypt', $subscription->id))}}"
                                                         class="btn btn-sm btn-primary" title="Edit"><i
