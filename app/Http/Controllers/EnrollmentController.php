@@ -6,6 +6,7 @@ use App\Models\Enrollment;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\Course;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 
 class EnrollmentController extends Controller
@@ -18,14 +19,31 @@ class EnrollmentController extends Controller
         $userRoleId = auth()->user()->role_id;
         if ($userRoleId == 1) {
             $enrollment = Enrollment::get();
+
+            return view('backend.enrollment.index', compact('enrollment'));
         }
         elseif ($userRoleId == 3) {
             $instructorId = auth()->user()->instructor_id;
+            //----check if the instructor is on a plan--
+            $existingPlan= Subscription::where('instructor_id', $instructorId )->first();
+            if (!$existingPlan) {
+                return redirect()->back()->with('error', 'Access denied, because you do not have an active subscription plan.');
+            }
+            //---check if the plan is still valid
+            $currentDate = now(); 
+            $dueDate = $existingPlan->end_date; 
+
+            if ($currentDate > $dueDate) {
+                return redirect()->back()->with('error', 'Your subscription plan has expired.');
+            }   
+
             $enrollment = Enrollment::where('instructor_id', '=', $instructorId)
             ->get();
+
+            return view('backend.enrollment.index', compact('enrollment'));
         }
 
-        return view('backend.enrollment.index', compact('enrollment'));
+        
     }
 
     /**

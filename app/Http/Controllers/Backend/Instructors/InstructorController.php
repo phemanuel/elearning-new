@@ -11,6 +11,7 @@ use App\Http\Requests\Backend\Instructors\AddNewRequest;
 use App\Http\Requests\Backend\Instructors\UpdateRequest;
 use App\Models\Role;
 use App\Models\Lesson;
+use App\Models\Subscription;
 use Illuminate\Support\Facades\Hash;
 use Exception;
 use File;
@@ -27,17 +28,35 @@ class InstructorController extends Controller
     {
         $role_id = auth()->user()->role_id;
         $user_id = auth()->user()->instructor_id;
+        $instructorId = auth()->user()->instructor_id;
 
         // If role is Superadmin, show all instructors
         if ($role_id == 1) {
             $instructor = Instructor::paginate(10);
+
+            return view('backend.instructor.index', compact('instructor'));
         } 
         // If role is Instructor, show all except the logged-in instructor
         elseif ($role_id == 3) {
+            //----check if the instructor is on a plan--
+            $existingPlan= Subscription::where('instructor_id', $instructorId )->first();
+            if (!$existingPlan) {
+                return redirect()->back()->with('error', 'Access denied, because you do not have an active subscription plan.');
+            }
+            //---check if the plan is still valid
+            $currentDate = now(); 
+            $dueDate = $existingPlan->end_date; 
+
+            if ($currentDate > $dueDate) {
+                return redirect()->back()->with('error', 'Your subscription plan has expired.');
+            }  
+
             $instructor = Instructor::where('id', '!=', $user_id)->get();
+
+            return view('backend.instructor.index', compact('instructor'));
         }
         
-        return view('backend.instructor.index', compact('instructor'));
+        
     }
 
     /**

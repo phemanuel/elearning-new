@@ -10,6 +10,7 @@ use App\Models\Enrollment;
 use Illuminate\Http\Request;
 use Barryvdh\Snappy\Facades\SnappyPdf;
 use App\Models\Certificate;
+use App\Models\Subscription;
 use Carbon\Carbon;
 
 class CertificateController extends Controller
@@ -24,6 +25,19 @@ class CertificateController extends Controller
         }
         elseif ($userRoleId == 3) {
             $instructorId = auth()->user()->instructor_id;
+            //----check if the instructor is on a plan--
+            $existingPlan= Subscription::where('instructor_id', $instructorId )->first();
+            if (!$existingPlan) {
+                return redirect()->back()->with('error', 'Access denied, because you do not have an active subscription plan.');
+            }
+            //---check if the plan is still valid
+            $currentDate = now(); 
+            $dueDate = $existingPlan->end_date; 
+
+            if ($currentDate > $dueDate) {
+                return redirect()->back()->with('error', 'Your subscription plan has expired.');
+            }  
+            
             $data = Certificate::where('instructor_id', $instructorId)->with(['instructor', 'course'])->get();
         return view('backend.certificate.index', compact('data'));
         }

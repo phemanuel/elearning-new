@@ -176,8 +176,13 @@
                     </div>
                     <div class="card-body">
                         <div class="widget-todo dz-scroll" style="height: 370px;" id="DZ_W_Notifications">
-                            @if($subscriptions->count() == 0)
-                            <h4>You have no plan subscribed to</h4>
+                            @if(empty($subscriptions))
+                            <h4>You have no active subscription plan.</h4>
+                            <div class="mt-3">
+                                    <a href="{{route('subscription.view')}}" class="btn btn-success btn-lg text-white">
+                                        <i class="la la-shopping-cart"></i> Subscribe Now
+                                    </a>
+                                </div>
                             @else
                             <!-- Image representing the plan -->
                             <div class="text-center mb-4">

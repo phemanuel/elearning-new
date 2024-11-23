@@ -16,6 +16,8 @@ use App\Models\Coupon;
 use App\Models\Enrollment;
 use App\Models\Payment;
 use App\Models\Student;
+use App\Models\Subscription;
+use App\Models\SubscriptionPlan;
 use Illuminate\Support\Str;
 use Exception;
 use File; 
@@ -33,12 +35,27 @@ class CourseController extends Controller
         $instructorId = auth()->user()->instructor_id;
         if($userRoleId == 1) {
             $course = Course::withCount('segment')->paginate(10);
+            return view('backend.course.courses.index', compact('course'));
         }
         else {
             $course = Course::where('instructor_id', $instructorId)->withCount('segment')->paginate(10);
-        }
+            //----check if the instructor is on a plan--
+            $existingPlan= Subscription::where('instructor_id', $instructorId )->first();
+            if (!$existingPlan) {
+                return redirect()->back()->with('error', 'Access denied, because you do not have an active subscription plan.');
+            }
+            //---check if the plan is still valid
+            $currentDate = now(); 
+            $dueDate = $existingPlan->end_date; 
+
+            if ($currentDate > $dueDate) {
+                return redirect()->back()->with('error', 'Your subscription plan has expired.');
+            }  
+
+            //---if there is an active plan.
+            return view('backend.course.courses.index', compact('course'));
+        }        
         
-        return view('backend.course.courses.index', compact('course'));
     }
 
     public function indexForAdmin()
@@ -57,12 +74,26 @@ class CourseController extends Controller
         $instructorId = auth()->user()->instructor_id;
         if($userRoleId == 1){
             $instructor = Instructor::get();
+            return view('backend.course.courses.create', compact('courseCategory', 'instructor'));
         }
         else{
             $instructor = Instructor::where('id', $instructorId)->get();
-        }
+            $instructorNew = Instructor::where('id', $instructorId)->first();
+            //---Check if the subscription plan can allow the instructor to add courses--
+            $currentPlan = $instructorNew->current_plan ;
+            //Get the current plan variables
+            $subPlan = SubscriptionPlan::where('id', $currentPlan)->first();
+            $noOfCourses = $subPlan->course_upload;
+            //Get the current no of courses upload by the instructor
+            $noOfCoursesInstructor = Course::where('instructor_id', $instructorId)->count();
+
+            return response()->json([
+                'courses' => $noOfCourses,
+                'coursesInstructor' => $noOfCoursesInstructor,
+            ]);
+
+        }       
         
-        return view('backend.course.courses.create', compact('courseCategory', 'instructor'));
     }
 
     /**
@@ -327,16 +358,31 @@ class CourseController extends Controller
             $payments = Payment::with(['student', 'course', 'course.instructor'])
             ->orderBy('created_at')
             ->get();
+
+            return view('backend.course.courses.course-fees', compact('payments'));
         }
         elseif ($userRoleId == 3) {
             $instructorId = auth()->user()->instructor_id;
+            //----check if the instructor is on a plan--
+            $existingPlan= Subscription::where('instructor_id', $instructorId )->first();
+            if (!$existingPlan) {
+                return redirect()->back()->with('error', 'Access denied, because you do not have an active subscription plan.');
+            }
+            //---check if the plan is still valid
+            $currentDate = now(); 
+            $dueDate = $existingPlan->end_date; 
+
+            if ($currentDate > $dueDate) {
+                return redirect()->back()->with('error', 'Your subscription plan has expired.');
+            }  
+
             $payments = Payment::where('instructor_id', '=', $instructorId)
             ->with(['student', 'course', 'course.instructor'])
             ->orderBy('created_at')
             ->get();
-        }       
 
-        return view('backend.course.courses.course-fees', compact('payments'));
+            return view('backend.course.courses.course-fees', compact('payments'));
+        }               
     }
 
     /**

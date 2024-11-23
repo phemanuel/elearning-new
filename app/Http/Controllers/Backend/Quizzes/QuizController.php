@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Segments;
+use App\Models\Subscription;
 use Exception;
 
 class QuizController extends Controller
@@ -21,15 +22,33 @@ class QuizController extends Controller
         if ($userRoleId == 1) {
             // Admin can view all quizzes with their segments and question count
             $quiz = Quiz::with('segment', 'questions')->paginate(10);
+
+            return view('backend.quiz.quizzes.index', compact('quiz'));
         } elseif ($userRoleId == 3) {
             // Instructor can view only their quizzes with their segments and question count
             $instructorId = auth()->user()->instructor_id;
+
+            //----check if the instructor is on a plan--
+            $existingPlan= Subscription::where('instructor_id', $instructorId )->first();
+            if (!$existingPlan) {
+                return redirect()->back()->with('error', 'Access denied, because you do not have an active subscription plan.');
+            }
+            //---check if the plan is still valid
+            $currentDate = now(); 
+            $dueDate = $existingPlan->end_date; 
+
+            if ($currentDate > $dueDate) {
+                return redirect()->back()->with('error', 'Your subscription plan has expired.');
+            }  
+
             $quiz = Quiz::where('instructor_id', $instructorId)
                 ->with('segment', 'questions')
                 ->paginate(10);
+
+            return view('backend.quiz.quizzes.index', compact('quiz'));
         }
         
-        return view('backend.quiz.quizzes.index', compact('quiz'));
+        
     }
 
     /**
