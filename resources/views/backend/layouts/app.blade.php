@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <!-- <link href="{{asset('frontend/summernote/summernote-lite.min.css')}}" rel="stylesheet"> -->
     <link href="https://cdn.jsdelivr.net/npm/summernote/dist/summernote-lite.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     @stack('styles')
     <style>
        /* Ensure long URLs wrap properly */

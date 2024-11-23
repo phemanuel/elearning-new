@@ -15,7 +15,7 @@
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
-                    <h4>Course List</h4>
+                    <h4>Course List</h4>                 
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -28,14 +28,37 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <div class="row tab-content">
+                <div class="row tab-content">  
+                     <div class="card-header">
+                        @if(auth()->user()->role_id != 1)
+                        <a class="btn text-white" style="background-color: #006400;"> <!-- Deep Green -->
+                            <i class="material-icons">golf_course</i> <strong>Total Course Allocated: {{$noOfCourses}}</strong>
+                        </a>
+                        @endif
+                    </div>                   
                     <div class="card-header">
                         @if(auth()->user()->role_id != 1)
-                        <a href="{{route('course.create')}}" class="btn btn-primary">+ Add new course <i class="baseline-golf_course"></i></a>
-                        @else
+                        <a class="btn text-white" style="background-color: #5C4033;"> <!-- Deep Brown -->
+                            <i class="material-icons">upload</i> <strong>Course Upload: {{$noOfCoursesInstructor}}</strong>
+                        </a>
+                        @endif
+                    </div>                     
+                    <div class="card-header">
+                        @if(auth()->user()->role_id != 1)
+                        <a class="btn text-white" style="background-color: #FF8C00;"> <!-- Deep Orange -->
+                            <i class="material-icons">assignment</i> <!-- Icon in White -->
+                            <strong>Total Course Left: {{$noOfCourses - $noOfCoursesInstructor}}</strong>
+                        </a>
                         @endif
                     </div>
-                    <div class="col-lg-12">
+                    <div class="card-header">
+                        @if(auth()->user()->role_id != 1)
+                        <a href="{{route('course.create')}}" class="btn btn-primary"><strong>+ Add new course</strong> <i class="baseline-golf_course"></i></a>
+                        @else
+                        @endif
+                    </div>             
+                    
+                    <div class="col-lg-12 mt-2">
                         <div class="row">
                             @forelse ($course as $d)
                             <div class="col-lg-4 col-md-4 col-sm-6">

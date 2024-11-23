@@ -74,8 +74,8 @@
                                                 </td>                                               
                                                 <td>
                                                     <a href=""
-                                                        class="btn btn-sm btn-primary" title="Enroll"><i
-                                                            class="fas fa-handshake">On-board</i></a>                                                   
+                                                        class="btn btn-sm btn-primary" title="Enroll">
+                                                        <i class="fas fa-user-plus"> &nbsp;Enroll</i></a>                                                   
                                                 </td>                                               
                                             </tr>
                                             @empty

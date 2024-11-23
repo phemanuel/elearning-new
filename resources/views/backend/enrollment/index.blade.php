@@ -31,11 +31,36 @@
             <div class="col-lg-12">
                 <div class="row tab-content">
                     <div id="list-view" class="tab-pane fade active show col-lg-12">
-                        <div class="card">
+                        <div class="card">                            
                             <div class="card-header">
-                                <h4 class="card-title">All Enrollments List </h4>
-                                <a href="{{route('enrollment.create')}}" class="btn btn-primary">+ Enroll</a>
+                                <h4 class="card-title">All Enrollments List</h4>
+
+                                @if(auth()->user()->role_id != 1)
+                                <a class="btn text-white" style="background-color: #006400;"> <!-- Deep Green -->
+                                    <i class="material-icons">people</i> <!-- Icon for "students" -->
+                                    <strong>Total Students to Enroll: {{$noOfStudent}}</strong>
+                                </a>
+                                @endif
+
+                                @if(auth()->user()->role_id != 1)
+                                <a class="btn text-white" style="background-color: #5C4033;"> <!-- Deep Brown -->
+                                    <i class="material-icons">check_circle</i> <!-- Icon for "completed/enrolled" -->
+                                    <strong>Students Enrolled: {{$noOfStudentEnrolled}}</strong>
+                                </a>
+                                @endif
+
+                                @if(auth()->user()->role_id != 1)
+                                <a class="btn text-white" style="background-color: #FF8C00;"> <!-- Deep Orange -->
+                                    <i class="material-icons">book</i> <!-- Icon for "courses" -->
+                                    <strong>Total Courses Left: {{$noOfStudent - $noOfStudentEnrolled}}</strong>
+                                </a>
+                                @endif 
+
+                                <a href="{{route('enrollment.create')}}" class="btn btn-primary">
+                                    <strong>+ Enroll New Student</strong>
+                                </a>
                             </div>
+
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="example3" class="display" style="min-width: 845px">

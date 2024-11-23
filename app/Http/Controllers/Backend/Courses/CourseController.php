@@ -52,8 +52,16 @@ class CourseController extends Controller
                 return redirect()->back()->with('error', 'Your subscription plan has expired.');
             }  
 
+            $instructorNew = Instructor::where('id', $instructorId)->first();
+            //---Check if the subscription plan can allow the instructor to add courses--
+            $currentPlan = $instructorNew->current_plan ;
+            $subPlan = SubscriptionPlan::where('id', $currentPlan)->first();
+            $noOfCourses = $subPlan->course_upload;
+            //Get the current no of courses upload by the instructor
+            $noOfCoursesInstructor = Course::where('instructor_id', $instructorId)->count();
+
             //---if there is an active plan.
-            return view('backend.course.courses.index', compact('course'));
+            return view('backend.course.courses.index', compact('course', 'noOfCourses','noOfCoursesInstructor'));
         }        
         
     }
@@ -87,10 +95,12 @@ class CourseController extends Controller
             //Get the current no of courses upload by the instructor
             $noOfCoursesInstructor = Course::where('instructor_id', $instructorId)->count();
 
-            return response()->json([
-                'courses' => $noOfCourses,
-                'coursesInstructor' => $noOfCoursesInstructor,
-            ]);
+            if($noOfCourses > $noOfCoursesInstructor){
+                return view('backend.course.courses.create', compact('courseCategory', 'instructor',));
+            }
+            elseif($noOfCourses == $noOfCoursesInstructor){
+                return redirect()->back()->with('error', 'You have reached the maximum number of courses to add.');
+            }    
 
         }       
         

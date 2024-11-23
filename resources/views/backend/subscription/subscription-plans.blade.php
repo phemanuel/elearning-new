@@ -55,7 +55,7 @@
                                 <!-- Pricing -->
                                 <div class="mt-3">
                                 <h5 class="text-primary"><strong>₦{{ number_format($d->amount, 0) }}/month 
-                                    or ₦{{number_format($d->amount * 12 * 0.9, 0) }}/year</strong>                                    
+                                    or ₦{{number_format($d->amount * 12 * 0.9, 0) }}/year(10% off)</strong>                                    
                                 </h5>                                  
                                 </div>                          
                                 <!-- Buy Button -->

@@ -265,7 +265,7 @@
                                         <a href="javascript:void(0);">
                                             <div class="media d-flex align-items-center">
                                                 <div class="avatar avatar-xl mr-2">
-                                                    <img class="rounded-circle img-fluid" src="{{asset('uploads/courses/'.$d->image)}}" width="30" alt="">
+                                                    <img class="img fluid" width="100" src="{{asset('uploads/courses/'.$d->image)}}" width="30" alt="">
                                                 </div>                                                
                                             </div>
                                         </a>
