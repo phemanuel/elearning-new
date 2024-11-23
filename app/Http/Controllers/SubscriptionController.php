@@ -104,7 +104,9 @@ class SubscriptionController extends Controller
         $instructorId = auth()->user()->instructor_id;
         $subscriptionPlans = SubscriptionPlan::all();
         $subscriptions = Subscription::where('instructor_id', $instructorId)->first();
-        return view('backend.subscription.subscription-plans', compact('subscriptionPlans', 'subscriptions'));
+        $currentDate = now();
+        return view('backend.subscription.subscription-plans', compact('subscriptionPlans', 'subscriptions'
+        ,'currentDate'));
     }
 
     public function subscribePlans($id)
@@ -115,6 +117,17 @@ class SubscriptionController extends Controller
 
         $subscriptionPlans = SubscriptionPlan::where('id', $decryptedId)->first();
         session(['planId' => $subscriptionPlans->id]);        
+
+        //check if the user has an existing plan
+        if($currentPlan){
+            //---check if the active plan is valid---
+            $currentDate = now();
+            $dueDate = $currentPlan->end_date;
+            if($currentDate > $dueDate){
+                return redirect()->back()->with('error', 'You still have an active plan, to upgrade your plan, contact our support team.');
+            }
+            
+        }
 
         return view('backend.subscription.subscribe-plan', compact('subscriptionPlans', 'currentPlan'));
     }

@@ -67,15 +67,32 @@
                                 </div>
                                 @else
                                 <div class="mt-3">
-                                    @if($d->id == $subscriptions->plan_id)                                    
-                                        <img src="{{asset('images/check.jpg')}}" alt=""> 
-                                    @elseif($d->id < $subscriptions->plan_id)                                    
-                                        <img src="{{asset('images/uncheck.jpg')}}" alt="">                                   
+                                    @if($subscriptions->end_date < $currentDate)
+                                        @if($d->id == $subscriptions->plan_id)                                    
+                                            <img src="{{asset('images/check.jpg')}}" alt="">
+                                            <a href="{{route('subscribe.view' , encryptor('encrypt' , $d->id))}}" class="btn btn-success btn-lg text-white">
+                                            <i class="la la-shopping-cart"></i> Renew Now
+                                        </a>                                    
+                                        @elseif($d->id < $subscriptions->plan_id)                                    
+                                            <img src="{{asset('images/uncheck.jpg')}}" alt="">                                            
+                                        @else
+                                        <a href="{{route('subscribe.view' , encryptor('encrypt' , $d->id))}}" class="btn btn-success btn-lg text-white">
+                                            <i class="la la-shopping-cart"></i> Upgrade Now
+                                        </a>
+                                        @endif
                                     @else
-                                    <a href="{{route('subscribe.view' , encryptor('encrypt' , $d->id))}}" class="btn btn-success btn-lg text-white">
-                                        <i class="la la-shopping-cart"></i> Upgrade Now
-                                    </a>
+                                        @if($d->id == $subscriptions->plan_id)                                    
+                                            <img src="{{asset('images/check.jpg')}}" alt=""> 
+                                        @elseif($d->id < $subscriptions->plan_id)                                    
+                                            <img src="{{asset('images/uncheck.jpg')}}" alt="">                                   
+                                        @else
+                                        <a href="{{route('subscribe.view' , encryptor('encrypt' , $d->id))}}" class="btn btn-success btn-lg text-white">
+                                            <i class="la la-shopping-cart"></i> Upgrade Now
+                                        </a>
+                                        @endif
                                     @endif
+
+                                    
                                 </div>
                                 @endif
                             </div>                            

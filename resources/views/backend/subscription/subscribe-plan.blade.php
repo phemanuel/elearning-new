@@ -19,7 +19,11 @@
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
+                    @if(empty($currentPlan))
+                    <h4>Subscribe : No Plan <i class="la la-arrow-right mx-2"></i> {{$subscriptionPlans->name}}</h4>
+                    @else
                     <h4>Subscribe : {{$currentPlan->subscriptionPlan->name}} <i class="la la-arrow-right mx-2"></i> {{$subscriptionPlans->name}}</h4>
+                    @endif
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">

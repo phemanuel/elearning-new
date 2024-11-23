@@ -54,8 +54,9 @@ class DashboardController extends Controller
             } else {
                 $imageUrl = null; 
             }
+            $currentDate = now(); 
             return view('backend.instructorDashboard', compact('student','course','enrollments','course',
-            'instructor','totalCourseFee','courseShow','subscriptions','imageUrl')); 
+            'instructor','totalCourseFee','courseShow','subscriptions','imageUrl','currentDate')); 
         }            
         else{
             return view('backend.dashboard', compact('student','course','enrollments','course'));  
