@@ -25,7 +25,7 @@
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('subscription.index')}}">Subscription Plan</a></li>
+                    <li class="breadcrumb-item active"><a href="{{route('subscriptionPlan.index')}}">Subscription Plan</a></li>
                     <li class="breadcrumb-item active"><a href="#">Add Subscription Plan</a>
                     </li>
                 </ol>
@@ -57,7 +57,7 @@
                                         <label class="form-label">No of Course Upload</label>
                                         <select name="courseUpload" id="" class="form-control">
                                         <option value="">Select No of Course Upload</option>
-                                    @for ($i = 1; $i <= 30; $i++)
+                                    @for ($i = 1; $i <= 50; $i++)
                                         <option value="{{ $i }}" {{ old('courseUpload') == $i ? 'selected' : '' }}>
                                             {{ $i }}
                                         </option>
@@ -74,7 +74,7 @@
                                         <label class="form-label">No of Student Upload</label>
                                         <select name="studentUpload" id="" class="form-control">
                                             <option value="">Select No of Student Upload</option>
-                                            @for ($i = 10; $i <= 500; $i += 10) <!-- Starting from 10 and incrementing by 10 -->
+                                            @for ($i = 50; $i <= 2000; $i += 50) 
                                                 <option value="{{ $i }}" {{ old('studentUpload') == $i ? 'selected' : '' }}>
                                                     {{ $i }}
                                                 </option>
@@ -90,7 +90,7 @@
                                         <label class="form-label">Allocated Space</label>
                                         <select name="allocatedSpace" id="" class="form-control">
                                             <option value="">Select Allocated Space</option>
-                                            @for ($i = 1; $i <= 50; $i++) <!-- Starting from 10 and incrementing by 10 -->
+                                            @for ($i = 1; $i <= 50; $i++) 
                                                 <option value="{{ $i }}" {{ old('allocatedSpace') == $i ? 'selected' : '' }}>
                                                     {{ $i }}
                                                 </option>
@@ -99,6 +99,60 @@
                                     </div>
                                     @if($errors->has('allocatedSpace'))
                                     <span class="text-danger"> {{ $errors->first('allocatedSpace') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Certificate</label>
+                                        <select name="certificate" id="certificate" class="form-control">
+                                            <option value="1">Yes</option>                                           
+                                            <option value="0">No</option>                                             
+                                        </select>                                        
+                                    </div>
+                                    @if($errors->has('certificate'))
+                                    <span class="text-danger"> {{ $errors->first('certificate') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Transaction Fee</label>
+                                        <select name="transactionFee" id="transactionFee" class="form-control">                                            
+                                            @for ($i = 0; $i <= 20; $i++) 
+                                                <option value="{{ $i }}" {{ old('transactionFee') == $i ? 'selected' : '' }}>
+                                                    {{ $i }}
+                                                </option>
+                                            @endfor
+                                        </select>                                 
+                                    </div>
+                                    @if($errors->has('transactionFee'))
+                                    <span class="text-danger"> {{ $errors->first('transactionFee') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Extra Days</label>
+                                        <select name="extraDay" id="extraDay" class="form-control">                                            
+                                            @for ($i = 0; $i <= 20; $i++) 
+                                                <option value="{{ $i }}" {{ old('extraDay') == $i ? 'selected' : '' }}>
+                                                    {{ $i }}
+                                                </option>
+                                            @endfor
+                                        </select>                                 
+                                    </div>
+                                    @if($errors->has('extraDay'))
+                                    <span class="text-danger"> {{ $errors->first('extraDay') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Manual Enrollment</label>
+                                        <select name="enrollment" id="enrollment" class="form-control">
+                                            <option value="1">Yes</option>                                           
+                                            <option value="0">No</option>                                             
+                                        </select>                                        
+                                    </div>
+                                    @if($errors->has('enrollment'))
+                                    <span class="text-danger"> {{ $errors->first('enrollment') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">

@@ -48,7 +48,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 845px">
+                                    <table id="example3" class="display" style="min-width: 900px">
                                         <thead>
                                             <tr>
                                                 <th>{{__('#')}}</th>
@@ -56,6 +56,10 @@
                                                 <th>{{__('Course Upload')}}</th>
                                                 <th>{{__('Student Upload')}}</th>
                                                 <th>{{__('Allocated Space')}}</th>
+                                                <th>{{__('Certificate Status')}}</th>
+                                                <th>{{__('Transaction Fee')}}</th>
+                                                <th>{{__('Extra Days')}}</th>
+                                                <th>{{__('Manual Enrollment')}}</th>
                                                 <th>{{__('Amount/Month')}}</th>
                                                 <th>{{__('Action')}}</th>
                                             </tr>
@@ -65,10 +69,26 @@
                                             <tr>
                                                 <td><strong>{{$key + 1}}</strong></td>
                                                 <td><strong>{{$d->name}}</strong></td> 
-                                                <td><strong>{{$d->course_upload}}</strong></td>
-                                                <td><strong>{{$d->student_upload}}</strong></td>
-                                                <td><strong>{{$d->allocated_space}}</strong></td>
-                                                <td><strong>{{number_format($d->amount, 2)}}</strong></td>
+                                                <td><strong>{{ $d->course_upload >= 50 ? 'Unlimited' : $d->course_upload }}</strong></td>
+                                                <td><strong>{{ $d->student_upload >= 2000 ? 'Unlimited' : $d->student_upload }}</strong></td>
+                                                <td><strong>{{ $d->allocated_space >= 50 ? 'Unlimited' : $d->allocated_space . 'Gb' }}</strong></td>
+                                                <td>
+                                                    @if($d->certificate == 1)
+                                                        <span class="badge badge-rounded badge-success text-white">Yes</span>
+                                                    @else
+                                                        <span class="badge badge-rounded badge-warning text-white">No</span>
+                                                    @endif
+                                                </td>
+                                                <td><strong>{{$d->transaction_fee}}%</strong></td>
+                                                <td><strong>{{ $d->extra_day >= 20 ? '-' : $d->extra_day }}</strong></td>
+                                                <td>
+                                                    @if($d->enrollment == 1)
+                                                        <span class="badge badge-rounded badge-success text-white">Yes</span>
+                                                    @else
+                                                        <span class="badge badge-rounded badge-warning text-white">No</span>
+                                                    @endif
+                                                </td>
+                                                <td><strong>{{ $d->amount >= 50000 ? 'Unlimited' : '₦' . $d->amount }}</strong></td>
                                                 <td>
                                                     <a href="{{route('subscriptionPlan.edit', encryptor('encrypt', $d->id))}}"
                                                         class="btn btn-sm btn-primary" title="Edit"><i

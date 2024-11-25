@@ -1,5 +1,5 @@
 @extends('backend.layouts.app')
-@section('title', 'Student List')
+@section('title', 'Enrollment')
 
 @push('styles')
 <!-- Datatable -->
@@ -21,8 +21,8 @@
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('student.index')}}">Students</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('student.index')}}">All Student</a></li>
+                    <li class="breadcrumb-item active"><a href="{{route('enrollment.index')}}">Enrollments</a></li>
+                    <li class="breadcrumb-item active"><a href="#">All Enrollments</a></li>
                 </ol>
             </div>
         </div>
@@ -46,45 +46,64 @@
                             </div> -->
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 845px">
-                                        <thead>
-                                            <tr>
-                                                <th>{{__('#')}}</th>
-                                                <th>{{__('Name')}}</th>
-                                                <th>{{__('Email')}}</th>
-                                                <th>{{__('Contact')}}</th>                                                
-                                                <th>{{__('Course')}}</th>                                                
-                                                <th>{{__('Action')}}</th>                                                
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($data as $d)
-                                            <tr>
-                                                <td><img class="rounded-circle" width="35" height="35"
-                                                        src="{{asset('uploads/students/'.$d->image)}}" alt=""></td>
-                                                <td><strong>{{$d->name_en}}</strong></td>
-                                                <td>{{$d->email}}</td>
-                                                <td>{{$d->contact_en}}</td>                                               
-                                                <td>
-                                                    <select name="courseId" id="courseId" class="form_control">
-                                                        @foreach($course as $c)
-                                                        <option value="$c->id">{{$c->title_en}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </td>                                               
-                                                <td>
-                                                    <a href=""
-                                                        class="btn btn-sm btn-primary" title="Enroll">
-                                                        <i class="fas fa-user-plus"> &nbsp;Enroll</i></a>                                                   
-                                                </td>                                               
-                                            </tr>
-                                            @empty
-                                            <tr>
-                                                <th colspan="7" class="text-center">No Student Found</th>
-                                            </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
+                                <table id="example3" class="display" style="min-width: 845px">
+                                    <thead>
+                                        <tr>
+                                            <th>{{__('#')}}</th>
+                                            <th>{{__('Name')}}</th>
+                                            <th>{{__('Email')}}</th>
+                                            <th>{{__('Contact')}}</th>
+                                            <th>{{__('Enrolled Courses')}}</th>
+                                            <th>{{__('Course')}}</th>
+                                            <th>{{__('Action')}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($data as $d)
+                                        <tr>
+                                            <td>
+                                                <img class="rounded-circle" width="35" height="35"
+                                                    src="{{ asset('uploads/students/' . $d->image) }}" alt="">
+                                            </td>
+                                            <td><strong>{{ $d->name_en }}</strong></td>
+                                            <td>{{ $d->email }}</td>
+                                            <td>{{ $d->contact_en }}</td>
+                                            <td>
+                                                <div class="scrollable-list">
+                                                    @if ($d->enrollments->isNotEmpty())
+                                                        <ul>
+                                                            @foreach ($d->enrollments as $enrollment)
+                                                                @if ($enrollment->course)
+                                                                    <li>● {{ $enrollment->course->title_en }}</li>
+                                                                @endif
+                                                            @endforeach
+                                                        </ul>
+                                                    @else
+                                                        <span>No courses enrolled</span>
+                                                    @endif
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <select name="courseId" id="courseId" class="form_control">
+                                                    @foreach ($course as $c)
+                                                    <option value="{{ $c->id }}">{{ $c->title_en }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <a href="#"
+                                                    class="btn btn-sm btn-primary enroll-btn" title="Enroll" data-student-id="{{ $d->id }}">
+                                                    <i class="fas fa-user-plus"></i> &nbsp;Enroll
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        @empty
+                                        <tr>
+                                            <th colspan="7" class="text-center">No Student Found</th>
+                                        </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
                                 </div>
                             </div>
                         </div>
@@ -169,5 +188,48 @@
 <!-- Datatable -->
 <script src="{{asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('js/plugins-init/datatables.init.js')}}"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.enroll-btn').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
 
+                // Retrieve required data
+                const studentId = this.dataset.studentId;
+                const courseId = this.closest('tr').querySelector('#courseId').value;
+                const instructorId = '{{ auth()->user()->instructor_id }}'; 
+
+                // Ensure all required data is available
+                if (!studentId || !courseId || !instructorId) {
+                    alert('Missing required data. Please check and try again.');
+                    return;
+                }
+
+                // Send POST request to enroll route
+                fetch("{{ route('enrollment.enroll') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify({ student_id: studentId, course_id: courseId, instructor_id: instructorId })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Enrollment successful!');
+                        // Optional: Refresh the table or update UI
+                    } else {
+                        alert(data.message || 'An error occurred. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An unexpected error occurred. Please try again later.');
+                });
+            });
+        });
+    });
+</script>
 @endpush

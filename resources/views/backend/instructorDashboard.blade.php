@@ -154,9 +154,9 @@
                                     <!-- Status Check -->
                                     <td>
                                         @if($enrollment->completed == 1)
-                                            <span class="badge badge-rounded badge-success">Completed</span>
+                                            <span class="badge badge-rounded badge-success text-white">Completed</span>
                                         @else
-                                            <span class="badge badge-rounded badge-warning">Not Completed</span>
+                                            <span class="badge badge-rounded badge-warning text-white">Not Completed</span>
                                         @endif
                                     </td>
                                     <td class="py-2">{{ $enrollment->created_at->format('d/m/Y') }}</td>                                        

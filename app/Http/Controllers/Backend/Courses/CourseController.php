@@ -219,11 +219,12 @@ class CourseController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit($id)
-    {
-        $instructorId = auth()->user()->instructor_id;
+    {    
+        $course = Course::findOrFail(encryptor('decrypt', $id));
+        $instructorId = $course->instructor_id;
         $courseCategory = CourseCategory::get();
         $instructor = Instructor::where('id', $instructorId)->get();
-        $course = Course::findOrFail(encryptor('decrypt', $id));
+        
         return view('backend.course.courses.edit', compact('courseCategory', 'instructor', 'course'));
     }
 

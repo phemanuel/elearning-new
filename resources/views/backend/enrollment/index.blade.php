@@ -21,7 +21,6 @@
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('enrollment.index')}}">Enrollments</a></li>
                     <li class="breadcrumb-item active"><a href="#">All Enrollment</a></li>
                 </ol>
             </div>
@@ -52,7 +51,7 @@
                                 @if(auth()->user()->role_id != 1)
                                 <a class="btn text-white" style="background-color: #FF8C00;"> <!-- Deep Orange -->
                                     <i class="material-icons">book</i> <!-- Icon for "courses" -->
-                                    <strong>Total Courses Left: {{$noOfStudent - $noOfStudentEnrolled}}</strong>
+                                    <strong>Total Students Left: {{$noOfStudent - $noOfStudentEnrolled}}</strong>
                                 </a>
                                 @endif 
 
@@ -69,7 +68,8 @@
                                                 <th>{{__('#')}}</th>
                                                 <th>{{__('Student Name')}}</th>
                                                 <th>{{__('Course Name')}}</th>
-                                                <th>{{__('Course Image')}}</th>
+                                                <th>{{__('Segment')}}</th>
+                                                <th>{{__('Completion Status')}}</th>
                                                 <th>{{__('Amount')}}</th>
                                                 <th>{{__('Enrollment Date')}}</th>
                                                 <!-- <th>{{__('Action')}}</th> -->
@@ -84,9 +84,13 @@
                                                 </td>
                                                 <td><strong>{{$e->student?->name_en}}</strong></td>
                                                 <td><strong>{{$e->course?->title_en}}</strong></td>
-                                                <td><img class="img fluid" width="100"
-                                                        src="{{asset('uploads/courses/'.$e->course?->image)}}"
-                                                        alt="">
+                                                <td><strong>{{$e->segment}}</strong></td>
+                                                <td>
+                                                    @if($e->completed == 1)
+                                                        <span class="badge badge-rounded badge-success text-white">Completed</span>
+                                                    @else
+                                                        <span class="badge badge-rounded badge-warning text-white">Not Completed</span>
+                                                    @endif
                                                 </td>
                                                 <td><strong>
         {{ $e->course?->price == null ? 'Free': $e->course?->currency_type . number_format($e->course?->price, 2) }}
@@ -131,5 +135,6 @@
 <!-- Datatable -->
 <script src="{{asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('js/plugins-init/datatables.init.js')}}"></script>
+
 
 @endpush

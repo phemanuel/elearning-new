@@ -10,7 +10,7 @@ class SubscriptionPlanController extends Controller
     public function index()
     {
         //
-        $subscriptionPlan = SubscriptionPlan::all();
+        $subscriptionPlan = SubscriptionPlan::orderBy('course_upload', 'asc')->get();
         return view('backend.subscription.index', compact('subscriptionPlan'));
         
     }    
@@ -38,6 +38,10 @@ class SubscriptionPlanController extends Controller
             $data->allocated_space = $request->allocatedSpace;
             $data->status = $request->status;
             $data->amount = $request->amount;
+            $data->certificate = $request->certificate;
+            $data->transaction_fee  = $request->transactionFee;
+            $data->extra_day = $request->extraDay;
+            $data->enrollment = $request->enrollment;
 
             if ($request->hasFile('image')) {
                 $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
@@ -88,6 +92,10 @@ class SubscriptionPlanController extends Controller
             $data->allocated_space = $request->allocatedSpace;
             $data->status = $request->status;
             $data->amount = $request->amount;
+            $data->certificate = $request->certificate;
+            $data->transaction_fee  = $request->transactionFee;
+            $data->extra_day = $request->extraDay;
+            $data->enrollment = $request->enrollment;
 
             if ($request->hasFile('image')) {
                 $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
@@ -107,11 +115,11 @@ class SubscriptionPlanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Subscription $subscription)
+    public function destroy($id)
     {
         //
-        $data = CourseCategory::findOrFail($id);
-        $image_path = public_path('uploads/courseCategories/') . $data->category_image;
+        $data = SubscriptionPlan::findOrFail($id);
+        $image_path = public_path('uploads/subscriptions/') . $data->image;
 
         if ($data->delete()) {
             if (File::exists($image_path))

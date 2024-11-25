@@ -78,8 +78,8 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label class="form-label">Amount per Month/Year</label>
-                                        <p>{{ number_format($subscriptionPlans->amount, 0) }}/month 
-                                        or {{ number_format($subscriptionPlans->amount * 12 * 0.9, 0) }}/year</p>
+                                        <p>₦{{ number_format($subscriptionPlans->amount, 0) }}/month 
+                                        or ₦{{ number_format($subscriptionPlans->amount * 12 * 0.9, 0) }}/year</p>
                                     </div>                                    
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -92,13 +92,13 @@
                                     </select>
 
                                     <div class="mt-3">
-                                        <strong>Total Amount: ₦<span id="total_amount">{{ number_format($subscriptionPlans->amount, 2) }}</span></strong>
+                                        <strong>Total Amount: ₦<span id="total_amount">₦{{ number_format($subscriptionPlans->amount, 2) }}</span></strong>
                                     </div>
                                     <div class="mt-3">
-                                        <strong>Transaction Charges: ₦<span id="transaction_charges">{{ number_format(($subscriptionPlans->amount * 0.015) + 100, 2) }}</span></strong>
+                                        <strong>Transaction Charges: ₦<span id="transaction_charges">₦{{ number_format(($subscriptionPlans->amount * 0.015) + 100, 2) }}</span></strong>
                                     </div>
                                     <div class="mt-3">
-                                        <strong>Total Payable: ₦<span id="total_with_charges">{{ number_format($subscriptionPlans->amount + (($subscriptionPlans->amount * 0.015) + 100), 2) }}</span></strong>
+                                        <strong>Total Payable: ₦<span id="total_with_charges">₦{{ number_format($subscriptionPlans->amount + (($subscriptionPlans->amount * 0.015) + 100), 2) }}</span></strong>
                                     </div>
 
                                     <input type="hidden" id="hidden_total_amount" value="{{ $subscriptionPlans->amount + (($subscriptionPlans->amount * 0.015) + 100) }}">

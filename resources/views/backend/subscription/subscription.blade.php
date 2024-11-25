@@ -71,9 +71,9 @@
                                         <td><strong>{{ $key + 1 }}</strong></td>
                                         <td><strong>{{ $subscription->instructor?->name_en ?? 'No Instructor' }}</strong></td>
                                         <td><strong>{{ $subscription->subscriptionPlan?->name ?? 'No Plan Assigned' }}</strong></td>
-                                        <td><strong>{{ number_format($subscription->subscriptionPlan?->amount ?? 0, 2) }}</strong></td>
+                                        <td><strong>₦{{ number_format($subscription->subscriptionPlan?->amount ?? 0, 2) }}</strong></td>
                                         <td><strong>{{ $subscription->no_of_months }}</strong></td>
-                                        <td><strong>{{ $subscription->total_amount }}</strong></td>
+                                        <td><strong>₦{{ $subscription->total_amount }}</strong></td>
                                         <td><strong>{{ $subscription->subscriptionPlan?->course_upload ?? 'N/A' }}</strong></td>
                                         <td><strong>{{ $subscription->subscriptionPlan?->student_upload ?? 'N/A' }}</strong></td>
                                         <td><strong>{{ $subscription->subscriptionPlan?->allocated_space ?? 'N/A' }}Gb</strong></td>

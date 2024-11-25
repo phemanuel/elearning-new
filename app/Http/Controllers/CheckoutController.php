@@ -27,7 +27,6 @@ class CheckoutController extends Controller
         $year = date('Y');
         $month = date('m');
         $day = date('d');
-        // Generate a 4-character alphanumeric string using str_shuffle
         $randomChars = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 4);
 
         // Generate the transaction reference

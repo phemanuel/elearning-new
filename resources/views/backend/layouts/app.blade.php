@@ -51,6 +51,28 @@
     line-height: 25px; /* Matches progress bar height for perfect centering */
 }
     </style>
+    <style>
+      .scrollable-list {
+    max-height: 100px; /* Limit the height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    border: 1px solid #ddd; /* Optional: border for better visibility */
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.bullet-list {
+    list-style-type: disc !important; /* Force bullets */
+    padding-left: 20px; /* Indent to display bullets properly */
+    margin: 0;
+}
+
+.bullet-list li {
+    margin-bottom: 5px; /* Add spacing between items */
+    font-size: 14px; /* Adjust font size for readability */
+    color: #333; /* Optional: Set text color */
+}
+    </style>
 </head>
 
 <body>

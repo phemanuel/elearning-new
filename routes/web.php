@@ -171,6 +171,7 @@ Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     Route::resource('subscriptionPlan', SubscriptionPlanController::class);
     //----------------------------------------------------------------
     Route::resource('enrollment', enrollment::class);
+    Route::post('/enroll-student', [enrollment::class, 'enroll'])->name('enrollment.enroll');
     Route::get('permission/{role}', [permission::class, 'index'])->name('permission.list');
     Route::post('permission/{role}', [permission::class, 'save'])->name('permission.save'); 
     Route::get('/get-segments/{courseId}', [course::class, 'getSegments']);      
