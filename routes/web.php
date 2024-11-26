@@ -226,12 +226,14 @@ Route::middleware(['checkstudent'])->prefix('students')->group(function () {
 });
 
 //----------instructor routes --------------------------------
-Route::get('/instructor/register', [sauth::class, 'instructorSignUpForm'])
+Route::get('/instructor/register/{id}', [sauth::class, 'instructorSignUpForm'])
 ->name('instructorRegister');
 Route::post('/instructor/register/{back_route}', [sauth::class, 'instructorSignUpStore'])
 ->name('instructorRegister.store');
 Route::get('/instructor/subscription', [sauth::class, 'instructorSubscription'])
 ->name('instructorSubscription');
+Route::get('/instructor/subscription/pay/{id}', [sauth::class, 'instructorSubscriptionPay'])
+->name('instructorSubscriptionPay');
 
  
 // frontend pages

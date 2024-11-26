@@ -12,7 +12,7 @@
                     <a href="{{route('home')}}" class="fs-6 text-secondary">Home</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    <a href="#" class="fs-6 text-secondary">Subscription</a>
+                    <a href="#" class="fs-6 text-secondary">Subscription Plans</a>
                 </li>
             </ol>
         </nav>
@@ -29,7 +29,7 @@
             <tr>
                 <td>
                 <div>
-                    <label for="duration">Select Duration:</label>
+                    <label for="duration">Select Duration(Months):</label>
                     <select id="no_of_months" class="form-control" onchange="calculateTotalAmountForAllPlans()">
                         <option value="1">1 Month</option>
                         <option value="3">3 Months</option>
@@ -44,9 +44,10 @@
         
         <div class="row">
         @foreach($subPlan as $s)
-        <div class="col-lg-6 my-3 plan-container" data-plan-id="{{ $s->id }}" data-amount="{{ $s->amount }}"> <!-- my-3 adds margin to both top and bottom -->
+        <div class="col-lg-6 my-3 plan-container" data-plan-id="{{ $s->id }}" data-amount="{{ $s->amount }}"> 
             <div class="about-feature">
-                <h5 class="font-title--sm">{{$s->name}}</h5>
+                <h5 class="font-title--sm"><i class="{{$s->icon}}"></i> {{$s->name}}</h5>
+            <div class="scrollable-list-container">
                 <ul class="list-group text-left mt-3">
                     <li class="list-group-item">
                         <i class="fas fa-upload text-primary"></i> &nbsp;
@@ -69,8 +70,13 @@
                         @if($s->enrollment == 1) Manual Enrollment @else No Manual Enrollment @endif
                     </li>
                     <li class="list-group-item">
+                        @if($s->name == 'ENTERPRISE')
+                        <i class="fas fa-certificate text-danger"></i> &nbsp;
+                        @if($s->certificate == 1) Branded certificates for students @else No Certificate of Completion @endif
+                        @else 
                         <i class="fas fa-certificate text-danger"></i> &nbsp;
                         @if($s->certificate == 1) Certificate of Completion @else No Certificate of Completion @endif
+                        @endif
                     </li>
                     <li class="list-group-item">
                         <i class="fas fa-clock text-dark"></i> &nbsp;
@@ -82,12 +88,70 @@
                     <li class="list-group-item">
                         <i class="fas fa-question-circle text-success"></i> &nbsp;Quiz & Assessment Builder
                     </li>
+                    @if($s->name == 'STARTER')
+                    <li class="list-group-item">
+                        <i class="fas fa-chart-line text-primary"></i> &nbsp;Basic analytics (track student progress)
+                    </li>
+                    @endif
+
+                    @if($s->name == 'GROWTH')
+                    <li class="list-group-item">
+                        <i class="fas fa-chart-bar text-info"></i> &nbsp;Advanced analytics (completion rates, detailed reports)
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-lightbulb text-warning"></i> &nbsp;Marketing strategy consultation with our marketing team (1 session every 2 months)
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-percent text-success"></i> &nbsp;5% discount on Kings Digital Literacy Hub's paid ads for your courses
+                    </li>
+                    @endif
+
+                    @if($s->name == 'PREMIUM')
+                    <li class="list-group-item">
+                        <i class="fas fa-code text-danger"></i> &nbsp;Public API access
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-headset text-primary"></i> &nbsp;Priority customer support (24/7 live chat and phone support)
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-paint-brush text-info"></i> &nbsp;Free course page customization (branded course pages)
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-lightbulb text-warning"></i> &nbsp;Marketing strategy consultation with our marketing team (1 session per month)
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-percent text-success"></i> &nbsp;10% discount on Kings Digital Literacy Hub's paid ads for your courses
+                    </li>
+                    @endif
+
+                    @if($s->name == 'ENTERPRISE')
+                    <li class="list-group-item">
+                        <i class="fas fa-database text-dark"></i> &nbsp;Advanced analytics + full API access
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-ban text-secondary"></i> &nbsp;Removable branding
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-user-tie text-primary"></i> &nbsp;Dedicated account manager
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-lightbulb text-warning"></i> &nbsp;Monthly marketing strategy consultations with our marketing team
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-bullseye text-info"></i> &nbsp;Marketing strategy consultation for promoting a specific course (tailored campaigns)
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-percent text-success"></i> &nbsp;20% discount on Kings Digital Literacy Hub's paid ads for your courses
+                    </li>
+                    @endif
+
                     @if($s->student_upload > 50)
                     <li class="list-group-item">
                         <i class="fas fa-hands-helping text-info"></i>&nbsp; Free setup assistance for first-time users
                     </li>
                     @endif
-                </ul>                    
+                </ul> 
+            </div>                   
                 <br>
                 @if($s->amount > 0 && $s->amount < 50000)
                     <h5 class="font-title--sm" style="color:blue;">
@@ -100,10 +164,10 @@
                     <h5 class="font-title--sm" style="color:blue;">Free</h5>
                 @endif
                 <br>
-                @if($s->student_upload >= 2000)
+                @if($s->course_upload >=50)
                 <a href="#" class="button button-lg button--dark w-100">Contact Sales</a>
                 @else
-                <a href="{{route('instructorRegister')}}" class="button button-lg button--dark w-100">Get started</a>
+                <a href="{{route('instructorRegister', encryptor('encrypt', $s->id))}}" class="button button-lg button--dark w-100">Get started</a>
                 @endif
             </div>
         </div>

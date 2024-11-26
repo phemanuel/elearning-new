@@ -42,6 +42,7 @@ class SubscriptionPlanController extends Controller
             $data->transaction_fee  = $request->transactionFee;
             $data->extra_day = $request->extraDay;
             $data->enrollment = $request->enrollment;
+            $data->icon = $request->icon;
 
             if ($request->hasFile('image')) {
                 $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
@@ -96,6 +97,7 @@ class SubscriptionPlanController extends Controller
             $data->transaction_fee  = $request->transactionFee;
             $data->extra_day = $request->extraDay;
             $data->enrollment = $request->enrollment;
+            $data->icon = $request->icon;
 
             if ($request->hasFile('image')) {
                 $imageName = rand(111, 999) . time() . '.' . $request->image->extension();

@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Student;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class MailController extends Controller
 {
@@ -54,39 +55,50 @@ class MailController extends Controller
 
     public function indexInstructor()
     {
+        $planId = session('plan_id');
         try {
-            // Retrieve email address from the session
+            // Retrieve email address and user details from the session
             $email_address = session('email');
             $full_name = session('full_name');
             $email_token = session('email_token');
-                      
 
+            // Find the user by email
+            $user = User::where('email', $email_address)->first();
+
+            if (!$user) {
+                // Handle the case where the user does not exist
+                session()->flash('error', 'User not found. Please register first.');
+                return redirect()->route('instructorSubscription'); 
+            }
+
+            // Log the user in
+            Auth::login($user);
+
+            // Prepare data for email
             $data['email'] = $email_address;
-            $data['full_name'] = "Dear user," ;
-            $data['email_token'] = $email_token;            
+            $data['full_name'] = $full_name ?? "Dear user,";
+            $data['email_token'] = $email_token;
             $data['title'] = 'Email Verification';
 
             // Load the PDF
             $pdf = PDF::loadview('backend.emails.sendmail', $data);
-
             $data['pdf'] = $pdf;
 
             // Send the email
             Mail::to($data['email'])->send(new MyCustomEmail($data));
 
-            // Success: Email sent
-            //session()->flash('success', 'Account setup successful! You can login to complete your profile.');
-
-            return redirect()->route('email-verify-instructor');
+            // Redirect to payment route
+            return redirect()->route('instructorSubscriptionPay', encryptor('encrypt', $planId));
         } catch (\Exception $e) {
             // Log the error
-            Log::error('Error during mail: ' . $e->getMessage()); 
-            // Error handling: Handle the error and display an error message
-            session()->flash('error', 'An error occurred while sending the email.');
+            Log::error('Error during mail: ' . $e->getMessage());
 
-            return redirect()->route('studentLogin');
+            // Error handling
+            session()->flash('error', 'An error occurred. Please try again.');
+            return redirect()->route('instructorSubscriptionPay', encryptor('encrypt', $planId));
         }
     }
+
 
     public function emailVerify()
     {

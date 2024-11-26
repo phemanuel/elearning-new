@@ -9,11 +9,15 @@
         <div class="row align-items-center justify-content-md-center">
             <div class="col-lg-5 order-2 order-lg-0">
                 <div class="signup-area-textwrapper">
-                    <h2 class="font-title--md mb-0">Sign Up- Instructor</h2>                    
+                    <h2 class="font-title--md mb-0">Sign Up- Instructor</h2> <br>                  
                     <form action="{{route('instructorRegister.store','instructordashboard')}}" method="POST">
                         @csrf
                         <div class="form-element">
-                                <label for="name">Full Name (First name and Last Name)</label>
+                                <!-- <label for="name">Subscription Plan</label> -->
+                                <h5><i class="{{$subPlan->icon}}"></i> &nbsp;{{$subPlan->name}} Plan</h5>
+                        </div>
+                        <div class="form-element">
+                                <label for="name">Full Name (Last Name and First Name)</label>
                                 <input type="text" placeholder="Enter Your Name" id="name" value="{{old('name')}}" name="name" />
                                 @if($errors->has('name'))
                                     <small class="d-block text-danger">{{$errors->first('name')}}</small>
@@ -72,6 +76,7 @@
                                     style="text-decoration: underline;">Privacy Policy</a></label>
                         </div>
                         <div class="form-element">
+                            <input type="hidden" name="planId" value="{{$subPlan->id}}">
                             <button type="submit" class="button button-lg button--primary w-100">Sign UP</button>
                         </div>
                         <p class="mt-2 mb-lg-4 mb-3">Already have account? <a href="{{route('studentLogin')}}" class="text-black-50">Sign In</a></p>

@@ -160,6 +160,31 @@
         background: transparent; /* Transparent background */
     }
 </style>
+<style>
+    .scrollable-list-container {
+    max-height: 350px; /* Adjust height as needed */
+    overflow-y: auto; /* Enables vertical scrolling */
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+    border: 1px solid #ddd; /* Optional: adds a border for clarity */
+    padding: 10px; /* Optional: spacing around the list */
+    background-color: #fff; /* Optional: ensures the background stays consistent */
+}
+
+/* Optional: Add a scrollbar style for better aesthetics */
+.scrollable-list-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollable-list-container::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+.scrollable-list-container::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+</style>
     @stack('styles')
 
 </head>
@@ -540,7 +565,7 @@
                         <h6>Quick Links</h6>
                         <ul>
                             <li><a href="#">Events</a></li>
-                            <li><a href="{{route('instructorRegister')}}">Become a Instructor</a></li>
+                            <li><a href="{{route('instructorSubscription')}}">Become a Instructor</a></li>
                             <li><a href="#">Partnerships</a></li>
                             <li><a href="#">Get the app</a></li>
                         </ul>

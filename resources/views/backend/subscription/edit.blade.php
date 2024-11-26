@@ -161,6 +161,16 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
+                                        <label class="form-label">Icon</label>
+                                        <input type="text" class="form-control" name="icon"
+                                            value="{{old('icon', $data->icon)}}">
+                                    </div>
+                                    @if($errors->has('icon'))
+                                    <span class="text-danger"> {{ $errors->first('icon') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
                                         <label class="form-label">Subscription Amount per Month</label>
                                         <input type="number" class="form-control" name="amount"
                                             value="{{old('amount', $data->amount)}}">

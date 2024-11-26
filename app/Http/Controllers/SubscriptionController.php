@@ -102,7 +102,7 @@ class SubscriptionController extends Controller
     public function subscriptionPlans()
     {
         $instructorId = auth()->user()->instructor_id;
-        $subscriptionPlans = SubscriptionPlan::all();
+        $subscriptionPlans = SubscriptionPlan::orderBy('course_upload', 'asc')->get();
         $subscriptions = Subscription::where('instructor_id', $instructorId)->first();
         $currentDate = now();
         return view('backend.subscription.subscription-plans', compact('subscriptionPlans', 'subscriptions'

@@ -122,7 +122,7 @@
                         <div class="form-element">
                             <button type="submit" class="button button-lg button--primary w-100">Sign in</button>
                         </div>
-                        <p class="mt-2 mb-lg-4 mb-3">Don't have account? <a href="{{route('instructorRegister')}}"
+                        <p class="mt-2 mb-lg-4 mb-3">Don't have account? <a href="{{route('instructorSubscription')}}"
                             class="text-black-50">Sign
                             up</a></p>
                     </form>              

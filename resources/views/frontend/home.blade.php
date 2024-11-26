@@ -1266,7 +1266,7 @@
                         and make a meaningful impact in the digital education space!
                         </p>
                         <div class="text-center">
-                            <a href="{{route('instructorRegister')}}" class="green-btn">Apply as Instructor</a>
+                            <a href="{{route('instructorSubscription')}}" class="green-btn">Apply as Instructor</a>
                         </div>
                     </div>
                 </div>

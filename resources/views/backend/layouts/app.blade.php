@@ -73,6 +73,31 @@
     color: #333; /* Optional: Set text color */
 }
     </style>
+    <style>
+    .scrollable-list-container {
+    max-height: 350px; /* Adjust height as needed */
+    overflow-y: auto; /* Enables vertical scrolling */
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+    border: 1px solid #ddd; /* Optional: adds a border for clarity */
+    padding: 10px; /* Optional: spacing around the list */
+    background-color: #fff; /* Optional: ensures the background stays consistent */
+}
+
+/* Optional: Add a scrollbar style for better aesthetics */
+.scrollable-list-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollable-list-container::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+.scrollable-list-container::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+</style>
 </head>
 
 <body>

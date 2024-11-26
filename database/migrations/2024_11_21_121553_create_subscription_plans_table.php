@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->enum('status', ['Active', 'Inactive'])->default('Active')->index();
             $table->decimal('amount', 10, 2);
+            $table->string('icon');
             $table->timestamps();
         });
     }

@@ -26,9 +26,21 @@ class AuthController extends Controller
         return view('students.auth.register');
     }
 
-    public function instructorSignUpForm()
+    public function instructorSignUpForm($id)
     {
-        return view('students.auth.register-instructor');       
+        $decryptedId = encryptor('decrypt', $id);
+        $subPlan = SubscriptionPlan::where('id' , $decryptedId)->first();
+
+        return view('students.auth.register-instructor', compact('subPlan'));             
+    }
+
+    public function instructorSubscriptionPay($id)
+    {
+        $decryptedId = encryptor('decrypt', $id);
+        $subPlan = SubscriptionPlan::where('id' , $decryptedId)->first();
+        
+            return view('students.auth.register-pay', compact('subPlan')); 
+             
     }
 
     public function instructorSubscription()
@@ -106,6 +118,8 @@ class AuthController extends Controller
             $instructor->remember_token = $email_token;
             $instructor->language = 'en';
             $instructor->instructor_url = $instructorUrl;
+            $instructor->current_plan = 0;
+            $planId = $request->planId;
             
             if ($instructor->save()) {
                 // Set session with the instructor details
@@ -133,8 +147,9 @@ class AuthController extends Controller
                 session(['full_name' => $request->name]);
                 session(['email_token' => $email_token]);
                 session(['email_message' => $email_message]);
+                session(['plan_id' => $planId]);
 
-                return redirect()->route('send-mail');
+                return redirect()->route('send-mail-instructor');
             } else {
                 return redirect()->back()->with('danger', 'Instructor save failed');
             }
