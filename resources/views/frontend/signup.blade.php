@@ -42,7 +42,7 @@
                     grow your teaching portfolio, and make a difference in the digital education world!
                     </p>
                     <br>
-                    <a href="{{route('instructorRegister')}}" class="button button-lg button--dark w-100">Get started</a>
+                    <a href="{{route('instructorSubscription')}}" class="button button-lg button--dark w-100">Get started</a>
                 </div>
             </div>
         </div>

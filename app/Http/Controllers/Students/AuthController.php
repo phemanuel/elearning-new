@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\Student;
 use App\Models\User;
 use App\Models\Instructor;
+use App\Models\SubscriptionPlan;
 use App\Http\Requests\Students\Auth\SignUpRequest;
 use App\Http\Requests\Students\Auth\SignUpRequestInstructor;
 use App\Http\Requests\Students\Auth\SignInRequest;
@@ -27,7 +28,13 @@ class AuthController extends Controller
 
     public function instructorSignUpForm()
     {
-        return view('students.auth.register-instructor');
+        return view('students.auth.register-instructor');       
+    }
+
+    public function instructorSubscription()
+    {   
+        $subPlan = SubscriptionPlan::orderBy('student_upload', 'asc')->get();
+        return view('students.auth.subscription-plan', compact('subPlan'));
     }
 
     public function signUpStore(SignUpRequest $request,$back_route)

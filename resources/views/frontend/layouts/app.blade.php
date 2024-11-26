@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{asset('frontend/dist/main.css')}}" />
     <link rel="icon" type="image/png" href="{{asset('frontend/dist/images/favicon/favicon.png')}}" />
     <link rel="stylesheet" href="{{asset('frontend/fontawesome-free-5.15.4-web/css/all.min.css')}}">
+    
     <style>
         .dropdown {
             position: relative;
@@ -117,6 +118,48 @@
     cursor: pointer;
 }
     </style>
+    <style>
+    /* Center the table and add styling */
+    table {
+        margin: 20px auto; /* Center the table horizontally */
+        border-collapse: collapse; /* Remove spacing between table borders */
+    }
+
+    td {
+        padding: 10px;
+        text-align: center; /* Center-align the content inside the cell */
+    }
+
+    label {
+        font-weight: bold; /* Bold label text */
+        font-size: 16px;
+    }
+
+    .form-control {
+        width: 100%; /* Full width dropdown */
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #ccc; /* Light gray border */
+        border-radius: 5px; /* Rounded edges */
+    }
+
+    #planDetails {
+        margin: 20px auto;
+        width: 50%; /* Adjust width for better centering */
+        padding: 15px;
+        border: 1px solid #ddd; /* Add border to the plan details */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+        background-color: #f9f9f9; /* Light background color */
+    }
+
+    .list-group-item {
+        padding: 10px 15px;
+        font-size: 14px;
+        border: none; /* Remove list border */
+        background: transparent; /* Transparent background */
+    }
+</style>
     @stack('styles')
 
 </head>

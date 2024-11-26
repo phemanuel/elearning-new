@@ -88,7 +88,7 @@
                                                         <span class="badge badge-rounded badge-warning text-white">No</span>
                                                     @endif
                                                 </td>
-                                                <td><strong>{{ $d->amount >= 50000 ? 'Unlimited' : '₦' . $d->amount }}</strong></td>
+                                                <td><strong>{{ $d->amount >= 50000 ? '-' : '₦' . $d->amount }}</strong></td>
                                                 <td>
                                                     <a href="{{route('subscriptionPlan.edit', encryptor('encrypt', $d->id))}}"
                                                         class="btn btn-sm btn-primary" title="Edit"><i

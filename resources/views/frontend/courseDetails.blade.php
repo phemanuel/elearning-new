@@ -2075,13 +2075,20 @@
                             @endif
                         @endif
 
-
+                        @if(auth()->check())
+                            <!-- Content for authenticated users, if needed -->
+                        @else
                             <form action="#">
-                                <a href="{{route('add.to.cart', $course->id)}}"
-                                    class="text-white button button-lg button--primary w-100">Add to Cart</a>
-                                <a href="{{route('checkout')}}"
-                                    class="button button-lg button--primary-outline mt-3 w-100">Checkout</a>
+                                <a href="{{ route('add.to.cart', $course->id) }}"
+                                    class="text-white button button-lg button--primary w-100">
+                                    Add to Cart
+                                </a>
+                                <a href="{{ route('checkout') }}"
+                                    class="button button-lg button--primary-outline mt-3 w-100">
+                                    Checkout
+                                </a>
                             </form>
+                        @endif
                         </div>
                         <div class="cart__includes-info">
                             <h6 class="font-title--card">This course includes:</h6>
@@ -2106,11 +2113,15 @@
                                             alt="airplay" /></span>
                                     <p class="font-para--md">Access on Mobile , Tablet and Laptop</p>
                                 </li>
-                                <li>
-                                    <span><img src="{{asset('frontend/dist/images/icon/clipboard.png')}}"
-                                            alt="clipboard" /></span>
-                                    <p class="font-para--md">Certificate of Completion</p>
-                                </li>
+                                @if(!empty($subPlan))
+                                    @if($subPlan->certificate == 1)
+                                    <li>
+                                        <span><img src="{{asset('frontend/dist/images/icon/clipboard.png')}}"
+                                                alt="clipboard" /></span>
+                                        <p class="font-para--md">Certificate of Completion</p>
+                                    </li>
+                                    @endif
+                                @else  @endif
                             </ul>
                         </div>
                         <div class="cart__share-content">

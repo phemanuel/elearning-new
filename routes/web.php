@@ -226,11 +226,13 @@ Route::middleware(['checkstudent'])->prefix('students')->group(function () {
 });
 
 //----------instructor routes --------------------------------
-Route::get('/instructor/register', [sauth::class, 'instructorSignUpForm'])->name('instructorRegister');
-Route::post('/instructor/register/{back_route}', [sauth::class, 'instructorSignUpStore'])->name('instructorRegister.store');
-// Route::get('/instructor/login', [sauth::class, 'instructorSignInForm'])->name('instructorLogin');
-//Route::post('/instructor/login/{back_route}', [sauth::class, 'instructorSignInCheck'])->name('instructorLogin.check');
-// Route::get('/instructor/logout', [sauth::class, 'signOut'])->name('studentlogOut');
+Route::get('/instructor/register', [sauth::class, 'instructorSignUpForm'])
+->name('instructorRegister');
+Route::post('/instructor/register/{back_route}', [sauth::class, 'instructorSignUpStore'])
+->name('instructorRegister.store');
+Route::get('/instructor/subscription', [sauth::class, 'instructorSubscription'])
+->name('instructorSubscription');
+
  
 // frontend pages
 // Route::get('home', [HomeController::class, 'index'])->name('home');

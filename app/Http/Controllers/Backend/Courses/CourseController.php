@@ -185,9 +185,12 @@ class CourseController extends Controller
         $relatedCourse = Course::where('course_category_id', $courseCategoryId)
             ->where('id', '!=', $courseId) // Exclude the current course
             ->get();
+        //Get the subscription plan the current course is subscribed to----
+        $instructor = Instructor::where('id', $instructorId)->first();
+        $subPlan = SubscriptionPlan::where('id', $instructor->current_plan)->first();
         
         return view('frontend.courseDetails', compact('course','lesson',
-        'courseNo','coupon','relatedCourse'));
+        'courseNo','coupon','relatedCourse','subPlan'));
         } 
         else{
             $course = Course::findOrFail(encryptor('decrypt', $id));
@@ -204,11 +207,16 @@ class CourseController extends Controller
             ->get();
             $enrollment = Enrollment::where('student_id', $student->id)
             ->where('course_id', $courseId)->first();
+            //Get the subscription plan the current course is subscribed to----
+            $instructor = Instructor::where('id', $instructorId)->first();
+            $subPlan = SubscriptionPlan::where('id', $instructor->current_plan)->first();
+
             if($enrollment){                
                 return redirect()->route('studentdashboard')->with('error', 'You have already enrolled for this course.');
             }
-            else{               
-                return view('frontend.courseDetails', compact('course','lesson','courseNo','coupon','relatedCourse'));
+            else{                               
+                return view('frontend.courseDetails', compact('course','lesson','courseNo','coupon',
+                'relatedCourse','subPlan'));
             }
         }
     }
