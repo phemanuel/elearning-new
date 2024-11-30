@@ -268,6 +268,7 @@
                                 </div>
                             </div>
                         </form>
+                        @if(request()->session()->get('studentLogin'))
                         <a href="{{route('cart')}}" class="cart-nav border-0 bg-transparent mx-3">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -278,6 +279,7 @@
                             <span class="badge bg-primary">{{ count((array) session('cart')) }}</span>
                             <span class="visually-hidden">Items Added</span>
                         </a>
+                        @endif
                         @if(request()->session()->get('studentLogin'))
                         <div class="dropdown user-image ms-3" id="imageDropdown">
                             <a href="{{route('studentdashboard')}}" onclick="toggleDropdown(event)">
@@ -347,9 +349,27 @@
                                         <span class="navbar-mobile__menu-link"> Home</span>
                                     </a>
                                 </li>
+                                @if(request()->session()->get('studentLogin'))
+                                <li class="navbar-mobile__menu-item">
+                                    <a href="{{route('studentdashboard')}}">
+                                        <span class="navbar-mobile__menu-link"> Dashboard</span>
+                                    </a>
+                                </li>
+                                @elseif(auth()->user())
+                                <li class="navbar-mobile__menu-item">
+                                    <a href="{{route('dashboard')}}">
+                                        <span class="navbar-mobile__menu-link"> Dashboard</span>
+                                    </a>
+                                </li>
+                                @endif
                                 <li class="navbar-mobile__menu-item">
                                     <a href="{{route('searchCourse')}}">
                                         <span class="navbar-mobile__menu-link"> Courses </span>
+                                    </a>
+                                </li>
+                                <li class="navbar-mobile__menu-item">
+                                    <a href="{{route('searchInstructor')}}">
+                                        <span class="navbar-mobile__menu-link"> Instructors</span>
                                     </a>
                                 </li>
                                 <li class="navbar-mobile__menu-item">
@@ -357,30 +377,54 @@
                                         <span class="navbar-mobile__menu-link"> About </span>
                                     </a>
                                 </li>
-                                <li class="navbar-mobile__menu-item">
-                                    <a href="#">
-                                        <span class="navbar-mobile__menu-link"> Pages </span>
-                                        <span class="navbar-mobile__menu-dropicon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                stroke-linecap="round" stroke-linejoin="round"
-                                                class="feather feather-chevron-right">
-                                                <polyline points="9 18 15 12 9 6"></polyline>
-                                            </svg>
-                                        </span>
-                                    </a>
-                                    <ul class="navbar-mobile__menu-dropmenu">
-                                        <li><a href="{{route('searchCourse')}}">Courses</a></li>
-                                        <li><a href="{{route('student_profile')}}">Student Profile</a></li>
-                                        <li><a href="{{route('about')}}">About</a></li>
-                                        <li><a href="{{route('contact')}}">Contact</a></li>
-                                    </ul>
-                                </li>
+                                
                                 <li class="navbar-mobile__menu-item">
                                     <a href="{{route('contact')}}">
                                         <span class="navbar-mobile__menu-link"> Contact </span>
                                     </a>
                                 </li>
+                                @if(request()->session()->get('studentLogin'))
+                                <li class="navbar-mobile__menu-item">
+                                    <a href="{{route('student_profile')}}">
+                                        <span class="navbar-mobile__menu-link"> Profile </span>
+                                    </a>
+                                </li>                                
+                                @elseif(auth()->user())
+                                <li class="navbar-mobile__menu-item">
+                                    <a href="{{route('user.edit', encryptor('encrypt',auth()->user()->id))}}">
+                                        <span class="navbar-mobile__menu-link"> Profile </span>
+                                    </a>
+                                </li>                                
+                                @endif
+                                @if(request()->session()->get('studentLogin'))
+                                
+                                @elseif(auth()->user())
+                                
+                                @else
+                                <li class="navbar-mobile__menu-item">
+                                    <a href="{{route('studentLogin')}}">
+                                        <span class="navbar-mobile__menu-link"> Signin </span>
+                                    </a>
+                                </li>
+                                <li class="navbar-mobile__menu-item">
+                                    <a href="{{route('signup')}}">
+                                        <span class="navbar-mobile__menu-link"> Signup </span>
+                                    </a>
+                                </li>
+                                @endif
+                                @if(request()->session()->get('studentLogin'))
+                                <li class="navbar-mobile__menu-item">
+                                    <a href="{{route('studentlogOut')}}">
+                                        <span class="navbar-mobile__menu-link"> Logout</span>
+                                    </a>
+                                </li>
+                                @elseif(auth()->user())
+                                <li class="navbar-mobile__menu-item">
+                                    <a href="{{route('studentlogOut')}}">
+                                        <span class="navbar-mobile__menu-link"> Logout</span>
+                                    </a>
+                                </li>
+                                @endif
                             </ul>
                         </div>
                     </div>

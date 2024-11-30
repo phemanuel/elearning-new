@@ -106,7 +106,7 @@ class SubscriptionController extends Controller
         $subscriptions = Subscription::where('instructor_id', $instructorId)->first();
         $currentDate = now();
         return view('backend.subscription.subscription-plans', compact('subscriptionPlans', 'subscriptions'
-        ,'currentDate'));
+        ,'currentDate')); 
     }
 
     public function subscribePlans($id)

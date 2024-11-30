@@ -195,16 +195,16 @@
                                 @else
                                     <!-- Image representing the plan -->
                                     <div class="text-center mb-4">
-                                        <img src="{{asset('uploads/subscriptions/' . $imageUrl)}}" alt="Starter Plan" class="img-fluid" style="max-height: 150px; width: auto;">
+                                    <h4><i class="{{$subscriptions->subscriptionPlan->icon}}"></i> {{$subscriptions->subscriptionPlan->name}}</h4>
                                     </div>
 
                                     <!-- Plan details -->
                                     <div class="plan-details text-center">
                                         <!-- Features -->
                                         <ul class="list-group text-left mt-3">
-                                            <li class="list-group-item"><i class="la la-upload mr-2"></i> {{$subscriptions->subscriptionPlan->course_upload}} Courses Upload</li>
-                                            <li class="list-group-item"><i class="la la-user mr-2"></i> {{$subscriptions->subscriptionPlan->student_upload}} Students On-board </li>
-                                            <li class="list-group-item"><i class="la la-hdd mr-2"></i> {{$subscriptions->subscriptionPlan->allocated_space}} GB storage for materials</li>
+                                            <li class="list-group-item"><i class="fas fa-upload text-primary"></i> {{$subscriptions->subscriptionPlan->course_upload}} Courses Upload</li>
+                                            <li class="list-group-item"><i class="fas fa-users text-success"></i> {{$subscriptions->subscriptionPlan->student_upload}} Students On-board </li>
+                                            <li class="list-group-item"><i class="fas fa-hdd text-info"></i> {{$subscriptions->subscriptionPlan->allocated_space}} GB storage for materials</li>
                                             <!-- <li class="list-group-item"><i class="la la-chart-bar mr-2"></i> Basic analytics</li> -->
                                             <!-- <li class="list-group-item"><i class="la la-envelope mr-2"></i> Email support</li> -->
                                             <li class="list-group-item">

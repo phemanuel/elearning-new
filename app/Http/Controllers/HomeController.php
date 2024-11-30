@@ -129,4 +129,9 @@ class HomeController extends Controller
 
         return view('frontend.contact', compact('instructor'));
     }
+
+    public function contactSales()
+    {
+        return view('frontend.contact-sales');
+    }
 }

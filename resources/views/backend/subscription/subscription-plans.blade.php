@@ -59,7 +59,7 @@
                             
                             <!-- Image representing the plan -->
                             <div class="text-center mb-4">
-                                <h4><i class="{{$s->icon}}"></i> {{$s->name}}</h4>
+                                <h4><i class="{{$s->icon}}"></i> {{$s->name}}</h4> 
                             </div>
 
                             <!-- Plan details -->
@@ -181,19 +181,31 @@
                                 @elseif($s->amount == 0)
                                     <h5 class="font-title--sm mt-3" style="color:blue;"><strong>Free</strong></h5>
                                 @endif                         
-                                <!-- Buy Button -->
-                                 @if(empty($subscriptions))
+                                <!-- Pricing -->
+                                 @if(empty($subscriptions) && $s->name == 'ENTERPRISE')
+                                <div class="mt-3">
+                                    <a href="{{route('contact-sales')}}" class="btn btn-success btn-lg text-white">
+                                        <i class="la la-shopping-cart"></i> Contact Sales
+                                    </a>
+                                </div>   
+                                @elseif($subscriptions && $s->name == 'ENTERPRISE')
+                                <div class="mt-3">
+                                    <a href="{{route('contact-sales')}}" class="btn btn-success btn-lg text-white">
+                                        <i class="la la-shopping-cart"></i> Contact Sales
+                                    </a>
+                                </div> 
+                                @elseif(empty($subscriptions) && $s->name != 'ENTERPRISE')
                                 <div class="mt-3">
                                     <a href="{{route('subscribe.view' , encryptor('encrypt' , $s->id))}}" class="btn btn-success btn-lg text-white">
                                         <i class="la la-shopping-cart"></i> Buy Now
                                     </a>
-                                </div>
-                                @elseif($s->course_upload >= 50)
+                                </div>  
+                                @elseif(empty($subscriptions) && $s->name == 'BASIC')
                                 <div class="mt-3">
                                     <a href="#" class="btn btn-success btn-lg text-white">
-                                        <i class="la la-shopping-cart"></i> Contact Sales
+                                        <i class="la la-shopping-cart"></i> Subscribe Now
                                     </a>
-                                </div>
+                                </div>                            
                                 @else
                                 <div class="mt-3">
                                     @if($subscriptions->end_date < $currentDate)
@@ -212,7 +224,7 @@
                                     @else
                                         @if($s->id == $subscriptions->plan_id)                                    
                                             <img src="{{asset('images/check.jpg')}}" alt=""> 
-                                        @elseif($d->id < $subscriptions->plan_id)                                    
+                                        @elseif($s->id < $subscriptions->plan_id)                                    
                                             <img src="{{asset('images/uncheck.jpg')}}" alt="">                                   
                                         @else
                                         <a href="{{route('subscribe.view' , encryptor('encrypt' , $s->id))}}" class="btn btn-success btn-lg text-white">

@@ -159,10 +159,7 @@
                 <div class="row align-items-center">
                     <div class="col-xl-6 offset-xl-3 order-2 order-xl-0">
                         <div class="signup-area-textwrapper">
-                            <h2 class="font-title--md mb-0">Sign in Before Checkout</h2>
-                            <p class="mt-2 mb-lg-4 mb-3">Don't have account?
-                                <a href="#" onclick="hide_signin()" class="text-black-50">Sign up</a>
-                            </p>
+                            <h2 class="font-title--md mb-0">Sign in Before Checkout</h2>                            
                             {{-- Check if total amount is greater than 0 before calculating the 1.5% transaction charge --}}
                                 @php
                                     $totalAmount = session('cart_details')['total_amount'] ?? 0;
@@ -205,6 +202,9 @@
                                         
                                         <a href="{{ route('user.password.request') }}" class="text-primary fs-6">Forgot Password</a>
                                     </div>
+                                    <p class="mt-2 mb-lg-4 mb-3">Don't have account?
+                                <a href="{{route('signup')}}" class="text-black-50">Sign up</a>
+                            </p>
                             </form>
                         </div>
                     </div>

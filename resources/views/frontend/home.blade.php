@@ -1093,7 +1093,7 @@
                             <div class="mentor__img">
                                 <img src="{{asset('uploads/users/'.$i->image)}}" alt="Mentor image" />
                                 <ul class="list-inline">
-                                @if(!empty($i->social_facebook))
+                                @if(!empty($i->social_facebook)) 
                                     <li class="list-inline-item">
                                         <a href="{{$i->social_facebook}}" tabindex="0">
                                             <svg width="9" height="18" viewBox="0 0 9 18" fill="none"

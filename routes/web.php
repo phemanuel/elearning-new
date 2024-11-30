@@ -273,6 +273,8 @@ Route::get('about', [HomeController::class, 'about'])
     ->name('about'); 
 Route::get('contact', [HomeController::class, 'contact'])
     ->name('contact'); 
+Route::get('contact-sales', [HomeController::class, 'contactSales'])
+    ->name('contact-sales');
 
 //---Course and Course Creators Url----
 Route::get('/instructors/{instructor_url}', [UrlController::class, 'instructorUrl'])

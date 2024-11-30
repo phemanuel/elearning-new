@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2024 at 12:59 PM
+-- Generation Time: Nov 27, 2024 at 12:22 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -192,7 +192,7 @@ INSERT INTO `courses` (`id`, `segment`, `title_en`, `title_bn`, `description_en`
 (1, 1, 'What is Data Science?', NULL, 'This will introduce you to the concepts of Data Science and how it is used to solve real-world problems. You will learn Data Science with an example on UBER dataset. Data science is the process of using the data to find solutions / to predict outcomes of a problem statemen', NULL, 19, 3, '=N=', 'free', 100.00, 100.00, NULL, NULL, 0, 10, 1, 'No tech skill required.', NULL, 'beginner', NULL, '5801727444624.png', '9551727444625.png', 'https://youtu.be/KdgQvgE3ji4', 2, 'en', 'popular', '5LORqOyGuoiW5q6U8gUJAMYdzSo6AXRYeGl5LlDK', '2024-09-27 20:43:45', '2024-11-16 20:13:45', NULL),
 (2, 0, 'Introduction to Data Science', NULL, 'This video will give you an idea of a life of Data Scientist. This Data Science for Beginners video will also explain the steps involved in the Data Science project, roles & salary offered to a Data Scientist. Data Science is basically dealing with unstructured and structured data.', NULL, 19, 3, '=N=', 'free', 0.00, 0.00, NULL, NULL, 0, 10, 1, 'No tech skill required.', NULL, 'beginner', NULL, '7211727444901.png', '5771727444901.png', 'https://youtu.be/X3paOmcrTjQ', 2, 'en', 'popular', 'Cgqmq435Mkx0g3kXA6QgWYRmrTsBLpWHQTWVfyjy', '2024-09-27 20:48:21', '2024-11-11 04:04:46', NULL),
 (3, 4, 'Freelance Bootcamp', NULL, 'SMM Freelance Bootcamp', NULL, 25, 4, '=N=', 'paid', 27500.00, 35000.00, 27500.00, '2024-10-21 07:00:00', 1, 8, 10, 'A good smart phone and internet.', NULL, 'beginner', 'SMM001', '7181728146583.jpg', '6311728146583.jpg', NULL, 2, 'en', 'popular', 'tz9wpE0czK0PqPS20J9Ghnu2gWOH6lmCCiQrWHCb', '2024-10-05 23:43:03', '2024-10-21 21:30:42', NULL),
-(4, 1, 'SMM BLUEPRINT', NULL, 'SMM BLUEPRINT', NULL, 25, 4, '=N=', 'paid', 35000.00, 40000.00, NULL, '2024-10-17 07:00:00', 0, 6, NULL, NULL, NULL, 'beginner', 'SMMBLU001', '5951729185369.jpg', '3411729185369.jpg', NULL, 2, 'en', 'popular', 'yoxyrW0Uakw32Y0bT60a6SvoWIv5MqAyGkB2PyHh', '2024-10-18 00:16:09', '2024-10-21 21:31:04', NULL);
+(4, 1, 'SMM BLUEPRINT', NULL, 'SMM BLUEPRINT', NULL, 25, 4, '=N=', 'paid', 35000.00, 40000.00, NULL, '2024-10-17 07:00:00', 0, 6, NULL, NULL, NULL, 'beginner', 'SMMBLU001', '5951729185369.jpg', '3411729185369.jpg', NULL, 0, 'en', 'popular', 'yoxyrW0Uakw32Y0bT60a6SvoWIv5MqAyGkB2PyHh', '2024-10-18 00:16:09', '2024-11-26 02:24:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -268,7 +268,8 @@ CREATE TABLE `enrollments` (
 INSERT INTO `enrollments` (`id`, `student_id`, `course_id`, `instructor_id`, `enrollment_date`, `segment`, `completed`, `completion_date`, `certificate_link`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 12, 3, 4, '2024-10-12 07:00:00', 2, 1, '2024-11-08 08:00:00', 'UiQtrf0BOi', '2024-10-13 02:14:01', '2024-10-13 02:14:01', NULL),
 (2, 12, 2, 3, '2024-11-17 08:00:00', 1, 0, '2024-11-17 08:00:00', NULL, '2024-11-17 17:06:44', '2024-11-17 17:06:44', NULL),
-(9, 12, 1, 3, '2024-11-20 08:00:00', 1, 0, '2024-11-20 08:00:00', NULL, '2024-11-21 06:03:29', '2024-11-21 06:03:29', NULL);
+(9, 12, 1, 3, '2024-11-20 08:00:00', 1, 0, '2024-11-20 08:00:00', NULL, '2024-11-21 06:03:29', '2024-11-21 06:03:29', NULL),
+(11, 13, 3, 4, '2024-11-26 04:04:49', 1, 0, NULL, NULL, '2024-11-26 04:04:49', '2024-11-26 04:04:49', NULL);
 
 -- --------------------------------------------------------
 
@@ -339,8 +340,8 @@ CREATE TABLE `instructors` (
 
 INSERT INTO `instructors` (`id`, `name_en`, `name_bn`, `contact_en`, `contact_bn`, `email`, `role_id`, `bio`, `title`, `designation`, `image`, `status`, `password`, `language`, `access_block`, `social_facebook`, `social_twitter`, `social_instagram`, `social_linkedin`, `social_youtube`, `instructor_url`, `current_plan`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (3, 'Adeyinka Temiloluwa', NULL, '08053608799', NULL, 'emmanexitconsult@gmail.com', 3, '<p><span style=\"font-size: 14.992px;\">I am a professional responsible for analyzing financial data and providing insights to help businesses make informed investment and strategic decisions. I assess economic performance, forecast future financial trends, and offer recommendations based on their analysis. I often work with financial models, examining variables such as revenues, expenses, and market trends, to determine the financial health of companies or projects.</span></p><p><span style=\"font-size: 14.992px;\">Key skills include proficiency in financial software, data analysis, understanding of accounting principles, and strong communication abilities and often work in investment firms, banks, insurance companies, or corporate finance departments. I typically holds a degree in finance, economics, or a related field and may possess certifications like CFA (Chartered Financial Analyst).</span></p>', 'Mrs', 'Financial Analyst', 'Instructor_Adeyinka Temiloluwa_197.jpg', 1, '$2y$12$oRlxxgjJXDhVFgDjAY21j.LBVn60MgaQUy4P0ysqnCZEWqjp0D91O', 'en', NULL, 'https://www.facebook.com/temi-akinyooye', NULL, 'https://www.instgram.com/temi-akinyooye', NULL, NULL, 'OVLbufn7RLj0NxlvY0ftcTanFCN6zFJhKiCW2DPA', 0, 'FJGu91BMdWdNlASbolOq3o4caqnR6Ro9Esnxptv9', '2024-09-27 18:36:41', '2024-11-22 07:03:48', NULL),
-(4, 'Miracle Peters', NULL, '08104196102', NULL, 'miracle.kingsbranding@gmail.com', 3, '<p>As a Digital Marketer, I specialize in creating impactful online campaigns that boost brand visibility and drive engagement. With expertise in social media, SEO, email marketing, and paid ads, I tailor strategies to connect with target audiences and generate leads. I’m passionate about using data-driven insights to optimize campaigns and help businesses grow in the digital landscape. Skilled in content creation and digital tools, I continuously adapt to new trends and technologies to stay ahead in the ever-evolving world of digital marketing.<br></p>', 'Miss', 'Digital Marketer', 'Instructor_Miracle Peter_629.jpg', 1, '$2y$12$uh2TKhMQCGp/S4n7Ps0BhedkDlJkmqipqxvvDkGtNBpa7DFgqr7k6', 'en', NULL, NULL, NULL, NULL, NULL, NULL, '85zlG17M2I4WAM9b4YtGqnckzTtOpKNZcXzcBoNL', 1, NULL, '2024-09-29 03:06:36', '2024-11-22 19:50:17', NULL),
-(5, 'Olayimika Omotayo', NULL, '08053708699', NULL, 'olaoluwayimika72@yahoo.com', 3, '<p>As an Executive Assistant, I provide high-level administrative support to executives, ensuring smooth day-to-day operations. With a strong focus on organization and attention to detail, I manage calendars, coordinate meetings, handle communications, and oversee special projects. I excel at multitasking and problem-solving, allowing executives to focus on strategic priorities. My role involves confidential tasks, managing travel arrangements, and preparing reports, all while maintaining professionalism and efficiency. Passionate about streamlining processes, I thrive in fast-paced environments and am committed to helping leadership achieve their goals effectively.<br></p>', 'Mrs', 'Executive Assistant', 'Instructor_Olayimika Omotayo_791.jpg', 1, '$2y$12$KivcsAkNgW05fba/oIrb9eCsasvKVXrfejZZlEB27zjbpja3JoIma', 'en', NULL, NULL, NULL, NULL, NULL, NULL, 'DL9bwHBPP5yRb5vopodNYvWZS9dONGCowDLT832M', 0, NULL, '2024-09-29 03:14:02', '2024-10-21 21:27:09', NULL);
+(4, 'Miracle Peters', NULL, '08104196102', NULL, 'miracle.kingsbranding@gmail.com', 3, '<p>As a Digital Marketer, I specialize in creating impactful online campaigns that boost brand visibility and drive engagement. With expertise in social media, SEO, email marketing, and paid ads, I tailor strategies to connect with target audiences and generate leads. I’m passionate about using data-driven insights to optimize campaigns and help businesses grow in the digital landscape. Skilled in content creation and digital tools, I continuously adapt to new trends and technologies to stay ahead in the ever-evolving world of digital marketing.<br></p>', 'Miss', 'Digital Marketer', 'Instructor_Miracle Peter_629.jpg', 1, '$2y$12$uh2TKhMQCGp/S4n7Ps0BhedkDlJkmqipqxvvDkGtNBpa7DFgqr7k6', 'en', NULL, NULL, NULL, NULL, NULL, NULL, '85zlG17M2I4WAM9b4YtGqnckzTtOpKNZcXzcBoNL', 1, NULL, '2024-09-29 03:06:36', '2024-11-23 22:14:52', NULL),
+(9, 'Emmanuel Abiodun', NULL, '08153324483', NULL, 'kingsbrandingconsult@gmail.com', 3, NULL, NULL, NULL, 'blank.jpg', 1, '$2y$12$eh0cfRcDBTaET.LBKwEL7OgI8HqkZUTnzmzvLzSz0xcxdRYrmAppq', 'en', NULL, NULL, NULL, NULL, NULL, NULL, 'Aqxoem3v40W51l41U0XMp254bNxKnplsjc4GGdxW', 0, '4MMs3N3zO6trtYygv32rDO9eXp7y2hIMikCZadt6', '2024-11-27 05:48:55', '2024-11-27 05:48:55', NULL);
 
 -- --------------------------------------------------------
 
@@ -609,7 +610,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (67, '2024_11_20_214859_add_course_id_to_payments_table', 35),
 (68, '2024_11_21_121553_create_subscription_plans_table', 36),
 (69, '2024_11_21_121827_add_current_plan_to_instructors_table', 36),
-(70, '2024_11_21_185609_create_subscriptions_table', 37);
+(70, '2024_11_21_185609_create_subscriptions_table', 37),
+(71, '2024_11_22_132444_create_subscription_payments_table', 38),
+(72, '2024_11_25_190454_add_certificate_to_subsctiption_plans_table', 39);
 
 -- --------------------------------------------------------
 
@@ -709,7 +712,8 @@ CREATE TABLE `payments` (
 INSERT INTO `payments` (`id`, `student_id`, `course_id`, `instructor_id`, `currency`, `currency_code`, `amount`, `currency_value`, `method`, `txnid`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 12, 3, 4, 'NAIRA', '=N=', 27500.00, 1.00, 'Paystack', 'KDH670aca79d981f', 1, '2024-10-13 02:14:01', '2024-10-13 02:14:01', NULL),
 (2, 12, 2, 3, 'NAIRA', '=N=', 0.00, 1.00, 'Paystack', 'KDH6739b2243eba3', 1, '2024-11-17 17:06:44', '2024-11-17 17:06:44', NULL),
-(9, 12, 1, 3, 'NAIRA', '=N=', 100.00, 1.00, 'Paystack', 'KDH20241120zv3U', 1, '2024-11-21 06:03:29', '2024-11-21 06:03:29', NULL);
+(9, 12, 1, 3, 'NAIRA', '=N=', 100.00, 1.00, 'Paystack', 'KDH20241120zv3U', 1, '2024-11-21 06:03:29', '2024-11-21 06:03:29', NULL),
+(10, 13, 3, 4, 'NAIRA', '=N=', 27500.00, 1.00, 'Manual', 'KDH202411256moRb', 1, '2024-11-26 04:04:49', '2024-11-26 04:04:49', NULL);
 
 -- --------------------------------------------------------
 
@@ -1090,7 +1094,35 @@ CREATE TABLE `subscriptions` (
 --
 
 INSERT INTO `subscriptions` (`id`, `instructor_id`, `plan_id`, `no_of_months`, `total_amount`, `start_date`, `end_date`, `status`, `created_at`, `updated_at`) VALUES
-(3, 4, 1, 2, 4000.00, '2024-11-22 19:51:03', '2025-01-22 19:51:03', 'active', '2024-11-22 07:04:25', '2024-11-22 19:51:03');
+(1, 4, 1, 1, 2000.00, '2024-11-23 22:14:52', '2024-12-23 22:14:52', 'active', '2024-11-23 22:14:52', '2024-11-23 22:14:52');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscription_payments`
+--
+
+CREATE TABLE `subscription_payments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `instructor_id` bigint(20) NOT NULL,
+  `currency` varchar(255) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `method` varchar(255) NOT NULL,
+  `txnid` varchar(255) NOT NULL,
+  `plan_id` int(11) NOT NULL,
+  `no_of_months` int(10) NOT NULL,
+  `total_amount` double(10,2) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '0 pending, 1 successfull, 2 fail',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `subscription_payments`
+--
+
+INSERT INTO `subscription_payments` (`id`, `instructor_id`, `currency`, `amount`, `method`, `txnid`, `plan_id`, `no_of_months`, `total_amount`, `status`, `created_at`, `updated_at`) VALUES
+(1, 4, 'Naira', 2000.00, 'Paystack', 'KDH20241123FX35', 1, 1, 2000.00, 1, '2024-11-23 22:14:52', '2024-11-23 22:14:52');
 
 -- --------------------------------------------------------
 
@@ -1101,9 +1133,14 @@ INSERT INTO `subscriptions` (`id`, `instructor_id`, `plan_id`, `no_of_months`, `
 CREATE TABLE `subscription_plans` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
+  `icon` varchar(255) NOT NULL,
   `course_upload` int(11) NOT NULL,
   `student_upload` int(11) NOT NULL,
   `allocated_space` int(11) NOT NULL,
+  `certificate` int(11) NOT NULL,
+  `transaction_fee` double NOT NULL,
+  `extra_day` int(11) NOT NULL,
+  `enrollment` int(10) NOT NULL,
   `amount` double(10,2) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `status` enum('Active','Inactive') NOT NULL,
@@ -1115,10 +1152,12 @@ CREATE TABLE `subscription_plans` (
 -- Dumping data for table `subscription_plans`
 --
 
-INSERT INTO `subscription_plans` (`id`, `name`, `course_upload`, `student_upload`, `allocated_space`, `amount`, `image`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'BASIC', 2, 100, 2, 2000.00, '9521732211248.png', 'Active', '2024-11-22 01:47:28', '2024-11-22 02:13:51'),
-(2, 'GROWTH', 5, 200, 5, 5000.00, '1821732211398.png', 'Active', '2024-11-22 01:49:58', '2024-11-22 02:14:11'),
-(3, 'PROFESSIONAL', 10, 500, 10, 10000.00, '4861732211466.png', 'Active', '2024-11-22 01:51:06', '2024-11-22 02:14:30');
+INSERT INTO `subscription_plans` (`id`, `name`, `icon`, `course_upload`, `student_upload`, `allocated_space`, `certificate`, `transaction_fee`, `extra_day`, `enrollment`, `amount`, `image`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'BASIC', 'fas fa-home text-primary', 1, 50, 2, 0, 15, 0, 0, 0.00, '9521732211248.png', 'Active', '2024-11-22 01:47:28', '2024-11-27 03:24:18'),
+(2, 'GROWTH', 'fas fa-chart-line text-info', 12, 1500, 10, 1, 1, 7, 1, 10500.00, '1821732211398.png', 'Active', '2024-11-22 01:49:58', '2024-11-27 03:23:01'),
+(3, 'PREMIUM', 'fas fa-crown text-warning', 30, 2000, 30, 1, 0, 14, 1, 25000.00, '4861732211466.png', 'Active', '2024-11-22 01:51:06', '2024-11-27 03:23:21'),
+(4, 'STARTER', 'fas fa-rocket text-success', 5, 400, 5, 1, 3, 7, 1, 5500.00, '3201732573172.png', 'Active', '2024-11-26 06:19:32', '2024-11-27 03:22:40'),
+(5, 'ENTERPRISE', 'fas fa-building text-dark', 50, 2000, 50, 1, 0, 20, 1, 50000.00, '4531732573759.png', 'Active', '2024-11-26 06:29:19', '2024-11-27 03:23:36');
 
 -- --------------------------------------------------------
 
@@ -1158,11 +1197,11 @@ INSERT INTO `users` (`id`, `name_en`, `name_bn`, `email`, `contact_en`, `email_v
 (9, 'Maxwell Akinyooye', NULL, 'phemanuel@yahoo.com', '07032689329', 1, '2024-09-27 18:33:33', NULL, 4, '$2y$12$3SSWI2dT8VYugHwFB3UFPuwQ.nPnxlbzRYumJES56BFozM2XTHW.a', 'en', 'blank.jpg', 0, 1, '2h1SSbyJAUUnxvFeCJHYfcfDIBFJgogCl0cHKwtgVv464k71HOxuiNqeUPXa', NULL, 12, '2024-09-27 18:32:50', '2024-10-23 18:15:56', NULL),
 (10, 'Adeyinka Temiloluwa', NULL, 'emmanexitconsult@gmail.com', '08053608799', NULL, NULL, NULL, 3, '$2y$12$2XNRWEPv4lqZxtFMqFZqiuupjCyqs48hoZXdmcEfNykUQwsGhhIZi', 'en', 'Instructor_Adeyinka Temiloluwa_197.jpg', 0, 1, 'edlGrH8QxK40cUmRmGODHAL6pvV4sMXf2JqSTMheXTQycInI1qGHHjmL1xpQ', 3, NULL, '2024-09-27 18:36:42', '2024-10-05 18:23:30', NULL),
 (11, 'Miracle Peters', NULL, 'miracle.kingsbranding@gmail.com', '08104196102', NULL, NULL, NULL, 3, '$2y$12$qj22czl2dsjA8NNfUslAt.rAX1MpyVuIBVL69sdOTSqikQoZICy7S', 'en', 'Instructor_Miracle Peter_629.jpg', 0, 1, NULL, 4, NULL, '2024-09-29 03:06:36', '2024-11-13 08:01:42', NULL),
-(12, 'Olayimika Omotayo', NULL, 'olaoluwayimika72@yahoo.com', '08053708699', NULL, NULL, NULL, 3, '$2y$12$cCZiRvsZH1X/il831Cq5XOoat/hdAERPxG0CK/AReRKXcVmT.WW6m', 'en', 'Instructor_Olayimika Omotayo_791.jpg', 0, 1, NULL, 5, NULL, '2024-09-29 03:14:03', '2024-09-29 03:14:03', NULL),
 (13, 'Awolola Paul', NULL, 'awopaul@gmail.com', '08000000000000', 1, '2024-11-21 10:56:05', NULL, 4, '$2y$12$VN3QLDwU/kv/3XIwt5eXMuBhAy.BpVKgS5Aa.wVhjEoPEAoon3kXy', 'en', 'blank.jpg', 0, 1, 'hw8EFe3I2quqixmvcnVlhrZO8PLGaFbFj3hsDWz4', NULL, 13, '2024-11-21 18:39:16', '2024-11-21 18:39:16', NULL),
 (18, 'Olateju Tosin', NULL, 'olatejutosin@gmail.com', '08037153582', 1, '2024-11-21 10:56:05', NULL, 4, '$2y$12$AwON/R/W6RqRAiQ5uMW.9ukIAdpLKC1UxrS4K5iTC8yAhT0Tnq8mm', 'en', 'blank.jpg', 0, 1, 'alvsmbfE3vyUeHfBXTtfUT3LRRuUisdjVQATpl5S', NULL, 19, '2024-11-21 18:53:13', '2024-11-21 18:53:13', NULL),
 (19, 'Jason Peter', NULL, 'jasonpeter@gmail.com', '08070257011', 1, '2024-11-21 10:56:05', NULL, 4, '$2y$12$vI0jkCM01vF.SXn66xJE4OqiXy/Pp51SKKCBEtJmblSgXqjtIGXAO', 'en', 'blank.jpg', 0, 1, 'T7PuI8IGOO2UJQviMpEeB6kDnc0s6ZHeJ7oSrWkR', NULL, 20, '2024-11-21 18:54:57', '2024-11-21 18:54:57', NULL),
-(20, 'Adeleke Iyanu', NULL, 'iyanuola@gmail.com', '08062459088', 1, '2024-11-21 10:56:05', NULL, 4, '$2y$12$i5x2RUKZ6lwP6X.5bMT0x.lQTwI5NuO3leu6cQTZmXs3Al5xThppa', 'en', 'blank.jpg', 0, 1, 'zrnLfAAAsqHytbTR3x82nKAT2nv61GsuwuCMGrIC', NULL, 21, '2024-11-21 18:55:32', '2024-11-21 18:55:32', NULL);
+(20, 'Adeleke Iyanu', NULL, 'iyanuola@gmail.com', '08062459088', 1, '2024-11-21 10:56:05', NULL, 4, '$2y$12$i5x2RUKZ6lwP6X.5bMT0x.lQTwI5NuO3leu6cQTZmXs3Al5xThppa', 'en', 'blank.jpg', 0, 1, 'zrnLfAAAsqHytbTR3x82nKAT2nv61GsuwuCMGrIC', NULL, 21, '2024-11-21 18:55:32', '2024-11-21 18:55:32', NULL),
+(24, 'Emmanuel Abiodun', NULL, 'kingsbrandingconsult@gmail.com', '08153324483', NULL, NULL, NULL, 3, '$2y$12$cDLow/FNGBPUgyql8IKKa.umXAP.NhQAvrGHJITAm/ZcK3WU0t9Km', 'en', 'blank.jpg', 1, 1, '4MMs3N3zO6trtYygv32rDO9eXp7y2hIMikCZadt6', 9, NULL, '2024-11-27 05:48:56', '2024-11-27 05:48:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -1404,6 +1443,12 @@ ALTER TABLE `subscriptions`
   ADD KEY `subscriptions_instructor_id_index` (`instructor_id`);
 
 --
+-- Indexes for table `subscription_payments`
+--
+ALTER TABLE `subscription_payments`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `subscription_plans`
 --
 ALTER TABLE `subscription_plans`
@@ -1481,7 +1526,7 @@ ALTER TABLE `discussions`
 -- AUTO_INCREMENT for table `enrollments`
 --
 ALTER TABLE `enrollments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -1493,7 +1538,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `instructors`
 --
 ALTER TABLE `instructors`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `lessons`
@@ -1517,7 +1562,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `news_letters`
@@ -1535,7 +1580,7 @@ ALTER TABLE `options`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -1601,19 +1646,25 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `subscriptions`
 --
 ALTER TABLE `subscriptions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `subscription_payments`
+--
+ALTER TABLE `subscription_payments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `subscription_plans`
 --
 ALTER TABLE `subscription_plans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `watchlists`
