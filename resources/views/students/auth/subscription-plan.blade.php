@@ -165,7 +165,7 @@
                 @endif
                 <br>
                 @if($s->course_upload >=50)
-                <a href="#" class="button button-lg button--dark w-100">Contact Sales</a>
+                <a href="{{route('contact-sales')}}" class="button button-lg button--dark w-100">Contact Sales</a>
                 @else
                 <a href="{{route('instructorRegister', encryptor('encrypt', $s->id))}}" class="button button-lg button--dark w-100">Get started</a>
                 @endif

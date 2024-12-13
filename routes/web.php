@@ -275,6 +275,8 @@ Route::get('contact', [HomeController::class, 'contact'])
     ->name('contact'); 
 Route::get('contact-sales', [HomeController::class, 'contactSales'])
     ->name('contact-sales');
+Route::post('contact-sales', [HomeController::class, 'contactSalesAction'])
+    ->name('contact-sales.action');
 
 //---Course and Course Creators Url----
 Route::get('/instructors/{instructor_url}', [UrlController::class, 'instructorUrl'])

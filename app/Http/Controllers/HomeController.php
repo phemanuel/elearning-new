@@ -8,6 +8,8 @@ use App\Models\Event;
 use App\Models\Instructor;
 use App\Models\CourseCategory;
 use App\Models\Student;
+use App\Models\ContactSales;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -134,4 +136,48 @@ class HomeController extends Controller
     {
         return view('frontend.contact-sales');
     }
+
+    public function contactSalesAction(Request $request)
+    {
+        // return response()->json(
+        //     [
+        //         'status' => 'success',
+        //     ]
+        //     );
+        try {
+            // Validate input
+            $request->validate([
+                'fullName'      => 'required|string|max:255',
+                'email'         => 'required|email|max:255',
+                'noOfCourse'    => 'required|integer|min:1',
+                'noOfStudent'   => 'required|integer|min:1',
+                'storageSpace'  => 'required|integer|min:1',
+                'addInfo'       => 'nullable|string|max:1000',
+            ]);
+
+            // Save to DB
+            ContactSales::create([
+                'name'      => $request->input('fullName'),
+                'email'          => $request->input('email'),
+                'no_of_course'  => $request->input('noOfCourse'),
+                'no_of_student' => $request->input('noOfStudent'),
+                'storage_space'  => $request->input('storageSpace'),
+                'additional_information'=> $request->input('addInfo'),
+            ]);
+
+            // Redirect with success message
+            return view('frontend.contact-sales-message');
+        } catch (\Exception $e) {
+            // Log the error
+            Log::error('Contact Sales Submission Error: ', [
+                'message' => $e->getMessage(),
+                'input'   => $request->all(),
+            ]);
+
+            // Redirect with error message
+            return redirect()->back()->with('error', 'Something went wrong. Please try again later.');
+        }
+    }
+
+
 }
