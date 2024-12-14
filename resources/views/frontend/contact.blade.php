@@ -87,28 +87,29 @@ Our support team is available to assist you with inquiries about our courses, en
                     class="img-fluid contact-feature-shape" />
             </div>
             <div class="col-lg-7 form-area">
-                <form action="#">
+                <form action="{{route('contact.action')}}" method="POST">
+                    @csrf
                     <div class="row g-3">
                         <div class="col-lg-6">
                             <label for="name">Name</label>
                             <input type="text" class="form-control form-control--focused" placeholder="Type here..."
-                                id="name" />
+                                name="fullName" />
                         </div>
                         <div class="col-lg-6">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" placeholder="Type here..." id="email" />
+                            <input type="email" class="form-control" placeholder="Type here..." name="email" />
                         </div>
                     </div>
                     <div class="row my-lg-2 my-2">
                         <div class="col-12">
                             <label for="subject">Subject</label>
-                            <input type="text" id="subject" class="form-control" placeholder="Type here..." />
+                            <input type="text" name="subject" class="form-control" placeholder="Type here..." />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <label for="message">Messages</label>
-                            <textarea id="message" placeholder="Type here..." class="form-control"></textarea>
+                            <textarea name="message" placeholder="Type here..." class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="row">

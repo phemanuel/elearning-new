@@ -9,6 +9,7 @@ use App\Models\Instructor;
 use App\Models\CourseCategory;
 use App\Models\Student;
 use App\Models\ContactSales;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
@@ -121,7 +122,7 @@ class HomeController extends Controller
 
     public function about()
     {
-        $instructor = Instructor::get();
+        $instructor = Instructor::where('status', 1)->get();
 
         return view('frontend.about', compact('instructor'));
     }
@@ -138,12 +139,7 @@ class HomeController extends Controller
     }
 
     public function contactSalesAction(Request $request)
-    {
-        // return response()->json(
-        //     [
-        //         'status' => 'success',
-        //     ]
-        //     );
+    {        
         try {
             // Validate input
             $request->validate([
@@ -179,5 +175,42 @@ class HomeController extends Controller
         }
     }
 
+    public function contactAction(Request $request)
+    {        
+        try {
+            // Validate input
+            $request->validate([
+                'fullName'      => 'required|string|max:255',
+                'email'         => 'required|email|max:255',
+                'subject'       => 'required|string|max:1000',               
+                'message'       => 'required|string|max:1000',
+            ]);
+
+            // Save to DB
+            Contact::create([
+                'name'      => $request->input('fullName'),
+                'email'          => $request->input('email'),
+                'subject'  => $request->input('subject'),
+                'message' => $request->input('message'),
+            ]);
+
+            // Redirect with success message
+            return redirect()->back()->with('success', 'Your message has been sent successfully.');
+        } catch (\Exception $e) {
+            // Log the error
+            Log::error('Contact Submission Error: ', [
+                'message' => $e->getMessage(),
+                'input'   => $request->all(),
+            ]);
+
+            // Redirect with error message
+            return redirect()->back()->with('error', 'Something went wrong. Please try again later.');
+        }
+    }
+
+    public function customPlan()
+    {
+        
+    }
 
 }

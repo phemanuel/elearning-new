@@ -420,6 +420,24 @@
                             <li><a href="{{route('coupon.index')}}"><i class="las la-tags"></i>Coupons</a></li>
                         </ul>
                     </li> 
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="las la-file-alt"></i>
+                            <span class="nav-text">Report</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li>
+                                <a href="{{route('customPlan')}}">
+                                    <i class="las la-file-signature"></i> Custom Plan Request
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('contactReport')}}">
+                                    <i class="las la-address-book"></i> Contact Report
+                                </a>
+                            </li>                            
+                        </ul>
+                    </li>
                     <li><a class="" href="{{route('logOut')}}" aria-expanded="false">
                             <i class="lab la-gg-circle"></i>
                             <span class="nav-text">Logout</span>

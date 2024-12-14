@@ -174,7 +174,10 @@ Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     Route::post('/enroll-student', [enrollment::class, 'enroll'])->name('enrollment.enroll');
     Route::get('permission/{role}', [permission::class, 'index'])->name('permission.list');
     Route::post('permission/{role}', [permission::class, 'save'])->name('permission.save'); 
-    Route::get('/get-segments/{courseId}', [course::class, 'getSegments']);      
+    Route::get('/get-segments/{courseId}', [course::class, 'getSegments']);    
+    Route::get('/customPlan', [HomeController::class, 'customPlan'])->name('customPlan');  
+    Route::get('/contactReport', [HomeController::class, 'contactReport'])->name('contactReport'); 
+
 });
 
 Route::get('/register', [HomeController::class, 'signUpForm'])->name('signup');
@@ -273,6 +276,8 @@ Route::get('about', [HomeController::class, 'about'])
     ->name('about'); 
 Route::get('contact', [HomeController::class, 'contact'])
     ->name('contact'); 
+Route::post('contact', [HomeController::class, 'contactAction'])
+    ->name('contact.action');
 Route::get('contact-sales', [HomeController::class, 'contactSales'])
     ->name('contact-sales');
 Route::post('contact-sales', [HomeController::class, 'contactSalesAction'])

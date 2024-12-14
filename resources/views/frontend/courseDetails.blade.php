@@ -2128,7 +2128,7 @@
                             <h6 class="font-title--card">Share This Course</h6>
                             <ul class="social-icons social-icons--outline">
                                 <li>
-                                    <a href="#">
+                                    <a href="https://www.instagram.com/?url={{ urlencode(route('courseDetails', encryptor('encrypt', $course->id))) }}" target="_blank">
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -2144,7 +2144,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(route('courseDetails', encryptor('encrypt', $course->id))) }}">
+                                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(route('courseDetails', encryptor('encrypt', $course->id))) }}" target="_blank">
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -2159,7 +2159,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(route('courseDetails', encryptor('encrypt', $course->id))) }}&text={{ urlencode($course->title_en) }}">
+                                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(route('courseDetails', encryptor('encrypt', $course->id))) }}&text={{ urlencode($course->title_en) }}" target="_blank">
                                         <svg width="18" height="15" viewBox="0 0 18 15" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -2169,7 +2169,7 @@
                                     </a>
                                 </li>                                
                                 <li>
-                                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('courseDetails', encryptor('encrypt', $course->id))) }}&t={{ urlencode($course->title_en) }}">
+                                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('courseDetails', encryptor('encrypt', $course->id))) }}&t={{ urlencode($course->title_en) }}" target="_blank">
                                         <svg width="9" height="18" viewBox="0 0 9 18" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path

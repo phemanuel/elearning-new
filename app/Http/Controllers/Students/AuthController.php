@@ -114,7 +114,7 @@ class AuthController extends Controller
             $instructor->contact_en = $request->contact;
             $instructor->image = 'blank.jpg';
             $instructor->role_id = 3;
-            $instructor->status = 1;
+            $instructor->status = 0;
             $instructor->remember_token = $email_token;
             $instructor->language = 'en';
             $instructor->instructor_url = $instructorUrl;
