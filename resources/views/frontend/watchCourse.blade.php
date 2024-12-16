@@ -31,11 +31,11 @@
 <style>
     /* General video area styles */
 .video-area {
-    height: 705px; /* Set desired height for video container */
+    height: 700px; /* Set desired height for video container */
 }
 
 .text-area {
-    height: 605px; /* Set desired height for video container */
+    height: 600px; /* Set desired height for video container */
 }
 
 /* Container to handle the video layout */
@@ -211,7 +211,7 @@ body {
                 </div>
                 <div class="coursedescription-header-end">  
                 @if($enrollment->completed == 1)
-                    <a href="#" class="button button--gold">
+                    <a href="{{ route('certificate.show', encryptor('encrypt', $course?->id)) }}" target="_blank" class="button button--gold">
                         <i class="fas fa-certificate"></i> Certificate
                     </a>
                 @endif
@@ -247,12 +247,12 @@ body {
                         <div class="video-area">                            
                             <div class="video-container">
                                 @if(!empty($currentMaterial->content))
-                                    <video controls id="myvideo" 
-                                        class="video-js w-100" 
-                                        poster="{{ asset('uploads/courses/contents/' . $currentMaterial->content) }}"
-                                        data-setup='{"controls": true, "preload": "auto", "autoplay":true}'>
-                                        <source src="{{ asset('uploads/courses/contents/' . $currentMaterial->content) }}" class="video-js w-100" autostart="true"/>
-                                    </video>                                        
+                                <video controls id="myvideo" 
+                                    class="video-js w-100" 
+                                    poster="{{ asset('uploads/courses/contents/' . $currentMaterial->content) }}"
+                                    preload="auto" autoplay>
+                                    <source src="{{ asset('uploads/courses/contents/' . $currentMaterial->content) }}" type="video/mp4">
+                                </video>                                       
                                 @else
                                     <p>No valid content available for this lesson.</p>
                                 @endif
@@ -299,6 +299,11 @@ body {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <!-- Navigating Lessons -->
+                    <div style="margin-top: 25px; margin-bottom: 10% text-align: center;">
+                    <button id="prev-lesson" disabled style="font-size: 16px; padding: 10px 15px; background-color:rgb(8, 84, 70); border: none; color: white; cursor: pointer;">Previous</button>
+                    <button id="next-lesson" style="font-size: 16px; padding: 10px 15px; background-color:rgb(7, 12, 114); border: none; color: white; cursor: pointer;">Next</button>
                     </div>
                     <div id="tab-container">
                         <div class="course-description-start-content"> 

@@ -210,7 +210,15 @@ class HomeController extends Controller
 
     public function customPlan()
     {
-        
+        $customPlan = ContactSales::latest()->paginate(10);
+
+        return view('backend.report.customPlan', compact('customPlan'));
     }
 
+    public function contactReport()
+    {
+        $contact = Contact::latest()->paginate(10);
+
+        return view('backend.report.contactReport', compact('contact'));
+    }
 }
