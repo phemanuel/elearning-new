@@ -221,4 +221,9 @@ class HomeController extends Controller
 
         return view('backend.report.contactReport', compact('contact'));
     }
+
+    public function testVideo()
+    {
+        return view('frontend.video-test');
+    }
 }

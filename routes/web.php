@@ -176,7 +176,7 @@ Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     Route::post('permission/{role}', [permission::class, 'save'])->name('permission.save'); 
     Route::get('/get-segments/{courseId}', [course::class, 'getSegments']);    
     Route::get('/customPlan', [HomeController::class, 'customPlan'])->name('customPlan');  
-    Route::get('/contactReport', [HomeController::class, 'contactReport'])->name('contactReport'); 
+    Route::get('/contactReport', [HomeController::class, 'contactReport'])->name('contactReport');     
 
 });
 
@@ -297,4 +297,5 @@ Route::get('/cert/{url}', [CertificateController::class, 'certificateUrl'])
     ->name('certificate-url');
 Route::get('/cert/view/{url}', [CertificateController::class, 'certificateView'])
     ->name('certificate-view');
+    Route::get('/test-video', [HomeController::class, 'testVideo'])->name('testVideo'); 
 

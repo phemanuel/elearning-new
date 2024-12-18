@@ -53,34 +53,34 @@
 }
 
 /* Ensure the video fills the container properly */
-.video-container video {
+/* .video-container video {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    object-fit: contain; /* Keep aspect ratio without cropping */
-}
+    width: 100%;
+    height: 100%; 
+    object-fit: contain; 
+} */
 
 /* Customize video.js skin */
-.video-js {
+/* .video-js {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-}
+} */
 
 /* Ensure fullscreen and volume controls are visible */
-.video-js .vjs-volume-panel,
+/* .video-js .vjs-volume-panel,
 .video-js .vjs-fullscreen-control {
     display: inline-block;
-}
+} */
 
 /* Optionally hide default browser controls panel (if needed) */
-video::-webkit-media-controls-panel {
-    display: none !important; /* Hide the default control panel */
-}
+ /* video::-webkit-media-controls-panel {
+    display: none !important; 
+}  */
 
 /* Prevent selection and copying */
 body {
@@ -247,12 +247,12 @@ body {
                         <div class="video-area">                            
                             <div class="video-container">
                                 @if(!empty($currentMaterial->content))
-                                <video controls id="myvideo" 
-                                    class="video-js w-100" 
-                                    poster="{{ asset('uploads/courses/contents/' . $currentMaterial->content) }}"
-                                    preload="auto" autoplay>
+                                <video id="myvideo" 
+                                    class="video-js vjs-default-skin w-100" 
+                                    controls preload="auto" autoplay
+                                    poster="{{ asset('uploads/courses/contents/' . $currentMaterial->content) }}">
                                     <source src="{{ asset('uploads/courses/contents/' . $currentMaterial->content) }}" type="video/mp4">
-                                </video>                                       
+                                </video>                                                                   
                                 @else
                                     <p>No valid content available for this lesson.</p>
                                 @endif
@@ -689,7 +689,30 @@ body {
     <script src="https://vjs.zencdn.net/7.18.1/video.min.js"></script>
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    
+    <script>
+        var player = videojs('myvideo', {
+    controls: true,
+    autoplay: false,
+    preload: 'auto',
+    playbackRates: [0.5, 1, 1.5, 2],
+});
+
+player.ready(function() {
+    const savedTime = localStorage.getItem("videoTime");
+    if (savedTime && !isNaN(savedTime)) {
+        player.currentTime(parseFloat(savedTime));
+    }
+
+    player.on("timeupdate", function() {
+        localStorage.setItem("videoTime", player.currentTime());
+    });
+
+    player.on("ended", function() {
+        localStorage.removeItem("videoTime");
+    });
+});
+
+    </script>
     <!-- Lesson -->
     <script>
 function show_content(material) {
@@ -705,13 +728,13 @@ function show_content(material) {
         // Render video content
         const videoHTML = `      
             <div class="video-area">
-                <div class="video-container">
-                    <video controls id="myvideo" 
-                           class="video-js w-100" 
-                           poster="${contentLink}"
-                           data-setup='{"controls": true, "preload": "auto", "autoplay":true}'>
-                        <source src="${contentLink}" type="video/mp4" />
-                    </video>  
+                <div class="video-container"> 
+                    <video id="myvideo" 
+                        class="video-js vjs-default-skin w-100" 
+                        controls preload="auto" autoplay
+                        poster="${contentLink}">
+                        <source src="${contentLink}" type="video/mp4">
+                    </video>
                 </div>
             </div>
         `;
@@ -824,6 +847,92 @@ function show_content(material) {
         });
     });
 </script>
+<!-- lesson using next and previous buttons -->
+<script>
+    let currentIndex = 0; // Track current lesson index
+    let lessons = []; // Store all lessons
+
+    $(document).ready(function () {
+        // Load lessons from page
+        $('.main-wizard').each(function () {
+            lessons.push({
+                title: $(this).data('material-title'),
+                type: $(this).data('material-type'),
+                content: $(this).data('material-content'),
+                content_data: $(this).data('material-content-data') || '',
+                description: $(this).data('material-description'),
+                notes: $(this).data('material-notes'),
+                id: $(this).data('material-id'),
+                course_id: $(this).data('course-id'),
+                lesson_id: $(this).data('lesson-id'),
+                segment_id: $(this).data('segment-id'),
+                segment_no: $(this).data('segment-no')
+            });
+        });
+
+        function loadLesson(index) {
+            const material = lessons[index];
+            show_content(material);
+
+            // Update description and notes
+            $('#nav-ldescrip .lesson-description p').html(material.description);
+            $('#nav-lnotes .course-notes-area .course-notes-item p').html(material.notes);
+
+            // Update progress via AJAX
+            $.ajax({
+                url: "{{ route('update.progress') }}",
+                type: 'POST',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    courseid: material.course_id,
+                    lessonid: material.lesson_id,
+                    materialid: material.id,
+                    segmentid: material.segment_id,
+                    segmentno: material.segment_no
+                },
+                success: function (response) {
+                    console.log('Progress updated successfully');
+                },
+                error: function (error) {
+                    console.log('Error updating progress:', error);
+                }
+            });
+
+            // Check corresponding checkbox
+            $('.main-wizard').eq(index).find('.form-check-input').prop('checked', true);
+
+            // Highlight current lesson
+            $('.main-wizard').removeClass('highlight');
+            $('.main-wizard').eq(index).addClass('highlight');
+
+            // Enable or disable navigation buttons
+            $('#prev-lesson').prop('disabled', index === 0);
+            $('#next-lesson').prop('disabled', index === lessons.length - 1);
+        }
+
+        // Next Button Click
+        $('#next-lesson').on('click', function () {
+            if (currentIndex < lessons.length - 1) {
+                currentIndex++;
+                loadLesson(currentIndex);
+            }
+        });
+
+        // Previous Button Click
+        $('#prev-lesson').on('click', function () {
+            if (currentIndex > 0) {
+                currentIndex--;
+                loadLesson(currentIndex);
+            }
+        });
+
+        // Initial lesson load
+        if (lessons.length > 0) {
+            loadLesson(currentIndex);
+        }
+    });
+</script>
+
 <!-- Quiz -->
 <script>
 let questions = [];
