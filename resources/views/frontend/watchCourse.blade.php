@@ -1258,39 +1258,39 @@ $(document).ready(function() {
 
 <!-- User Comments -->
 <script>
-    $(document).ready(function () {
-        // Submit comment via AJAX
-        $('#comment-form').submit(function (event) {
-            event.preventDefault(); // Prevent default form submission
+    $(document).ready(function () {        
+      // Submit comment via AJAX
+            $('#comment-form').submit(function (event) {
+                event.preventDefault(); // Prevent default form submission
 
-            let formData = {
-                comment: $('#comment').val(),
-                student_id: $('#student_id').val(),
-                course_id: $('#course_id').val(),
-                _token: $('input[name="_token"]').val()
-            };
+                let formData = {
+                    comment: $('#comment').val(),
+                    student_id: parseInt($('#student_id').val(), 10), // Force to integer
+                    course_id: parseInt($('#course_id').val(), 10), // Force to integer
+                    _token: $('input[name="_token"]').val()
+                };
 
-            $.ajax({
-                url: "{{ route('review.save') }}",  // Your route to save the comment
-                method: 'POST',
-                data: formData,
-                success: function (response) {
-                    if (response.success) {
-                        // Clear the comment textarea
-                        $('#comment').val('');
+                $.ajax({
+                    url: "{{ route('review.save') }}",  // Your route to save the comment
+                    method: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        if (response.success) {
+                            // Clear the comment textarea
+                            $('#comment').val('');
 
-                        // Reload the comments section
-                        loadComments();
-                    } else {
-                        alert('Error: ' + response.message); // Handle error message
+                            // Reload the comments section
+                            loadComments();
+                        } else {
+                            alert('Error: ' + response.message); // Handle error message
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error submitting the comment: ', error);
+                        alert('Error submitting the comment. Please try again.');
                     }
-                },
-                error: function (xhr, status, error) {
-                    console.error('Error submitting the comment: ', error);
-                    alert('Error submitting the comment. Please try again.');
-                }
+                });
             });
-        });
 
         // Function to load comments dynamically
         function loadComments() {

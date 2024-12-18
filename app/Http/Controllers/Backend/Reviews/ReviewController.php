@@ -35,33 +35,67 @@ class ReviewController extends Controller
         //
         
     }
+    
     public function saveReviews(Request $request)
     {
-        // Log::info('Review Store Request:', [
-        //     'request_data' => $request->all(),
-        //     'user_ip' => $request->ip(),
-        //     'user_agent' => $request->userAgent(),
-        //     'timestamp' => now(),
-        // ]);
+        try {
+            $studentId = (int) $request->input('student_id');
+            $courseId = (int) $request->input('course_id');
 
-         // Validate the input
-        $request->validate([
-            'comment' => 'required|string|max:1000',
-            'student_id' => 'required|integer|exists:users,id',
-            'course_id' => 'required|integer|exists:courses,id',
-        ]);      
-
-        // Save the review
-        $review = Review::updateOrCreate(
-            ['course_id' => $request->course_id, 'student_id' => $request->student_id],
-            ['comment' => $request->comment]
-        );
-
-        // Return a JSON response for AJAX
-        return response()->json([
-            'success' => true,
-            'message' => 'Comment posted successfully',
-        ]);
+            // Merge the casted data back into the request
+            $request->merge([
+                'student_id' => $studentId,
+                'course_id' => $courseId
+            ]);
+            // Validate the input to ensure both student_id and course_id exist
+            $request->validate([
+                'comment' => 'required|string|max:1000',
+                'student_id' => 'required|integer|exists:students,id',
+                'course_id' => 'required|integer|exists:courses,id',
+            ]);
+    
+            // Check if a review already exists for the given student and course
+            $review = Review::where('student_id', $request->student_id)
+                            ->where('course_id', $request->course_id)
+                            ->first();
+    
+            if ($review) {
+                // If a review already exists, update it
+                $review->update([
+                    'comment' => $request->comment,
+                ]);
+                $message = 'Review updated successfully';
+            } else {
+                // If no review exists, create a new one
+                Review::create([
+                    'student_id' => $request->student_id,
+                    'course_id' => $request->course_id,
+                    'comment' => $request->comment,
+                ]);
+                $message = 'Review posted successfully';
+            }
+    
+            // Return a JSON response for AJAX
+            return response()->json([
+                'success' => true,
+                'message' => $message,
+            ]);
+            
+        } catch (\Exception $e) {
+            // Log the exception for debugging
+            \Log::error('Error storing review: ' . $e->getMessage(), [
+                'exception' => $e,
+                'request_data' => $request->all(),
+                'user_ip' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+            ]);
+    
+            // Return an error response to the client
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred while processing your request. Please try again later.',
+            ], 500); // 500 Internal Server Error
+        }
     }
 
     public function getReviews($courseId)
@@ -96,7 +130,7 @@ class ReviewController extends Controller
         $request->validate([
             'rating' => 'required|numeric|min:1|max:5',           
             'course_id' => 'required|exists:courses,id',
-            'student_id' => 'required|exists:users,id',
+            'student_id' => 'required|exists:students,id',
         ]);
 
         // Store the review in the database
