@@ -20,7 +20,7 @@
     }
     
     .text-frame, .document-frame {
-        max-height: 600px; /* Set your desired height */
+        max-height: 700px; /* Set your desired height */
         overflow-y: auto;  /* Enable vertical scrolling */
         border: 2px solid #ccc; /* Optional: Border for visual separation */
         padding: 10px; /* Optional: Padding for better spacing */
@@ -30,27 +30,90 @@
 </style>
 <style>
     /* General video area styles */
-.video-area {
-    height: 700px; /* Set desired height for video container */
+/* Lesson Container */
+#lesson-container {
+    position: relative;
+    height: auto; /* Set height as needed */
+    margin-bottom: 5px; /* Spacing below the lesson container */
+    overflow: hidden; /* Prevent overflow and keep things within bounds */
 }
 
+/* Video and Text Areas */
+.video-area, 
 .text-area {
-    height: 600px; /* Set desired height for video container */
+    height: auto; /* Set desired height */
+    position: relative;
+    overflow: hidden; /* Prevent content from overflowing */
 }
 
-/* Container to handle the video layout */
-.video-container {
-    width: 100%; /* Ensure full-width */    
-    margin: auto; /* Center the video player */
-    z-index: 1; /* Set a lower z-index to prevent overlap */
-    position: relative; /* Position relative to control stacking */
-}
+/* Video and Text Containers */
+.video-container, 
 .text-container {
-    width: 100%; /* Ensure full-width */    
-    margin: auto; /* Center the video player */
-    z-index: 1; /* Set a lower z-index to prevent overlap */
-    position: relative; /* Position relative to control stacking */
+    width: 100%; /* Ensure full width */
+    margin: auto; /* Center the content */
+    position: relative; /* Control stacking */
+    z-index: 1; /* Set lower z-index to prevent overlap */
 }
+
+/* Styling for Containers */
+.video-container, 
+.text-frame {
+    padding: 15px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+}
+
+/* Lesson Card and Tab Container */
+.lesson-card, 
+#tab-container {
+    position: relative;
+    z-index: 1; /* Ensure they appear on top */
+}
+
+/* Lesson button navigation */
+/* Lesson Navigation (Make sure it stays below lesson container) */
+.card.lesson-card {
+    position: relative; /* Ensure it stays within the flow */
+    width: 100%; /* Take full width */
+    margin-top: 10px; /* Space between content and navigation */
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Lesson Navigation Buttons */
+.lesson-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+/* Button Styling */
+.btn {
+    font-size: 16px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Button Colors */
+.prev-lesson {
+    background-color: rgb(8, 84, 70);  /* Dark Green */
+}
+
+.next-lesson {
+    background-color: rgb(7, 12, 114);  /* Dark Blue */
+}
+
+/* Disabled Button Style */
+.btn:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
 
 /* Ensure the video fills the container properly */
 /* .video-container video {
@@ -91,7 +154,6 @@ body {
     -ms-user-select: none;
     user-select: none;
 }
-
 </style>
 
 <style>
@@ -235,46 +297,57 @@ body {
     <!-- Ttile Ends Here -->
 
     <!-- Course Description Starts Here -->
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin: 20px auto;">
         <div class="row course-description">              
             {{-- Video Area --}}
             <div class="col-lg-8">
                 <div class="course-description-start">                    
                     <h5 class="font-title--sm material-title"> {{$currentLesson->title}}</h5>                     
-                    <hr> 
-                <div id="lesson-container" style="position: relative;"> 
-                    @if($currentMaterial->type == 'video')
-                        <div class="video-area">                            
-                            <div class="video-container">
-                                @if(!empty($currentMaterial->content))
-                                <video id="myvideo" 
-                                    class="video-js vjs-default-skin w-100" 
-                                    controls preload="auto" autoplay
-                                    poster="{{ asset('uploads/courses/contents/' . $currentMaterial->content) }}">
-                                    <source src="{{ asset('uploads/courses/contents/' . $currentMaterial->content) }}" type="video/mp4">
-                                </video>                                                                   
-                                @else
-                                    <p>No valid content available for this lesson.</p>
-                                @endif
+                    <hr>                      
+                    <!-- Lesson Container -->
+                    <div id="lesson-container">
+                        @if($currentMaterial->type == 'video')
+                            <div class="video-area">                             
+                                <div class="video-container">                             
+                                    @if(!empty($currentMaterial->content))
+                                    <video id="myvideo" 
+                                        class="video-js vjs-default-skin w-100" 
+                                        controls preload="auto" autoplay
+                                        poster="{{ asset('uploads/courses/contents/' . $currentMaterial->content) }}">
+                                        <source src="{{ asset('uploads/courses/contents/' . $currentMaterial->content) }}" type="video/mp4" class="w-100">
+                                    </video>                                                                   
+                                    @else
+                                        <p>No valid content available for this lesson.</p>
+                                    @endif
+                                </div>
+                            </div>
+                        @elseif($currentMaterial->type == 'text')
+                        <div class="text-area">
+                            <div class="text-frame">
+                                {!! $currentMaterial->content_data !!}
                             </div>
                         </div>
-                    @elseif($currentMaterial->type == 'text')
-                    <div class="text-area">
-                        <div class="text-frame">
-                            {!! $currentMaterial->content_data !!}
+                        @elseif($currentMaterial->type == 'document')
+                        <div class="text-area">
+                            <div class="text-frame">
+                                {!! $currentMaterial->content_data !!}
+                            </div>
+                        </div>
+                        @else
+                            <p>No valid content available for this lesson.</p>
+                        @endif                    
+                    </div>
+                    <!-- Navigating Lessons in a Card -->
+                    <div class="card lesson-card">
+                        <div class="lesson-navigation">
+                            <button id="prev-lesson" disabled class="btn prev-lesson">
+                                <i class="fas fa-arrow-left"></i> Previous
+                            </button>
+                            <button id="next-lesson" class="btn next-lesson">
+                                Next <i class="fas fa-arrow-right"></i>
+                            </button>
                         </div>
                     </div>
-                    @elseif($currentMaterial->type == 'document')
-                    <div class="text-area">
-                        <div class="text-frame">
-                            {!! $currentMaterial->content_data !!}
-                        </div>
-                    </div>
-                    @else
-                        <p>No valid content available for this lesson.</p>
-                    @endif                    
-
-                </div>
                 
                 <!-- Quiz Section (Initially hidden) -->
                     <div id="quiz-container" style="display: none; border: 2px solid #ccc; padding: 20px; border-radius: 10px; margin: 20px auto; max-width: 100%; background-color: #fff;">
@@ -300,11 +373,7 @@ body {
                             </div>
                         </div>
                     </div>
-                    <!-- Navigating Lessons -->
-                    <div style="margin-top: 25px; margin-bottom: 10% text-align: center;">
-                    <button id="prev-lesson" disabled style="font-size: 16px; padding: 10px 15px; background-color:rgb(8, 84, 70); border: none; color: white; cursor: pointer;">Previous</button>
-                    <button id="next-lesson" style="font-size: 16px; padding: 10px 15px; background-color:rgb(7, 12, 114); border: none; color: white; cursor: pointer;">Next</button>
-                    </div>
+                    
                     <div id="tab-container">
                         <div class="course-description-start-content"> 
                                 <nav class="course-description-start-content-tab">
@@ -479,9 +548,9 @@ body {
                                 </div>
                             </div>
                         </div>  
-                    </div>                 
-                </div>
+                    </div> 
             </div>
+        </div>
 
             {{-- Index Course Contents --}}
             <div class="col-lg-4">
