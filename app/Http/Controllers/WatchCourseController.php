@@ -77,7 +77,9 @@ class WatchCourseController extends Controller
             $currentLesson = Lesson::where('segments_id', $segment->id)
             ->where('id', $lastviewedLesson)
             ->first();
-            $currentMaterial = Material::where('lesson_id', $currentLesson->id)->first();          
+            $currentMaterial = Material::where('lesson_id', $currentLesson->id)->first();  
+            $lastViewedLessonId = $lastviewedLesson;
+            $lastViewedMaterialId = $currentMaterial->id;     
         } else {
             // If no progress exists, initialize variables for the view
             $lastViewedMaterial = null; 
@@ -156,7 +158,7 @@ class WatchCourseController extends Controller
             //dd($totalLessons,$completedLessons,$segmentProgress);
         }
         
-        $questions = Question::where('quiz_id', $quiz->id)->get();
+        $questions = Question::where('quiz_id', $quiz->id)->get();        
         // Continue with the course view, passing all necessary variables
         return view('frontend.watchCourse', compact(
             'course', 
@@ -166,7 +168,7 @@ class WatchCourseController extends Controller
             'lastViewedAt', 
             'progressRecords','currentLesson','currentMaterial','progress','segment',
             'segmentProgress','studentId','courseId','quiz','questions','stdSegment','totalCourseSegment',
-            'enrollment'
+            'enrollment','lastViewedLessonId','lastViewedMaterialId'
         ));
     }
 

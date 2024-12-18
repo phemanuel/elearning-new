@@ -76,7 +76,8 @@
 .card.lesson-card {
     position: relative; /* Ensure it stays within the flow */
     width: 100%; /* Take full width */
-    margin-top: 10px; /* Space between content and navigation */
+    margin-top: 5px; /* Space between content and navigation */
+    margin-bottom: 5px;
     text-align: center;
     box-sizing: border-box;
 }
@@ -757,31 +758,7 @@ body {
     <script src="{{asset('frontend/src/js/app.js')}}"></script>
     <script src="https://vjs.zencdn.net/7.18.1/video.min.js"></script>
     <!-- Include jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        var player = videojs('myvideo', {
-    controls: true,
-    autoplay: false,
-    preload: 'auto',
-    playbackRates: [0.5, 1, 1.5, 2],
-});
-
-player.ready(function() {
-    const savedTime = localStorage.getItem("videoTime");
-    if (savedTime && !isNaN(savedTime)) {
-        player.currentTime(parseFloat(savedTime));
-    }
-
-    player.on("timeupdate", function() {
-        localStorage.setItem("videoTime", player.currentTime());
-    });
-
-    player.on("ended", function() {
-        localStorage.removeItem("videoTime");
-    });
-});
-
-    </script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>   
     <!-- Lesson -->
     <script>
 function show_content(material) {
@@ -918,8 +895,12 @@ function show_content(material) {
 </script>
 <!-- lesson using next and previous buttons -->
 <script>
-    let currentIndex = 0; // Track current lesson index
+    let currentIndex = 0; // Default index
     let lessons = []; // Store all lessons
+
+    // Last viewed lesson data from PHP
+    let lastViewedLessonId = @json($lastViewedLessonId); 
+    let lastViewedMaterialId = @json($lastViewedMaterialId);
 
     $(document).ready(function () {
         // Load lessons from page
@@ -938,6 +919,9 @@ function show_content(material) {
                 segment_no: $(this).data('segment-no')
             });
         });
+
+        // Find the index of the last viewed lesson
+        currentIndex = lessons.findIndex(lesson => lesson.id === lastViewedMaterialId);
 
         function loadLesson(index) {
             const material = lessons[index];
