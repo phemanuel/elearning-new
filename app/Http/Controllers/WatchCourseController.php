@@ -40,6 +40,7 @@ class WatchCourseController extends Controller
         $course = Course::findOrFail($courseId);
         $instructorId = $course->instructor_id;
         $lessons = Lesson::where('segments_id', $segment->id)->with('material')->get();
+        $lessonCount = $lessons->count();
         $lessonsFirst = Lesson::where('segments_id', $segment->id)->first();
         $materialFirst = Material::where('lesson_id', $lessonsFirst->id)->first();
         $courseNo = Course::where('instructor_id', $instructorId)->get();   
@@ -168,7 +169,7 @@ class WatchCourseController extends Controller
             'lastViewedAt', 
             'progressRecords','currentLesson','currentMaterial','progress','segment',
             'segmentProgress','studentId','courseId','quiz','questions','stdSegment','totalCourseSegment',
-            'enrollment','lastViewedLessonId','lastViewedMaterialId'
+            'enrollment','lastViewedLessonId','lastViewedMaterialId','lessonCount'
         ));
     }
 

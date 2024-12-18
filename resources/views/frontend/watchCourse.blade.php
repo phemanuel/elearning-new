@@ -761,72 +761,73 @@ body {
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>   
     <!-- Lesson -->
     <script>
-function show_content(material) {
-    const contentType = material.type;
-    const contentLink = "{{ asset('uploads/courses/contents') }}/" + material.content;
+    function show_content(material) {
+        const contentType = material.type;
+        const contentLink = "{{ asset('uploads/courses/contents') }}/" + material.content;
 
-    // Clear any existing content in the lesson container
-    $('#lesson-container').empty();
+        // Clear any existing content in the lesson container
+        $('#lesson-container').empty();
 
-    // Determine content type and render accordingly
-    if (contentType === 'video') {
-        $('.material-title').html(material.title); 
-        // Render video content
-        const videoHTML = `      
-            <div class="video-area">
-                <div class="video-container"> 
-                    <video id="myvideo" 
-                        class="video-js vjs-default-skin w-100" 
-                        controls preload="auto" autoplay
-                        poster="${contentLink}">
-                        <source src="${contentLink}" type="video/mp4">
-                    </video>
+        // Determine content type and render accordingly
+        if (contentType === 'video') {
+            $('.material-title').html(material.title); 
+            // Render video content
+            const videoHTML = `      
+                <div class="video-area">
+                    <div class="video-container"> 
+                        <video id="myvideo" 
+                            class="video-js vjs-default-skin w-100" 
+                            controls preload="auto" autoplay
+                            poster="${contentLink}">
+                            <source src="${contentLink}" type="video/mp4">
+                        </video>
+                    </div>
                 </div>
-            </div>
-        `;
-        $('#lesson-container').append(videoHTML);
-        $('#myvideo').get(0).play(); // Auto-play video
-    } else if (contentType === 'text') {
-        $('.material-title').html(material.title); 
-        // Render text content
-        const textHTML = `
-            <div class="text-area">
-                <div class="text-frame">
-                    <p>${material.content_data ? material.content_data : 'No content available.'}</p>
+            `;
+            $('#lesson-container').append(videoHTML);
+            $('#myvideo').get(0).play(); // Auto-play video
+        } else if (contentType === 'text') {
+            $('.material-title').html(material.title); 
+            // Render text content
+            const textHTML = `
+                <div class="text-area">
+                    <div class="text-frame">
+                        <p>${material.content_data ? material.content_data : 'No content available.'}</p>
+                    </div>
                 </div>
-            </div>
-        `;
-        $('#lesson-container').append(textHTML);
-    } else if (contentType === 'document') {
-        $('.material-title').html(material.title); 
-        // Render document content (corrected to display document content)
-        const documentHTML = `
-            <div class="document-content">
-                <div class="document-frame">
-                    ${material.content_data ? material.content_data : 'No content available.'}
+            `;
+            $('#lesson-container').append(textHTML);
+        } else if (contentType === 'document') {
+            $('.material-title').html(material.title); 
+            // Render document content (corrected to display document content)
+            const documentHTML = `
+                <div class="document-content">
+                    <div class="document-frame">
+                        ${material.content_data ? material.content_data : 'No content available.'}
+                    </div>
                 </div>
-            </div>
-        `;
-        $('#lesson-container').append(documentHTML);
-    } else {
-        console.log('No valid content available for this lesson.');
+            `;
+            $('#lesson-container').append(documentHTML);
+        } else {
+            console.log('No valid content available for this lesson.');
+        }
+
+        // Display the lesson container and hide others
+        $('#lesson-container').show();
+        $('#tab-container').show();
+        $('#quiz-container').hide();
+
+        // Scroll to the top of the lesson container
+        scrollToTop();
+
+        // Scroll function for smooth experience
+        function scrollToTop() {
+            $('html, body').animate({
+                scrollTop: $('#lesson-container').offset().top
+            }, 'fast');
+        }
     }
 
-    // Display the lesson container and hide others
-    $('#lesson-container').show();
-    $('#tab-container').show();
-    $('#quiz-container').hide();
-
-    // Scroll to the top of the lesson container
-    scrollToTop();
-
-    // Scroll function for smooth experience
-    function scrollToTop() {
-        $('html, body').animate({
-            scrollTop: $('#lesson-container').offset().top
-        }, 'fast');
-    }
-}
     $(document).ready(function() {
         // Set the initial checked state for checkboxes based on progress records
         var progressRecords = @json($progressRecords); // Pass this from the server-side
@@ -850,9 +851,9 @@ function show_content(material) {
                 notes: $(this).data('material-notes'), // Capture lesson notes
                 id: $(this).data('material-id'), // Capture material ID
                 course_id: $(this).data('course-id'), // Capture course ID
-                lesson_id: $(this).data('lesson-id') ,// Capture lesson ID
-                segment_id: $(this).data('segment-id') ,
-                segment_no: $(this).data('segment-no') 
+                lesson_id: $(this).data('lesson-id'), // Capture lesson ID
+                segment_id: $(this).data('segment-id'),
+                segment_no: $(this).data('segment-no')
             };
 
             // Check the checkbox for the clicked lesson
@@ -861,9 +862,6 @@ function show_content(material) {
             // Highlight the current lesson
             $(this).addClass('highlight'); // Add highlight class to the clicked lesson
 
-            // Update material title
-            // $('.material-title').html(material.title);
-
             // Update lesson description and notes
             $('#nav-ldescrip .lesson-description p').html(material.description); // Update description
             $('#nav-lnotes .course-notes-area .course-notes-item p').html(material.notes); // Update notes
@@ -871,7 +869,7 @@ function show_content(material) {
             // Show content based on the type
             show_content(material);
 
-            // Send AJAX request to update progress
+            // Send AJAX request to update progress and update the last viewed lesson/material
             $.ajax({
                 url: "{{ route('update.progress') }}", 
                 type: 'POST',
@@ -884,106 +882,119 @@ function show_content(material) {
                     segmentno: material.segment_no
                 },
                 success: function(response) {
+                    // Update the frontend variables with the returned values from the server
+                    lastViewedLessonId = material.lesson_id;
+                    lastViewedMaterialId = material.id;
                     console.log('Progress updated successfully');
                 },
                 error: function(error) {
-                    // console.log('Error updating progress:', error);
+                    console.log('Error updating progress:', error);
                 }
             });
         });
     });
 </script>
+
 <!-- lesson using next and previous buttons -->
 <script>
-    let currentIndex = 0; // Default index
-    let lessons = []; // Store all lessons
+let currentIndex = 0; // Default index
+let lessons = []; // Store all lessons
 
-    // Last viewed lesson data from PHP
-    let lastViewedLessonId = @json($lastViewedLessonId); 
-    let lastViewedMaterialId = @json($lastViewedMaterialId);
+// Last viewed lesson data from PHP
+let lastViewedLessonId = @json($lastViewedLessonId); 
+let lastViewedMaterialId = @json($lastViewedMaterialId);
 
-    $(document).ready(function () {
-        // Load lessons from page
-        $('.main-wizard').each(function () {
-            lessons.push({
-                title: $(this).data('material-title'),
-                type: $(this).data('material-type'),
-                content: $(this).data('material-content'),
-                content_data: $(this).data('material-content-data') || '',
-                description: $(this).data('material-description'),
-                notes: $(this).data('material-notes'),
-                id: $(this).data('material-id'),
-                course_id: $(this).data('course-id'),
-                lesson_id: $(this).data('lesson-id'),
-                segment_id: $(this).data('segment-id'),
-                segment_no: $(this).data('segment-no')
-            });
+// Total number of lessons from PHP
+let lessonCount = @json($lessonCount);
+
+$(document).ready(function () {
+    // Load lessons from page
+    $('.main-wizard').each(function () {
+        lessons.push({
+            title: $(this).data('material-title'),
+            type: $(this).data('material-type'),
+            content: $(this).data('material-content'),
+            content_data: $(this).data('material-content-data') || '',
+            description: $(this).data('material-description'),
+            notes: $(this).data('material-notes'),
+            id: $(this).data('material-id'),
+            course_id: $(this).data('course-id'),
+            lesson_id: $(this).data('lesson-id'),
+            segment_id: $(this).data('segment-id'),
+            segment_no: $(this).data('segment-no')
         });
+    });
 
-        // Find the index of the last viewed lesson
-        currentIndex = lessons.findIndex(lesson => lesson.id === lastViewedMaterialId);
+    // Find the index of the last viewed lesson
+    currentIndex = lessons.findIndex(lesson => lesson.id === lastViewedMaterialId);
 
-        function loadLesson(index) {
-            const material = lessons[index];
-            show_content(material);
+    // Function to load a specific lesson
+    function loadLesson(index) {
+        const material = lessons[index];
+        show_content(material);
 
-            // Update description and notes
-            $('#nav-ldescrip .lesson-description p').html(material.description);
-            $('#nav-lnotes .course-notes-area .course-notes-item p').html(material.notes);
+        // Update description and notes
+        $('#nav-ldescrip .lesson-description p').html(material.description);
+        $('#nav-lnotes .course-notes-area .course-notes-item p').html(material.notes);
 
-            // Update progress via AJAX
-            $.ajax({
-                url: "{{ route('update.progress') }}",
-                type: 'POST',
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    courseid: material.course_id,
-                    lessonid: material.lesson_id,
-                    materialid: material.id,
-                    segmentid: material.segment_id,
-                    segmentno: material.segment_no
-                },
-                success: function (response) {
-                    console.log('Progress updated successfully');
-                },
-                error: function (error) {
-                    console.log('Error updating progress:', error);
-                }
-            });
-
-            // Check corresponding checkbox
-            $('.main-wizard').eq(index).find('.form-check-input').prop('checked', true);
-
-            // Highlight current lesson
-            $('.main-wizard').removeClass('highlight');
-            $('.main-wizard').eq(index).addClass('highlight');
-
-            // Enable or disable navigation buttons
-            $('#prev-lesson').prop('disabled', index === 0);
-            $('#next-lesson').prop('disabled', index === lessons.length - 1);
-        }
-
-        // Next Button Click
-        $('#next-lesson').on('click', function () {
-            if (currentIndex < lessons.length - 1) {
-                currentIndex++;
-                loadLesson(currentIndex);
+        // Update progress via AJAX
+        $.ajax({
+            url: "{{ route('update.progress') }}",
+            type: 'POST',
+            data: {
+                _token: "{{ csrf_token() }}",
+                courseid: material.course_id,
+                lessonid: material.lesson_id,
+                materialid: material.id,
+                segmentid: material.segment_id,
+                segmentno: material.segment_no
+            },
+            success: function (response) {
+                console.log('Progress updated successfully');
+            },
+            error: function (error) {
+                console.log('Error updating progress:', error);
             }
         });
 
-        // Previous Button Click
-        $('#prev-lesson').on('click', function () {
-            if (currentIndex > 0) {
-                currentIndex--;
-                loadLesson(currentIndex);
-            }
-        });
+        // Check corresponding checkbox
+        $('.main-wizard').eq(index).find('.form-check-input').prop('checked', true);
 
-        // Initial lesson load
-        if (lessons.length > 0) {
+        // Highlight current lesson
+        $('.main-wizard').removeClass('highlight');
+        $('.main-wizard').eq(index).addClass('highlight');
+
+        // Enable or disable navigation buttons based on the current index
+        $('#prev-lesson').prop('disabled', index === 0); // Disable "Previous" if first lesson
+        $('#next-lesson').prop('disabled', index === lessonCount - 1); // Disable "Next" if last lesson
+    }
+
+    // Next Button Click
+    $('#next-lesson').on('click', function () {
+        if (currentIndex < lessonCount - 1) {
+            currentIndex++;
             loadLesson(currentIndex);
         }
     });
+
+    // Previous Button Click
+    $('#prev-lesson').on('click', function () {
+        if (currentIndex > 0) {
+            currentIndex--;
+            loadLesson(currentIndex);
+        }
+    });
+
+    // Initial lesson load
+    if (lessons.length > 0) {
+        loadLesson(currentIndex);
+    }
+
+    // Disable both buttons when there is only one lesson
+    if (lessonCount === 1) {
+        $('#prev-lesson, #next-lesson').prop('disabled', true); 
+    }
+});
 </script>
 
 <!-- Quiz -->
