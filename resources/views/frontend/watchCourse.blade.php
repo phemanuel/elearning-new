@@ -115,6 +115,28 @@
     cursor: not-allowed;
 }
 
+/* Styling for the Quiz Button */
+#quiz-button {
+    background-color:rgb(101, 6, 89); /* Gold background (adjust to match your branding) */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#quiz-button:hover {
+    background-color:rgb(66, 2, 65); /* Darker gold shade on hover */
+}
+
+#quiz-button:active {
+    background-color: rgb(66, 2, 65); /* Even darker gold shade on click */
+}
+
+
 
 /* Ensure the video fills the container properly */
 /* .video-container video {
@@ -339,7 +361,7 @@ body {
                         @endif                    
                     </div>
                     <!-- Navigating Lessons in a Card -->
-                    <div class="card lesson-card">
+                    <div id ="lesson-navigate-container" class="card lesson-card" data-quiz-id="{{ $quiz->id }}">
                         <div class="lesson-navigation">
                             <button id="prev-lesson" disabled class="btn prev-lesson">
                                 <i class="fas fa-arrow-left"></i> Previous
@@ -347,6 +369,48 @@ body {
                             <button id="next-lesson" class="btn next-lesson">
                                 Next <i class="fas fa-arrow-right"></i>
                             </button>
+                            <!-- Quiz Button -->
+                            @if($questions->count() > 0)
+                                @if($progress->completed != 1 && $progress->quiz_attempt == 0)  
+                                <button id="quiz-button" style="display:none;"  
+                                class="button button--primary start-quiz-btn" 
+                                            data-quiz-id="{{$quiz->id}}"
+                                            data-quiz-pass-mark="{{$quiz->pass_mark}}"
+                                            data-student-id="{{$studentId}}"
+                                            data-course-id="{{$course->id}}"
+                                            data-segment-id="{{$segment->id}}"
+                                            data-segment-no="{{$segment->segment_no}}">
+                                    Start Quiz
+                                </button>
+                                @elseif($progress->completed != 1 && $progress->quiz_attempt >= 1)
+                                    <button id="quiz-button" style="display:none;" 
+                                    class="button button--primary start-quiz-btn" 
+                                            data-quiz-id="{{$quiz->id}}"
+                                            data-quiz-pass-mark="{{$quiz->pass_mark}}"
+                                            data-student-id="{{$studentId}}"
+                                            data-course-id="{{$course->id}}"
+                                            data-segment-id="{{$segment->id}}"
+                                            data-segment-no="{{$segment->segment_no}}">
+                                        Re-take Quiz
+                                    </button>
+                                @elseif($progress->completed == 1 )
+                                <button id="quiz-button" style="display:none;" class="btn quiz-btn">
+                                        Quiz Completed
+                                </button>
+                                @else
+                                <button id="quiz-button" style="display:none;" 
+                                class="button button--primary start-quiz-btn" 
+                                            data-quiz-id="{{$quiz->id}}"
+                                            data-quiz-pass-mark="{{$quiz->pass_mark}}"
+                                            data-student-id="{{$studentId}}"
+                                            data-course-id="{{$course->id}}"
+                                            data-segment-id="{{$segment->id}}"
+                                            data-segment-no="{{$segment->segment_no}}">
+                                        Re-take Quiz
+                                </button>
+                                @endif
+                            @endif
+
                         </div>
                     </div>
                 
@@ -626,6 +690,7 @@ body {
                             </div>                            
                         @endforeach  
 
+                    <div id="start-quiz-container">
                         @if($questions->count() > 0)
                             @if($progress->completed != 1 && $progress->quiz_attempt == 0)                            
                                 <div class="videolist-area-wizard"> 
@@ -670,7 +735,7 @@ body {
                                         <div class="wizard-heading">
                                             <h6 class="">Quiz</h6>
                                         </div> 
-                                       <strong><p>Segment Completed</p></strong> 
+                                       <strong><p>Quiz Completed</p></strong> 
                                 </div>
                             @else
                             <div class="videolist-area-wizard"> 
@@ -696,6 +761,7 @@ body {
                                 </div>
                             @endif                   
                         @endif
+                    </div>
                 </div>
             </div>
 
@@ -815,6 +881,7 @@ body {
         // Display the lesson container and hide others
         $('#lesson-container').show();
         $('#tab-container').show();
+        $('#lesson-navigate-container').show();
         $('#quiz-container').hide();
 
         // Scroll to the top of the lesson container
@@ -895,7 +962,6 @@ body {
     });
 </script>
 
-<!-- lesson using next and previous buttons -->
 <script>
 let currentIndex = 0; // Default index
 let lessons = []; // Store all lessons
@@ -967,6 +1033,23 @@ $(document).ready(function () {
         // Enable or disable navigation buttons based on the current index
         $('#prev-lesson').prop('disabled', index === 0); // Disable "Previous" if first lesson
         $('#next-lesson').prop('disabled', index === lessonCount - 1); // Disable "Next" if last lesson
+
+        // Show quiz button only if there are more than one lesson and it's the last lesson
+        if (lessonCount > 1) {
+            if (index === lessonCount - 1) {
+                $('#next-lesson').hide(); // Hide next button
+                $('#prev-lesson').show(); // Show previous button
+                $('#quiz-button').show(); // Show quiz button
+            } else {
+                $('#next-lesson').show(); // Show next button
+                $('#prev-lesson').show(); // Show previous button
+                $('#quiz-button').hide(); // Hide quiz button
+            }
+        } else {
+            $('#quiz-button').show(); // Show quiz button if only one lesson
+            $('#next-lesson').hide(); // Hide next button
+            $('#prev-lesson').hide(); // Hide previous button
+        }
     }
 
     // Next Button Click
@@ -990,12 +1073,43 @@ $(document).ready(function () {
         loadLesson(currentIndex);
     }
 
-    // Disable both buttons when there is only one lesson
-    if (lessonCount === 1) {
-        $('#prev-lesson, #next-lesson').prop('disabled', true); 
-    }
+    // Quiz Button Click (hides containers and initializes quiz)
+    $('#quiz-button').on('click', function () {
+        // Hide all lesson-related containers
+        $('.lesson-container').hide();
+        $('.video-container').hide();
+        $('.tab-container').hide();
+        $('.lesson-navigate-container').hide();
+
+        // Initialize the quiz using the 'start-quiz-btn' class
+        const quizButton = $(this);
+        const quizId = quizButton.data('quiz-id');
+        const studentId = quizButton.data('student-id');
+        const courseId = quizButton.data('course-id');
+        const segmentId = quizButton.data('segment-id');
+        const segmentNo = quizButton.data('segment-no');
+        const passMark = quizButton.data('quiz-pass-mark');
+
+        // Example function to start the quiz (you already have a similar function for this)
+        startQuiz(quizId, studentId, courseId, segmentId, segmentNo, passMark);
+
+        // Optionally, you can show a loading state or redirect to the quiz page, etc.
+    });
 });
+
+// Example function for initializing the quiz (replace with your existing function)
+function startQuiz(quizId, studentId, courseId, segmentId, segmentNo, passMark) {
+    console.log("Starting quiz with the following data:");
+    console.log("Quiz ID:", quizId);
+    console.log("Student ID:", studentId);
+    console.log("Course ID:", courseId);
+    console.log("Segment ID:", segmentId);
+    console.log("Segment No:", segmentNo);
+    console.log("Pass Mark:", passMark);
+    // Implement your quiz initialization logic here
+}
 </script>
+
 
 <!-- Quiz -->
 <script>
@@ -1105,6 +1219,7 @@ function fetchQuizQuestions(quizId) {
             $('.material-title').html('Quiz'); 
             $('#quiz-container').show(); // Ensure it’s shown on success
             $('#tab-container').hide();
+            $('#lesson-navigate-container').hide();
             if (questions.length > 0) {
                 loadQuestion(0);
                 $('html, body').animate({
