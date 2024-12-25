@@ -14,7 +14,10 @@ class ProfileController extends Controller
     {
         $student_info = Student::find(currentUserId());
         $enrollment = Enrollment::where('student_id', currentUserId())->get();
-        return view('students.profile', compact('student_info', 'enrollment'));
+        $completedCourses = Enrollment::where('student_id', currentUserId())
+        ->where('completed', 1)
+        ->count(); 
+        return view('students.profile', compact('student_info', 'enrollment','completedCourses'));
     }
 
     public function save_profile(Request $request)

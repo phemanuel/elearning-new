@@ -36,7 +36,7 @@ class DashboardController extends Controller
             'course.lessons',
             'course.instructor.courses' 
         ])
-            ->where('student_id', currentUserId())
+            ->where('student_id', currentUserId()) 
             ->where('completed', 1)
             ->paginate(10);
 
