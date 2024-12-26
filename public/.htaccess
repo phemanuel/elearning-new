@@ -18,6 +18,13 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+    <FilesMatch "\.(mp4|webm|ogg|avi)$">
+    Header set Content-Disposition "inline"
+    Require all granted
+    SetEnvIf Request_URI ".*" no-download
+    </FilesMatch>
+
 </IfModule>
 
 <IfModule mod_headers.c>

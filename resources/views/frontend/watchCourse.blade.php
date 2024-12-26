@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{asset('frontend/fontawesome-free-5.15.4-web/css/all.min.css')}}">
     <link href="https://vjs.zencdn.net/7.18.1/video-js.css" rel="stylesheet" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    
 <style>
     .highlight {
         background-color: #e0f7fa; /* Light blue background for highlighting */
@@ -333,12 +334,15 @@ body {
                             <div class="video-area">                             
                                 <div class="video-container">                             
                                     @if(!empty($currentMaterial->content))
-                                    <video id="myvideo" 
+                                    <video 
+                                        id="myvideo" 
                                         class="video-js vjs-default-skin w-100" 
-                                        controls preload="auto" autoplay
+                                        controls controlsList="nodownload"
+                                        preload="auto" 
+                                        autoplay
                                         poster="{{ asset('uploads/courses/contents/' . $currentMaterial->content) }}">
-                                        <source src="{{ asset('uploads/courses/contents/' . $currentMaterial->content) }}" type="video/mp4" class="w-100">
-                                    </video>                                                                   
+                                        <source src="{{ asset('uploads/courses/contents/' . $currentMaterial->content) }}" type="video/mp4">
+                                    </video>                                                                 
                                     @else
                                         <p>No valid content available for this lesson.</p>
                                     @endif
@@ -822,9 +826,10 @@ body {
     <script src="{{asset('frontend/src/scss/vendors/plugin/js/jquery.nice-select.min.js')}}"></script>
     <script src="{{asset('frontend/src/scss/vendors/plugin/js/jquery.star-rating-svg.js')}}"></script>
     <script src="{{asset('frontend/src/js/app.js')}}"></script>
-    <script src="https://vjs.zencdn.net/7.18.1/video.min.js"></script>
+    <!-- <script src="https://vjs.zencdn.net/7.18.1/video.min.js"></script> -->
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>   
+    
     <!-- Lesson -->
     <script>
     function show_content(material) {
@@ -843,7 +848,8 @@ body {
                     <div class="video-container"> 
                         <video id="myvideo" 
                             class="video-js vjs-default-skin w-100" 
-                            controls preload="auto" autoplay
+                            controls controlsList="nodownload"
+                            preload="auto" autoplay
                             poster="${contentLink}">
                             <source src="${contentLink}" type="video/mp4">
                         </video>

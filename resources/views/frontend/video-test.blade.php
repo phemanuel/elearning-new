@@ -6,7 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-<video controls>
+<video controls 
+controlsList="nodownload">
   <source src="{{ asset('testvideo.mp4') }}" type="video/mp4">
 </video>
 </body>
