@@ -54,10 +54,11 @@
                                     <strong>Total Students Left: {{$noOfStudent - $noOfStudentEnrolled}}</strong>
                                 </a>
                                 @endif 
-
+                                @if(auth()->user()->role_id != 1)
                                 <a href="{{route('enrollment.create')}}" class="btn btn-primary">
                                     <strong>+ Enroll New Student</strong>
                                 </a>
+                                @endif 
                             </div>
 
                             <div class="card-body">

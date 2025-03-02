@@ -148,10 +148,20 @@ class CourseController extends Controller
                 $request->thumbnail_image->move(public_path('uploads/courses/thumbnails'), $thumbnailImageName);
                 $course->thumbnail_image = $thumbnailImageName;
             }
-            if ($course->save())
+            if ($course->save()){
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'New Course Created by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 return redirect()->route('course.index')->with('success', 'Data Saved');
-            else
+            }                
+            else{
                 return redirect()->back()->withInput()->with('error', 'Please try again');
+            }                
         } catch (Exception $e) {
             dd($e);
             return redirect()->back()->withInput()->with('error', 'Please try again');
@@ -283,10 +293,20 @@ class CourseController extends Controller
                 $request->thumbnail_image->move(public_path('uploads/courses/thumbnails'), $thumbnailImageName);
                 $course->thumbnail_image = $thumbnailImageName;
             }
-            if ($course->save())
+            if ($course->save()){
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Course updated by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 return redirect()->route('course.index')->with('success', 'Data Saved');
-            else
+            }                
+            else{
                 return redirect()->back()->withInput()->with('error', 'Please try again');
+            }                
         } catch (Exception $e) {
             // dd($e);
             return redirect()->back()->withInput()->with('error', 'Please try again');
@@ -332,10 +352,20 @@ class CourseController extends Controller
                 $request->thumbnail_image->move(public_path('uploads/courses/thumbnails'), $thumbnailImageName);
                 $course->thumbnail_image = $thumbnailImageName;
             }
-            if ($course->save())
+            if ($course->save()){
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Course updated by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 return redirect()->route('courseList')->with('success', 'Data Saved');
-            else
+            }                
+            else{
                 return redirect()->back()->withInput()->with('error', 'Please try again');
+            }                
         } catch (Exception $e) {
             // dd($e);
             return redirect()->back()->withInput()->with('error', 'Please try again');
@@ -413,6 +443,15 @@ class CourseController extends Controller
         $image_path = public_path('uploads/courses') . $data->image;
 
         if ($data->delete()) {
+            if (auth()->check()) {
+                \App\Models\LogActivity::create([
+                    'user_id' => auth()->id(),
+                    'ip_address' => request()->ip(),
+                    'activity' => 'Course Deleted by ' . auth()->user()->name_en,
+                    'activity_date' => now(),
+                ]);
+            }
+
             if (File::exists($image_path))
                 File::delete($image_path);
 

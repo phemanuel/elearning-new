@@ -239,7 +239,7 @@ class MaterialController extends Controller
             $this->notice::error('Please try again');
             return redirect()->back()->withInput();
         }
-    }
+    } 
      
     /**
      * Remove the specified resource from storage.

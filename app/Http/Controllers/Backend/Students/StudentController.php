@@ -62,8 +62,18 @@ class StudentController extends Controller
                 $request->image->move(public_path('uploads/students'), $imageName);
                 $student->image = $imageName;
             }
-            if ($student->save())
+            if ($student->save()){
+                //---Log Activity------
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'New student created by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 return redirect()->route('student.index')->with('success', 'Data Saved');
+            }   
             else
                 return redirect()->back()->withInput()->with('error', 'Please try again');
         } catch (Exception $e) {

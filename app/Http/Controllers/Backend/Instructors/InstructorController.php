@@ -116,6 +116,15 @@ class InstructorController extends Controller
                 }
                 if ($user->save()) {
                     DB::commit();
+                    //---Log Activity------
+                    if (auth()->check()) {
+                        \App\Models\LogActivity::create([
+                            'user_id' => auth()->id(),
+                            'ip_address' => request()->ip(),
+                            'activity' => 'New Instructor created by ' . auth()->user()->name_en,
+                            'activity_date' => now(),
+                        ]);
+                    }
                     $this->notice::success('Successfully saved');
                     return redirect()->route('instructor.index');
                 }
@@ -236,7 +245,15 @@ class InstructorController extends Controller
                 // Save user
                 if ($user->save()) {
                     DB::commit(); // Commit the transaction
-    
+                    //---Log Activity------
+                    if (auth()->check()) {
+                        \App\Models\LogActivity::create([
+                            'user_id' => auth()->id(),
+                            'ip_address' => request()->ip(),
+                            'activity' => 'Instructor updated by ' . auth()->user()->name_en,
+                            'activity_date' => now(),
+                        ]);
+                    }
                     // Success notice
                     $this->notice::success('Successfully saved');
                     return redirect()->route('instructor.index');
@@ -263,6 +280,15 @@ class InstructorController extends Controller
         $image_path = public_path('uploads/instructors') . $data->image;
 
         if ($data->delete()) {
+            //---Log Activity------
+            if (auth()->check()) {
+                \App\Models\LogActivity::create([
+                    'user_id' => auth()->id(),
+                    'ip_address' => request()->ip(),
+                    'activity' => 'Instructor deleted by ' . auth()->user()->name_en,
+                    'activity_date' => now(),
+                ]);
+            }
             if (File::exists($image_path))
                 File::delete($image_path);
 

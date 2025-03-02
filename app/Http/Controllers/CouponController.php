@@ -91,6 +91,14 @@ class CouponController extends Controller
 
             // Save the new coupon and check if successful
             if ($coupon->save()) {
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Coupon Created by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 return redirect()->route('coupon.index')->with('success', 'Coupon Saved');
             } else {
                 return redirect()->back()->withInput()->with('error', 'Please try again');
@@ -137,10 +145,20 @@ class CouponController extends Controller
             $coupon->valid_from = $request->valid_from;
             $coupon->valid_until = $request->valid_until;
 
-            if ($coupon->save())
+            if ($coupon->save()){
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Coupon Updated by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 return redirect()->route('coupon.index')->with('success', 'Coupon Saved');
-            else
+            }                
+            else{
                 return redirect()->back()->withInput()->with('error', 'Please try again');
+            }                
         } catch (\Exception $e) {
             dd($e);
             return redirect()->back()->withInput()->with('error', 'Please try again');
@@ -154,7 +172,16 @@ class CouponController extends Controller
     {
         $coupon = Coupon::findOrFail($id);
 
-        if($coupon->delete())
+        if($coupon->delete()){
+            if (auth()->check()) {
+                \App\Models\LogActivity::create([
+                    'user_id' => auth()->id(),
+                    'ip_address' => request()->ip(),
+                    'activity' => 'Coupon Deleted by ' . auth()->user()->name_en,
+                    'activity_date' => now(),
+                ]);
+            }
+        }
         return redirect()->back()->with('error','Data Deleted');
     }
 }

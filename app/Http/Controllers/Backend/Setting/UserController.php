@@ -57,11 +57,20 @@ class UserController extends Controller
                 $data->image = $imageName;              
                 
             }
-            if ($data->save())
+            if ($data->save()) {
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => $request->userName_en . ' created by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 return redirect()->route('user.index')->with('success', 'Data SAVED');
-            else
-                dd($data);
-                //return redirect()->back()->withInput()->with('error', 'Please Try again');
+            } else {
+                dd($data); // Debugging: Check what is inside $data
+                // return redirect()->back()->withInput()->with('error', 'Please Try again');
+            }
         } catch (Exception $e) {
              dd($e);
             //return redirect()->back()->withInput()->with('error', 'Please try again');
@@ -111,10 +120,22 @@ class UserController extends Controller
                 $request->image->move(public_path('uploads/users'), $imageName);
                 $data->image = $imageName;
             }
-            if ($data->save())
+            
+            if ($data->save()) {
+                // Ensure a user is authenticated before logging activity
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => $request->userName_en . ' profile updated by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
+            
                 return redirect()->route('user.index')->with('success', 'Data SAVED');
-            else
+            } else {
                 return redirect()->back()->withInput()->with('error', 'Please Try again');
+            }
         } catch (Exception $e) {
             dd($e);
             return redirect()->back()->withInput()->with('error', 'Please try again');
@@ -130,6 +151,15 @@ class UserController extends Controller
         $image_path = public_path('uploads/users/') . $data->image;
 
         if ($data->delete()) {
+            //-----Log Activity--------
+            if (auth()->check()) {
+                \App\Models\LogActivity::create([
+                    'user_id' => auth()->id(),
+                    'ip_address' => request()->ip(),
+                    'activity' => $data->name_en . 'profile deleted by ' . auth()->user()->name_en,
+                    'activity_date' => now(),
+                ]);
+            }
             if (File::exists($image_path))
                 File::delete($image_path);
 

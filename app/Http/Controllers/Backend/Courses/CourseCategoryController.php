@@ -45,10 +45,21 @@ class CourseCategoryController extends Controller
                 $request->category_image->move(public_path('uploads/courseCategories'), $imageName);
                 $data->category_image = $imageName;
             }
-            if ($data->save())
+            if ($data->save()){
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Course Category Created by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 return redirect()->route('courseCategory.index')->with('success', 'Data Saved');
-            else
+            }   
+            else{
                 return redirect()->back()->withInput()->with('error', 'Please try again');
+            }
+                
         } catch (Exception $e) {
             // dd($e);
             return redirect()->back()->withInput()->with('error', 'Please try again');
@@ -87,10 +98,20 @@ class CourseCategoryController extends Controller
                 $request->category_image->move(public_path('uploads/courseCategories'), $imageName);
                 $data->category_image = $imageName;
             }
-            if ($data->save())
+            if ($data->save()){
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Course Category Updated by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 return redirect()->route('courseCategory.index')->with('success', 'Data Saved');
-            else
+            }                
+            else{
                 return redirect()->back()->withInput()->with('error', 'Please try again');
+            }                
         } catch (Exception $e) {
             // dd($e);
             return redirect()->back()->withInput()->with('error', 'Please try again');
@@ -106,6 +127,15 @@ class CourseCategoryController extends Controller
         $image_path = public_path('uploads/courseCategories/') . $data->category_image;
 
         if ($data->delete()) {
+            if (auth()->check()) {
+                \App\Models\LogActivity::create([
+                    'user_id' => auth()->id(),
+                    'ip_address' => request()->ip(),
+                    'activity' => 'Course Category Deleted by ' . auth()->user()->name_en,
+                    'activity_date' => now(),
+                ]);
+            }
+
             if (File::exists($image_path))
                 File::delete($image_path);
 

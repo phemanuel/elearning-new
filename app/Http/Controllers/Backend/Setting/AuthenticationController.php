@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\LogActivity;
 use App\Http\Requests\Authentication\SignUpRequest;
 use App\Http\Requests\Authentication\SignInRequest;
 use Illuminate\Support\Facades\Hash;
@@ -58,6 +59,13 @@ class AuthenticationController extends Controller
                 // Check if the user is active
                 if ($user->status == 1) {
                     $this->setSession($user);
+                    //---Log Activity--
+                    LogActivity::create([
+                        'user_id' => $user->id,
+                        'ip_address' => request()->ip(),
+                        'activity' => 'User logged in',
+                        'activity_date' => now(),
+                    ]);
                     // Redirect to dashboard if successful
                     return redirect()->route('dashboard')->with('success', 'Successfully Logged In');
                 } else {

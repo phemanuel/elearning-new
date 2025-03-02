@@ -47,6 +47,16 @@ class PermissionController extends Controller
                 $data->role_id = encryptor('decrypt', $role);
                 $data->name = $permission;
                 $data->save();
+
+                //----Log activity----
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Permission for role updated by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
             }
             $this->notice::success('Permission saved');
             return redirect()->route('role.index');

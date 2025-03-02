@@ -74,6 +74,15 @@ class RoleController extends Controller
             $data->name=$request->Name;
             $data->identity=$request->Identity;
             if($data->save()){
+                //----Log activity----
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Role updated by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 $this->notice::success('Successfully updated');
                 return redirect()->route('role.index');
             }
@@ -91,6 +100,15 @@ class RoleController extends Controller
     {
         $data= Role::findOrFail(encryptor('decrypt',$id));
         if($data->delete()){
+            //----Log activity----
+            if (auth()->check()) {
+                \App\Models\LogActivity::create([
+                    'user_id' => auth()->id(),
+                    'ip_address' => request()->ip(),
+                    'activity' => 'Role deleted by ' . auth()->user()->name_en,
+                    'activity_date' => now(),
+                ]);
+            }
             $this->notice::warning('Deleted Permanently!');
             return redirect()->back();
         }
