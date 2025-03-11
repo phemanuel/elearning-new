@@ -110,6 +110,7 @@ class InstructorController extends Controller
                 $user->contact_en = $request->contactNumber_en;
                 $user->role_id = $request->roleId;
                 $user->status = $request->status;
+                $user->full_access = 0;
                 $user->password = Hash::make($request->password);
                 if (isset($imageName)) {
                     $user->image = $imageName; // Save the image name in the users table
