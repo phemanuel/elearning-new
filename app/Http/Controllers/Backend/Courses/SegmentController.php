@@ -113,6 +113,7 @@ class SegmentController extends Controller
             $segment->lesson = $request->lesson;
             $segment->segment_no = $request->segmentNo;
             $segment->status = 2;
+            $segment->quiz = $request->quiz;
 
             // Handle image upload
             if ($request->hasFile('image')) {
@@ -214,6 +215,7 @@ class SegmentController extends Controller
             $segment->title_en = $request->title_en;
             $segment->description_en = $request->description_en;
             $segment->segment_no = $request->segmentNo;
+            $segment->quiz = $request->quiz;
 
             if ($request->hasFile('image')) {
                 $imageName = rand(111, 999) . time() . '.' . $request->image->extension();

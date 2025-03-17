@@ -85,6 +85,15 @@
                                     @endif
                                 </div>  
                                 <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Enable Quiz</label>
+                                        <select class="form-control" name="quiz">
+                                            <option value="1" @if(old('quiz')=='Yes' ) selected @endif>Yes</option>
+                                            <option value="0" @if(old('quiz')=='No' ) selected @endif>No </option>                                            
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
                                     <label class="form-label">Image</label>
                                     <div class="form-group fallback w-100">
                                         <input type="file" class="dropify" data-default-file="" name="image">

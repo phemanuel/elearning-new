@@ -106,10 +106,10 @@
                                                         ($d->difficulty == 'intermediate' ? __('Intermediate') :
                                                         __('Advanced')) }}</strong>
                                                 </li>
-                                                <li class="list-group-item px-0 d-flex justify-content-between">
+                                                <!-- <li class="list-group-item px-0 d-flex justify-content-between">
                                                     <span class="mb-0">Instructor :</span>
                                                     <strong>{{$d->instructor?->name_en}}</strong>
-                                                </li>
+                                                </li> -->
                                                 <li class="list-group-item px-0 d-flex justify-content-between">
                                                     <span class="mb-0">Category :</span>
                                                     <strong>{{$d->courseCategory?->category_name}}</strong>
@@ -122,6 +122,14 @@
                                                     <span class="mb-0">No of Segments Uploaded :</span>
                                                     <strong>{{$d->segment_count}}</strong>
                                                 </li>
+                                                <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                                    <span class="mb-0">Project:</span>
+                                                    @if($d->project == 1)
+                                                        <i class="fa fa-check-circle text-success fs-5"></i> 
+                                                    @else
+                                                        <i class="fa fa-times-circle text-danger fs-5"></i>
+                                                    @endif
+                                                </li>
                                                 @if($d->date_enabled == 1)
                                                 <li class="list-group-item px-0 d-flex justify-content-between">
                                                     <span class="mb-0">Start Date :</span>                                                    
@@ -132,19 +140,23 @@
                                                 @endif
                                                 @if(!empty($d->course_url))
                                                 <li class="list-group-item px-0 d-flex justify-content-between">                                                   
-    <table style="table-layout: fixed; width: 100%;">
-        <tr>                                                            
-            <td class="long-url">
-                <strong>
-                    <a href="https://kingsdigihub.org/courses/{{ $d->course_url }}" 
-                       target="_blank" 
-                       style="text-decoration: none; color: inherit;">
-                       https://kingsdigihub.org/courses/{{ $d->course_url }}
-                    </a>
-                </strong>
-            </td>
-        </tr>
-    </table>                                                     
+                                                <div class="d-flex align-items-center bg-light rounded p-3 gap-3" style="overflow: hidden; white-space: nowrap;">
+    <i class="fa fa-link text-primary fs-5"></i> 
+    
+    <div class="text-truncate flex-grow-1" style="max-width: 70%;">
+        <a href="https://kingsdigihub.org/courses/{{ $d->course_url }}" 
+           target="_blank" 
+           class="text-decoration-none text-dark fw-bold"
+           title="https://kingsdigihub.org/courses/{{ $d->course_url }}">
+           https://kingsdigihub.org/courses/{{ $d->course_url }}
+        </a>
+    </div>
+
+    <button class="btn btn-sm btn-outline-primary copy-btn px-3" 
+            data-url="https://kingsdigihub.org/courses/{{ $d->course_url }}">
+        <i class="fa fa-copy"></i> Copy
+    </button>
+</div>               
 </li>
 @else  @endif
                                                 <li class="list-group-item px-0 d-flex justify-content-between">
@@ -198,5 +210,17 @@
 <!-- Datatable -->
 <script src="{{asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('js/plugins-init/datatables.init.js')}}"></script>
-
+<script>
+    document.querySelectorAll('.copy-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const url = this.getAttribute('data-url');
+            navigator.clipboard.writeText(url).then(() => {
+                this.innerHTML = '<i class="fa fa-check text-success"></i> Copied!';
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fa fa-copy"></i> Copy';
+                }, 2000);
+            });
+        });
+    });
+</script>
 @endpush

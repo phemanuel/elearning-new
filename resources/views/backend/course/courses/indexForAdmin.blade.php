@@ -45,6 +45,8 @@
                                                 <th>{{__('Instructor')}}</th>
                                                 <th>{{__('Category')}}</th>
                                                 <th>{{__('Price')}}</th>
+                                                <th>{{__('Link')}}</th>
+                                                <th>{{__('Project')}}</th>
                                                 <th>{{__('Status')}}</th>
                                                 <th>{{__('Action')}}</th>
                                             </tr>
@@ -59,6 +61,30 @@
                                                 <td><strong>{{$d->courseCategory?->category_name}}</strong>
                                                 </td>
                                                 <td><strong>{{$d->price?'=N='.$d->price:'Free'}}</strong></td>
+                                                <td><div class="d-flex align-items-center bg-light rounded p-3 gap-3" style="overflow: hidden; white-space: nowrap;">
+    <i class="fa fa-link text-primary fs-5"></i> 
+    
+    <div class="text-truncate flex-grow-1" style="max-width: 70%;">
+        <a href="https://kingsdigihub.org/courses/{{ $d->course_url }}" 
+           target="_blank" 
+           class="text-decoration-none text-dark fw-bold"
+           title="https://kingsdigihub.org/courses/{{ $d->course_url }}">
+           https://kingsdigihub.org/courses/{{ $d->course_url }}
+        </a>
+    </div>
+
+    <button class="btn btn-sm btn-outline-primary copy-btn px-3" 
+            data-url="https://kingsdigihub.org/courses/{{ $d->course_url }}">
+        <i class="fa fa-copy"></i> Copy
+    </button>
+</div>               </td>
+<td>
+@if($d->project == 1)
+ <i class="fa fa-check-circle text-success fs-5"></i> 
+@else
+  <i class="fa fa-times-circle text-danger fs-5"></i>
+@endif
+</td>
                                                 <td>
                                                     <span class="badge 
                                                     @if($d->status == 0) badge-warning 
@@ -110,5 +136,17 @@
 <!-- Datatable -->
 <script src="{{asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('js/plugins-init/datatables.init.js')}}"></script>
-
+<script>
+    document.querySelectorAll('.copy-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const url = this.getAttribute('data-url');
+            navigator.clipboard.writeText(url).then(() => {
+                this.innerHTML = '<i class="fa fa-check text-success"></i> Copied!';
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fa fa-copy"></i> Copy';
+                }, 2000);
+            });
+        });
+    });
+</script>
 @endpush

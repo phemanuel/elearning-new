@@ -89,7 +89,14 @@
                                                     <span class="mb-0">Segment No :</span>
                                                     <strong>{{$d->segment_no}}</strong>
                                                 </li>
-
+                                                <li class="list-group-item px-0 d-flex justify-content-between">
+                                                    <span class="mb-0">Quiz:</span>
+                                                    @if($d->quiz == 1)
+                                                        <i class="fa fa-check-circle text-success fs-5"></i> 
+                                                    @else
+                                                        <i class="fa fa-times-circle text-danger fs-5"></i>
+                                                    @endif
+                                                </li>
                                                 <li class="list-group-item px-0 d-flex justify-content-between">
                                                     <span class="mb-0">Status :</span>
                                                     <span class="badge 

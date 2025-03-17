@@ -16,7 +16,7 @@
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
-                    <h4>Edit Course</h4>
+                    <h4>Edit Course Segment</h4>
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -297,6 +297,22 @@
                                     @endif
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Enable QUiz</label>
+                                        <select class="form-control" name="quiz">
+                                            <option value="1" @if(old('quiz', $course->tag)=='1' ) selected
+                                                @endif>Yes
+                                            </option>
+                                            <option value="0" @if(old('quiz', $course->tag)=='0' ) selected
+                                                @endif>No
+                                            </option>                                            
+                                        </select>
+                                    </div>
+                                    @if($errors->has('quiz'))
+                                    <span class="text-danger"> {{ $errors->first('quiz') }}</span>
+                                    @endif
+                                </div>   
+                                <div class="col-lg-6 col-md-6 col-sm-12">
                                     <label class="form-label">Image</label>
                                     <div class="form-group fallback w-100">
                                         <input type="file" class="dropify" data-default-file="" name="image">
@@ -366,7 +382,23 @@
                                     @if($errors->has('lesson'))
                                     <span class="text-danger"> {{ $errors->first('lesson') }}</span>
                                     @endif
-                                </div>                                
+                                </div>      
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Enable QUiz</label>
+                                        <select class="form-control" name="quiz">
+                                            <option value="1" @if(old('quiz', $course->tag)=='1' ) selected
+                                                @endif>Yes
+                                            </option>
+                                            <option value="0" @if(old('quiz', $course->tag)=='0' ) selected
+                                                @endif>No
+                                            </option>                                            
+                                        </select>
+                                    </div>
+                                    @if($errors->has('quiz'))
+                                    <span class="text-danger"> {{ $errors->first('quiz') }}</span>
+                                    @endif
+                                </div>                          
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <label class="form-label">Image</label>
                                     <div class="form-group fallback w-100">

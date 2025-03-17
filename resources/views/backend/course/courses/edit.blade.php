@@ -287,6 +287,22 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
+                                        <label class="form-label">Enable Project</label>
+                                        <select class="form-control" name="project">
+                                            <option value="1" @if(old('project', $course->tag)=='1' ) selected
+                                                @endif>Yes
+                                            </option>
+                                            <option value="0" @if(old('project', $course->tag)=='0' ) selected
+                                                @endif>No
+                                            </option>                                            
+                                        </select>
+                                    </div>
+                                    @if($errors->has('project'))
+                                    <span class="text-danger"> {{ $errors->first('project') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
                                         <label class="form-label">Thumbnail Video URL</label>
                                         <input type="text" class="form-control" name="thumbnail_video"
                                             value="{{old('thumbnail_video',$course->thumbnail_video)}}">
@@ -572,6 +588,22 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
+                                        <label class="form-label">Enable Project</label>
+                                        <select class="form-control" name="project">
+                                            <option value="1" @if(old('project', $course->tag)=='1' ) selected
+                                                @endif>Yes
+                                            </option>
+                                            <option value="0" @if(old('project', $course->tag)=='0' ) selected
+                                                @endif>No
+                                            </option>                                            
+                                        </select>
+                                    </div>
+                                    @if($errors->has('project'))
+                                    <span class="text-danger"> {{ $errors->first('project') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
                                         <label class="form-label">Thumbnail Video URL</label>
                                         <input type="text" class="form-control" name="thumbnail_video"
                                             value="{{old('thumbnail_video',$course->thumbnail_video)}}">
@@ -580,7 +612,7 @@
                                     <span class="text-danger"> {{ $errors->first('thumbnail_video') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                {{--<div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label class="form-label">Course Tag</label>
                                         <select class="form-control" name="tag">
@@ -597,7 +629,7 @@
                                     @if($errors->has('tag'))
                                     <span class="text-danger"> {{ $errors->first('tag') }}</span>
                                     @endif
-                                </div>
+                                </div>--}}
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <label class="form-label">Image</label>
                                     <div class="form-group fallback w-100">

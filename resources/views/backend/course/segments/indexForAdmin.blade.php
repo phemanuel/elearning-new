@@ -45,6 +45,7 @@
                                                 <th>{{__('Instructor')}}</th>
                                                 <th>{{__('Category')}}</th>
                                                 <th>{{__('Price')}}</th>
+                                                
                                                 <th>{{__('Status')}}</th>
                                                 <th>{{__('Action')}}</th>
                                             </tr>

@@ -146,6 +146,7 @@ class CourseController extends Controller
             $courseUrl = Str::random(40);
             $course->course_url = $courseUrl;
             $course->language = 'en';
+            $course->project = $request->project;
 
             if ($request->hasFile('image')) {
                 $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
@@ -286,6 +287,7 @@ class CourseController extends Controller
             $course->tag = $request->tag;
             $course->date_enabled = $request->dateEnabled;
             $course->language = 'en';
+            $course->project = $request->project;
 
             // Generate course URL if not present
             if (empty($course->course_url)) {
@@ -381,7 +383,7 @@ class CourseController extends Controller
         }
     }
 
-    public function getSegments($courseId)
+    public function getSegments($courseId) 
     {
         try {
             // Log the incoming request

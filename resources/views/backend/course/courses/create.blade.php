@@ -251,14 +251,23 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
+                                        <label class="form-label">Enable Project</label>
+                                        <select class="form-control" name="project">
+                                            <option value="1" @if(old('project')=='Yes' ) selected @endif>Yes</option>
+                                            <option value="0" @if(old('project')=='No' ) selected @endif>No </option>                                            
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
                                         <label class="form-label">Thumbnail Video URL</label>
                                         <input type="text" class="form-control" name="thumbnail_video" value="{{old('thumbnail_video')}}">
                                     </div>
                                     @if($errors->has('thumbnail_video'))
                                     <span class="text-danger"> {{ $errors->first('thumbnail_video') }}</span>
                                     @endif
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                </div>                               
+                                {{--<div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label class="form-label">Course Tag</label>
                                         <select class="form-control" name="tag">
@@ -269,7 +278,7 @@
                                             </option>
                                         </select>
                                     </div>
-                                </div>
+                                </div>--}}
                                 {{-- <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label class="form-label">Status</label> 
