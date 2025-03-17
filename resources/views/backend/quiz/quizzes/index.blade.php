@@ -21,7 +21,7 @@
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('quiz.index')}}">Quizzes</a></li>
+                    <!-- <li class="breadcrumb-item active"><a href="{{route('quiz.index')}}">Quizzes</a></li> -->
                     <li class="breadcrumb-item active"><a href="{{route('quiz.index')}}">All Quiz</a>
                     </li>
                 </ol>
@@ -44,7 +44,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">All Quiz List </h4>
-                                <a href="{{route('quiz.create')}}" class="btn btn-primary">+ Add new</a>
+                                <a href="{{route('quiz.create')}}" class="btn btn-primary">+ Add QUiz</a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">

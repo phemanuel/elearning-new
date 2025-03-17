@@ -77,6 +77,11 @@ class QuizController extends Controller
     public function store(Request $request)
     {
         try {
+            // check if quiz is enabled for the segment---
+            $quizEnabled = Segments::where('id', $request->segmentId)->first();
+            if($quizEnabled->quiz == 0){
+                return redirect()->back()->with('error', 'Quiz is not enabled for this segment.');
+            }
             // Check if a quiz already exists for the selected course and segment by the instructor
             $existingQuiz = Quiz::where('course_id', $request->courseId)
                 ->where('segment_id', $request->segmentId)
