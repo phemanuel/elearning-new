@@ -6,6 +6,16 @@
 <link rel="stylesheet" href="{{asset('vendor/chartist/css/chartist.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/skin-2.css')}}">
 <link href="{{asset('vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
+<style>
+    .hover-effect {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hover-effect:hover {
+        transform: scale(1.05); /* Slightly increase size */
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Add a glow */
+    }
+</style>
 @endpush
 
 @section('content')
@@ -15,54 +25,64 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-3 col-xxl-3 col-sm-6">
-                <div class="widget-stat card bg-primary overflow-hidden">
-                    <div class="card-header">
-                        <h3 class="card-title text-white">Total Students</h3>
-                        <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i> {{$student->count()}}</h5>
-                    </div>
-                    <div class="card-body text-center mt-3">
-                        <div class="ico-sparkline">
-                            <div id="sparkline12"></div>
+                <a href="{{ route('enrollment.index') }}" class="text-decoration-none">
+                    <div class="widget-stat card bg-primary overflow-hidden text-center p-4 hover-effect">
+                        <div class="card-header border-0">
+                            <h3 class="card-title text-white">Total Students</h3>
+                        </div>
+                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                            <i class="fa fa-users fa-3x text-white mb-3"></i> 
+                            <h1 class="text-white fw-bold display-6" style="text-shadow: 2px 2px 10px rgba(255,255,255,0.6);">
+                                {{ $student->count() }}
+                            </h1>
                         </div>
                     </div>
-                </div>
+                </a>                
             </div>
             <div class="col-xl-3 col-xxl-3 col-sm-6">
-                <div class="widget-stat card bg-success overflow-hidden">
-                    <div class="card-header">
-                        <h3 class="card-title text-white">Enrolled Students</h3>
-                        <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i> {{$allEnrollment->count()}}</h5>
-                    </div>
-                    <div class="card-body text-center mt-4 p-0">
-                        <div class="ico-sparkline">
-                            <div id="spark-bar-2"></div>
+                <a href="{{ route('enrollment.index') }}" class="text-decoration-none">
+                    <div class="widget-stat card bg-success overflow-hidden text-center p-4 hover-effect">
+                        <div class="card-header border-0">
+                            <h3 class="card-title text-white">Enrolled Students</h3>
+                        </div>
+                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                            <i class="fa fa-user-graduate fa-3x text-white mb-3"></i> 
+                            <h1 class="text-white fw-bold display-6" style="text-shadow: 2px 2px 10px rgba(255,255,255,0.6);">
+                                {{ $allEnrollments->count() }}
+                            </h1>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-xl-3 col-xxl-3 col-sm-6">
-                <div class="widget-stat card bg-secondary overflow-hidden">
-                    <div class="card-header pb-3">
-                        <h3 class="card-title text-white">Total Course</h3>
-                        <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i> {{ $allCourse->count() }}</h5>
-                    </div>
-                    <div class="card-body p-0 mt-2">
-                        <div class="px-4"><span class="bar1"
-                                data-peity='{ "fill": ["rgb(0, 0, 128)", "rgb(7, 135, 234)"]}'>6,2,8,4,-3,8,1,-3,6,-5,9,2,-8,1,4,8,9,8,2,1</span>
+                <a href="{{ route('course.index') }}" class="text-decoration-none">
+                    <div class="widget-stat card bg-secondary overflow-hidden text-center p-4 hover-effect">
+                        <div class="card-header border-0">
+                            <h3 class="card-title text-white">Total Course</h3>
+                        </div>
+                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                            <i class="fa fa-book-open fa-3x text-white mb-3"></i>
+                            <h1 class="text-white fw-bold display-6" style="text-shadow: 2px 2px 10px rgba(255,255,255,0.6);">
+                                {{ $allCourse->count() }}
+                            </h1>
                         </div>
                     </div>
-                </div>
+                </a>                
             </div>
             <div class="col-xl-3 col-xxl-3 col-sm-6">
-                <div class="widget-stat card bg-danger overflow-hidden">
-                    <div class="card-header pb-3">
-                        <h3 class="card-title text-white">Fees Collection</h3>
-                        <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i>{{ number_format($totalCourseFee, 2) }}</h5>
+                <a href="{{ route('courseFee') }}" class="text-decoration-none">
+                    <div class="widget-stat card bg-danger overflow-hidden text-center p-4 hover-effect">
+                        <div class="card-header border-0">
+                            <h3 class="card-title text-white">Fees Collection</h3>
+                        </div>
+                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                            <i class="fa fa-wallet fa-3x text-white mb-3"></i>
+                            <h1 class="text-white fw-bold display-6" style="text-shadow: 2px 2px 10px rgba(255,255,255,0.6);">
+                                ₦{{ number_format($totalCourseFee, 2) }}
+                            </h1>
+                        </div>
                     </div>
-                    <div class="card-body p-0 mt-1">
-                        <span class="peity-line-2" data-width="100%">7,6,8,7,3,8,3,3,6,5,9,2,8</span>
-                    </div>
-                </div>
+                </a>                
             </div>
             <!-- <div class="col-xl-6 col-xxl-6 col-sm-6">
                 <div class="card">

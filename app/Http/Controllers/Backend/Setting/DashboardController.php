@@ -11,6 +11,7 @@ use App\Models\Enrollment;
 use App\Models\Instructor;
 use App\Models\Payment;
 use App\Models\Subscription;
+use App\Models\Coupon;
 
 class DashboardController extends Controller
 {
@@ -48,6 +49,7 @@ class DashboardController extends Controller
             ->orderBy('created_at', 'desc')
             ->withCount('segment')->paginate(5);            
             $totalCourseFee = Payment::where('instructor_id', $instructor->id)->sum('amount');
+            $coupons = Coupon::where('instructor_id', $instructor->id)->get();
             $subscriptions = Subscription::where('instructor_id', $instructor->id)->first();
             if ($subscriptions && $subscriptions->subscriptionPlan) {
                 $imageUrl = $subscriptions->subscriptionPlan->image; 
@@ -56,7 +58,7 @@ class DashboardController extends Controller
             }
             $currentDate = now(); 
             return view('backend.instructorDashboard', compact('student','course','enrollments','course',
-            'instructor','totalCourseFee','courseShow','subscriptions','imageUrl','currentDate')); 
+            'instructor','totalCourseFee','courseShow','subscriptions','imageUrl','currentDate','coupons')); 
         }            
         else{
             return view('backend.dashboard', compact('student','course','enrollments','course'));  

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Coupon;
 use App\Models\Course;
 use App\Models\Subscription;
+use App\Models\SubscriptionPlan;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Coupon\AddNewRequest;
 use App\Http\Requests\Backend\Coupon\UpdateRequest;
@@ -30,13 +31,22 @@ class CouponController extends Controller
             if (!$existingPlan) {
                 return redirect()->back()->with('error', 'Access denied, because you do not have an active subscription plan.');
             }
-            //---check if the plan is still valid
-            $currentDate = now(); 
-            $dueDate = $existingPlan->end_date; 
+            // Fetch the subscription plan details
+            $subscriptionPlan = SubscriptionPlan::where('id', $existingPlan->plan_id)->first();
 
-            if ($currentDate > $dueDate) {
-                return redirect()->back()->with('error', 'Your subscription plan has expired.');
-            }   
+            if (!$subscriptionPlan) {
+                return redirect()->back()->with('error', 'Invalid subscription plan.');
+            }
+
+            // Check if the instructor is on a free plan
+            if ($subscriptionPlan->amount > 0) {  
+                $currentDate = now();
+                $dueDate = $existingPlan->end_date;
+
+                if ($currentDate > $dueDate) {
+                    return redirect()->back()->with('error', 'Your subscription plan has expired.');
+                }
+            }     
            
             $coupon = Coupon::with('course')->where('instructor_id', $instructorId)->get();
 

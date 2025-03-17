@@ -6,6 +6,16 @@
 <link rel="stylesheet" href="{{asset('vendor/chartist/css/chartist.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/skin-2.css')}}">
 <link href="{{asset('vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
+<style>
+    .hover-effect {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hover-effect:hover {
+        transform: scale(1.05); /* Slightly increase size */
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Add a glow */
+    }
+</style>
 @endpush
 
 @section('content')
@@ -17,22 +27,23 @@
         @if(!empty($instructor->instructor_url))
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
-                <div class="welcome-text">
-                    <h4><strong>Profile Link :</strong> </h4> 
-                    <h5><table style="table-layout: fixed; width: 100%;">
-                    <tr>                                                            
-                        <td class="long-url">
-                            <strong>
-                                <a href="https://kingsdigihub.org/instructor-profile/{{ $instructor->instructor_url }}" 
-                                target="_blank" 
-                                style="text-decoration: none; color: inherit;">
-                                https://kingsdigihub.org/instructor-profile/{{ $instructor->instructor_url }}
-                                </a>
-                            </strong>
-                        </td>
-                    </tr>
-                </table></h5>
-            </div>
+                <div class="welcome-text text-center">
+                    <!-- <h4 class="fw-bold mb-3">
+                        <i class="fa fa-user-circle text-primary"></i>
+                    </h4>  -->
+                    <div class="bg-light p-3 rounded d-flex align-items-center justify-content-between">
+                        <span class="text-truncate" style="max-width: 80%; font-size: 16px;">
+                            <a href="https://kingsdigihub.org/instructor-profile/{{ $instructor->instructor_url }}" 
+                            target="_blank" 
+                            style="text-decoration: none; color: #007bff; font-weight: bold;">
+                            https://kingsdigihub.org/instructor-profile/{{ $instructor->instructor_url }}
+                            </a>
+                        </span>
+                        <button class="btn btn-sm btn-primary" id="copyButton" onclick="copyToClipboard()">
+                            <i class="fa fa-copy"></i> Copy
+                        </button>
+                    </div>
+                </div>
         </div>
         @else  @endif
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -42,56 +53,66 @@
                 </ol>
             </div>
         </div>
-        <div class="row">
+        <div class="row">            
             <div class="col-xl-3 col-xxl-3 col-sm-6">
-                <div class="widget-stat card bg-primary overflow-hidden">
-                    <div class="card-header">
-                        <h3 class="card-title text-white">Total Students</h3>
-                        <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i> {{$student->count()}}</h5>
-                    </div>
-                    <div class="card-body text-center mt-3">
-                        <div class="ico-sparkline">
-                            <div id="sparkline12"></div>
+                <a href="{{ route('enrollment.index') }}" class="text-decoration-none">
+                    <div class="widget-stat card bg-success overflow-hidden text-center p-4 hover-effect">
+                        <div class="card-header border-0">
+                            <h3 class="card-title text-white">Enrolled Students</h3>
+                        </div>
+                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                            <i class="fa fa-user-graduate fa-3x text-white mb-3"></i> 
+                            <h1 class="text-white fw-bold display-6" style="text-shadow: 2px 2px 10px rgba(255,255,255,0.6);">
+                                {{ $enrollments->count() }}
+                            </h1>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-xl-3 col-xxl-3 col-sm-6">
-                <div class="widget-stat card bg-success overflow-hidden">
-                    <div class="card-header">
-                        <h3 class="card-title text-white">Enrolled Students</h3>
-                        <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i> {{$enrollments->count()}}</h5>
-                    </div>
-                    <div class="card-body text-center mt-4 p-0">
-                        <div class="ico-sparkline">
-                            <div id="spark-bar-2"></div>
+                <a href="{{ route('course.index') }}" class="text-decoration-none">
+                    <div class="widget-stat card bg-secondary overflow-hidden text-center p-4 hover-effect">
+                        <div class="card-header border-0">
+                            <h3 class="card-title text-white">My Course</h3>
+                        </div>
+                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                            <i class="fa fa-book-open fa-3x text-white mb-3"></i>
+                            <h1 class="text-white fw-bold display-6" style="text-shadow: 2px 2px 10px rgba(255,255,255,0.6);">
+                                {{ $course->count() }}
+                            </h1>
                         </div>
                     </div>
-                </div>
+                </a>                
             </div>
             <div class="col-xl-3 col-xxl-3 col-sm-6">
-                <div class="widget-stat card bg-secondary overflow-hidden">
-                    <div class="card-header pb-3">
-                        <h3 class="card-title text-white">My Course</h3>
-                        <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i> {{$course->count()}}</h5>
-                    </div>
-                    <div class="card-body p-0 mt-2">
-                        <div class="px-4"><span class="bar1"
-                                data-peity='{ "fill": ["rgb(0, 0, 128)", "rgb(7, 135, 234)"]}'>6,2,8,4,-3,8,1,-3,6,-5,9,2,-8,1,4,8,9,8,2,1</span>
+                <a href="{{ route('courseFee') }}" class="text-decoration-none">
+                    <div class="widget-stat card bg-danger overflow-hidden text-center p-4 hover-effect">
+                        <div class="card-header border-0">
+                            <h3 class="card-title text-white">Fees Collection</h3>
+                        </div>
+                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                            <i class="fa fa-wallet fa-3x text-white mb-3"></i>
+                            <h1 class="text-white fw-bold display-6" style="text-shadow: 2px 2px 10px rgba(255,255,255,0.6);">
+                                ₦{{ number_format($totalCourseFee, 2) }}
+                            </h1>
                         </div>
                     </div>
-                </div>
+                </a>                
             </div>
             <div class="col-xl-3 col-xxl-3 col-sm-6">
-                <div class="widget-stat card bg-danger overflow-hidden">
-                    <div class="card-header pb-3">
-                        <h3 class="card-title text-white">Fees Collection</h3>
-                        <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i>{{ number_format($totalCourseFee, 2) }}</h5>
+                <a href="{{ route('coupon.index') }}" class="text-decoration-none">
+                    <div class="widget-stat card bg-primary overflow-hidden text-center p-4 hover-effect">
+                        <div class="card-header border-0">
+                            <h3 class="card-title text-white">Coupons</h3>
+                        </div>
+                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                            <i class="fa fa-ticket-alt fa-3x text-white mb-3"></i> 
+                            <h1 class="text-white fw-bold display-6" style="text-shadow: 2px 2px 10px rgba(255,255,255,0.6);">
+                                {{ $coupons->count() }}
+                            </h1>
+                        </div>
                     </div>
-                    <div class="card-body p-0 mt-1">
-                        <span class="peity-line-2" data-width="100%">7,6,8,7,3,8,3,3,6,5,9,2,8</span>
-                    </div>
-                </div>
+                </a>                
             </div>
             <!-- <div class="col-xl-6 col-xxl-6 col-sm-6">
                 <div class="card">
@@ -355,4 +376,28 @@
 <script src="{{asset('js/dashboard/dashboard-3.js')}}"></script>
 <script src="{{asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('js/plugins-init/datatables.init.js')}}"></script>
+
+<script>
+    function copyToClipboard() {
+        var tempInput = document.createElement("input");
+        tempInput.value = "https://kingsdigihub.org/instructor-profile/{{ $instructor->instructor_url }}";
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+
+        // Change button text and icon
+        var copyButton = document.getElementById("copyButton");
+        copyButton.innerHTML = '<i class="fa fa-check"></i> Copied';
+        copyButton.classList.remove("btn-primary");
+        copyButton.classList.add("btn-success");
+
+        // Revert back to "Copy" after 3 seconds
+        setTimeout(function() {
+            copyButton.innerHTML = '<i class="fa fa-copy"></i> Copy';
+            copyButton.classList.remove("btn-success");
+            copyButton.classList.add("btn-primary");
+        }, 2000);
+    }
+</script>
 @endpush
