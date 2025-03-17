@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2025 at 07:01 PM
+-- Generation Time: Mar 17, 2025 at 09:26 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -390,7 +390,7 @@ CREATE TABLE `instructors` (
 INSERT INTO `instructors` (`id`, `name_en`, `name_bn`, `contact_en`, `contact_bn`, `email`, `role_id`, `bio`, `title`, `designation`, `image`, `status`, `password`, `language`, `access_block`, `social_facebook`, `social_twitter`, `social_instagram`, `social_linkedin`, `social_youtube`, `instructor_url`, `current_plan`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (3, 'Adeyinka Temiloluwa', NULL, '08053608799', NULL, 'emmanexitconsult@gmail.com', 3, '<p><span style=\"font-size: 14.992px;\">I am a professional responsible for analyzing financial data and providing insights to help businesses make informed investment and strategic decisions. I assess economic performance, forecast future financial trends, and offer recommendations based on their analysis. I often work with financial models, examining variables such as revenues, expenses, and market trends, to determine the financial health of companies or projects.</span></p><p><span style=\"font-size: 14.992px;\">Key skills include proficiency in financial software, data analysis, understanding of accounting principles, and strong communication abilities and often work in investment firms, banks, insurance companies, or corporate finance departments. I typically holds a degree in finance, economics, or a related field and may possess certifications like CFA (Chartered Financial Analyst).</span></p>', 'Mrs', 'Financial Analyst', 'Instructor_Adeyinka Temiloluwa_197.jpg', 1, '$2y$12$oRlxxgjJXDhVFgDjAY21j.LBVn60MgaQUy4P0ysqnCZEWqjp0D91O', 'en', NULL, 'https://www.facebook.com/temi-akinyooye', NULL, 'https://www.instgram.com/temi-akinyooye', NULL, NULL, 'OVLbufn7RLj0NxlvY0ftcTanFCN6zFJhKiCW2DPA', 0, 'FJGu91BMdWdNlASbolOq3o4caqnR6Ro9Esnxptv9', '2024-09-27 18:36:41', '2024-11-22 07:03:48', NULL),
 (4, 'Miracle Peters', NULL, '08104196102', NULL, 'miracle.kingsbranding@gmail.com', 3, '<p>As a Digital Marketer, I specialize in creating impactful online campaigns that boost brand visibility and drive engagement. With expertise in social media, SEO, email marketing, and paid ads, I tailor strategies to connect with target audiences and generate leads. I’m passionate about using data-driven insights to optimize campaigns and help businesses grow in the digital landscape. Skilled in content creation and digital tools, I continuously adapt to new trends and technologies to stay ahead in the ever-evolving world of digital marketing.<br></p>', 'Miss', 'Digital Marketer', 'Instructor_Miracle Peter_629.jpg', 1, '$2y$12$uh2TKhMQCGp/S4n7Ps0BhedkDlJkmqipqxvvDkGtNBpa7DFgqr7k6', 'en', NULL, NULL, NULL, NULL, NULL, NULL, '85zlG17M2I4WAM9b4YtGqnckzTtOpKNZcXzcBoNL', 1, NULL, '2024-09-29 03:06:36', '2024-11-23 22:14:52', NULL),
-(9, 'Emmanuel Abiodun', NULL, '08153324483', NULL, 'kingsbrandingconsult@gmail.com', 3, NULL, NULL, NULL, 'blank.jpg', 0, '$2y$12$eh0cfRcDBTaET.LBKwEL7OgI8HqkZUTnzmzvLzSz0xcxdRYrmAppq', 'en', NULL, NULL, NULL, NULL, NULL, NULL, 'Aqxoem3v40W51l41U0XMp254bNxKnplsjc4GGdxW', 0, '4MMs3N3zO6trtYygv32rDO9eXp7y2hIMikCZadt6', '2024-11-27 05:48:55', '2024-11-27 05:48:55', NULL);
+(9, 'Emmanuel Abiodun', NULL, '08153324483', NULL, 'kingsbrandingconsult@gmail.com', 3, NULL, 'Mr', 'Executive Assistant', 'Instructor_Emmanuel Abiodun_170.jpg', 1, '$2y$12$u3BbzUpzA9V5aZFXpZbQmuw2WgTtJYc2266iHR5TVZXYbuzd9gSL.', 'en', NULL, NULL, NULL, NULL, NULL, NULL, 'Aqxoem3v40W51l41U0XMp254bNxKnplsjc4GGdxW', 0, '4MMs3N3zO6trtYygv32rDO9eXp7y2hIMikCZadt6', '2024-11-27 05:48:55', '2025-03-17 15:25:18', NULL);
 
 -- --------------------------------------------------------
 
@@ -486,7 +486,19 @@ CREATE TABLE `log_activities` (
 --
 
 INSERT INTO `log_activities` (`id`, `user_id`, `ip_address`, `activity`, `activity_date`, `created_at`, `updated_at`) VALUES
-(1, 11, '127.0.0.1', 'User logged in', '2025-01-31 05:55:57', '2025-01-31 05:55:57', '2025-01-31 05:55:57');
+(1, 11, '127.0.0.1', 'User logged in', '2025-01-31 05:55:57', '2025-01-31 05:55:57', '2025-01-31 05:55:57'),
+(2, 1, '127.0.0.1', 'User logged in', '2025-03-03 05:56:27', '2025-03-03 05:56:27', '2025-03-03 05:56:27'),
+(3, 11, '127.0.0.1', 'User logged in', '2025-03-12 04:32:17', '2025-03-12 04:32:17', '2025-03-12 04:32:17'),
+(4, 10, '127.0.0.1', 'User logged in', '2025-03-12 04:33:28', '2025-03-12 04:33:28', '2025-03-12 04:33:28'),
+(5, 1, '127.0.0.1', 'User logged in', '2025-03-12 04:35:14', '2025-03-12 04:35:14', '2025-03-12 04:35:14'),
+(6, 1, '127.0.0.1', 'Instructor updated by Femi Akinyooye', '2025-03-12 04:38:53', '2025-03-12 04:38:53', '2025-03-12 04:38:53'),
+(7, 1, '127.0.0.1', 'Instructor updated by Femi Akinyooye', '2025-03-12 04:39:45', '2025-03-12 04:39:45', '2025-03-12 04:39:45'),
+(8, 24, '127.0.0.1', 'User logged in', '2025-03-12 04:40:48', '2025-03-12 04:40:48', '2025-03-12 04:40:48'),
+(9, 1, '127.0.0.1', 'User logged in', '2025-03-12 04:41:54', '2025-03-12 04:41:54', '2025-03-12 04:41:54'),
+(10, 24, '127.0.0.1', 'User logged in', '2025-03-12 04:47:03', '2025-03-12 04:47:03', '2025-03-12 04:47:03'),
+(11, 1, '127.0.0.1', 'User logged in', '2025-03-17 15:22:36', '2025-03-17 15:22:36', '2025-03-17 15:22:36'),
+(12, 1, '127.0.0.1', 'Instructor updated by Femi Akinyooye', '2025-03-17 15:24:07', '2025-03-17 15:24:07', '2025-03-17 15:24:07'),
+(13, 1, '127.0.0.1', 'Instructor updated by Femi Akinyooye', '2025-03-17 15:25:19', '2025-03-17 15:25:19', '2025-03-17 15:25:19');
 
 -- --------------------------------------------------------
 
@@ -1064,8 +1076,7 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id`, `name`, `identity`, `created_at`, `updated_at`) VALUES
 (1, 'Super Admin', 'superadmin', '2024-09-26 01:25:46', NULL),
 (2, 'Admin', 'admin', '2024-09-26 01:25:46', NULL),
-(3, 'Instructor', 'instructor', '2024-09-26 01:25:46', NULL),
-(4, 'Student', 'student', '2024-09-26 01:25:46', NULL);
+(3, 'Instructor', 'instructor', '2024-09-26 01:25:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -1270,14 +1281,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name_en`, `name_bn`, `email`, `contact_en`, `email_verified_status`, `email_verified_at`, `contact_bn`, `role_id`, `password`, `language`, `image`, `full_access`, `status`, `remember_token`, `instructor_id`, `student_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Femi Akinyooye', NULL, 'admin@gmail.com', '23409073829919', NULL, NULL, NULL, 1, '$2y$12$PlnhqSDfcI.fCeE3uhW3BOdH8iSZ5ylB1Rg.Hs9iesfSRgtVfGPPO', 'en', 'femi_akinyooye.jpg', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(9, 'Maxwell Akinyooye', NULL, 'phemanuel@yahoo.com', '07032689329', 1, '2024-09-27 18:33:33', NULL, 4, '$2y$12$3SSWI2dT8VYugHwFB3UFPuwQ.nPnxlbzRYumJES56BFozM2XTHW.a', 'en', 'blank.jpg', 0, 1, '2h1SSbyJAUUnxvFeCJHYfcfDIBFJgogCl0cHKwtgVv464k71HOxuiNqeUPXa', NULL, 12, '2024-09-27 18:32:50', '2024-10-23 18:15:56', NULL),
-(10, 'Adeyinka Temiloluwa', NULL, 'emmanexitconsult@gmail.com', '08053608799', NULL, NULL, NULL, 3, '$2y$12$2XNRWEPv4lqZxtFMqFZqiuupjCyqs48hoZXdmcEfNykUQwsGhhIZi', 'en', 'Instructor_Adeyinka Temiloluwa_197.jpg', 0, 1, 'edlGrH8QxK40cUmRmGODHAL6pvV4sMXf2JqSTMheXTQycInI1qGHHjmL1xpQ', 3, NULL, '2024-09-27 18:36:42', '2024-10-05 18:23:30', NULL),
+(10, 'Adeyinka Temiloluwa', NULL, 'emmanexitconsult@gmail.com', '08053608799', NULL, NULL, NULL, 3, '$2y$12$2XNRWEPv4lqZxtFMqFZqiuupjCyqs48hoZXdmcEfNykUQwsGhhIZi', 'en', 'Instructor_Adeyinka Temiloluwa_197.jpg', 0, 1, 'RD1CCtZDKOA8YS8dcldjsqJJ8ta6VoIgcAVXYF0Jw8vxDKO2dOD3ekWTZNwq', 3, NULL, '2024-09-27 18:36:42', '2024-10-05 18:23:30', NULL),
 (11, 'Miracle Peters', NULL, 'miracle.kingsbranding@gmail.com', '08104196102', NULL, NULL, NULL, 3, '$2y$12$qj22czl2dsjA8NNfUslAt.rAX1MpyVuIBVL69sdOTSqikQoZICy7S', 'en', 'Instructor_Miracle Peter_629.jpg', 0, 1, NULL, 4, NULL, '2024-09-29 03:06:36', '2024-11-13 08:01:42', NULL),
-(13, 'Awolola Paul', NULL, 'awopaul@gmail.com', '08000000000000', 1, '2024-11-21 10:56:05', NULL, 4, '$2y$12$VN3QLDwU/kv/3XIwt5eXMuBhAy.BpVKgS5Aa.wVhjEoPEAoon3kXy', 'en', 'blank.jpg', 0, 1, 'hw8EFe3I2quqixmvcnVlhrZO8PLGaFbFj3hsDWz4', NULL, 13, '2024-11-21 18:39:16', '2024-11-21 18:39:16', NULL),
-(18, 'Olateju Tosin', NULL, 'olatejutosin@gmail.com', '08037153582', 1, '2024-11-21 10:56:05', NULL, 4, '$2y$12$AwON/R/W6RqRAiQ5uMW.9ukIAdpLKC1UxrS4K5iTC8yAhT0Tnq8mm', 'en', 'blank.jpg', 0, 1, 'alvsmbfE3vyUeHfBXTtfUT3LRRuUisdjVQATpl5S', NULL, 19, '2024-11-21 18:53:13', '2024-11-21 18:53:13', NULL),
-(19, 'Jason Peter', NULL, 'jasonpeter@gmail.com', '08070257011', 1, '2024-11-21 10:56:05', NULL, 4, '$2y$12$vI0jkCM01vF.SXn66xJE4OqiXy/Pp51SKKCBEtJmblSgXqjtIGXAO', 'en', 'blank.jpg', 0, 1, 'T7PuI8IGOO2UJQviMpEeB6kDnc0s6ZHeJ7oSrWkR', NULL, 20, '2024-11-21 18:54:57', '2024-11-21 18:54:57', NULL),
-(20, 'Adeleke Iyanu', NULL, 'iyanuola@gmail.com', '08062459088', 1, '2024-11-21 10:56:05', NULL, 4, '$2y$12$i5x2RUKZ6lwP6X.5bMT0x.lQTwI5NuO3leu6cQTZmXs3Al5xThppa', 'en', 'blank.jpg', 0, 1, 'zrnLfAAAsqHytbTR3x82nKAT2nv61GsuwuCMGrIC', NULL, 21, '2024-11-21 18:55:32', '2024-11-21 18:55:32', NULL),
-(24, 'Emmanuel Abiodun', NULL, 'kingsbrandingconsult@gmail.com', '08153324483', NULL, NULL, NULL, 3, '$2y$12$cDLow/FNGBPUgyql8IKKa.umXAP.NhQAvrGHJITAm/ZcK3WU0t9Km', 'en', 'blank.jpg', 1, 1, '4MMs3N3zO6trtYygv32rDO9eXp7y2hIMikCZadt6', 9, NULL, '2024-11-27 05:48:56', '2024-11-27 05:48:56', NULL);
+(24, 'Emmanuel Abiodun', NULL, 'kingsbrandingconsult@gmail.com', '08153324483', NULL, NULL, NULL, 3, '$2y$12$j4/2GXyO6zyxHYLniTlQfurBUkf8kMcSCPoBshe8ffg.8ZXC2gyz2', 'en', 'Instructor_Emmanuel Abiodun_170.jpg', 0, 1, 'tM0ThxqdoDw86M8jvDQTT2KrkiRNvFj4bkHpxgm5Y64Ghlm8lGrj9AzZOQgb', 9, NULL, '2024-11-27 05:48:56', '2025-03-17 15:25:19', NULL);
 
 -- --------------------------------------------------------
 
@@ -1656,7 +1662,7 @@ ALTER TABLE `lessons`
 -- AUTO_INCREMENT for table `log_activities`
 --
 ALTER TABLE `log_activities`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `materials`

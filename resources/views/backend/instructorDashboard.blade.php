@@ -185,50 +185,90 @@
                                 </div>                       
                                
                             @else
-                                @if($subscriptions->end_date < $currentDate)
-                                    <h4>You subscription plan has expired.</h4>
-                                    <div class="mt-3">
-                                        <a href="{{route('subscription.view')}}" class="btn btn-success btn-lg text-white">
-                                            <i class="la la-shopping-cart"></i> Renew Now
-                                        </a>
-                                    </div>
-                                @else
+                                @if($subscriptions->amount == 0)
                                     <!-- Image representing the plan -->
                                     <div class="text-center mb-4">
-                                    <h4><i class="{{$subscriptions->subscriptionPlan->icon}}"></i> {{$subscriptions->subscriptionPlan->name}}</h4>
-                                    </div>
-
-                                    <!-- Plan details -->
-                                    <div class="plan-details text-center">
-                                        <!-- Features -->
-                                        <ul class="list-group text-left mt-3">
-                                            <li class="list-group-item"><i class="fas fa-upload text-primary"></i> {{$subscriptions->subscriptionPlan->course_upload}} Courses Upload</li>
-                                            <li class="list-group-item"><i class="fas fa-users text-success"></i> {{$subscriptions->subscriptionPlan->student_upload}} Students On-board </li>
-                                            <li class="list-group-item"><i class="fas fa-hdd text-info"></i> {{$subscriptions->subscriptionPlan->allocated_space}} GB storage for materials</li>
-                                            <!-- <li class="list-group-item"><i class="la la-chart-bar mr-2"></i> Basic analytics</li> -->
-                                            <!-- <li class="list-group-item"><i class="la la-envelope mr-2"></i> Email support</li> -->
-                                            <li class="list-group-item">
-                                                <i class="la la-calendar mr-2"></i>{{ \Carbon\Carbon::parse($subscriptions->start_date)->format('F d, Y') }} 
-                                                <i class="la la-arrow-right mx-2"></i>
-                                                {{ \Carbon\Carbon::parse($subscriptions->end_date)->format('F d, Y') }}
-                                            </li>
-                                        </ul>
-
-                                        <!-- Pricing -->
-                                        <div class="mt-3">
-                                        <!-- <h5 class="text-primary"><strong>=N={{ number_format($subscriptions->subscriptionPlan->amount, 2) }}/month 
-                                            or =N={{ number_format($subscriptions->subscriptionPlan->amount * 12 * 0.9, 2) }}/year</strong>
-                                            
-                                        </h5> -->
-                                            <!-- <h6 class="text-muted">or $100/year</h6> -->
+                                        <h4><i class="{{$subscriptions->subscriptionPlan->icon}}"></i> {{$subscriptions->subscriptionPlan->name}}</h4>
                                         </div>
-                                        <!-- Upgrade Button -->
+
+                                        <!-- Plan details -->
+                                        <div class="plan-details text-center">
+                                            <!-- Features -->
+                                            <ul class="list-group text-left mt-3">
+                                                <li class="list-group-item"><i class="fas fa-upload text-primary"></i> {{$subscriptions->subscriptionPlan->course_upload}} Courses Upload</li>
+                                                <li class="list-group-item"><i class="fas fa-users text-success"></i> {{$subscriptions->subscriptionPlan->student_upload}} Students On-board </li>
+                                                <li class="list-group-item"><i class="fas fa-hdd text-info"></i> {{$subscriptions->subscriptionPlan->allocated_space}} GB storage for materials</li>
+                                                <!-- <li class="list-group-item"><i class="la la-chart-bar mr-2"></i> Basic analytics</li> -->
+                                                <!-- <li class="list-group-item"><i class="la la-envelope mr-2"></i> Email support</li> -->
+                                                <li class="list-group-item">
+                                                    <i class="la la-calendar mr-2"></i>{{ \Carbon\Carbon::parse($subscriptions->start_date)->format('F d, Y') }} 
+                                                    <i class="la la-arrow-right mx-2"></i>
+                                                    {{ \Carbon\Carbon::parse($subscriptions->end_date)->format('F d, Y') }}
+                                                </li>
+                                            </ul>
+
+                                            <!-- Pricing -->
+                                            <div class="mt-3">
+                                            <!-- <h5 class="text-primary"><strong>=N={{ number_format($subscriptions->subscriptionPlan->amount, 2) }}/month 
+                                                or =N={{ number_format($subscriptions->subscriptionPlan->amount * 12 * 0.9, 2) }}/year</strong>
+                                                
+                                            </h5> -->
+                                                <!-- <h6 class="text-muted">or $100/year</h6> -->
+                                            </div>
+                                            <!-- Upgrade Button -->
+                                            <div class="mt-3">
+                                                <a href="{{route('subscription.view')}}" class="btn btn-success btn-lg text-white">
+                                                    <i class="la la-arrow-up mr-2"></i> Upgrade Plan
+                                                </a>
+                                            </div>
+                                        </div>
+                                @else
+                                    @if($subscriptions->end_date < $currentDate)
+                                        <h4>You subscription plan has expired.</h4>
                                         <div class="mt-3">
                                             <a href="{{route('subscription.view')}}" class="btn btn-success btn-lg text-white">
-                                                <i class="la la-arrow-up mr-2"></i> Upgrade Plan
+                                                <i class="la la-shopping-cart"></i> Renew Now
                                             </a>
                                         </div>
-                                    </div>
+                                    @else
+                                        <!-- Image representing the plan -->
+                                        <div class="text-center mb-4">
+                                        <h4><i class="{{$subscriptions->subscriptionPlan->icon}}"></i> {{$subscriptions->subscriptionPlan->name}}</h4>
+                                        </div>
+
+                                        <!-- Plan details -->
+                                        <div class="plan-details text-center">
+                                            <!-- Features -->
+                                            <ul class="list-group text-left mt-3">
+                                                <li class="list-group-item"><i class="fas fa-upload text-primary"></i> {{$subscriptions->subscriptionPlan->course_upload}} Courses Upload</li>
+                                                <li class="list-group-item"><i class="fas fa-users text-success"></i> {{$subscriptions->subscriptionPlan->student_upload}} Students On-board </li>
+                                                <li class="list-group-item"><i class="fas fa-hdd text-info"></i> {{$subscriptions->subscriptionPlan->allocated_space}} GB storage for materials</li>
+                                                <!-- <li class="list-group-item"><i class="la la-chart-bar mr-2"></i> Basic analytics</li> -->
+                                                <!-- <li class="list-group-item"><i class="la la-envelope mr-2"></i> Email support</li> -->
+                                                <li class="list-group-item">
+                                                    <i class="la la-calendar mr-2"></i>{{ \Carbon\Carbon::parse($subscriptions->start_date)->format('F d, Y') }} 
+                                                    <i class="la la-arrow-right mx-2"></i>
+                                                    {{ \Carbon\Carbon::parse($subscriptions->end_date)->format('F d, Y') }}
+                                                </li>
+                                            </ul>
+
+                                            <!-- Pricing -->
+                                            <div class="mt-3">
+                                            <!-- <h5 class="text-primary"><strong>=N={{ number_format($subscriptions->subscriptionPlan->amount, 2) }}/month 
+                                                or =N={{ number_format($subscriptions->subscriptionPlan->amount * 12 * 0.9, 2) }}/year</strong>
+                                                
+                                            </h5> -->
+                                                <!-- <h6 class="text-muted">or $100/year</h6> -->
+                                            </div>
+                                            <!-- Upgrade Button -->
+                                            <div class="mt-3">
+                                                <a href="{{route('subscription.view')}}" class="btn btn-success btn-lg text-white">
+                                                    <i class="la la-arrow-up mr-2"></i> Upgrade Plan
+                                                </a>
+                                            </div>
+                                        </div>
+                                    @endif
+
                                 @endif
                             
                             @endif

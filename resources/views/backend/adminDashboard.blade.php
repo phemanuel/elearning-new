@@ -217,6 +217,8 @@
                                             <span class="badge badge-rounded badge-success">Active</span>
                                         @elseif($d->status == 1)
                                             <span class="badge badge-rounded badge-warning">Pending</span>
+                                            @elseif($d->status == 0)
+                                            <span class="badge badge-rounded badge-danger">Inactive</span>
                                         @endif
                                     </td>                                       
                                 </tr>

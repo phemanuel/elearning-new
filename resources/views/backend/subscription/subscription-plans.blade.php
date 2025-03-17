@@ -208,29 +208,34 @@
                                 </div>                            
                                 @else
                                 <div class="mt-3">
-                                    @if($subscriptions->end_date < $currentDate)
-                                        @if($s->id == $subscriptions->plan_id)                                    
-                                            <img src="{{asset('images/check.jpg')}}" alt="">
-                                            <a href="{{route('subscribe.view' , encryptor('encrypt' , $s->id))}}" class="btn btn-success btn-lg text-white">
-                                            <i class="la la-shopping-cart"></i> Renew Now
-                                        </a>                                    
-                                        @elseif($s->id < $subscriptions->plan_id)                                    
-                                            <img src="{{asset('images/uncheck.jpg')}}" alt="">                                            
-                                        @else
-                                        <a href="{{route('subscribe.view' , encryptor('encrypt' , $s->id))}}" class="btn btn-success btn-lg text-white">
-                                            <i class="la la-shopping-cart"></i> Upgrade Now
-                                        </a>
-                                        @endif
+                                    @if($s->amount == 0)
+                                    <img src="{{asset('images/check.jpg')}}" alt="">
                                     @else
-                                        @if($s->id == $subscriptions->plan_id)                                    
-                                            <img src="{{asset('images/check.jpg')}}" alt=""> 
-                                        @elseif($s->id < $subscriptions->plan_id)                                    
-                                            <img src="{{asset('images/uncheck.jpg')}}" alt="">                                   
+                                        @if($subscriptions->end_date < $currentDate)
+                                            @if($s->id == $subscriptions->plan_id)                                    
+                                                <img src="{{asset('images/check.jpg')}}" alt="">
+                                                <a href="{{route('subscribe.view' , encryptor('encrypt' , $s->id))}}" class="btn btn-success btn-lg text-white">
+                                                <i class="la la-shopping-cart"></i> Renew Now
+                                            </a>                                    
+                                            @elseif($s->id < $subscriptions->plan_id)                                    
+                                                <img src="{{asset('images/uncheck.jpg')}}" alt="">                                            
+                                            @else
+                                            <a href="{{route('subscribe.view' , encryptor('encrypt' , $s->id))}}" class="btn btn-success btn-lg text-white">
+                                                <i class="la la-shopping-cart"></i> Upgrade Now
+                                            </a>
+                                            @endif
                                         @else
-                                        <a href="{{route('subscribe.view' , encryptor('encrypt' , $s->id))}}" class="btn btn-success btn-lg text-white">
-                                            <i class="la la-shopping-cart"></i> Upgrade Now
-                                        </a>
+                                            @if($s->id == $subscriptions->plan_id)                                    
+                                                <img src="{{asset('images/check.jpg')}}" alt=""> 
+                                            @elseif($s->id < $subscriptions->plan_id)                                    
+                                                <img src="{{asset('images/uncheck.jpg')}}" alt="">                                   
+                                            @else
+                                            <a href="{{route('subscribe.view' , encryptor('encrypt' , $s->id))}}" class="btn btn-success btn-lg text-white">
+                                                <i class="la la-shopping-cart"></i> Upgrade Now
+                                            </a>
+                                            @endif
                                         @endif
+
                                     @endif
 
                                     
