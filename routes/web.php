@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\Courses\CourseController as course;
 use App\Http\Controllers\Backend\Courses\SegmentController as segment;
 use App\Http\Controllers\Backend\Courses\MaterialController as material;
 use App\Http\Controllers\Backend\Quizzes\QuizController as quiz;
+use App\Http\Controllers\Backend\Project\ProjectController as project;
 use App\Http\Controllers\Backend\Quizzes\QuestionController as question;
 use App\Http\Controllers\Backend\Quizzes\OptionController as option;
 use App\Http\Controllers\Backend\Quizzes\AnswerController as answer;
@@ -140,6 +141,7 @@ Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     Route::get('lessons/view/{id}', [lesson::class, 'show'])->name('lesson.view');
     Route::resource('event', event::class);
     Route::resource('quiz', quiz::class);
+    Route::resource('project', project::class);
     Route::resource('question', question::class);
     Route::get('question/add/{id}', [question::class, 'createQuestion'])->name('question.createNew');
     Route::resource('option', option::class);

@@ -1,5 +1,5 @@
 @extends('backend.layouts.app')
-@section('title', 'Edit Quiz')
+@section('title', 'Edit Project')
 
 @push('styles')
 <!-- Pick date -->
@@ -16,14 +16,14 @@
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
-                    <h4>Edit Quiz</h4>
+                    <h4>Edit Project</h4>
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('quiz.index')}}">All Quiz</a></li>
-                    <li class="breadcrumb-item active"><a href="javascript:void(0);">Edit Quiz</a></li>
+                    <li class="breadcrumb-item active"><a href="{{route('project.index')}}">All Project</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0);">Edit Project</a></li>
                 </ol>
             </div>
         </div>
@@ -35,22 +35,22 @@
                         <h5 class="card-title">Basic Info</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('quiz.update',encryptor('encrypt', $quiz->id))}}" method="post"
+                        <form action="{{route('project.update',encryptor('encrypt', $project->id))}}" method="post"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
-                            <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$quiz->id)}}">
+                            <input type="hidden" name="uptoken" value="{{encryptor('encrypt',$project->id)}}">
                             <div class="row">                                
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label class="form-label">Course</label>
                                         <select class="form-control" name="courseId">
                                             @forelse ($course as $c)
-                                            <option value="{{$c->id}}" {{old('courseId', $quiz->course_id) ==
+                                            <option value="{{$c->id}}" {{old('courseId', $project->course_id) ==
                                                 $c->id?'selected':''}}>
                                                 {{$c->title_en}}</option>
                                             @empty
-                                            <option value="">No Quiz Found</option>
+                                            <option value="">No Project Found</option>
                                             @endforelse
                                         </select>
                                     </div>
@@ -58,45 +58,29 @@
                                     <span class="text-danger"> {{ $errors->first('courseId') }}</span>
                                     @endif
                                 </div>
-                                <!-- Segments Dropdown -->
+
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label class="form-label">Segment</label>
-                                        <select class="form-control" name="segmentId" id="segmentId">
-                                            <option value="{{$segmentName->id}}" selected>{{$segmentName->title_en}}</option>
-                                        </select>
+                                        <label class="form-label">Additional Information(If needed)</label>
+                                        <textarea class="form-control"
+                                            name="additionalInfo">{{old('additionalInfo',$project->additional_info)}}</textarea>                                        
                                     </div>
-                                    @if($errors->has('segmentId'))
-                                    <span class="text-danger"> {{ $errors->first('segmentId') }}</span>
+                                    @if($errors->has('additionalInfo'))
+                                    <span class="text-danger"> {{ $errors->first('additionalInfo') }}</span>
                                     @endif
                                 </div>
+                                
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label class="form-label">Title</label>
-                                        <input type="text" class="form-control" name="quizTitle"
-                                            value="{{old('quizTitle',$quiz->title)}}">
+                                        <label class="form-label">Project Content</label>
+                                        <textarea class="form-control"
+                                            name="projectContent" id="myEditor">{{old('projectContent',$project->project_content)}}</textarea>
                                     </div>
-                                    @if($errors->has('quizTitle'))
-                                    <span class="text-danger"> {{ $errors->first('quizTitle') }}</span>
+                                    @if($errors->has('projectContent'))
+                                    <span class="text-danger"> {{ $errors->first('projectContent') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label class="form-label">Pass Mark(%)</label>
-                                        <select name="passMark" id="passMark" class="form-control">
-                                            <option value="{{$quiz->pass_mark}}">{{$quiz->pass_mark}}</option>
-                                            <option value="50">50</option>
-                                            <option value="60">60</option>
-                                            <option value="70">70</option>
-                                            <option value="80">80</option>
-                                            <option value="90">90</option>
-                                            <option value="100">100</option>
-                                        </select>
-                                    </div>
-                                    @if($errors->has('passMark'))
-                                    <span class="text-danger"> {{ $errors->first('passMark') }}</span>
-                                    @endif
-                                </div>
+
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <button type="submit" class="btn btn-primary">Save</button>
                                     <button type="submit" class="btn btn-light">Cancel</button>

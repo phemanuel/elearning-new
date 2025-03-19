@@ -384,6 +384,21 @@
                                         class="las la-question-circle"></i>Questions</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="las la-clipboard-list"></i> <!-- Clipboard list icon for project -->
+                            <span class="nav-text">Project</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li>
+                                <a href="#"><i class="las la-folder-open"></i> All Projects</a> <!-- Folder open icon -->
+                            </li>
+                            <!-- Uncomment if needed -->
+                            <!-- <li>
+                                <a href="{{route('question.index')}}"><i class="las la-question-circle"></i> Questions</a>
+                            </li> -->
+                        </ul>
+                    </li>
                     <li><a class="" href="{{route('certificates.index')}}" aria-expanded="false">
                     <i class="las la-atom"></i>
                             <span class="nav-text">Certificates</span>
@@ -489,6 +504,21 @@
                             <li><a href="{{route('quiz.index')}}"><i class="las la-icons"></i>All Quiz</a></li>
                             <!-- <li><a href="{{route('question.index')}}"><i
                                         class="las la-question-circle"></i>Questions</a></li> -->
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="las la-clipboard-list"></i> <!-- Clipboard list icon for project -->
+                            <span class="nav-text">Project</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li>
+                                <a href="{{route('project.index')}}"><i class="las la-folder-open"></i> All Projects</a> <!-- Folder open icon -->
+                            </li>
+                            <!-- Uncomment if needed -->
+                            <!-- <li>
+                                <a href="{{route('question.index')}}"><i class="las la-question-circle"></i> Questions</a>
+                            </li> -->
                         </ul>
                     </li>
                     <li><a class="" href="{{route('certificates.index')}}" aria-expanded="false">
@@ -601,6 +631,13 @@
 <script>
   $(document).ready(function() {
     $('#myEditor').summernote({
+      height: 200
+    });
+  });
+</script>
+<script>
+  $(document).ready(function() {
+    $('#myEditor1').summernote({
       height: 200
     });
   });
