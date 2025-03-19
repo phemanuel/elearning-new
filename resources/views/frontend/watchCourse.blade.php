@@ -251,6 +251,23 @@ body {
     color: #fff;
 }
 </style>
+<style>
+    .button--purple {
+    background-color: #6f42c1; /* Bootstrap Purple */
+    color: white;
+    padding: 13px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.button--purple:hover {
+    background-color: #59329c; /* Darker Purple on hover */
+    color: #fff;
+}
+</style>
 </head>
 
 <body style="background-color: #ebebf2;">
@@ -296,7 +313,12 @@ body {
                     </div>
                 </div>
                 <div class="coursedescription-header-end">  
-                @if($enrollment->completed == 1)
+                @if($progress->completed == 1 && $stdSegment->segment == $totalCourseSegment)
+                <a href="" class="button button--purple">
+                    <i class="fas fa-clipboard-list"></i> Project
+                </a>
+                @endif
+                @if($enrollment->completed == 2)
                     <a href="{{ route('certificate.show', encryptor('encrypt', $course?->id)) }}" target="_blank" class="button button--gold">
                         <i class="fas fa-certificate"></i> Certificate
                     </a>
@@ -306,7 +328,7 @@ body {
                     class="button button--green">
                         <i class="fas fa-arrow-right"></i> Next Segment
                     </a>
-                @endif
+                @endif               
                 
                 <a href="#" class="button button--dark" data-bs-toggle="modal" data-bs-target="#ratingModal">
                     <i class="fas fa-star"></i> Leave a Rating
