@@ -170,7 +170,7 @@ use Carbon\Carbon;
                                         @endphp
 
                                         @if($progressPercentage == 100)
-                                            @if($a->completed != 1)
+                                            @if($a->completed != 2)
                                                 <i class="fas fa-spinner text-warning"></i> 
                                                 {{ $progressPercentage - 10 }}%
                                             @else
@@ -194,7 +194,7 @@ use Carbon\Carbon;
                                         <img src="{{ asset('uploads/users/' . $a->course?->instructor?->image) }}" alt="client-image" class="rounded-circle" height="34" width="34" />
                                         <p class="font-para--md">{{ $a->course?->instructor?->name_en }}</p>
                                     </a>
-                                    @if($a->completed == 1)
+                                    @if($a->completed == 2)
                                     <div class="contentCard-course--status d-flex align-items-center">                                     
                                             <a                                              
                                             href="{{ route('certificate.show', encryptor('encrypt', $a->course?->id)) }}" target="_blank">
@@ -223,7 +223,7 @@ use Carbon\Carbon;
                                 {{-- Additional content for course buttons, etc. --}}
                                 <div class="contentCard-button text-center mt-3">
                                     <a class="button button-md button--primary-outline w-100 my-3" href="{{ route('courseSegment', encryptor('encrypt', $a->course?->id)) }}">
-                                        @if($a->completed == 1)
+                                        @if($a->completed == 2)
                                         View Course 
                                         @elseif ($progressPercentage > 0)
                                         Continue Course

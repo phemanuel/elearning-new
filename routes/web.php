@@ -217,6 +217,8 @@ Route::middleware(['checkstudent'])->prefix('students')->group(function () {
     Route::get('/load-lesson', [lesson::class, 'loadLesson'])->name('load.lesson');
     Route::get('watchCourse/{id}', [watchCourse::class, 'watchCourse'])->name('watchCourse');
     Route::get('/watchCourse/{id}/next', [watchCourse::class, 'watchCourseNext'])->name('watchCourseNext');
+    Route::get('/project/{id}', [watchCourse::class, 'projectView'])->name('project-view');
+    Route::get('/project/{id}/submission', [watchCourse::class, 'projectSubmission'])->name('project-submission');
     Route::get('courseSegment/{id}', [studashboard::class, 'courseSegment'])->name('courseSegment');
     Route::post('/review/store', [review::class, 'saveReviews'])->name('review.save');
     Route::get('/course-review/{courseId}', [review::class, 'getReviews'])->name('course-review');

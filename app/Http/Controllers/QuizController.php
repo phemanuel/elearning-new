@@ -9,6 +9,7 @@ use App\Models\Quiz;
 use App\Models\Lesson;
 use App\Models\Enrollment;
 use App\Models\ProgressAll;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
@@ -129,22 +130,27 @@ class QuizController extends Controller
         );
 
         // Check if the score is not less than the pass mark
-        if ($score >= $passMark) {
+        if ($score >= $passMark) {             
             $quizRecord->completed = 1;
             $quizRecord->progress_percentage = 100;    
 
             // Check if the student is on the last segment
             if ($stdSegment->segment == $totalCourseSegment) {
                 $certificateUrl = Str::random(10);
-                // If it's the last segment, update the enrollment's completed status to 1
-                \DB::table('enrollments')
-                    ->where('student_id', $studentId)
-                    ->where('course_id', $courseId)
-                    ->update([
-                        'completed' => 1,
-                        'completion_date' => date('Y-m-d'),                        
-                        'certificate_link' => $certificateUrl,
-                ]);
+                //check if the course has a project-----
+                $projectEnable = Course::where('id' , $courseId)->first();
+                if ($projectEnable->project == 1){
+                    // If it's the last segment, update the enrollment's completed status to 1
+                        \DB::table('enrollments')
+                        ->where('student_id', $studentId)
+                        ->where('course_id', $courseId)
+                        ->update([
+                            'completed' => 1,
+                            'completion_date' => date('Y-m-d'),                        
+                            'certificate_link' => $certificateUrl,
+                    ]);
+                }
+                
             } else {
                 // Otherwise, increment the segment attribute
                 \DB::table('enrollments')

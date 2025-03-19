@@ -12,6 +12,7 @@ use App\Models\Segments;
 use App\Models\Enrollment;
 use App\Models\Quiz;
 use App\Models\Question;
+use App\Models\Project;
 
 class WatchCourseController extends Controller
 {
@@ -207,5 +208,25 @@ class WatchCourseController extends Controller
         return redirect()->route('watchCourse', encryptor('encrypt', $nextSegmentData->id));
     }
 
+    public function projectView($id)
+    {
+        $decryptedId = encryptor('decrypt', $id);
+        $studentId = currentUserId();
+        $courseId = $decryptedId;
 
+        $project = Project::where('course_id', $decryptedId)->first();
+        $projectId = $project->id;
+
+        return view('frontend.project-layout', compact('project', 'studentId', 'courseId','projectId'));
+        
+    }
+
+    public function projectSubmission($id)
+    {
+        $decryptedId = encryptor('decrypt', $id);
+        $studentId = currentUserId();
+        $courseId = $decryptedId;
+
+        
+    }
 }

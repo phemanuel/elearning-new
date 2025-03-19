@@ -314,11 +314,11 @@ body {
                 </div>
                 <div class="coursedescription-header-end">  
                 @if($progress->completed == 1 && $stdSegment->segment == $totalCourseSegment)
-                <a href="" class="button button--purple">
+                <a href="{{route('project-view', encryptor('encrypt', $courseId))}}" class="button button--purple">
                     <i class="fas fa-clipboard-list"></i> Project
                 </a>
                 @endif
-                @if($enrollment->completed == 2)
+                @if($enrollment->completed == 1)
                     <a href="{{ route('certificate.show', encryptor('encrypt', $course?->id)) }}" target="_blank" class="button button--gold">
                         <i class="fas fa-certificate"></i> Certificate
                     </a>

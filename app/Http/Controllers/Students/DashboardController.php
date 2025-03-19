@@ -28,9 +28,11 @@ class DashboardController extends Controller
         ])
         ->where('student_id', currentUserId())
         ->paginate(10);
+        
         $completedCourses = Enrollment::where('student_id', currentUserId())
         ->where('completed', 1)
-        ->count();        
+        ->count();  
+
         $allCompletedCourses = Enrollment::with([
             'course.segments', 
             'course.lessons',
