@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Project;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\ProjectSubmission;
 use App\Models\SubscriptionPlan;
 use App\Models\Subscription;
 use App\Models\Course;
@@ -26,7 +27,10 @@ class ProjectController extends Controller
         
         if ($userRoleId == 1) {
             // Admin can view all quizzes with their segments and question count
-            $project = Project::paginate(10);
+            $project = Project::withCount(['submissions as pending_submissions' => function ($query) {
+                $query->where('project_status', 'pending');
+            }])
+            ->paginate(10);
 
             return view('backend.project.index', compact('project'));
         } elseif ($userRoleId == 3) {
@@ -55,7 +59,11 @@ class ProjectController extends Controller
                 }
             }    
 
-            $project = Project::where('instructor_id', $instructorId)->paginate(10);
+            $project = Project::where('instructor_id', $instructorId)
+            ->withCount(['submissions as pending_submissions' => function ($query) {
+                $query->where('project_status', 'pending');
+            }])
+            ->paginate(10);
 
             return view('backend.project.index', compact('project'));
         }
@@ -158,4 +166,41 @@ class ProjectController extends Controller
             return redirect()->back();
         }
     }
+
+    public function show($id)
+    {
+        $courseId = encryptor('decrypt', $id);
+
+        // Get pending project submissions for this course
+        $projectSubmissions = ProjectSubmission::where('course_id', $courseId)
+        ->where('project_status', 'pending')
+        ->with('student') 
+        ->latest('created_at')
+        ->get();
+
+        return view('backend.project.project-submission', compact('projectSubmissions'));
+    }
+
+    public function reviewUpdate(Request $request)
+    {
+        Log::info("Review Update Request: " . json_encode($request->all())); // Log request data
+
+        $request->validate([
+            'id' => 'required|exists:project_submissions,id',
+            'comment' => 'nullable|string',
+            'status' => 'required|in:reviewed,approved',
+        ]);
+
+        // Find the project submission
+        $submission = ProjectSubmission::findOrFail($request->id);
+
+        // Update fields
+        $submission->comment = $request->comment;
+        $submission->project_status = $request->status;
+        $submission->save();
+
+        return response()->json(['success' => true, 'message' => 'Project reviewed successfully']);
+    }
+
+
 }

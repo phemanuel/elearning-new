@@ -217,6 +217,12 @@ class WatchCourseController extends Controller
 
         $project = Project::where('course_id', $decryptedId)->first();
         $projectId = $project->id;
+
+        $allProjectSubmission = ProjectSubmission::where('course_id', $courseId)
+        ->where('student_id', $studentId)
+        ->orderBy('created_at', 'desc') // Orders by latest date
+        ->get();
+
         $projectSubmission = ProjectSubmission::where('course_id', $courseId)
         ->where('student_id', $studentId)
         ->latest()
@@ -230,16 +236,67 @@ class WatchCourseController extends Controller
         }        
 
         return view('frontend.project-layout', compact('project', 'studentId', 'courseId','projectId'
-        ,'projectSubmission'));
+        ,'projectSubmission','allProjectSubmission'));
         
     }
 
-    public function projectSubmission($id)
+    public function projectSubmission(Request $request, $id)
     {
-        $decryptedId = encryptor('decrypt', $id);
+        // Decrypt course ID
+        $courseId = encryptor('decrypt', $id);
         $studentId = currentUserId();
-        $courseId = $decryptedId;
 
-        
+        // Validate the request
+        $request->validate([
+            'project_link' => 'required|url', 
+            'projectId' => 'required|exists:projects,id',
+        ]);
+
+        // Get the latest project submission
+        $latestProjectSubmission = ProjectSubmission::where('course_id', $courseId)
+            ->where('student_id', $studentId)
+            ->latest()
+            ->first();
+
+        if ($latestProjectSubmission) {
+            // If latest project is pending, do not allow submission
+            if ($latestProjectSubmission->project_status === 'pending') {
+                return redirect()->back()->with('info', 'Your last project submission is still under review. Please wait for feedback before submitting another.');
+            }
+
+            // If latest project is approved, do not allow submission
+            if ($latestProjectSubmission->project_status === 'approved') {
+                return redirect()->back()->with('success', 'Your project has been approved. You cannot submit another link.');
+            }
+
+            // If latest project is reviewed, allow a new submission
+            if ($latestProjectSubmission->project_status === 'reviewed') {
+                ProjectSubmission::create([
+                    'student_id' => $studentId,
+                    'course_id' => $courseId,
+                    'project_id' => $request->projectId,
+                    'project_link' => $request->project_link,
+                    'comment' => null, 
+                    'project_status' => 'pending', 
+                ]);
+
+                return redirect()->back()->with('success', 'Project submitted successfully and is pending review.');
+            }
+        } else {
+            // If no previous submission, allow submission
+            ProjectSubmission::create([
+                'student_id' => $studentId,
+                'course_id' => $courseId,
+                'project_id' => $request->projectId,
+                'project_link' => $request->project_link,
+                'comment' => null, 
+                'project_status' => 'pending', 
+            ]);
+
+            return redirect()->back()->with('success', 'Project submitted successfully and is pending review.');
+        }
     }
+
+
+
 }

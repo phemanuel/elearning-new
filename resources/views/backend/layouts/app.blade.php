@@ -637,8 +637,8 @@
 </script>
 <script>
   $(document).ready(function() {
-    $('#myEditor1').summernote({
-      height: 200
+    $('#comment').summernote({
+      height: 120
     });
   });
 </script>

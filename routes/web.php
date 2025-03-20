@@ -142,6 +142,8 @@ Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     Route::resource('event', event::class);
     Route::resource('quiz', quiz::class);
     Route::resource('project', project::class);
+    Route::get('project/{id}/review', [project::class, 'review'])->name('project.review');
+    Route::post('/review/update', [project::class, 'reviewUpdate'])->name('admin.review.update');
     Route::resource('question', question::class);
     Route::get('question/add/{id}', [question::class, 'createQuestion'])->name('question.createNew');
     Route::resource('option', option::class);
@@ -218,7 +220,7 @@ Route::middleware(['checkstudent'])->prefix('students')->group(function () {
     Route::get('watchCourse/{id}', [watchCourse::class, 'watchCourse'])->name('watchCourse');
     Route::get('/watchCourse/{id}/next', [watchCourse::class, 'watchCourseNext'])->name('watchCourseNext');
     Route::get('/project/{id}', [watchCourse::class, 'projectView'])->name('project-view');
-    Route::get('/project/{id}/submission', [watchCourse::class, 'projectSubmission'])->name('project-submission');
+    Route::post('/project/{id}/submission', [watchCourse::class, 'projectSubmission'])->name('project-submission');
     Route::get('courseSegment/{id}', [studashboard::class, 'courseSegment'])->name('courseSegment');
     Route::post('/review/store', [review::class, 'saveReviews'])->name('review.save');
     Route::get('/course-review/{courseId}', [review::class, 'getReviews'])->name('course-review');

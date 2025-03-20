@@ -16,4 +16,11 @@ class Project extends Model
         'project_content',
         'additional_info',
     ];
+
+
+    public function submissions()
+    {
+        return $this->hasMany(ProjectSubmission::class, 'project_id', 'id');
+    }
+    
 }

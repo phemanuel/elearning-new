@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('course_id');
             $table->integer('project_id');
             $table->string('project_link');
-            $table->string('comment');
+            $table->string('comment')->nullable();
             $table->string('project_status');            
             $table->timestamps();
         });

@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{asset('frontend/fontawesome-free-5.15.4-web/css/all.min.css')}}">
     <link href="https://vjs.zencdn.net/7.18.1/video-js.css" rel="stylesheet" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     
 <style>
     .highlight {
@@ -65,109 +67,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
 }
 
-/* Lesson Card and Tab Container */
-.lesson-card, 
-#tab-container {
-    position: relative;
-    z-index: 1; /* Ensure they appear on top */
-}
 
-/* Lesson button navigation */
-/* Lesson Navigation (Make sure it stays below lesson container) */
-.card.lesson-card {
-    position: relative; /* Ensure it stays within the flow */
-    width: 100%; /* Take full width */
-    margin-top: 5px; /* Space between content and navigation */
-    margin-bottom: 5px;
-    text-align: center;
-    box-sizing: border-box;
-}
-
-/* Lesson Navigation Buttons */
-.lesson-navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-}
-
-/* Button Styling */
-.btn {
-    font-size: 16px;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    cursor: pointer;
-}
-
-/* Button Colors */
-.prev-lesson {
-    background-color: rgb(8, 84, 70);  /* Dark Green */
-}
-
-.next-lesson {
-    background-color: rgb(7, 12, 114);  /* Dark Blue */
-}
-
-/* Disabled Button Style */
-.btn:disabled {
-    background-color: gray;
-    cursor: not-allowed;
-}
-
-/* Styling for the Quiz Button */
-#quiz-button {
-    background-color:rgb(101, 6, 89); /* Gold background (adjust to match your branding) */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-#quiz-button:hover {
-    background-color:rgb(66, 2, 65); /* Darker gold shade on hover */
-}
-
-#quiz-button:active {
-    background-color: rgb(66, 2, 65); /* Even darker gold shade on click */
-}
-
-
-
-/* Ensure the video fills the container properly */
-/* .video-container video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%; 
-    object-fit: contain; 
-} */
-
-/* Customize video.js skin */
-/* .video-js {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-} */
-
-/* Ensure fullscreen and volume controls are visible */
-/* .video-js .vjs-volume-panel,
-.video-js .vjs-fullscreen-control {
-    display: inline-block;
-} */
-
-/* Optionally hide default browser controls panel (if needed) */
- /* video::-webkit-media-controls-panel {
-    display: none !important; 
-}  */
 
 /* Prevent selection and copying */
 body {
@@ -180,32 +80,7 @@ body {
 }
 </style>
 
-<style>
-.videolist-area-bar {
-    background-color: #e0e0e0; /* Light grey for the background */
-    border-radius: 5px; /* Rounded corners for the background */
-    height: 5px; /* Height of the progress bar */
-    position: relative; /* For positioning the icon */
-}
 
-.videolist-area-bar--progress {
-    background-color: green; /* Progress bar color */
-    display: block;
-    height: 100%; /* Full height of the container */
-    border-radius: 5px; /* Rounded corners for the progress bar */
-}
-
-.videolist-area-bar p {
-    display: flex; /* Align icon and text */
-    align-items: center; /* Center icon vertically with text */
-}
-
-.videolist-area-bar i {
-    margin-right: 8px; /* Space between icon and text */
-    color: green; /* Icon color */
-}
-
-</style>
 <style>
     .star-rating {
     font-size: 2rem;
@@ -222,35 +97,7 @@ body {
     color: gold; /* Change color when hovered or selected */
 }
 </style>
-<style>
-    .button--green {
-    background-color: #28a745;
-    color: #fff;
-    padding: 13px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-}
-.button--green:hover {
-    background-color: #218838; /* Darker shade for hover effect */
-    color: #fff;
-}
 
-.button--gold {
-    background-color: darkgoldenrod; /* Set the background color to gold */
-    color: #fff; /* Set the text color to white for contrast */
-    padding: 13px 20px; /* Add padding for better appearance */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Optional: rounded corners */
-    text-decoration: none; /* Remove underline from link */
-    display: inline-block; /* Ensures padding and margins work correctly */
-    transition: background-color 0.3s; /* Add transition for hover effect */
-}
-
-.button--gold:hover {
-    background-color: darkgoldenrod; /* Darken the gold on hover */
-    color: #fff;
-}
-</style>
 <style>
     .button--purple {
     background-color: #6f42c1; /* Bootstrap Purple */
@@ -332,12 +179,54 @@ body {
                                           
                     </div>
                     <!-- Navigating Lessons in a Card -->
-                    <!-- <div id ="lesson-navigate-container" class="card lesson-card">
+                    <div id="lesson-navigate-container" class="card lesson-card">
                         <div class="lesson-navigation">
-                           
-
+                            <h4>Project Submission and Review</h4>
                         </div>
-                    </div>         -->
+                        <div class="card-body">
+                            @if($allProjectSubmission->count() > 0)
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Project Link</th>
+                                            <th>Status</th>
+                                            <th>Comment</th>
+                                            <th>Submitted At</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($allProjectSubmission as $index => $submission)
+                                            <tr>
+                                                <td>{{ $index + 1 }}</td>
+                                                <td>
+                                                    <a href="{{ $submission->project_link }}" target="_blank">
+                                                        {{ Str::limit($submission->project_link, 30) }}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    @if($submission->project_status == 'pending')
+                                                    <span class="badge bg-warning text-dark">Pending</span>
+                                                    @elseif($submission->project_status == 'reviewed')
+                                                        <span class="badge bg-primary">Reviewed</span>
+                                                    @elseif($submission->project_status == 'approved')
+                                                        <span class="badge bg-success">Approved</span>
+                                                    @else
+                                                        <span class="badge bg-secondary">Unknown</span>
+                                                    @endif
+                                                </td>
+                                                <td>{{ $submission->comment ?? 'No comments yet' }}</td>
+                                                <td>{{ $submission->created_at->format('d M Y, h:i A') }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @else
+                                <p class="text-center">No project submissions yet.</p>
+                            @endif
+                        </div>
+                    </div>
+    
                      
             </div>
         </div>
@@ -359,6 +248,7 @@ body {
                                  <p>
                                     <label for="project_link" class="fw-bold">Project Link</label>
                                     <form action="{{route('project-submission' , encryptor('encrypt', $courseId))}}" method="POST">
+                                        @csrf
                                         <div class="form-group mb-3">
                                             <input type="text" id="project_link" name="project_link" class="form-control" placeholder="Enter project link" required>
                                         </div>
@@ -367,6 +257,7 @@ body {
                                                 <i class="fas fa-paper-plane"></i> Submit
                                             </button>
                                         </div>
+                                        <input type="hidden" name="projectId" value="{{$project->id}}">
                                     </form>
                                 </p>                             
                             </div>  

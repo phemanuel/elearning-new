@@ -92,23 +92,33 @@ use Carbon\Carbon;
                         @if($courseCompleted->completed == 0)
                             @if(!$projectSubmission)
                                 {{-- No project submitted, show an "add project" icon --}}
-                                <button class="nav-link btn btn-warning">
-                                    <i class="fas fa-plus-circle"></i> <a href="{{route('project-view', encryptor('encrypt', $courseId))}}" class="text-dark text-decoration-none">Course Project</a>
+                                <button class="nav-link btn">
+                                    <i class="fas fa-plus-circle"></i> 
+                                    <a href="{{ route('project-view', encryptor('encrypt', $courseId)) }}" class="text-dark text-decoration-none">Course Project</a>
                                 </button>
                             @else
                                 @if($projectSubmission->project_status == 'pending')
                                     {{-- Project submitted but pending approval --}}
-                                    <button class="nav-link btn btn-info">
-                                        <i class="fas fa-hourglass-half"></i> <a href="{{route('project-view', encryptor('encrypt', $courseId))}}" class="text-white text-decoration-none">Pending Review</a>
+                                    <button class="nav-link">
+                                        <i class="fas fa-hourglass-half"></i> 
+                                        <a href="{{ route('project-view', encryptor('encrypt', $courseId)) }}" class="text-dark text-decoration-none">Course Project <small>(Pending)</small></a>
                                     </button>
-                                @elseif($projectSubmission->project_status == 'completed')
-                                    {{-- Project completed --}}
-                                    <button class="nav-link btn btn-success">
-                                        <i class="fas fa-check-circle"></i> <a href="{{route('project-view', encryptor('encrypt', $courseId))}}" class="text-white text-decoration-none">Project Approved</a>
+                                @elseif($projectSubmission->project_status == 'reviewed')
+                                    {{-- Project has been reviewed --}}
+                                    <button class="nav-link">
+                                        <i class="fas fa-eye"></i> 
+                                        <a href="{{ route('project-view', encryptor('encrypt', $courseId)) }}" class="text-dark text-decoration-none">Course Project <small>Reviewed</small></a>
+                                    </button>
+                                @elseif($projectSubmission->project_status == 'approved')
+                                    {{-- Project approved --}}
+                                    <button class="nav-link">
+                                        <i class="fas fa-check-circle"></i> 
+                                        <a href="{{ route('project-view', encryptor('encrypt', $courseId)) }}" class="text-dark text-decoration-none">Course Project <small>Approved</small></a>
                                     </button>
                                 @endif
                             @endif
                         @endif
+
 
                         <button class="nav-link "><a href="{{route('studentdashboard')}}" class="text-secondary">My Courses</a></button>
 

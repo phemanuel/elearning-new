@@ -21,7 +21,6 @@
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <!-- <li class="breadcrumb-item active"><a href="{{route('quiz.index')}}">Quizzes</a></li> -->
                     <li class="breadcrumb-item active"><a href="{{route('project.index')}}">All Project</a>
                     </li>
                 </ol>
@@ -55,7 +54,7 @@
                                                 <th>{{__('Course')}}</th>
                                                 <th>{{__('Project Content')}}</th>
                                                 <th>{{__('Additional Info')}}</th>
-                                                <th></th>
+                                                <th>{{__('Submission')}}</th>
                                                 <th>{{__('Action')}}</th>
                                             </tr>
                                         </thead>
@@ -65,15 +64,23 @@
                                                 <td>{{$key + 1}}</td>
                                                 <td>{{$q->course_title}}</td> 
                                                 <td>
-                                                    <div style="max-height: 100px; overflow-y: auto; white-space: pre-wrap;">
+                                                    <div style="max-height: 100px;  overflow-y: auto; white-space: pre-wrap;">
                                                         {!! $q->project_content ?? 'No content' !!}
                                                     </div>
                                                 </td>    
-                                                <td>{{ $q->additional_info }}</td>                                 
-                                                <td>                                                   
-                                                    <a href="{{route('project.show', encryptor('encrypt', $q->id))}}" 
-                                                class="btn btn-info" title="View Submission">View Submission</a>                                                
-                                            </td>
+                                                <td>
+                                                    <div style="max-height: 100px; overflow-y: auto;">    
+                                                        {{ $q->additional_info }}</td>   
+                                                    </div>                              
+                                                <td>
+                                                    <a href="{{ route('project.show', encryptor('encrypt', $q->course_id)) }}" 
+                                                    class="btn btn-info" title="View Submission">
+                                                        View 
+                                                        @if($q->pending_submissions > 0)
+                                                            <span class="badge bg-white text-dark border border-dark">{{ $q->pending_submissions }}</span>
+                                                        @endif
+                                                    </a>
+                                                </td>
                                                 <td>
                                                     <a href="{{route('project.edit', encryptor('encrypt',$q->id))}}"
                                                         class="btn btn-sm btn-primary" title="Edit"><i

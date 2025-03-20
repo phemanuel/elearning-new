@@ -17,4 +17,10 @@ class ProjectSubmission extends Model
         'project_status',
         'comment',
     ];
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class, 'student_id', 'id');
+    }
+
 }
