@@ -13,6 +13,7 @@ use App\Models\Enrollment;
 use App\Models\Quiz;
 use App\Models\Question;
 use App\Models\Project;
+use App\Models\ProjectSubmission;
 
 class WatchCourseController extends Controller
 {
@@ -216,8 +217,20 @@ class WatchCourseController extends Controller
 
         $project = Project::where('course_id', $decryptedId)->first();
         $projectId = $project->id;
+        $projectSubmission = ProjectSubmission::where('course_id', $courseId)
+        ->where('student_id', $studentId)
+        ->latest()
+        ->first();
 
-        return view('frontend.project-layout', compact('project', 'studentId', 'courseId','projectId'));
+        if($projectSubmission){
+
+            if($projectSubmission->project_status == 'Approved'){
+                return redirect()->back()->with('error', 'Project has been submitted and approved.');
+            }
+        }        
+
+        return view('frontend.project-layout', compact('project', 'studentId', 'courseId','projectId'
+        ,'projectSubmission'));
         
     }
 

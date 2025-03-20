@@ -358,7 +358,7 @@ body {
                                  <!-- insert input box -->
                                  <p>
                                     <label for="project_link" class="fw-bold">Project Link</label>
-                                    <form action="{{route('project-submission' , encryptor('encrypt', $courseId)))}}" method="POST">
+                                    <form action="{{route('project-submission' , encryptor('encrypt', $courseId))}}" method="POST">
                                         <div class="form-group mb-3">
                                             <input type="text" id="project_link" name="project_link" class="form-control" placeholder="Enter project link" required>
                                         </div>

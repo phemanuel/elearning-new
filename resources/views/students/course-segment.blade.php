@@ -80,6 +80,8 @@ use Carbon\Carbon;
             <!-- Nav  -->
             <nav class="students-info-intro__nav">
                 <div class="nav" id="nav-tab" role="tablist">
+                <button class="nav-link "><a href="{{route('home')}}" class="text-secondary">Home</a></button>
+
                     <button class="nav-link active" id="nav-profile-tab" data-bs-toggle="tab"
                         data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile"
                         aria-selected="true">Course Segments</button>
@@ -87,8 +89,30 @@ use Carbon\Carbon;
                     <!-- <button class="nav-link" id="nav-coursesall-tab" data-bs-toggle="tab"
                         data-bs-target="#nav-coursesall" type="button" role="tab" aria-controls="nav-coursesall"
                         aria-selected="false">All Courses</button> -->
+                        @if($courseCompleted->completed == 0)
+                            @if(!$projectSubmission)
+                                {{-- No project submitted, show an "add project" icon --}}
+                                <button class="nav-link btn btn-warning">
+                                    <i class="fas fa-plus-circle"></i> <a href="{{route('project-view', encryptor('encrypt', $courseId))}}" class="text-dark text-decoration-none">Course Project</a>
+                                </button>
+                            @else
+                                @if($projectSubmission->project_status == 'pending')
+                                    {{-- Project submitted but pending approval --}}
+                                    <button class="nav-link btn btn-info">
+                                        <i class="fas fa-hourglass-half"></i> <a href="{{route('project-view', encryptor('encrypt', $courseId))}}" class="text-white text-decoration-none">Pending Review</a>
+                                    </button>
+                                @elseif($projectSubmission->project_status == 'completed')
+                                    {{-- Project completed --}}
+                                    <button class="nav-link btn btn-success">
+                                        <i class="fas fa-check-circle"></i> <a href="{{route('project-view', encryptor('encrypt', $courseId))}}" class="text-white text-decoration-none">Project Approved</a>
+                                    </button>
+                                @endif
+                            @endif
+                        @endif
 
-                    <button class="nav-link "><a href="{{route('studentdashboard')}}" class="text-secondary">My Courses</a></button>
+                        <button class="nav-link "><a href="{{route('studentdashboard')}}" class="text-secondary">My Courses</a></button>
+
+                    
 
                     <!-- <button class="nav-link" id="nav-activecourses-tab" data-bs-toggle="tab"
                         data-bs-target="#nav-activecourses" type="button" role="tab" aria-controls="nav-activecourses"
@@ -107,9 +131,7 @@ use Carbon\Carbon;
                         History</button>
 
                     <button class="nav-link "><a href="{{route('student_profile')}}"
-                            class="text-secondary">Profile</a></button> -->
-
-                    <button class="nav-link "><a href="{{route('home')}}" class="text-secondary">Home</a></button>
+                            class="text-secondary">Profile</a></button> -->                    
                 </div>
             </nav>
         </div>

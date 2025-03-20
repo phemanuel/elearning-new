@@ -12,6 +12,7 @@ use App\Models\Material;
 use App\Models\Progress;
 use App\Models\ProgressAll;
 use Illuminate\Http\Request;
+use App\Models\ProjectSubmission;
 use Carbon\Carbon;
 
 class DashboardController extends Controller
@@ -76,8 +77,19 @@ class DashboardController extends Controller
         // Fetch the current student information
         $studentId = currentUserId();
         $student_info = Student::find($studentId);
+        $courseId = encryptor('decrypt' , $id);
+        
+        //--check if the course has been completed
+        $courseCompleted = Enrollment::where('course_id', $courseId)
+        ->where('student_id', $studentId)
+        ->first();
 
-        // In your controller method
+        // Check if a project has been submitted for this course
+        $projectSubmission = ProjectSubmission::where('course_id', $courseId)
+        ->where('student_id', $studentId)
+        ->latest()
+        ->first();
+        //
         $enrollment = Enrollment::with(['course.segments', 'course.lessons'])
             ->where('student_id', currentUserId())
             ->paginate(10);
@@ -88,7 +100,7 @@ class DashboardController extends Controller
         $course = Course::all();
         // Fetch current course selected
         $courseExist = Course::find(encryptor('decrypt' , $id)); 
-        $courseDateEnabled = $courseExist->date_enabled;
+        $courseDateEnabled = $courseExist->date_enabled;      
 
         //---Check if date has been enabled for the course----
         if ($courseDateEnabled == 1) {
@@ -148,7 +160,7 @@ class DashboardController extends Controller
             'student_info',
             'segments',
             'segmentProgress',
-            'progress','completedCourses' // Pass the segment progress to the view
+            'progress','completedCourses' ,'projectSubmission', 'courseCompleted','courseId'
         ));
     }
 
