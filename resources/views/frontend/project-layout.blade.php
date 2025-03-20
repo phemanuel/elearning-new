@@ -208,14 +208,14 @@ body {
                                                     @if($submission->project_status == 'pending')
                                                     <span class="badge bg-warning text-dark">Pending</span>
                                                     @elseif($submission->project_status == 'reviewed')
-                                                        <span class="badge bg-primary">Reviewed</span>
+                                                        <span class="badge bg-warning text-dark">Reviewed</span>
                                                     @elseif($submission->project_status == 'approved')
-                                                        <span class="badge bg-success">Approved</span>
+                                                        <span class="badge bg-warning text-dark">Approved</span>
                                                     @else
                                                         <span class="badge bg-secondary">Unknown</span>
                                                     @endif
                                                 </td>
-                                                <td>{{ $submission->comment ?? 'No comments yet' }}</td>
+                                                <td>{!! $submission->comment ?? 'No comments yet' !!}</td>
                                                 <td>{{ $submission->created_at->format('d M Y, h:i A') }}</td>
                                             </tr>
                                         @endforeach
