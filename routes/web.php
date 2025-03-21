@@ -144,6 +144,7 @@ Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     Route::resource('project', project::class);
     Route::get('project/{id}/review', [project::class, 'review'])->name('project.review');
     Route::post('/review/update', [project::class, 'reviewUpdate'])->name('admin.review.update');
+    Route::get('/review/filter', [project::class, 'filterProjects'])->name('admin.review.filter');
     Route::resource('question', question::class);
     Route::get('question/add/{id}', [question::class, 'createQuestion'])->name('question.createNew');
     Route::resource('option', option::class);

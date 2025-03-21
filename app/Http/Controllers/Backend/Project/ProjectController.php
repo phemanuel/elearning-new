@@ -8,6 +8,7 @@ use App\Models\ProjectSubmission;
 use App\Models\SubscriptionPlan;
 use App\Models\Subscription;
 use App\Models\Course;
+use App\Models\Enrollment;
 use Illuminate\Support\Facades\Hash;
 use Exception;
 use File;
@@ -178,29 +179,62 @@ class ProjectController extends Controller
         ->latest('created_at')
         ->get();
 
-        return view('backend.project.project-submission', compact('projectSubmissions'));
+        return view('backend.project.project-submission', compact('projectSubmissions', 'courseId'));
     }
 
     public function reviewUpdate(Request $request)
-    {
-        Log::info("Review Update Request: " . json_encode($request->all())); // Log request data
+        {
+            // Log::info("Review Update Request: " . json_encode($request->all()));
 
-        $request->validate([
-            'id' => 'required|exists:project_submissions,id',
-            'comment' => 'nullable|string',
-            'status' => 'required|in:reviewed,approved',
-        ]);
+            // Validate request
+            $request->validate([
+                'id' => 'required|exists:project_submissions,id',
+                'comment' => 'nullable|string',
+                'status' => 'required|in:reviewed,approved',
+            ]);
 
-        // Find the project submission
-        $submission = ProjectSubmission::findOrFail($request->id);
+            // Find the project submission and get student_id & course_id
+            $submission = ProjectSubmission::findOrFail($request->id);
+            $studentId = $submission->student_id;
+            $courseId = $submission->course_id;
 
-        // Update fields
-        $submission->comment = $request->comment;
-        $submission->project_status = $request->status;
-        $submission->save();
+            // Log::info("Student ID: $studentId, Course ID: $courseId");
 
-        return response()->json(['success' => true, 'message' => 'Project reviewed successfully']);
-    }
+            // Update project status and comment
+            $submission->comment = $request->comment;
+            $submission->project_status = $request->status;
+            $submission->save();
+
+            // If the status is approved, update completed status in enrollment table
+            if ($request->status === 'approved') {
+                $updated = Enrollment::where('student_id', $studentId)
+                    ->where('course_id', $courseId)
+                    ->update(['completed' => 1]);
+
+                if ($updated) {
+                    Log::info("Enrollment updated for student $studentId in course $courseId.");
+                } else {
+                    Log::warning("No enrollment record found for student $studentId in course $courseId.");
+                }
+            }
+
+            return response()->json(['success' => true, 'message' => 'Project reviewed successfully']);
+        }
+
+        public function filterProjects(Request $request)
+        {
+            $status = $request->status;
+            $courseId = $request->course_id;
+
+            $projectSubmissions = ProjectSubmission::where('project_status', $status)
+                ->where('course_id', $courseId)
+                ->with('student') 
+                ->get();
+
+            $html = view('backend.project.submissions_list', compact('projectSubmissions'))->render();
+
+            return response()->json(['html' => $html]);
+        }
 
 
 }

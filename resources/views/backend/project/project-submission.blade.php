@@ -36,11 +36,21 @@
         <div class="row">
             <div class="col-lg-12">
                 <ul class="nav nav-pills mb-3">
-                    <li class="nav-item"><a href="#list-view" data-toggle="tab"
-                            class="nav-link btn-primary mr-1 show active">List View</a></li>
-                    <!-- <li class="nav-item"><a href="javascript:void(0);" data-toggle="tab"
-                            class="nav-link btn-primary">Grid
-                            View</a></li> -->
+                    <li class="nav-item">
+                        <a href="javascript:void(0);" data-status="pending" class="nav-link btn-warning status-filter active">
+                            <i class="fas fa-clock"></i> Pending
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:void(0);" data-status="reviewed" class="nav-link btn-info status-filter">
+                            <i class="fas fa-eye"></i> Reviewed
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:void(0);" data-status="approved" class="nav-link btn-success status-filter">
+                            <i class="fas fa-check-circle"></i> Approved
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="col-lg-12">
@@ -56,50 +66,17 @@
                                 <table id="example3" class="display" style="min-width: 845px">
                                     <thead>
                                         <tr>
-                                            <th>{{__('#')}}</th>
-                                            <th>{{__('Student Picture')}}</th>
-                                            <th>{{__('Student Name')}}</th>
-                                            <th>{{__('Project Link')}}</th>
-                                            <th>{{__('Comment')}}</th>
-                                            <th>{{__('Status')}}</th>
-                                            <th>{{__('Action')}}</th>
+                                            <th>#</th>
+                                            <th>Student Picture</th>
+                                            <th>Student Name</th>
+                                            <th>Project Link</th>
+                                            <th>Comment</th>
+                                            <!-- <th>Status</th> -->
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        @forelse ($projectSubmissions as $key => $submission)
-                                        <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>
-                                                <img src="{{ asset('uploads/students/' . $submission->student->image) }}" 
-                                                    alt="Student Image" class="rounded-circle" width="50" height="50">
-                                            </td>
-                                            <td>{{ $submission->student->name_en ?? 'Unknown' }}</td>                                            
-                                            <td>
-                                                <a href="{{ $submission->project_link }}" target="_blank" class="btn btn-primary">
-                                                    View Project
-                                                </a>
-                                            </td>
-                                            <td>{{ $submission->comment ?? 'No comments' }}</td>
-                                            <td>
-                                                <span class="badge bg-warning text-dark">{{ ucfirst($submission->project_status) }}</span>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-info review-btn" 
-                                                        data-id="{{ $submission->id }}" 
-                                                        data-name="{{ $submission->student->name_en }}" 
-                                                        data-image="{{ asset('uploads/students/' . $submission->student->image) }}" 
-                                                        data-comment="{{ $submission->comment }}" 
-                                                        data-status="{{ $submission->project_status }}"
-                                                        title="Review Submission">
-                                                    Review Project
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        @empty
-                                        <tr>
-                                            <th colspan="7" class="text-center">No Pending Project Submission Found</th>
-                                        </tr>
-                                        @endforelse
+                                    <tbody id="projectSubmissionsTable">
+                                        @include('backend.project.submissions_list', ['projectSubmissions' => $projectSubmissions])
                                     </tbody>
                                 </table>
 
@@ -224,6 +201,61 @@
         });
     });
 </script>
+
+<script>
+    $(document).ready(function () {
+        let courseId = "{{ $courseId }}"; 
+
+        // Handle status filter click
+        $('.status-filter').click(function () {
+            let status = $(this).data('status');
+
+            console.log("Tab Clicked! Status:", status);
+
+            $('.status-filter').removeClass('active');
+            $(this).addClass('active');
+
+            fetchProjects(status, courseId);
+        });
+
+        function fetchProjects(status, courseId) {
+            console.log("Fetching projects for Status:", status, "and Course ID:", courseId);
+
+            $.ajax({
+                url: "{{ route('admin.review.filter') }}",
+                type: "GET",
+                data: { status: status, course_id: courseId },
+                success: function (response) {
+                    console.log("AJAX Request Sent...");
+                    $('#projectSubmissionsTable').html(response.html);
+                },
+                error: function () {
+                    alert('Error fetching projects.');
+                }
+            });
+        }
+
+        // Handle Review Button Click (Using Event Delegation)
+        $(document).on('click', '.review-btn', function () {
+            let submissionId = $(this).data('id');
+            let studentName = $(this).data('name');
+            let studentImage = $(this).data('image');
+            let comment = $(this).data('comment');
+            let status = $(this).data('status');
+
+            console.log("Review Button Clicked! ID:", submissionId);
+
+            // Populate modal fields
+            $('#reviewProjectModal #submissionId').val(submissionId);
+            $('#reviewProjectModal #studentName').text(studentName);
+            $('#reviewProjectModal #studentImage').attr('src', studentImage);
+            $('#reviewModal #comment').val(comment);
+            $('#reviewProjectModal').modal('show');
+        });
+    });
+</script>
+
+
 
 
 @endpush
