@@ -22,26 +22,26 @@
         </span>
     </td> -->
     <td>
-        @if ($submission->project_status == 'pending')
-            <!-- Review Button for Pending Submissions -->
-            <button class="btn btn-info review-btn" 
-                    data-id="{{ $submission->id }}" 
-                    data-name="{{ $submission->student->name_en }}" 
-                    data-image="{{ asset('uploads/students/' . $submission->student->image) }}" 
-                    data-comment="{{ $submission->comment }}" 
-                    data-status="{{ $submission->project_status }}">
-                <i class="fas fa-edit"></i> Review
-            </button>
-        @elseif ($submission->project_status == 'reviewed')
-            <!-- Edit Button for Reviewed Submissions -->
-            <button class="btn btn-warning edit-comment-btn" 
-                    data-id="{{ $submission->id }}" 
-                    data-comment="{{ $submission->comment }}">
-                <i class="fas fa-pencil-alt"></i> Edit
-            </button>
-        @endif
-        <!-- No button for Approved Submissions -->
-    </td>
+    @if ($submission->project_status == 'pending')
+        <button class="btn btn-warning review-btn"
+                data-id="{{ $submission->id }}" 
+                data-name="{{ $submission->student->name_en }}" 
+                data-image="{{ asset('uploads/students/' . $submission->student->image) }}" 
+                data-comment="{{ $submission->comment }}" 
+                data-status="{{ $submission->project_status }}">
+            <i class="fas fa-check"></i> Review
+        </button>
+    @elseif ($submission->project_status == 'reviewed')
+        <button class="btn btn-info edit-btn"
+                data-id="{{ $submission->id }}" 
+                data-name="{{ $submission->student->name_en }}" 
+                data-image="{{ asset('uploads/students/' . $submission->student->image) }}" 
+                data-comment="{{ $submission->comment }}" 
+                data-status="{{ $submission->project_status }}">
+            <i class="fas fa-edit"></i> Edit
+        </button>
+    @endif
+</td>
 </tr>
 @empty
 <tr>

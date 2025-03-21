@@ -229,6 +229,7 @@ class ProjectController extends Controller
             $projectSubmissions = ProjectSubmission::where('project_status', $status)
                 ->where('course_id', $courseId)
                 ->with('student') 
+                ->latest('created_at')
                 ->get();
 
             $html = view('backend.project.submissions_list', compact('projectSubmissions'))->render();

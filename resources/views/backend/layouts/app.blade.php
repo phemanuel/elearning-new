@@ -642,6 +642,13 @@
     });
   });
 </script>
+<script>
+  $(document).ready(function() {
+    $('#edit-comment').summernote({
+      height: 120
+    });
+  });
+</script>
 </body>
 
 </html>
