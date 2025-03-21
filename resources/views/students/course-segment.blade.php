@@ -107,16 +107,16 @@ use Carbon\Carbon;
                                     {{-- Project has been reviewed --}}
                                     <button class="nav-link">
                                         <i class="fas fa-eye"></i> 
-                                        <a href="{{ route('project-view', encryptor('encrypt', $courseId)) }}" class="text-dark text-decoration-none">Course Project <small>Reviewed</small></a>
-                                    </button>
-                                @elseif($projectSubmission->project_status == 'approved')
+                                        <a href="{{ route('project-view', encryptor('encrypt', $courseId)) }}" class="text-dark text-decoration-none">Course Project <small>(Reviewed)</small></a>
+                                    </button>                                
+                                @endif
+                            @endif
+                        @else                       
                                     {{-- Project approved --}}
                                     <button class="nav-link">
                                         <i class="fas fa-check-circle"></i> 
-                                        <a href="{{ route('project-view', encryptor('encrypt', $courseId)) }}" class="text-dark text-decoration-none">Course Project <small>Approved</small></a>
+                                        <a href="{{ route('project-view', encryptor('encrypt', $courseId)) }}" class="text-dark text-decoration-none">Course Project <small>(Approved)</small></a>
                                     </button>
-                                @endif
-                            @endif
                         @endif
 
 

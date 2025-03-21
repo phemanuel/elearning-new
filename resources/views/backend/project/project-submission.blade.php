@@ -121,13 +121,13 @@
                     <!-- Comment Section -->
                     <div class="mb-3">
                         <label for="comment" class="form-label">Comment</label>
-                        <textarea class="form-control" id="comment" name="comment" rows="3"></textarea> <!-- Added name="comment" -->
+                        <textarea class="form-control" id="comment" name="comment" rows="3"></textarea> 
                     </div>
 
                     <!-- Status Dropdown -->
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
-                        <select class="form-control" id="status" name="status"> <!-- Added name="status" -->
+                        <select class="form-control" id="status" name="status"> 
                             <option selected>Select Status</option>
                             <option value="reviewed">Reviewed</option>
                             <option value="approved">Approved</option>

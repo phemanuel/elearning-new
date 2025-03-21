@@ -12,11 +12,11 @@
     <link rel="icon" type="image/png" href="{{asset('frontend/dist/images/favicon/favicon.png')}}" />
     <link rel="stylesheet" href="{{asset('frontend/fontawesome-free-5.15.4-web/css/all.min.css')}}">
     <link href="https://vjs.zencdn.net/7.18.1/video-js.css" rel="stylesheet" />
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">   
 
     
 <style>
+   
     .highlight {
         background-color: #e0f7fa; /* Light blue background for highlighting */
         border-left: 4px solid #007bff; /* Blue left border for additional emphasis */
@@ -115,6 +115,44 @@ body {
     color: #fff;
 }
 </style>
+
+<style>
+    .status-box {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 15px; /* Rounded corners */
+        font-weight: bold;
+        text-align: center;
+        font-size: 12px;
+        min-width: 100px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+
+    /* Different Status Colors */
+    .pending {
+        background: #ffcc00; /* Yellow */
+        color: #333;
+        border: 2px solid #e6b800;
+    }
+
+    .reviewed {
+        background: #007bff; /* Blue */
+        color: white;
+        border: 2px solid #0056b3;
+    }
+
+    .approved {
+        background: #28a745; /* Green */
+        color: white;
+        border: 2px solid #1e7e34;
+    }
+
+    .unknown {
+        background: #6c757d; /* Grey */
+        color: white;
+        border: 2px solid #545b62;
+    }
+</style>
 </head>
 
 <body style="background-color: #ebebf2;">
@@ -206,13 +244,13 @@ body {
                                                 </td>
                                                 <td>
                                                     @if($submission->project_status == 'pending')
-                                                    <span class="badge bg-warning text-dark">Pending</span>
+                                                        <div class="status-box pending">Pending</div>
                                                     @elseif($submission->project_status == 'reviewed')
-                                                        <span class="badge bg-warning text-dark">Reviewed</span>
+                                                        <div class="status-box reviewed">Reviewed</div>
                                                     @elseif($submission->project_status == 'approved')
-                                                        <span class="badge bg-warning text-dark">Approved</span>
+                                                        <div class="status-box approved">Approved</div>
                                                     @else
-                                                        <span class="badge bg-secondary">Unknown</span>
+                                                        <div class="status-box unknown">Unknown</div>
                                                     @endif
                                                 </td>
                                                 <td>{!! $submission->comment ?? 'No comments yet' !!}</td>
