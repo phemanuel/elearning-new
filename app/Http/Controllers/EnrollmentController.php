@@ -72,34 +72,52 @@ class EnrollmentController extends Controller
     public function create()
     {
         $user = auth()->user();
-        if ($user) {
-            $instructorId = $user->instructor_id;
 
-            // Fetch students and their enrollments specific to the instructor
-            $data = Student::with(['enrollments.course' => function ($query) use ($instructorId) {
-                $query->where('instructor_id', $instructorId);
-            }])->paginate(20);            
-
-            $course = Course::where('instructor_id', $instructorId)
-                ->where('status', 2)
-                ->get();
-
-            $instructorNew = Instructor::where('id', $user->instructor_id)->first();
-            $currentPlan = $instructorNew->current_plan;
-
-            $subPlan = SubscriptionPlan::where('id', $currentPlan)->first();
-            $noOfStudent = $subPlan->student_upload;
-
-            $noOfStudentEnrolled = Enrollment::where('instructor_id', $instructorId)->count();
-
-            if ($noOfStudent > $noOfStudentEnrolled) {
-                return view('backend.enrollment.view', compact('data', 'course'));
-            } elseif ($noOfStudent == $noOfStudentEnrolled) {
-                return redirect()->back()->with('error', 'You have reached the maximum number of students to enroll.');
-            }
+        if (!$user) {
+            return redirect()->route('studentlogOut');
         }
-        return redirect()->route('studentlogOut');
+
+        if ($user->role_id == 1) { // Super Admin
+            $course = Course::where('status', 2)->get();
+            $data = Student::with(['enrollments.course'])->paginate(20);  
+            $noOfStudentEnrolled = Enrollment::count();
+
+            return view('backend.enrollment.view', compact('data', 'course'));
+        } 
+        
+        // If role_id is not 1, process as an Instructor
+        $instructorId = $user->instructor_id;
+        
+        $data = Student::with(['enrollments.course' => function ($query) use ($instructorId) {
+            $query->where('instructor_id', $instructorId);
+        }])->paginate(20);
+
+        $course = Course::where('instructor_id', $instructorId)
+            ->where('status', 2)
+            ->get();
+
+        $instructorNew = Instructor::find($instructorId);
+        if (!$instructorNew) {
+            return redirect()->back()->with('error', 'Instructor not found.');
+        }
+
+        $currentPlan = $instructorNew->current_plan;
+        $subPlan = SubscriptionPlan::find($currentPlan);
+
+        if (!$subPlan) {
+            return redirect()->back()->with('error', 'Subscription plan not found.');
+        }
+
+        $noOfStudentAllowed = $subPlan->student_upload;
+        $noOfStudentEnrolled = Enrollment::where('instructor_id', $instructorId)->count();
+
+        if ($noOfStudentAllowed > $noOfStudentEnrolled) {
+            return view('backend.enrollment.view', compact('data', 'course'));
+        }
+
+        return redirect()->back()->with('error', 'You have reached the maximum number of students to enroll.');
     }
+
 
     public function enroll(Request $request)
     {
