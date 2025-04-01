@@ -10,7 +10,7 @@ use App\Models\CourseCategory;
 use App\Models\Student;
 use App\Models\ContactSales;
 use App\Models\Contact;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Log; 
 
 class HomeController extends Controller
 {

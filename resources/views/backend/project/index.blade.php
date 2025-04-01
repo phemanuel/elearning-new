@@ -78,6 +78,8 @@
                                                         View 
                                                         @if($q->pending_submissions > 0)
                                                             <span class="badge bg-white text-dark border border-dark">{{ $q->pending_submissions }}</span>
+                                                        @else
+                                                            <span class="badge bg-white text-dark border border-dark">0</span>
                                                         @endif
                                                     </a>
                                                 </td>

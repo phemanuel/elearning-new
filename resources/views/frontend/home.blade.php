@@ -57,15 +57,15 @@
                 
                 <div class="browse-categories-item default-item-one mb-2">
                     <div class="browse-categories-item-icon">
-                    <div class="categories-one default-categories">
-                            <a href="{{route('courseName', ['courseCategory' => $cat->category_name])}}">
-                            <img src="{{asset('uploads/courseCategories/'.$cat->category_image)}}"
-                            class="rounded-circle" width="80" height="80" alt="">
-                            </a>
+                        <div class="categories-one default-categories">
+                                <a href="{{route('courseName', ['courseCategory' => $cat->category_name])}}">
+                                <img src="{{asset('uploads/courseCategories/'.$cat->category_image)}}"
+                                class="rounded-circle" width="80" height="80" alt="">
+                                </a>
                         </div>
                     </div>
                     <div class="browse-categories-item-text">
-                        <a href="{{route('courseName', ['courseCategory' => $cat->category_name])}}"><h6 class="font-title--card"><a href="#">{{$cat->category_name}}</a></h6></a>
+                        <a href="{{route('courseName', ['courseCategory' => $cat->category_name])}}"><h6 class="font-title--card">{{$cat->category_name}}</h6></a>
                         <p>{{ $courseCount }} Courses</p>
                     </div>
                 </div>

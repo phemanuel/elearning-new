@@ -189,7 +189,7 @@ Route::get('/register', [HomeController::class, 'signUpForm'])->name('signup');
 
 /* students controllers */
 Route::get('/student/register', [sauth::class, 'signUpForm'])->name('studentRegister');
-Route::post('/student/register/{back_route}', [sauth::class, 'signUpStore'])->name('studentRegister.store');
+Route::post('/student/register', [sauth::class, 'signUpStore'])->name('studentRegister.store');
 
 Route::get('/user/login', [sauth::class, 'signInForm'])->name('studentLogin');
 Route::post('/student/login/{back_route}', [sauth::class, 'signInCheck'])->name('studentLogin.check');

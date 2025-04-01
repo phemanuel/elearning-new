@@ -49,21 +49,22 @@ class AuthController extends Controller
         return view('students.auth.subscription-plan', compact('subPlan'));
     }
 
-    public function signUpStore(SignUpRequest $request,$back_route)
+    public function signUpStore(SignUpRequest $request)
     {
         try {
             $email_token =Str::random(40);
 
+            $stdPassword = Hash::make($request->password);
             $student = new Student;
             $student->name_en = $request->name;
             $student->email = $request->email;
-            $student->password = Hash::make($request->password);
+            $student->password =  $stdPassword ;
             $student->email_verified_status = 0;
             $student->nationality = "n/a";
             $student->remember_token = $email_token;
             $student->image = "blank.jpg";
             if ($student->save()){
-                $this->setSession($student);
+                // $this->setSession($student);
 
                 // Create and save user data with student ID
                 
@@ -80,7 +81,7 @@ class AuthController extends Controller
                 $user->language = 'en';
                 $user->email_verified_status = 0;
                 $user->remember_token = $email_token;
-                $user->password = Hash::make($request->password);
+                $user->password = $stdPassword;
                 $user->save();
 
                 
@@ -89,8 +90,20 @@ class AuthController extends Controller
                 session(['email' => $request->email]);
                 session(['full_name' => $request->name]);
                 session(['email_token' => $email_token]);
-                session(['email_message' => $email_message]);               
+                session(['email_message' => $email_message]);   
                 
+                // Log::info('SignUpStore Response: ', [
+                //     'email' => $request->email,
+                //     'fullName' => $request->name,
+                //     'emailToken' => $email_token
+                // ]);
+                
+                // return response()->json([
+                //     'email' => $request->email,
+                //     'fullName' => $request->name,
+                //     'emailToken' => $email_token,
+                //     'emailMessage' => $email_message
+                // ], 200, ['Content-Type' => 'application/json']);
                 return redirect()->route('send-mail');
                 // return redirect()->route('register')->with('success', 'Account cerated successfully.');
             }

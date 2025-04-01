@@ -21,7 +21,7 @@ class MailController extends Controller
     {
         try {
             // Retrieve email address from the session
-            $email_address = session('email');
+            $email_address = session('email'); 
             $full_name = session('full_name');
             $email_token = session('email_token');
                       

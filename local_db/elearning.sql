@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2025 at 11:07 PM
+-- Generation Time: Apr 01, 2025 at 02:09 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -505,7 +505,10 @@ INSERT INTO `log_activities` (`id`, `user_id`, `ip_address`, `activity`, `activi
 (18, 11, '127.0.0.1', 'User logged in', '2025-03-17 16:44:20', '2025-03-17 16:44:20', '2025-03-17 16:44:20'),
 (19, 11, '127.0.0.1', 'Course Deleted by Miracle Peters', '2025-03-17 17:01:47', '2025-03-17 17:01:47', '2025-03-17 17:01:47'),
 (20, 11, '127.0.0.1', 'Course updated by Miracle Peters', '2025-03-17 17:44:35', '2025-03-17 17:44:35', '2025-03-17 17:44:35'),
-(21, 11, '127.0.0.1', 'User logged in', '2025-03-20 00:43:12', '2025-03-20 00:43:12', '2025-03-20 00:43:12');
+(21, 11, '127.0.0.1', 'User logged in', '2025-03-20 00:43:12', '2025-03-20 00:43:12', '2025-03-20 00:43:12'),
+(22, 1, '127.0.0.1', 'User logged in', '2025-03-23 01:05:26', '2025-03-23 01:05:26', '2025-03-23 01:05:26'),
+(23, 11, '127.0.0.1', 'User logged in', '2025-03-23 01:15:33', '2025-03-23 01:15:33', '2025-03-23 01:15:33'),
+(24, 1, '127.0.0.1', 'User logged in', '2025-04-01 07:07:56', '2025-04-01 07:07:56', '2025-04-01 07:07:56');
 
 -- --------------------------------------------------------
 
@@ -1129,7 +1132,8 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id`, `name`, `identity`, `created_at`, `updated_at`) VALUES
 (1, 'Super Admin', 'superadmin', '2024-09-26 01:25:46', NULL),
 (2, 'Admin', 'admin', '2024-09-26 01:25:46', NULL),
-(3, 'Instructor', 'instructor', '2024-09-26 01:25:46', NULL);
+(3, 'Instructor', 'instructor', '2024-09-26 01:25:46', NULL),
+(4, 'Student', 'student', '2025-04-01 07:08:43', '2025-04-01 07:08:43');
 
 -- --------------------------------------------------------
 
@@ -1728,7 +1732,7 @@ ALTER TABLE `lessons`
 -- AUTO_INCREMENT for table `log_activities`
 --
 ALTER TABLE `log_activities`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `materials`
@@ -1824,7 +1828,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `segments`

@@ -171,7 +171,8 @@ class ProjectController extends Controller
     public function show($id)
     {
         $courseId = encryptor('decrypt', $id);
-
+        $course = Course::where('id', $courseId)->first();
+        $courseName = $course->title_en;
         // Get pending project submissions for this course
         $projectSubmissions = ProjectSubmission::where('course_id', $courseId)
         ->where('project_status', 'pending')
@@ -179,7 +180,7 @@ class ProjectController extends Controller
         ->latest('created_at')
         ->get();
 
-        return view('backend.project.project-submission', compact('projectSubmissions', 'courseId'));
+        return view('backend.project.project-submission', compact('projectSubmissions', 'courseId','courseName'));
     }
 
     public function reviewUpdate(Request $request)
