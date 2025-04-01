@@ -126,15 +126,15 @@ class EnrollmentController extends Controller
         $validated = $request->validate([
             'student_id' => 'required|exists:students,id',
             'course_id' => 'required|exists:courses,id',
-            'instructor_id' => 'required|exists:instructors,id',
         ]);
-    
+        $course = Course::where('id', '=', $validated['course_id'])->first();
+        $instructorId = $course->instructor_id;
         \Log::info('Validated Data:', $validated);
         // Check if the enrollment already exists
         $exists = DB::table('enrollments')->where([
             'student_id' => $validated['student_id'],
             'course_id' => $validated['course_id'],
-            'instructor_id' => $validated['instructor_id'],
+            'instructor_id' => $instructorId,
         ])->exists();
 
         if ($exists) {
@@ -145,7 +145,7 @@ class EnrollmentController extends Controller
         DB::table('enrollments')->insert([
             'student_id' => $validated['student_id'],
             'course_id' => $validated['course_id'],
-            'instructor_id' => $validated['instructor_id'],
+            'instructor_id' => $instructorId,
             'segment' => 1,
             'completed' => 0,
             'enrollment_date' => now(),
@@ -165,7 +165,7 @@ class EnrollmentController extends Controller
         DB::table('payments')->insert([
             'student_id' => $validated['student_id'],
             'course_id' => $validated['course_id'],
-            'instructor_id' => $validated['instructor_id'],
+            'instructor_id' => $instructorId,
             'currency' => "NAIRA",
             'currency_code' => $course->currency_type,
             'currency_value' => 1,
@@ -179,7 +179,6 @@ class EnrollmentController extends Controller
 
         return response()->json(['success' => true, 'message' => 'Enrollment created successfully.']);
     }
-
     /**
      * Store a newly created resource in storage.
      */

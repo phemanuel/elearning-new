@@ -79,7 +79,7 @@
                                                             @endforeach
                                                         </ul>
                                                     @else
-                                                        <span>No courses enrolled</span>
+                                                        <span>No course/s enrolled</span>
                                                     @endif
                                                 </div>
                                             </td>
