@@ -198,10 +198,9 @@
                 // Retrieve required data
                 const studentId = this.dataset.studentId;
                 const courseId = this.closest('tr').querySelector('#courseId').value;
-                const instructorId = '{{ auth()->user()->instructor_id }}'; 
 
                 // Ensure all required data is available
-                if (!studentId || !courseId || !instructorId) {
+                if (!studentId || !courseId ) {
                     alert('Missing required data. Please check and try again.');
                     return;
                 }
@@ -213,7 +212,7 @@
                         "Content-Type": "application/json",
                         "X-CSRF-TOKEN": "{{ csrf_token() }}"
                     },
-                    body: JSON.stringify({ student_id: studentId, course_id: courseId, instructor_id: instructorId })
+                    body: JSON.stringify({ student_id: studentId, course_id: courseId })
                 })
                 .then(response => response.json())
                 .then(data => {
