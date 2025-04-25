@@ -67,8 +67,10 @@
                                     <div class="card-body pt-2">
                                         <div class="text-center">
                                             <div class="">
-                                                <img src="{{asset('uploads/courses/'.$d->image)}}" class="w-100"
-                                                    height="200" alt="">
+                                                <img src="{{ asset('public/uploads/courses/' . ($d->image && file_exists(public_path('uploads/courses/' . $d->image)) ? $d->image : 'course_blank.jpg')) }}"
+     class="w-100"
+                                                    height="200" alt="Course Image">
+                                               
                                             </div>
                                             <h3 class="mt-4 mb-1">{{$d->title_en}}</h3>
                                             <ul class="list-group mb-3 list-group-flush">

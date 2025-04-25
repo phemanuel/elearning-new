@@ -64,8 +64,11 @@
                                             @forelse ($instructor as $d)
                                             <tr>
                                                 <td>
-                                                    <img class="rounded-circle" width="35" height="35"
-                                                        src="{{asset('uploads/users/'.$d->image)}}" alt="">
+                                                    <img src="{{ asset('public/uploads/users/' . ($d->image && file_exists(public_path('uploads/users/' . $d->image)) ? $d->image : 'blank.jpg')) }}"
+     width="50"
+     height="50"
+     class="rounded-circle"
+     alt="">
                                                 </td>
                                                 <td><strong>{{$d->name_en}}</strong></td>
                                                 <td>{{$d->email}}</td>
@@ -136,8 +139,11 @@
                                     <div class="card-body pt-2">
                                         <div class="text-center">
                                             <div class="profile-photo">
-                                                <img src="{{asset('uploads/users/'.$d->image)}}" width="100"
-                                                    height="100" class="rounded-circle" alt="">
+                                                <img src="{{ asset('uploads/users/' . ($d->image && file_exists(public_path('uploads/users/' . $d->image)) ? $d->image : 'blank.jpg')) }}"
+     width="50"
+     height="50"
+     class="rounded-circle"
+     alt="">
                                             </div>
                                             <h3 class="mt-4 mb-1">{{$d->name_en}}</h3>
                                             <p class="text-muted">{{$d->designation}}</p>
