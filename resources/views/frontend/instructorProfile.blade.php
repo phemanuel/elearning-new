@@ -27,7 +27,13 @@
             <div class="col-lg-4">
                 <div class="instructor-courses-instructor">
                     <div class="instructor-image mx-auto text-center">
-                        <img src="{{asset('uploads/users/'.$instructor->image)}}" alt="Instructor" />
+                        @php
+    $instructorImage = $instructor->image ?? '';
+    $imagePath = public_path('uploads/users/' . $instructorImage);
+    $finalImage = ($instructorImage && file_exists($imagePath)) ? $instructorImage : 'blank.jpg';
+@endphp
+
+<img src="{{ asset('uploads/users/' . $finalImage) }}" alt="Instructor" />
                     </div>
                     <div class="instructor-info text-center">
                         <h5 class="font-title--sm">{{$instructor->name_en}}</h5>
@@ -246,9 +252,16 @@
                                     <div class="col-md-6 mb-4">
                                         <div class="contentCard contentCard--course">
                                             <div class="contentCard-top">
-                                                <a href="{{route('courseDetails', encryptor('encrypt', $c->id))}}"><img
-                                                        src="{{asset('uploads/courses/'.$c->image)}}" alt="images"
-                                                        class="img-fluid" /></a>
+                                                <a href="{{route('courseDetails', encryptor('encrypt', $c->id))}}">
+                                                    @php
+    $courseImage = $c->image ?? '';
+    $imagePath = public_path('uploads/courses/' . $courseImage);
+    $finalImage = ($courseImage && file_exists($imagePath)) ? $courseImage : 'course_blank.jpg';
+@endphp
+
+<img src="{{ asset('uploads/courses/' . $finalImage) }}" alt="Course Image" 
+    class="img-fluid" alt="Course Image" />
+                                                    </a>
                                             </div>
                                             <div class="contentCard-bottom">
                                                 <h5>

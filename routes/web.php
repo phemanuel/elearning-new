@@ -291,7 +291,7 @@ Route::post('contact-sales', [HomeController::class, 'contactSalesAction'])
     ->name('contact-sales.action');
 
 //---Course and Course Creators Url----
-Route::get('/instructors/{instructor_url}', [UrlController::class, 'instructorUrl'])
+Route::get('/instructor-profile/{instructor_url}', [UrlController::class, 'instructorUrl'])
 ->name('instructor-url');
 Route::get('/instructors/courses/{id}', [SearchInstructorController::class, 'instructorCourse']) 
 ->name('instructorCourse');

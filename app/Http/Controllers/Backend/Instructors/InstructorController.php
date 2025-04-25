@@ -84,6 +84,15 @@ class InstructorController extends Controller
     public function store(AddNewRequest $request)
     {
         try {
+            // Ensure the username is unique and not already in use
+            $username = $request->fullName_en;
+            $uniqueUsername = $username;
+            $counter = 1;
+            while (User::where('name_en', $uniqueUsername)->exists()) {
+                $counter++;
+                $uniqueUsername = $username . '-' . $counter;
+            }
+            
             DB::beginTransaction();
             $instructor = new Instructor;
             $instructor->name_en = $request->fullName_en;
@@ -102,10 +111,11 @@ class InstructorController extends Controller
             $instructor->title = $request->title;
             $instructor->status = $request->status;
             $instructor->password = Hash::make($request->password);
-            $instructorUrl = Str::random(40);
-            $instructor->instructor_url = $instructorUrl;
+            //$instructorUrl = Str::random(40);
+            $instructor->instructor_url = $uniqueUsername;
             $instructor->language = 'en';
             $instructor->access_block = $request->access_block;
+             $instructor->current_plan = 1;
             if ($request->hasFile('image')) {
                 $imageName = (Role::find($request->roleId)->name) . '_' .  $request->fullName_en . '_' . rand(999, 111) .  '.' . $request->image->extension();
                 $request->image->move(public_path('uploads/users'), $imageName);

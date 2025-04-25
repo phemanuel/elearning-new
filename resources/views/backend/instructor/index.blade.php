@@ -31,14 +31,14 @@
             <div class="col-lg-12">
                 <ul class="nav nav-pills mb-3">
                     <li class="nav-item"><a href="#list-view" data-toggle="tab"
-                            class="nav-link btn-primary mr-1">List View</a></li>
-                    <li class="nav-item"><a href="#grid-view" data-toggle="tab" class="nav-link btn-primary show active">Grid
+                            class="nav-link btn-primary show active">List View</a></li>
+                    <li class="nav-item"><a href="#grid-view" data-toggle="tab" class="nav-link btn-primary mr-1">Grid
                             View</a></li>
                 </ul>
             </div>
             <div class="col-lg-12">
                 <div class="row tab-content">
-                    <div id="list-view" class="tab-pane fade col-lg-12">
+                    <div id="list-view" class="tab-pane fade active show col-lg-12">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">All Instructors List </h4>
@@ -104,7 +104,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="grid-view" class="tab-pane fade active show col-lg-12">
+                    <div id="grid-view" class="tab-pane fade col-lg-12">
                         <div class="row">
                             @forelse ($instructor as $d)
                             <div class="col-lg-4 col-md-6 col-sm-6 col-12">
