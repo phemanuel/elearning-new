@@ -123,9 +123,13 @@ class SubscriptionController extends Controller
             //---check if the active plan is valid---
             $currentDate = now();
             $dueDate = $currentPlan->end_date;
-            if($currentDate > $dueDate){
-                return redirect()->back()->with('error', 'You still have an active plan, to upgrade your plan, contact our support team.');
-            }
+            $planId = $currentPlan->plan_id;
+
+            if($planId != 1) {
+                if($currentDate < $dueDate){
+                    return redirect()->back()->with('error', 'You still have an active plan, to upgrade your plan, contact our support team.');
+                }
+            }            
             
         }
 

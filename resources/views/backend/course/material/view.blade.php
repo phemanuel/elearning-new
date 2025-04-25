@@ -4,6 +4,13 @@
 @push('styles')
 <!-- Datatable -->
 <link href="{{asset('vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
+
+<style>
+    .modal-body {
+        max-height: 70vh; /* Set a max height for the modal body */
+        overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
+    }
+</style>
 @endpush
 
 @section('content')
@@ -22,7 +29,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{route('course.index')}}">My Courses</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('lesson.show', encryptor('encrypt',$lesson->course_id))}}">Course Lessons</a></li>
+                    <li class="breadcrumb-item active"><a href="{{route('lesson.show', encryptor('encrypt',$lesson->segments_id))}}">Course Lessons</a></li>
                     <li class="breadcrumb-item active"><a href="">All Course Material</a>
                     </li>
                 </ol>
@@ -54,12 +61,10 @@
                                         <thead>
                                             <tr>
                                                 <th>{{__('#')}}</th>
-                                                <!-- <th>{{__('Title')}}</th> -->
                                                 <th>{{__('Lesson')}}</th>
                                                 <th>{{__('Title')}}</th>
                                                 <th>{{__('Material Type')}}</th>
                                                 <th>{{__('Content')}}</th>
-                                                <!-- <th>{{__('Content Url')}}</th> -->
                                                 <th>{{__('Action')}}</th>
                                             </tr>
                                         </thead>
@@ -67,24 +72,24 @@
                                             @forelse ($material as $key => $m)
                                             <tr>
                                                 <td>{{$key + 1}}</td>
-                                                <!-- <td>{{$m->title}}</td> -->
                                                 <td>{{$m->lesson?->title}}</td>  
                                                 <td>{{$m->title}}</td>                                                
                                                 <td>
                                                     {{ $m->type == 'video' ? __('Video') : ($m->type == 'text' ?
                                                     __('Text') : __('Quiz')) }}
-                                                </td>                                               
-                                                @if($m->type == 'video')
+                                                </td>  
                                                 <td>
-                                                <video width="200" height="100" controls>
-                                                    <source src="{{asset('uploads/courses/contents/'.$m->content)}}" type="video/mp4">
-                                                    Your browser does not support the video tag.
-                                                </video>
-                                                </td>
-                                                @else
-                                                <td></td>
-                                                @endif
-                                                <!-- <td>{{$m->content_url}}</td> -->
+    <a href="javascript:void(0);"
+       class="btn btn-sm btn-info text-white view-material"
+       data-id="{{ $m->id }}"
+       data-title="{{ $m->title }}"
+       data-type="{{ $m->type }}"
+       data-content="{{ $m->content_data }}"
+       data-video="{{ asset('uploads/courses/contents/' . $m->content) }}">
+        <i class="la la-eye"></i> View
+    </a>
+</td>
+</td>
                                                 <td>
                                                     <a href="{{route('material.edit', encryptor('encrypt',$m->id))}}"
                                                         class="btn btn-sm btn-primary" title="Edit"><i
@@ -118,11 +123,62 @@
     </div>
 </div>
 
+<!-- Material View Modal -->
+<div class="modal fade" id="materialModal" tabindex="-1" aria-labelledby="materialModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="materialModalLabel">Material Preview</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+      </div>
+      <div class="modal-body" id="material-content">
+        <!-- Dynamic content loads here -->
+      </div>
+    </div>
+  </div>
+</div>
+
 @endsection
 
 @push('scripts')
 <!-- Datatable -->
 <script src="{{asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('js/plugins-init/datatables.init.js')}}"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('.view-material').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            const title = this.getAttribute('data-title');
+            const type = this.getAttribute('data-type');
+            const textContent = this.getAttribute('data-content');
+            const videoSource = this.getAttribute('data-video');
+
+            let modalContent = '';
+
+            if (type === 'text') {
+                modalContent = `
+                    <h5>${title}</h5>
+                    <div class="border p-3" style="min-height: 200px;">
+                        ${textContent}
+                    </div>`;
+            } else if (type === 'video') {
+                modalContent = `
+                    <h5>${title}</h5>
+                    <video controls class="w-100 mt-2" style="max-height: 500px;">
+                        <source src="${videoSource}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>`;
+            }
+
+            document.getElementById('material-content').innerHTML = modalContent;
+            new bootstrap.Modal(document.getElementById('materialModal')).show();
+        });
+    });
+});
+</script>
+
 
 @endpush
