@@ -226,4 +226,9 @@ class HomeController extends Controller
     {
         return view('frontend.video-test');
     }
+
+    public function smmBlueprint()
+    {
+        return view('smmblueprint.index');
+    }
 }

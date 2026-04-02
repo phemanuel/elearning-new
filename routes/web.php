@@ -40,6 +40,7 @@ use App\Http\Controllers\QuizController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\SubscriptionPlanController;
+use App\Http\Controllers\SmmBlueprintFormController;
 
 /* students */
 use App\Http\Controllers\Students\AuthController as sauth;
@@ -305,4 +306,15 @@ Route::get('/cert/{url}', [CertificateController::class, 'certificateUrl'])
 Route::get('/cert/view/{url}', [CertificateController::class, 'certificateView'])
     ->name('certificate-view');
     Route::get('/test-video', [HomeController::class, 'testVideo'])->name('testVideo'); 
+
+Route::get('/smmblueprint', [HomeController::class, 'smmBlueprint'])
+    ->name('smmblueprint');
+Route::post('/smm/submit', [SmmBlueprintFormController::class, 'submit'])
+->name('smm.submit');
+Route::get('/smm/payment/{form_id}', [SmmBlueprintFormController::class, 'paymentPage'])
+->name('smm.payment.page');
+Route::post('/smm/payment/callback', [SmmBlueprintFormController::class, 'paymentCallback'])
+->name('smm.payment.callback');
+Route::get('/thank-you', [SmmBlueprintFormController::class, 'thankYou'])
+->name('thankyou.page');
 

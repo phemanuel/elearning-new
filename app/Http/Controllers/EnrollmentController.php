@@ -135,7 +135,7 @@ class EnrollmentController extends Controller
             'student_id' => $validated['student_id'],
             'course_id' => $validated['course_id'],
             'instructor_id' => $instructorId,
-        ])->exists();
+        ])->exists(); 
 
         if ($exists) {
             return response()->json(['success' => false, 'message' => 'Student has already been enrolled for this course.']);
