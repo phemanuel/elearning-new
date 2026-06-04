@@ -12,6 +12,7 @@ class SmmBlueprintForm extends Model
     protected $fillable = [
         'name',
         'email',
+        'course',
         'payment_status',
         'transaction_reference',
     ];

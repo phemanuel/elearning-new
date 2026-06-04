@@ -231,4 +231,9 @@ class HomeController extends Controller
     {
         return view('smmblueprint.index');
     }
+
+    public function miraclePeter()
+    {
+        return view('smmblueprint.miracle-peters');
+    }
 }

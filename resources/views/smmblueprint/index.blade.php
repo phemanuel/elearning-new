@@ -290,7 +290,7 @@ button:hover{background:#16a34a}
 
   <p style="text-align:left;">- Learn from the woman who has worked with clients across various countries of the world.</p>
 
-  <p style="text-align:left;">- Learn from the woman popularly known online as “The Social Media Goddess.”</p>
+  <!-- <p style="text-align:left;">- Learn from the woman popularly known online as “The Social Media Goddess.”</p> -->
 
   <p style="text-align:left;">- Learn from the woman who has helped beginners like you start landing clients and building real income online.</p>
 
@@ -341,8 +341,16 @@ button:hover{background:#16a34a}
     <li style="margin-bottom:10px;"><span style="color:#22c55e; margin-right:8px;">✔</span> Portfolio & Client-Building Exercises</li>
     <li style="margin-bottom:10px;"><span style="color:#22c55e; margin-right:8px;">✔</span> Templates & Scripts to Land Your First Client</li>
     <li style="margin-bottom:10px;"><span style="color:#22c55e; margin-right:8px;">✔</span> Weekly Coaching Call Sessions</li>
-    <li style="margin-bottom:10px;"><span style="color:#22c55e; margin-right:8px;">✔</span> <a href="https://www.kingsdigihub.org/certificate" style="color:#ffcc00; text-decoration:underline;">Certificate of Completion</a></li>
-  </ul>
+    <li style="margin-bottom:10px;">
+        <span style="color:#22c55e; margin-right:8px;">✔</span> Certificate of Completion</li>
+</ul>
+
+<!-- Sample Certificate Image -->
+<div style="text-align:left; margin-top:20px;">
+    <img src="{{ asset('images/cert-sample.jpg') }}" 
+         alt="Certificate Sample" 
+         style="max-width:400px; width:100%; height:auto; border-radius:12px; box-shadow:0 8px 25px rgba(0,0,0,0.1);">
+</div>
 
   <h3 style="margin-top:25px; text-align:left;">PLUS LIMITED-TIME BONUSES:</h3>
   <ul style="list-style:none; padding-left:0; margin-top:10px; text-align:left;">

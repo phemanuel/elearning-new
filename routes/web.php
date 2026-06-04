@@ -164,6 +164,8 @@ Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     ->name('subscribe.view');
     Route::post('/subscribePlan/{id}', [SubscriptionController::class, 'subscribePlansStore'])
     ->name('subscribe.store');
+    Route::post('/subscribe/free', [SubscriptionController::class, 'freeSubscribe'])
+    ->name('sub.free-subscribe');
     Route::get('/subPlan/verifyTransaction/{ref}', [SubscriptionController::class, 'verifyTransaction'])
     ->name('sub.verify-transaction');    
     Route::get('/subPlan/cancel-transaction', [SubscriptionController::class, 'cancelTransaction'])
@@ -317,4 +319,6 @@ Route::post('/smm/payment/callback', [SmmBlueprintFormController::class, 'paymen
 ->name('smm.payment.callback');
 Route::get('/thank-you', [SmmBlueprintFormController::class, 'thankYou'])
 ->name('thankyou.page');
+Route::get('/miraclepeters', [HomeController::class, 'miraclePeter'])
+    ->name('miraclepeters');
 

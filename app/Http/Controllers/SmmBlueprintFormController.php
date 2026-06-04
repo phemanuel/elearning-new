@@ -16,14 +16,16 @@ class SmmBlueprintFormController extends Controller
             'email' => 'required|email|max:255',
         ]);
 
-        // Create or update form entry based on email
         $form = SmmBlueprintForm::updateOrCreate(
-            ['email' => $request->email], // Check if email exists
-            ['name' => $request->name]    // Update name if exists or create new
+                ['email' => $request->email], // Search condition
+                [
+                    'name'   => $request->name,
+                    'course' => 'SMM BLUEPRINT',
+                ]
         );
 
         // Send success email
-        Mail::to($form->email)->send(new \App\Mail\PaymentSuccessMail($form));
+        // Mail::to($form->email)->send(new \App\Mail\PaymentSuccessMail($form));
 
         // Redirect to payment page with form ID
         return redirect()->route('smm.payment.page', ['form_id' => $form->id]);
@@ -54,7 +56,7 @@ class SmmBlueprintFormController extends Controller
         if($body['status'] && $body['data']['status'] === 'success') {
             // Payment verified
             $form->update([
-                'payment_status' => 'success',
+                'payment_status' => 'success', 
                 'transaction_reference' => $reference,
             ]);
 

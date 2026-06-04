@@ -130,7 +130,7 @@ class SubscriptionController extends Controller
                     return redirect()->back()->with('error', 'You still have an active plan, to upgrade your plan, contact our support team.');
                 }
             }            
-            
+             
         }
 
         return view('backend.subscription.subscribe-plan', compact('subscriptionPlans', 'currentPlan'));
@@ -209,7 +209,7 @@ class SubscriptionController extends Controller
 
         // Make an HTTP GET request to Paystack API
         $response = Http::withHeaders([           
-            'Authorization' => 'Bearer sk_test_a68da4cd7971e573aa675946d8b2549ca819044e',
+            'Authorization' => 'Bearer sk_test_778f4b00b10752109be4b35e6d771305ea9d6cf5',
             'Cache-Control' => 'no-cache',
         ])->get($url);
 
@@ -324,6 +324,94 @@ class SubscriptionController extends Controller
         session()->forget(['planId', 'no_of_months']);
 
         //return redirect()->route('subscribe.view')->with('success', $message);        
+    }
+
+    public function freeSubscribe(Request $request)
+    {
+        $request->validate([
+            'planId' => 'required',
+            'noOfMonths' => 'required'
+        ]);
+
+        $instructorId = auth()->user()->instructor_id;
+
+        $plan = SubscriptionPlan::find($request->planId);
+
+        if (!$plan) {
+            return response()->json(['error' => 'Invalid plan'], 400);
+        }
+
+        $duration = $request->noOfMonths;
+
+        // =========================
+        // 1. BLOCK DUPLICATE PAYMENT (5 MIN WINDOW)
+        // =========================
+        $recentPayment = SubscriptionPayment::where('instructor_id', $instructorId)
+            ->where('plan_id', $plan->id)
+            ->where('no_of_months', $duration)
+            ->where('method', 'Free')
+            ->where('created_at', '>=', now()->subMinutes(5))
+            ->first();
+
+        if ($recentPayment) {
+            return redirect()->route('dashboard')
+                ->with('info', 'Subscription already processed.');
+        }
+
+        $startDate = now();
+        $endDate = $startDate->copy()->addMonths($duration);
+
+        // =========================
+        // 2. PAYMENT RECORD
+        // =========================
+        SubscriptionPayment::create([
+            'instructor_id' => $instructorId,
+            'amount' => 0,
+            'txnid' => 'FREE-' . uniqid(),
+            'plan_id' => $plan->id,
+            'status' => 1,
+            'no_of_months' => $duration,
+            'total_amount' => 0,
+            'method' => 'Free',
+            'currency' => 'Naira',
+        ]);
+
+        // =========================
+        // 3. SUBSCRIPTION LOGIC
+        // =========================
+        $existing = Subscription::where('instructor_id', $instructorId)
+            ->where('status', 'Active')
+            ->first();
+
+        if ($existing) {
+            $existing->update([
+                'plan_id' => $plan->id,
+                'no_of_months' => $duration,
+                'start_date' => $startDate,
+                'end_date' => $endDate,
+                'total_amount' => 0,
+            ]);
+        } else {
+            Subscription::create([
+                'instructor_id' => $instructorId,
+                'plan_id' => $plan->id,
+                'no_of_months' => $duration,
+                'start_date' => $startDate,
+                'end_date' => $endDate,
+                'total_amount' => 0,
+                'status' => 'Active',
+            ]);
+        }
+
+        // =========================
+        // 4. UPDATE INSTRUCTOR
+        // =========================
+        $instructor = Instructor::find($instructorId);
+        $instructor->current_plan = $plan->id;
+        $instructor->save();
+
+        return redirect()->route('dashboard')
+            ->with('success', 'Subscription activated successfully!');
     }
 
 
