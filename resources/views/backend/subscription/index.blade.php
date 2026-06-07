@@ -61,142 +61,138 @@
                             </div>
 
                             <!-- Table -->
-                            <div class="lms-table-wrapper">
+                            <div class="row">
 
-                                <table class="lms-table" id="example3">
+    @forelse($subscriptionPlan as $d)
 
-                                    <thead>
-                                        <tr>
-                                            <th>Plan</th>
-                                            <th>Limits</th>
-                                            <th>Features</th>
-                                            <th>Pricing</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
+        <div class="col-xl-4 col-lg-6 col-md-6 mb-4">
 
-                                    <tbody>
+            <div class="lms-pricing-card">
 
-                                        @forelse ($subscriptionPlan as $key => $d)
+                <!-- Plan Header -->
+                <div class="lms-plan-header">
 
-                                            <tr>
+                    <h4>{{ $d->name }}</h4>
 
-                                                <!-- PLAN NAME -->
-                                                <td>
-                                                    <div style="font-weight:700;">
-                                                        {{ $d->name }}
-                                                    </div>
-                                                    <div style="font-size:11px; color:#94a3b8;">
-                                                        Tier {{ $key + 1 }}
-                                                    </div>
-                                                </td>
+                    <div class="lms-plan-price">
 
-                                                <!-- LIMITS (GROUPED) -->
-                                                <td>
-                                                    <div style="font-size:13px; line-height:1.7;">
+                        @if($d->amount >= 50000)
+                            <span>Custom Plan</span>
+                        @else
+                            <span class="amount">
+                                ₦{{ number_format($d->amount,0) }}
+                            </span>
 
-                                                        <div>
-                                                            📚 Courses:
-                                                            <strong>
-                                                                {{ $d->course_upload >= 50 ? 'Unlimited' : $d->course_upload }}
-                                                            </strong>
-                                                        </div>
+                            <small>/month</small>
+                        @endif
 
-                                                        <div>
-                                                            👥 Students:
-                                                            <strong>
-                                                                {{ $d->student_upload >= 2000 ? 'Unlimited' : $d->student_upload }}
-                                                            </strong>
-                                                        </div>
+                    </div>
 
-                                                        <div>
-                                                            💾 Storage:
-                                                            <strong>
-                                                                {{ $d->allocated_space >= 50 ? 'Unlimited' : $d->allocated_space . 'GB' }}
-                                                            </strong>
-                                                        </div>
+                </div>
 
-                                                    </div>
-                                                </td>
+                <!-- Features -->
+                <div class="lms-plan-features">
 
-                                                <!-- FEATURES -->
-                                                <td>
-                                                    <div style="display:flex; flex-direction:column; gap:6px;">
+                    <div class="feature-item">
+                        📚 Courses:
+                        <strong>
+                            {{ $d->course_upload >= 50 ? 'Unlimited' : $d->course_upload }}
+                        </strong>
+                    </div>
 
-                                                        <span class="lms-badge {{ $d->certificate ? 'lms-badge-success' : 'lms-badge-danger' }}">
-                                                            Certificate: {{ $d->certificate ? 'Enabled' : 'Disabled' }}
-                                                        </span>
+                    <div class="feature-item">
+                        👥 Students:
+                        <strong>
+                            {{ $d->student_upload >= 2000 ? 'Unlimited' : $d->student_upload }}
+                        </strong>
+                    </div>
 
-                                                        <span class="lms-badge {{ $d->enrollment ? 'lms-badge-success' : 'lms-badge-danger' }}">
-                                                            Manual Enrollment: {{ $d->enrollment ? 'Yes' : 'No' }}
-                                                        </span>
+                    <div class="feature-item">
+                        💾 Storage:
+                        <strong>
+                            {{ $d->allocated_space >= 50 ? 'Unlimited' : $d->allocated_space.' GB' }}
+                        </strong>
+                    </div>
 
-                                                    </div>
-                                                </td>
+                    <div class="feature-item">
+                        💳 Transaction Fee:
+                        <strong>{{ $d->transaction_fee }}%</strong>
+                    </div>
 
-                                                <!-- PRICING -->
-                                                <td>
-                                                    <div style="font-weight:700; font-size:16px;">
-                                                        {{ $d->amount >= 50000 ? 'Custom' : '₦' . number_format($d->amount,2) }}
-                                                    </div>
+                    <div class="feature-item">
+                        📅 Extra Days:
+                        <strong>{{ $d->extra_day }}</strong>
+                    </div>
 
-                                                    <div style="font-size:11px; color:#94a3b8;">
-                                                        / month
-                                                    </div>
+                </div>
 
-                                                    <div style="margin-top:6px; font-size:12px;">
-                                                        Fee: {{ $d->transaction_fee }}%
-                                                    </div>
+                <!-- Status -->
+                <div class="lms-plan-badges">
 
-                                                    <div style="font-size:12px;">
-                                                        Extra Days: {{ $d->extra_day }}
-                                                    </div>
-                                                </td>
+                    @if($d->certificate)
+                        <span class="lms-badge lms-badge-success">
+                            Certificate Enabled
+                        </span>
+                    @else
+                        <span class="lms-badge lms-badge-danger">
+                            No Certificate
+                        </span>
+                    @endif
 
-                                                <!-- ACTION -->
-                                                <td>
-                                                    <div style="display:flex; gap:8px;">
+                    @if($d->enrollment)
+                        <span class="lms-badge lms-badge-success">
+                            Manual Enrollment
+                        </span>
+                    @else
+                        <span class="lms-badge lms-badge-danger">
+                            No Enrollment
+                        </span>
+                    @endif
 
-                                                        <a href="{{route('subscriptionPlan.edit', encryptor('encrypt', $d->id))}}"
-                                                        class="lms-btn">
-                                                            Edit
-                                                        </a>
+                </div>
 
-                                                        <a href="javascript:void(0);"
-                                                        onclick="$('#form{{$d->id}}').submit()"
-                                                        class="lms-btn-danger"
-                                                        style="padding:6px 10px; border-radius:8px; font-size:12px;">
-                                                            Delete
-                                                        </a>
+                <!-- Actions -->
+                <div class="lms-plan-actions">
 
-                                                    </div>
+                    <a href="{{route('subscriptionPlan.edit', encryptor('encrypt', $d->id))}}"
+                       class="lms-btn">
+                        Edit Plan
+                    </a>
 
-                                                    <form id="form{{$d->id}}"
-                                                        action="{{route('subscriptionPlan.destroy', $d->id)}}"
-                                                        method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
-                                                </td>
+                    <a href="javascript:void(0);"
+                       onclick="$('#form{{$d->id}}').submit()"
+                       class="lms-btn-danger">
+                        Delete
+                    </a>
 
-                                            </tr>
+                    <form id="form{{$d->id}}"
+                          action="{{route('subscriptionPlan.destroy', $d->id)}}"
+                          method="post">
+                        @csrf
+                        @method('DELETE')
+                    </form>
 
-                                        @empty
+                </div>
 
-                                            <tr>
-                                                <td colspan="5"
-                                                    style="text-align:center; padding:20px; color:#94a3b8;">
-                                                    No Subscription Plans Found
-                                                </td>
-                                            </tr>
+            </div>
 
-                                        @endforelse
+        </div>
 
-                                    </tbody>
+    @empty
 
-                                </table>
+        <div class="col-12">
 
-                            </div>
+            <div class="lms-empty-state">
+
+                <h5>No Subscription Plans Found</h5>
+
+            </div>
+
+        </div>
+
+    @endforelse
+
+</div>
 
                         </div>
 

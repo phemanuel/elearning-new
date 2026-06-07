@@ -1126,6 +1126,576 @@ body {
         padding: 12px 14px;
     }
 }
+
+
+/* ==========================
+   PRICING CARDS
+========================== */
+
+.lms-pricing-card{
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:20px;
+    padding:24px;
+    height:100%;
+    transition:.3s ease;
+    box-shadow:0 4px 20px rgba(15,23,42,.04);
+}
+
+.lms-pricing-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 40px rgba(15,23,42,.10);
+}
+
+/* Header */
+
+.lms-plan-header{
+    text-align:center;
+    margin-bottom:24px;
+}
+
+.lms-plan-header h4{
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+.lms-plan-price .amount{
+    font-size:34px;
+    font-weight:800;
+    color:#2563eb;
+}
+
+.lms-plan-price small{
+    color:#64748b;
+}
+
+/* Features */
+
+.lms-plan-features{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-bottom:24px;
+}
+
+.feature-item{
+    padding:10px 12px;
+    background:#f8fafc;
+    border-radius:10px;
+    font-size:14px;
+}
+
+/* Badges */
+
+.lms-plan-badges{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:24px;
+}
+
+/* Actions */
+
+.lms-plan-actions{
+    display:flex;
+    gap:10px;
+    margin-top:auto;
+}
+
+.lms-plan-actions .lms-btn,
+.lms-plan-actions .lms-btn-danger{
+    flex:1;
+    text-align:center;
+}
+
+.lms-btn-danger{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px 16px;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:600;
+    text-decoration:none;
+    transition:.25s ease;
+    min-height:40px;
+}
+
+/* Empty State */
+
+.lms-empty-state{
+    background:#fff;
+    padding:50px;
+    border-radius:20px;
+    text-align:center;
+    border:1px dashed #cbd5e1;
+}
+
+
+
+.lms-course-card{
+    background:#fff;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 10px 35px rgba(15,23,42,.08);
+    border:1px solid #eef2f7;
+    transition:.3s ease;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+}
+
+.lms-course-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 50px rgba(15,23,42,.12);
+}
+
+.lms-course-cover{
+    position:relative;
+    height:220px;
+}
+
+.lms-course-cover img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.lms-status-badge{
+    position:absolute;
+    top:16px;
+    right:16px;
+    padding:7px 14px;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:700;
+    backdrop-filter:blur(10px);
+}
+
+.lms-status-badge.active{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.lms-status-badge.inactive{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+.lms-status-badge.pending{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.lms-course-content{
+    padding:24px;
+    flex:1;
+}
+
+.lms-course-tags{
+    display:flex;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.lms-tag-category,
+.lms-tag-level{
+    padding:6px 12px;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:600;
+}
+
+.lms-tag-category{
+    background:#eff6ff;
+    color:#1d4ed8;
+}
+
+.lms-tag-level{
+    background:#f8fafc;
+    color:#475569;
+}
+
+.lms-course-title{
+    font-size:18px;
+    font-weight:700;
+    margin-bottom:20px;
+    line-height:1.4;
+    color:#0f172a;
+}
+
+.lms-course-metrics{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.metric-box{
+    background:#f8fafc;
+    border-radius:14px;
+    padding:14px;
+}
+
+.metric-label{
+    display:block;
+    font-size:11px;
+    text-transform:uppercase;
+    color:#94a3b8;
+    margin-bottom:6px;
+}
+
+.metric-box strong{
+    color:#0f172a;
+}
+
+.lms-course-details{
+    border-top:1px solid #e2e8f0;
+    padding-top:15px;
+}
+
+.detail-item{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:12px;
+    font-size:14px;
+}
+
+.lms-course-footer{
+    padding:20px 24px;
+    border-top:1px solid #eef2f7;
+    display:flex;
+    gap:10px;
+}
+
+.lms-course-footer a{
+    flex:1;
+    text-align:center;
+}
+
+
+.segment-card{
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 8px 30px rgba(15,23,42,.08);
+    transition:.3s;
+    border:1px solid #eef2f7;
+    height:100%;
+}
+
+.segment-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 40px rgba(15,23,42,.12);
+}
+
+.segment-cover{
+    position:relative;
+    height:220px;
+}
+
+.segment-cover img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.segment-overlay{
+    position:absolute;
+    top:15px;
+    left:15px;
+    right:15px;
+    display:flex;
+    justify-content:space-between;
+}
+
+.segment-number{
+    background:#0f172a;
+    color:#fff;
+    padding:6px 14px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.segment-status{
+    padding:6px 14px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.segment-status.success{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.segment-status.warning{
+    background:#fef3c7;
+    color:#b45309;
+}
+
+.segment-status.danger{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+.segment-body{
+    padding:24px;
+}
+
+.segment-title{
+    font-size:18px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.segment-meta{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.segment-meta small{
+    display:block;
+    color:#94a3b8;
+    margin-bottom:4px;
+}
+
+.segment-meta strong{
+    font-size:14px;
+}
+
+.segment-stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-bottom:24px;
+}
+
+.stat-box{
+    background:#f8fafc;
+    border-radius:14px;
+    padding:16px;
+    text-align:center;
+}
+
+.stat-box h5{
+    margin:0;
+    font-size:22px;
+    font-weight:700;
+}
+
+.stat-box span{
+    color:#64748b;
+    font-size:12px;
+}
+
+.segment-actions{
+    display:flex;
+    gap:10px;
+}
+
+.btn-edit,
+.btn-manage{
+    flex:1;
+    text-align:center;
+    padding:10px;
+    border-radius:10px;
+    font-weight:600;
+    text-decoration:none;
+}
+
+.btn-edit{
+    border:1px solid #dbeafe;
+    color:#2563eb;
+}
+
+.btn-manage{
+    background:#2563eb;
+    color:white;
+}
+
+.lms-empty-state{
+    background:white;
+    border-radius:20px;
+    padding:60px;
+    text-align:center;
+}
+
+.empty-icon{
+    font-size:48px;
+    margin-bottom:15px;
+}
+
+/* Main wrapper card */
+.lms-section-card{
+    background:#fff;
+    border-radius:24px;
+    padding:30px;
+    border:1px solid #e2e8f0;
+    box-shadow:0 10px 40px rgba(15,23,42,.06);
+}
+
+/* Header */
+.lms-section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+    padding-bottom:20px;
+    border-bottom:1px solid #f1f5f9;
+}
+
+/* Add button */
+.lms-btn{
+    background:#2563eb;
+    color:#fff;
+    text-decoration:none;
+    padding:12px 20px;
+    border-radius:12px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.lms-btn:hover{
+    background:#1d4ed8;
+    color:#fff;
+}
+
+/* Better spacing between cards */
+.lms-section-card .row{
+    margin-left:-10px;
+    margin-right:-10px;
+}
+
+.lms-section-card .col-xl-4,
+.lms-section-card .col-lg-6{
+    padding:10px;
+}
+
+/* =========================
+   CLEAN LMS BREADCRUMB
+========================= */
+
+.breadcrumb{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+
+    margin:0 0 20px;
+    padding:0;
+
+    background:transparent;
+    border:none;
+    box-shadow:none;
+
+    font-size:13px;
+    font-weight:500;
+}
+
+/* Links */
+
+.breadcrumb-item a{
+    color:#64748b;
+    text-decoration:none;
+    transition:.2s ease;
+}
+
+.breadcrumb-item a:hover{
+    color:#2563eb;
+}
+
+/* Separator */
+
+.breadcrumb-item + .breadcrumb-item::before{
+    content:"/";
+    color:#cbd5e1;
+    padding:0 10px;
+}
+
+/* Active */
+
+.breadcrumb-item.active,
+.breadcrumb-item.active a{
+    color:#0f172a;
+    font-weight:600;
+}
+
+/* =========================
+   LMS HEADER CONTROL CARD
+========================= */
+
+.lms-header-card{
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:18px;
+
+    padding:18px 22px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    box-shadow:0 6px 20px rgba(15,23,42,.05);
+}
+
+/* Left side text */
+.lms-header-left h3{
+    font-size:20px;
+    font-weight:700;
+    color:#0f172a;
+    margin:0;
+}
+
+.lms-header-left p{
+    font-size:13px;
+    color:#64748b;
+    margin-top:4px;
+}
+
+/* Right side button alignment */
+.lms-header-right{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+}
+
+/* Button (keep consistent LMS style) */
+.lms-btn{
+    background:#2563eb;
+    color:#fff;
+    padding:10px 18px;
+    border-radius:12px;
+    font-weight:600;
+    text-decoration:none;
+    transition:.25s ease;
+    white-space:nowrap;
+}
+
+.lms-btn:hover{
+    background:#1d4ed8;
+    color:#fff;
+}
+
+/* Mobile responsiveness */
+@media(max-width:768px){
+    .lms-header-card{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+    }
+
+    .lms-header-right{
+        width:100%;
+    }
+
+    .lms-btn{
+        width:100%;
+        text-align:center;
+    }
+}
 </style>
 </head>
 
@@ -1438,7 +2008,7 @@ body {
                         <ul>
                             <li><a href="{{ route('courseCategory.index') }}">Categories</a></li>
                             <li><a href="{{ route('courseList') }}">All Courses</a></li>
-                            <li><a href="{{ route('course.index') }}">Course Setup</a></li>
+                            <!-- <li><a href="{{ route('course.index') }}">Course Setup</a></li> -->
                         </ul>
                     </li>
 
@@ -1553,6 +2123,189 @@ body {
                     </li>
 
                 </ul>
+            </div>
+        </div>
+        @endif
+
+        @if(!fullAccess())
+        <div class="dlabnav">
+            <div class="dlabnav-scroll">
+
+                <ul class="metismenu" id="menu">
+
+                    {{-- ================= INSTRUCTOR BLOCK ================= --}}
+                    <li class="nav-label first"
+                        style="background:#1e293b; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                        INSTRUCTOR PANEL
+                    </li>
+
+                    <li class="mt-2">
+                        <a class="ai-icon" href="{{ route('home') }}">
+                            <i class="las la-home"
+                            style="background:#e0f2fe; color:#0284c7; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text font-weight-bold">Home</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="ai-icon" href="{{ route('dashboard') }}">
+                            <i class="las la-tachometer-alt"
+                            style="background:#dcfce7; color:#16a34a; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text font-weight-bold">Dashboard</span>
+                        </a>
+                    </li>
+
+                    @php $user = auth()->user(); @endphp
+
+                    @if(Auth::check())
+                    <li>
+                        <a class="ai-icon"
+                        href="{{ $user->role_id == 3
+                                ? route('instructor.edit', encryptor('encrypt', $user->instructor_id))
+                                : route('user.edit', encryptor('encrypt', $user->id)) }}">
+                            <i class="las la-user-circle"
+                            style="background:#fef3c7; color:#f59e0b; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text">Profile</span>
+                        </a>
+                    </li>
+                    @endif
+
+
+                    {{-- ================= TEACHING ================= --}}
+                    <li class="nav-label mt-3"
+                        style="background:#0f172a; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                        TEACHING
+                    </li>
+
+                    <li class="mt-2">
+                        <a class="ai-icon" href="{{ route('course.index') }}">
+                            <i class="las la-school"
+                            style="background:#dbeafe; color:#2563eb; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text">My Courses</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="ai-icon" href="{{ route('enrollment.index') }}">
+                            <i class="las la-bullseye"
+                            style="background:#dcfce7; color:#16a34a; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text">Enrollments</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="ai-icon" href="{{ route('certificates.index') }}">
+                            <i class="las la-certificate"
+                            style="background:#f3e8ff; color:#9333ea; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text">Certificates</span>
+                        </a>
+                    </li>
+
+
+                    {{-- ================= ASSESSMENTS ================= --}}
+                    <li class="nav-label mt-3"
+                        style="background:#0f172a; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                        ASSESSMENTS
+                    </li>
+
+                    <li class="mt-2">
+                        <a class="has-arrow ai-icon" href="javascript:void(0)">
+                            <i class="las la-tasks"
+                            style="background:#fef9c3; color:#ca8a04; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text">Quiz</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('quiz.index') }}">
+                                    All Quiz
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="has-arrow ai-icon" href="javascript:void(0)">
+                            <i class="las la-clipboard-list"
+                            style="background:#ede9fe; color:#7c3aed; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text">Projects</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('project.index') }}">
+                                    All Projects
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    {{-- ================= FINANCE ================= --}}
+                    <li class="nav-label mt-3"
+                        style="background:#0f172a; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                        FINANCE
+                    </li>
+
+                    <li class="mt-2">
+                        <a class="has-arrow ai-icon" href="javascript:void(0)">
+                            <i class="las la-money-check"
+                            style="background:#dcfce7; color:#16a34a; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text">Payments</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('courseFee') }}">
+                                    Course Payments
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('subscription.view') }}">
+                                    Subscription
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="ai-icon" href="{{ route('coupon.index') }}">
+                            <i class="las la-tags"
+                            style="background:#fee2e2; color:#ef4444; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text">Coupons</span>
+                        </a>
+                    </li>
+
+
+                    {{-- ================= NETWORK ================= --}}
+                    <!-- <li class="nav-label mt-3"
+                        style="background:#0f172a; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                        NETWORK
+                    </li> -->
+
+                    <!-- <li class="mt-2">
+                        <a class="ai-icon" href="{{ route('instructor.index') }}">
+                            <i class="las la-chalkboard-teacher"
+                            style="background:#e0f2fe; color:#0284c7; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text">Instructors List</span>
+                        </a>
+                    </li> -->
+
+
+                    {{-- ================= SYSTEM ================= --}}
+                    <li class="nav-label mt-3"
+                        style="background:#0f172a; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                        SYSTEM
+                    </li>
+
+                    <li class="mt-2">
+                        <a class="ai-icon" href="{{ route('logOut') }}">
+                            <i class="lab la-gg-circle"
+                            style="background:#fee2e2; color:#ef4444; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text">Logout</span>
+                        </a>
+                    </li>
+
+                </ul>
+
             </div>
         </div>
         @endif

@@ -151,30 +151,25 @@
                         <div class="row">
                             @forelse ($course as $d)
 
-                            <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="col-xl-4 col-lg-6 col-md-6 mb-4">
 
-                                <div class="course-card">
+                                <div class="lms-course-card">
 
-                                    <!-- KEEP YOUR DROPDOWN -->
-                                    <div class="card-header border-0 bg-white d-flex justify-content-end">
+                                    <!-- Course Image -->
+                                    <div class="lms-course-cover">
 
-                                        <!-- Existing dropdown here -->
+                                        <img src="{{ asset('uploads/courses/'.$d->image) }}" alt="">
 
-                                    </div>
-
-                                    <!-- KEEP YOUR IMAGE -->
-                                    <div class="course-image">
-                                        <img src="{{asset('uploads/courses/'.$d->image)}}" alt="">
-
-                                        <!-- KEEP STATUS -->
-                                        <span class="course-status
+                                        <!-- Status Badge -->
+                                        <span class="lms-status-badge
                                             @if($d->status == 2)
-                                                bg-success
+                                                active
                                             @elseif($d->status == 1)
-                                                bg-danger
+                                                inactive
                                             @else
-                                                bg-warning
+                                                pending
                                             @endif">
+
                                             @if($d->status == 2)
                                                 Active
                                             @elseif($d->status == 1)
@@ -182,62 +177,75 @@
                                             @else
                                                 Pending
                                             @endif
+
                                         </span>
 
                                     </div>
 
-                                    <div class="course-body">
+                                    <!-- Content -->
+                                    <div class="lms-course-content">
 
-                                        <h4 class="course-title">
-                                            {{$d->title_en}}
-                                        </h4>
+                                        <!-- Category + Difficulty -->
+                                        <div class="lms-course-tags">
 
-                                        <div class="d-flex justify-content-between align-items-center mb-3">
-
-                                            <span class="badge badge-level">
-                                                {{ ucfirst($d->difficulty) }}
+                                            <span class="lms-tag-category">
+                                                {{ $d->courseCategory?->category_name }}
                                             </span>
 
-                                            <span class="text-muted">
-                                                {{$d->courseCategory?->category_name}}
+                                            <span class="lms-tag-level">
+                                                {{ ucfirst($d->difficulty) }}
                                             </span>
 
                                         </div>
 
-                                        <!-- KEEP ALL YOUR EXISTING DETAILS -->
-                                        <ul class="list-group list-group-flush">
+                                        <!-- Title -->
+                                        <h4 class="lms-course-title">
+                                            {{ $d->title_en }}
+                                        </h4>
 
-                                            <!-- Price -->
-                                            <li class="list-group-item px-0 d-flex justify-content-between">
-                                                <span>Price</span>
+                                        <!-- Metrics -->
+                                        <div class="lms-course-metrics">
+
+                                            <div class="metric-box">
+                                                <span class="metric-label">Price</span>
                                                 <strong>
-                                                    {{ $d->price && $d->price > 0 ? $d->currency_type . number_format($d->price, 2) : 'Free' }}
+                                                    {{ $d->price > 0
+                                                        ? $d->currency_type . number_format($d->price,2)
+                                                        : 'Free' }}
                                                 </strong>
-                                            </li>
+                                            </div>
 
-                                            <!-- Segments -->
-                                            <li class="list-group-item px-0 d-flex justify-content-between">
-                                                <span>Segments</span>
-                                                <strong>{{$d->segment_count}}</strong>
-                                            </li>
+                                            <div class="metric-box">
+                                                <span class="metric-label">Segments</span>
+                                                <strong>{{ $d->segment_count }}</strong>
+                                            </div>
 
-                                            <!-- Project -->
-                                            <li class="list-group-item px-0 d-flex justify-content-between">
+                                        </div>
+
+                                        <!-- Secondary Metrics -->
+                                        <div class="lms-course-details">
+
+                                            <div class="detail-item">
 
                                                 <span>Project</span>
 
                                                 @if($d->project == 1)
-                                                    <i class="fa fa-check-circle text-success"></i>
+                                                    <span class="text-success">
+                                                        <i class="fa fa-check-circle"></i>
+                                                        Available
+                                                    </span>
                                                 @else
-                                                    <i class="fa fa-times-circle text-danger"></i>
+                                                    <span class="text-danger">
+                                                        <i class="fa fa-times-circle"></i>
+                                                        None
+                                                    </span>
                                                 @endif
 
-                                            </li>
+                                            </div>
 
-                                            <!-- KEEP DATE LOGIC -->
                                             @if($d->date_enabled == 1)
 
-                                            <li class="list-group-item px-0 d-flex justify-content-between">
+                                            <div class="detail-item">
 
                                                 <span>Start Date</span>
 
@@ -245,24 +253,26 @@
                                                     {{ \Carbon\Carbon::parse($d->start_from)->format('M d, Y') }}
                                                 </strong>
 
-                                            </li>
+                                            </div>
 
                                             @endif
 
-                                        </ul>
+                                        </div>
 
                                     </div>
 
-                                    <!-- KEEP ACTION BUTTON -->
-                                    <div class="course-footer">
+                                    <!-- Footer -->
+                                    <div class="lms-course-footer">
 
-                                        <a href="{{route('course.edit', encryptor('encrypt',$d->id))}}"
-                                        class="btn btn-outline-primary btn-sm">
+                                        <a href="{{ route('course.edit', encryptor('encrypt',$d->id)) }}"
+                                        class="lms-btn-outline">
                                             Edit
                                         </a>
 
-                                        <a href="{{ $d->segment_count > 0 ? route('segment.show', encryptor('encrypt',$d->id)) : route('segment.createNew',['id'=>encryptor('encrypt',$d->id)]) }}"
-                                        class="btn btn-primary btn-sm">
+                                        <a href="{{ $d->segment_count > 0
+                                                ? route('segment.show', encryptor('encrypt',$d->id))
+                                                : route('segment.createNew',['id'=>encryptor('encrypt',$d->id)]) }}"
+                                        class="lms-btn">
                                             Manage Course
                                         </a>
 

@@ -29,76 +29,164 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-12">
+            <!-- <div class="col-lg-12">
                 <ul class="nav nav-pills mb-3">
                     <li class="nav-item"><a href="#list-view" data-toggle="tab"
                             class="nav-link btn-primary mr-1 show active">List View</a></li>
-                    <!-- <li class="nav-item"><a href="javascript:void(0);" data-toggle="tab"
+                    <li class="nav-item"><a href="javascript:void(0);" data-toggle="tab"
                             class="nav-link btn-primary">Grid
-                            View</a></li> -->
+                            View</a></li>
                 </ul>
-            </div>
+            </div> -->
             <div class="col-lg-12">
                 <div class="row tab-content">
                     <div id="list-view" class="tab-pane fade active show col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">All Segment Lessons List </h4>
-                                <a href="{{route('lesson.create',['segment_id' => encryptor('encrypt', $segment->id)])}}" class="btn btn-primary">+ Add new lesson</a>
+
+                        <!-- Page Header -->
+                        <div class="lms-card mb-4">
+
+                            <div class="lms-card-header d-flex justify-content-between align-items-center">
+
+                                <!-- Left Content -->
+                                <div>
+                                    <h3 class="mb-1">Segment Lessons</h3>
+                                    <p class="text-muted mb-0">
+                                        Manage lessons and attach learning materials
+                                    </p>
+                                </div>
+
+                                <!-- Right Button -->
+                                <div>
+                                    <a href="{{ route('lesson.create', ['segment_id' => encryptor('encrypt', $segment->id)]) }}"
+                                    class="lms-btn">
+                                        + Add Lesson
+                                    </a>
+                                </div>
+
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 845px">
-                                        <thead>
+
+                        </div>
+
+                        <!-- Card -->
+                        <div class="lms-card">
+
+                            <div class="lms-card-header">
+                                <div class="lms-card-title">Lessons List</div>
+                            </div>
+
+                            <div class="lms-table-wrapper">
+
+                                <table id="example3" class="lms-table">
+
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Title</th>
+                                            <th>Notes</th>
+                                            <th>Materials</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        @forelse ($lesson as $l)
+
                                             <tr>
-                                                <th>{{__('#')}}</th>
-                                                <th>{{__('Title')}}</th>
-                                                <th>{{__('Notes')}}</th>
-                                                <th>{{__('Materials Uploaded')}}</th>
-                                                <th></th>
-                                                <!-- <th>{{__('Course')}}</th> -->
-                                                <th>{{__('Action')}}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($lesson as $key => $l)
-                                            <tr>
-                                                <td>{{ $l->serial_no }}</td>
-                                                <td>{{ $l->title }}</td>
-                                                <td>{{ $l->notes }}</td>
-                                                <td>{{ $l->material_count }}</td>
+
+                                                <!-- Serial -->
                                                 <td>
-                                                    @if($l->material_count > 0)
-                                                        <a href="{{ route('material.show', encryptor('encrypt', $l->id)) }}" 
-                                                        class="btn btn-info" title="View Materials">View Materials</a>
-                                                    @else
-                                                        <a href="{{ route('material.createNew', ['id' => encryptor('encrypt', $l->id)]) }}" 
-                                                        class="btn btn-dark" title="Add Materials">+ Add Materials</a>
-                                                    @endif
+                                                    <span class="text-muted">
+                                                        {{ $l->serial_no }}
+                                                    </span>
                                                 </td>
+
+                                                <!-- Title -->
                                                 <td>
-                                                    <a href="{{ route('lesson.edit', encryptor('encrypt', $l->id)) }}" 
-                                                    class="btn btn-sm btn-primary" title="Edit"><i class="la la-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger" 
-                                                    title="Delete" onclick="$('#form{{ $l->id }}').submit()"><i class="la la-trash-o"></i></a>
-                                                    <form id="form{{ $l->id }}" 
-                                                        action="{{ route('lesson.destroy', encryptor('encrypt', $l->id)) }}" 
+                                                    <div style="font-weight:600;">
+                                                        {{ $l->title }}
+                                                    </div>
+                                                </td>
+
+                                                <!-- Notes -->
+                                                <td>
+                                                    <span class="text-muted">
+                                                        {{ $l->notes ?? '—' }}
+                                                    </span>
+                                                </td>
+
+                                                <!-- Materials -->
+                                                <td>
+                                                    <span class="lms-badge">
+                                                        {{ $l->material_count }} files
+                                                    </span>
+                                                </td>
+
+                                                <!-- Material Action -->
+                                                <td>
+                                                    <div style="display:flex; gap:8px; align-items:center;">
+
+                                                        @if($l->material_count > 0)
+
+                                                            <a href="{{ route('material.show', encryptor('encrypt', $l->id)) }}"
+                                                            class="lms-btn"
+                                                            style="padding:6px 10px; font-size:12px;">
+                                                                View Materials
+                                                            </a>
+
+                                                        @else
+
+                                                            <a href="{{ route('material.createNew', ['id' => encryptor('encrypt', $l->id)]) }}"
+                                                            class="lms-btn-secondary"
+                                                            style="padding:6px 10px; font-size:12px;">
+                                                                + Add Materials
+                                                            </a>
+
+                                                        @endif
+
+                                                        <!-- Actions -->
+                                                        <a href="{{ route('lesson.edit', encryptor('encrypt', $l->id)) }}"
+                                                        class="lms-btn"
+                                                        style="padding:6px 10px; font-size:12px;">
+                                                            Edit
+                                                        </a>
+
+                                                        <a href="javascript:void(0);"
+                                                        onclick="$('#form{{ $l->id }}').submit()"
+                                                        class="lms-btn-danger"
+                                                        style="padding:6px 10px; font-size:12px;">
+                                                            Delete
+                                                        </a>
+
+                                                    </div>
+
+                                                    <form id="form{{ $l->id }}"
+                                                        action="{{ route('lesson.destroy', encryptor('encrypt', $l->id)) }}"
                                                         method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>
-                                                </td>                                                  
+
+                                                </td>
+
                                             </tr>
 
-                                            @empty
+                                        @empty
+
                                             <tr>
-                                                <th colspan="6" class="text-center">No Course Lesson Found</th>
+                                                <td colspan="5" style="text-align:center; padding:20px; color:#94a3b8;">
+                                                    No Lessons Found for this Segment
+                                                </td>
                                             </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
-                                </div>
+
+                                        @endforelse
+
+                                    </tbody>
+
+                                </table>
+
                             </div>
+
                         </div>
                     </div>
                 </div>

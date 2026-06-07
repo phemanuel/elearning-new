@@ -29,64 +29,110 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-12">
+            <!-- <div class="col-lg-12">
                 <ul class="nav nav-pills mb-3">
                     <li class="nav-item"><a href="#list-view" data-toggle="tab"
                             class="nav-link btn-primary mr-1 show active">List View</a></li>
-                    <!-- <li class="nav-item"><a href="javascript:void(0);" data-toggle="tab"
+                    <li class="nav-item"><a href="javascript:void(0);" data-toggle="tab"
                             class="nav-link btn-primary">Grid
-                            View</a></li> -->
+                            View</a></li>
                 </ul>
-            </div>
+            </div> -->
             <div class="col-lg-12">
                 <div class="row tab-content">
                     <div id="list-view" class="tab-pane fade active show col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">All Course Lessons List </h4>
-                                <a href="{{route('lesson.create')}}" class="btn btn-primary">+ Add new</a>
+
+                        <!-- Page Header -->
+                        <div class="lms-page-header mb-4">
+                            <div>
+                                <h3 class="mb-1">All Course Lessons</h3>
+                                <p class="text-muted mb-0">
+                                    Manage and organize lessons for your courses
+                                </p>
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 845px">
-                                        <thead>
+
+                            <a href="{{ route('lesson.create') }}" class="lms-btn">
+                                + Add Lesson
+                            </a>
+                        </div>
+
+                        <!-- Table Card -->
+                        <div class="lms-card">
+
+                            <div class="lms-card-header">
+                                <div class="lms-card-title">Lessons List</div>
+                            </div>
+
+                            <div class="lms-table-wrapper">
+                                <table id="example3" class="lms-table">
+
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Title</th>
+                                            <th>Course</th>
+                                            <th class="text-end">Actions</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @forelse ($lesson as $l)
                                             <tr>
-                                                <th>{{__('#')}}</th>
-                                                <th>{{__('Title')}}</th>
-                                                <th>{{__('Course')}}</th>
-                                                <th>{{__('Action')}}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($lesson as $l)
-                                            <tr>
-                                                <td>{{$l->id}}</td>
-                                                <td>{{$l->title}}</td>
-                                                <td>{{$l->course?->title_en}}</td>
+                                                <td>{{ $l->id }}</td>
+
                                                 <td>
-                                                    <a href="{{route('lesson.edit', encryptor('encrypt',$l->id))}}"
-                                                        class="btn btn-sm btn-primary" title="Edit"><i
-                                                            class="la la-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"
-                                                        title="Delete" onclick="$('#form{{$l->id}}').submit()"><i
-                                                            class="la la-trash-o"></i></a>
+                                                    <div style="font-weight:600;">
+                                                        {{ $l->title }}
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <span class="text-muted">
+                                                        {{ $l->course?->title_en ?? 'N/A' }}
+                                                    </span>
+                                                </td>
+
+                                                <td class="text-end">
+
+                                                    <div style="display:flex; gap:8px; justify-content:flex-end;">
+
+                                                        <a href="{{ route('lesson.edit', encryptor('encrypt',$l->id)) }}"
+                                                        class="lms-btn"
+                                                        style="padding:6px 10px; font-size:12px;">
+                                                            Edit
+                                                        </a>
+
+                                                        <a href="javascript:void(0);"
+                                                        onclick="$('#form{{$l->id}}').submit()"
+                                                        class="lms-btn-danger"
+                                                        style="padding:6px 10px; font-size:12px;">
+                                                            Delete
+                                                        </a>
+
+                                                    </div>
+
                                                     <form id="form{{$l->id}}"
-                                                        action="{{route('lesson.destroy', encryptor('encrypt',$l->id))}}"
+                                                        action="{{ route('lesson.destroy', encryptor('encrypt',$l->id)) }}"
                                                         method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>
+
                                                 </td>
                                             </tr>
-                                            @empty
+
+                                        @empty
                                             <tr>
-                                                <th colspan="6" class="text-center">No Course Lesson Found</th>
+                                                <td colspan="4" style="text-align:center; padding:20px; color:#94a3b8;">
+                                                    No Course Lessons Found
+                                                </td>
                                             </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
-                                </div>
+                                        @endforelse
+                                    </tbody>
+
+                                </table>
                             </div>
+
                         </div>
                     </div>
                 </div>

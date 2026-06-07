@@ -29,112 +29,164 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <div class="row tab-content">
-                
-                    <div class="card-header">
-                        <a href="{{route('segment.createNew', encryptor('encrypt', $courseId ))}}" class="btn btn-primary">+ Add new segment <i class="baseline-golf_course"></i></a>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="row">
-                        @forelse ($segment as $d)
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <div class="card card-profile">
-                                    <div class="card-header justify-content-end pb-0">
-                                        <div class="dropdown">
-                                            <button class="btn btn-link" type="button" data-toggle="dropdown">
-                                                <span class="dropdown-dots fs--1"></span>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right border py-0">
-                                                <div class="py-2">
-                                                <a class="dropdown-item" 
-                                                href="{{ $d->lesson_count > 0 ? route('lesson.show', encryptor('encrypt', $d->id)) : route('lesson.create', ['segment_id' => encryptor('encrypt', $d->id)]) }}">
-                                                {{ $d->lesson_count > 0 ? 'View Segment Lessons' : 'Create Segment Lessons' }}
-                                            </a>
-                                                    <a class="dropdown-item"
-                                                        href="{{route('segment.edit', encryptor('encrypt',$d->id))}}">Edit</a>
-                                                    <a class="dropdown-item text-danger" href="javascript:void(0);"
-                                                        onclick="$('#form{{$d->id}}').submit()">Delete</a>
-                                                    <form id="form{{$d->id}}"
-                                                        action="{{route('segment.destroy', encryptor('encrypt',$d->id))}}"
-                                                        method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body pt-2">
-                                        <div class="text-center">
-                                            <div class="">
-                                                <img src="{{ asset('public/uploads/courses/' . ($d->image && file_exists(public_path('uploads/courses/' . $d->image)) ? $d->image : 'course_blank.jpg')) }}"
-     class="w-100"
-                                                    height="200" alt="Course Image">
-                                               
-                                            </div>
-                                            <h3 class="mt-4 mb-1">{{$d->title_en}}</h3>
-                                            <ul class="list-group mb-3 list-group-flush">
-                                                
-                                                <li class="list-group-item px-0 d-flex justify-content-between">
-                                                    <span class="mb-0">Instructor :</span>
-                                                    <strong>{{$d->instructor?->name_en}}</strong>
-                                                </li>
-                                                <li class="list-group-item px-0 d-flex justify-content-between">
-                                                    <span class="mb-0">Category :</span>
-                                                    <strong>{{$d->courseCategory?->category_name}}</strong>
-                                                </li>                                                
-                                                <li class="list-group-item px-0 d-flex justify-content-between">
-                                                    <span class="mb-0">No of Lessons Uploaded :</span>
-                                                    <strong>{{$d->lesson_count}}</strong>
-                                                </li>
-                                                <li class="list-group-item px-0 d-flex justify-content-between">
-                                                    <span class="mb-0">Segment No :</span>
-                                                    <strong>{{$d->segment_no}}</strong>
-                                                </li>
-                                                <li class="list-group-item px-0 d-flex justify-content-between">
-                                                    <span class="mb-0">Quiz:</span>
-                                                    @if($d->quiz == 1)
-                                                        <i class="fa fa-check-circle text-success fs-5"></i> 
-                                                    @else
-                                                        <i class="fa fa-times-circle text-danger fs-5"></i>
-                                                    @endif
-                                                </li>
-                                                <li class="list-group-item px-0 d-flex justify-content-between">
-                                                    <span class="mb-0">Status :</span>
-                                                    <span class="badge 
-                                                    @if($d->status == 0) badge-warning 
-                                                    @elseif($d->status == 1) badge-danger 
-                                                    @elseif($d->status == 2) badge-success 
-                                                    @endif">
-                                                        @if($d->status == 0) {{__('Pending')}}
-                                                        @elseif($d->status == 1) {{__('Inactive')}}
-                                                        @elseif($d->status == 2) {{__('Active')}}
-                                                        @endif
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                            <a class="btn btn-outline-primary btn-rounded mt-3 px-4" 
-                                                href="{{ $d->lesson_count > 0 ? route('lesson.show', encryptor('encrypt', $d->id)) : route('lesson.create', ['segment_id' => encryptor('encrypt', $d->id)]) }}">
-                                                {{ $d->lesson_count > 0 ? 'View Segment Lessons' : 'Create Segment Lessons' }}
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="lms-section-card">
+                    <div class="row g-4">
+
+                    <div class="col-12 mb-4">
+
+                        <div class="lms-header-card">
+
+                            <div class="lms-header-left">
+                                <h3 class="mb-1">Course Segments</h3>
+                                <p class="text-muted mb-0">
+                                    Organize lessons and quizzes into learning modules.
+                                </p>
                             </div>
-                            @empty
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="card card-profile">
-                                    <div class="card-body pt-2">
-                                        <div class="text-center">
-                                            <p class="mt-3 px-4">Segment has not been uploaded.</p>
-                                        </div>
-                                    </div>
-                                </div>
+
+                            <div class="lms-header-right">
+                                <a href="{{route('segment.createNew', encryptor('encrypt', $courseId ))}}"
+                                class="lms-btn">
+                                    + Add Segment
+                                </a>
                             </div>
-                            @endforelse
+
                         </div>
+
                     </div>
+
+                    @forelse($segment as $d)
+
+                    <div class="col-xl-4 col-lg-6">
+
+                        <div class="segment-card">
+
+                            <!-- Cover -->
+                            <div class="segment-cover">
+
+                                <img src="{{ asset('uploads/courses/' . ($d->image ?? 'course_blank.jpg')) }}"
+                                    alt="">
+
+                                <div class="segment-overlay">
+
+                                    <span class="segment-number">
+                                        Segment {{ $d->segment_no }}
+                                    </span>
+
+                                    <span class="segment-status
+                                    @if($d->status == 2)
+                                        success
+                                    @elseif($d->status == 1)
+                                        danger
+                                    @else
+                                        warning
+                                    @endif">
+                                        @if($d->status == 2)
+                                            Active
+                                        @elseif($d->status == 1)
+                                            Inactive
+                                        @else
+                                            Pending
+                                        @endif
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <!-- Body -->
+                            <div class="segment-body">
+
+                                <h4 class="segment-title">
+                                    {{ $d->title_en }}
+                                </h4>
+
+                                <div class="segment-meta">
+
+                                    <div>
+                                        <small>Instructor</small>
+                                        <strong>{{ $d->instructor?->name_en }}</strong>
+                                    </div>
+
+                                    <div>
+                                        <small>Category</small>
+                                        <strong>{{ $d->courseCategory?->category_name }}</strong>
+                                    </div>
+
+                                </div>
+
+                                <!-- Stats -->
+                                <div class="segment-stats">
+
+                                    <div class="stat-box">
+                                        <h5>{{ $d->lesson_count }}</h5>
+                                        <span>Lessons</span>
+                                    </div>
+
+                                    <div class="stat-box">
+                                        <h5>
+                                            @if($d->quiz)
+                                                ✓
+                                            @else
+                                                ✕
+                                            @endif
+                                        </h5>
+                                        <span>Quiz</span>
+                                    </div>
+
+                                </div>
+
+                                <!-- Actions -->
+                                <div class="segment-actions">
+
+                                    <a href="{{route('segment.edit', encryptor('encrypt',$d->id))}}"
+                                    class="btn-edit">
+                                        Edit
+                                    </a>
+
+                                    <a href="{{ $d->lesson_count > 0
+                                        ? route('lesson.show', encryptor('encrypt',$d->id))
+                                        : route('lesson.create',['segment_id'=>encryptor('encrypt',$d->id)]) }}"
+                                    class="btn-manage">
+
+                                        {{ $d->lesson_count > 0
+                                            ? 'View Lessons'
+                                            : 'Add Lessons' }}
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    @empty
+
+                    <div class="col-12">
+
+                        <div class="lms-empty-state">
+
+                            <div class="empty-icon">
+                                📚
+                            </div>
+
+                            <h4>No Segments Yet</h4>
+
+                            <p>
+                                Create your first segment to start building this course.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    @endforelse
+
                 </div>
+                </div>
+
             </div>
         </div>
 

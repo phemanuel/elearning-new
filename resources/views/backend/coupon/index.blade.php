@@ -34,59 +34,158 @@
             <div class="col-lg-12">
                 <div class="row tab-content">
                     <div id="list-view" class="tab-pane fade active show col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">All Coupons List </h4>
-                                <a href="{{route('coupon.create')}}" class="btn btn-primary">+ Add new</a>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 845px">
-                                        <thead>
-                                            <tr>
-                                                <th>{{__('#')}}</th>
-                                                <th>{{__('Course')}}</th>
-                                                <th>{{__('Coupon Code')}}</th>
-                                                <th>{{__('Discount')}}</th>
-                                                <th>{{__('Valid From')}}</th>
-                                                <th>{{__('Valid Until')}}</th>
-                                                <th>{{__('Action')}}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($coupon as $key => $c)
-                                            <tr>
-                                                <td>{{$key + 1}}</td>
-                                                <td>{{ $c->course ? $c->course->title_en : 'No Course' }}</td>
-                                                <td><strong>{{$c->code}}</strong></td>
-                                                <td><strong>{{$c->discount}}</strong></td>
-                                                <td>{{$c->valid_from}}</td>
-                                                <td>{{$c->valid_until}}</td>
-                                                <td>
-                                                    <a href="{{route('coupon.edit', encryptor('encrypt', $c->id))}}"
-                                                        class="btn btn-sm btn-primary" title="Edit"><i
-                                                            class="la la-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"
-                                                        title="Delete" onclick="$('#form{{$c->id}}').submit()"><i
-                                                            class="la la-trash-o"></i></a>
-                                                    <form id="form{{$c->id}}"
-                                                        action="{{route('coupon.destroy', $c->id)}}"
-                                                        method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                            @empty
-                                            <tr>
-                                                <th colspan="7" class="text-center">No Coupon Found</th>
-                                            </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
+
+                        <div class="lms-card">
+
+                            <!-- Header -->
+                            <div class="lms-card-header">
+
+                                <div>
+                                    <div class="lms-card-title">Coupon Management</div>
+                                    <div style="font-size:12px; color:#64748b;">
+                                        Manage discount campaigns and promotional offers
+                                    </div>
                                 </div>
+
+                                <a href="{{ route('coupon.create') }}" class="lms-btn">
+                                    + Create Coupon
+                                </a>
+
                             </div>
+
+                            <!-- Table -->
+                            <div class="lms-table-wrapper">
+
+                                <table class="lms-table" id="example3">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Coupon</th>
+                                            <th>Course</th>
+                                            <th>Discount</th>
+                                            <th>Valid Period</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        @forelse ($coupon as $key => $c)
+
+                                        @php
+                                            $expired = \Carbon\Carbon::parse($c->valid_until)->isPast();
+                                        @endphp
+
+                                        <tr>
+
+                                            <!-- Coupon -->
+                                            <td>
+                                                <div>
+                                                    <div style="font-weight:700; font-size:14px;">
+                                                        {{ $c->code }}
+                                                    </div>
+
+                                                    <div style="font-size:11px; color:#94a3b8;">
+                                                        Coupon #{{ $key + 1 }}
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                            <!-- Course -->
+                                            <td>
+                                                <div style="font-weight:600;">
+                                                    {{ $c->course ? $c->course->title_en : 'No Course Assigned' }}
+                                                </div>
+
+                                                <div style="font-size:11px; color:#94a3b8;">
+                                                    Learning Program
+                                                </div>
+                                            </td>
+
+                                            <!-- Discount -->
+                                            <td>
+                                                <span class="lms-badge lms-badge-success">
+                                                    {{ $c->discount }}% OFF
+                                                </span>
+                                            </td>
+
+                                            <!-- Validity -->
+                                            <td>
+
+                                                <div style="font-weight:600;">
+                                                    {{ \Carbon\Carbon::parse($c->valid_from)->format('d M Y') }}
+                                                </div>
+
+                                                <div style="font-size:11px; color:#94a3b8;">
+                                                    Until {{ \Carbon\Carbon::parse($c->valid_until)->format('d M Y') }}
+                                                </div>
+
+                                            </td>
+
+                                            <!-- Status -->
+                                            <td>
+
+                                                @if($expired)
+                                                    <span class="lms-badge lms-badge-danger">
+                                                        Expired
+                                                    </span>
+                                                @else
+                                                    <span class="lms-badge lms-badge-success">
+                                                        Active
+                                                    </span>
+                                                @endif
+
+                                            </td>
+
+                                            <!-- Actions -->
+                                            <td>
+
+                                                <div style="display:flex; gap:8px;">
+
+                                                    <a href="{{ route('coupon.edit', encryptor('encrypt', $c->id)) }}"
+                                                    class="lms-btn">
+                                                        Edit
+                                                    </a>
+
+                                                    <a href="javascript:void(0);"
+                                                    onclick="$('#form{{$c->id}}').submit()"
+                                                    class="lms-btn-danger">
+                                                        Delete
+                                                    </a>
+
+                                                </div>
+
+                                                <form id="form{{$c->id}}"
+                                                    action="{{ route('coupon.destroy', $c->id) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+
+                                            </td>
+
+                                        </tr>
+
+                                        @empty
+
+                                        <tr>
+                                            <td colspan="6"
+                                                style="text-align:center; padding:30px; color:#94a3b8;">
+                                                No Coupons Found
+                                            </td>
+                                        </tr>
+
+                                        @endforelse
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>

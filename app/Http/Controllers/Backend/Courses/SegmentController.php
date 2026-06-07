@@ -84,7 +84,10 @@ class SegmentController extends Controller
             $instructor = Instructor::where('id', $instructorId)->first();
         }
         
-        return view('backend.course.segments.create', compact('courseCategory', 'instructor','course'));
+        $nextSegmentNo = Segments::where('course_id', $decryptedId)->max('segment_no');
+        $nextSegmentNo = $nextSegmentNo ? $nextSegmentNo + 1 : 1;
+
+        return view('backend.course.segments.create', compact('courseCategory', 'instructor','course','nextSegmentNo'));
         
     }
 

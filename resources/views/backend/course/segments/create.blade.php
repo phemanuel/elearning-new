@@ -1,5 +1,5 @@
 @extends('backend.layouts.app')
-@section('title', 'Add Course')
+@section('title', 'Add Segment')
 
 @push('styles')
 <!-- Pick date -->
@@ -42,18 +42,21 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label class="form-label">Segment No</label>
-                                <select class="form-control" name="segmentNo">
-                                    <option value="">Select Segment</option>
-                                    @for ($i = 1; $i <= 10; $i++)
-                                        <option value="{{ $i }}" {{ old('segmentNo') == $i ? 'selected' : '' }}>
-                                            {{ $i }}
-                                        </option>
-                                    @endfor
-                                </select>
+
+                                <input type="text"
+                                    class="form-control"
+                                    name="segmentNo"
+                                    value="{{ $nextSegmentNo }}"
+                                    readonly>
+
+                                <small class="text-muted">
+                                    Auto-generated segment number
+                                </small>
+
+                                @if($errors->has('segmentNo'))
+                                    <span class="text-danger">{{ $errors->first('segmentNo') }}</span>
+                                @endif
                             </div>
-                            @if($errors->has('segmentNo'))
-                                <span class="text-danger">{{ $errors->first('segmentNo') }}</span>
-                            @endif
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
