@@ -410,8 +410,10 @@ class SubscriptionController extends Controller
         $instructor->current_plan = $plan->id;
         $instructor->save();
 
-        return redirect()->route('dashboard')
-            ->with('success', 'Subscription activated successfully!');
+        return response()->json([
+            'success' => true,
+            'message' => 'Subscription activated successfully!'
+        ]);
     }
 
 

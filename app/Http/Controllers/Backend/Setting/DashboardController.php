@@ -21,7 +21,8 @@ class DashboardController extends Controller
         $user_id =auth()->user()->instructor_id;       
         $student = Student::all();
         $course = Course::where('instructor_id', $user_id)->get();
-        $allCourse = Course::all();       
+        $allCourse = Course::all(); 
+        $allCoupon = Coupon::all();       
         $enrollments = Enrollment::with(['student', 'course' => function($query) {
             $query->withCount('segments');
         }])->where('instructor_id', $user_id)
@@ -41,7 +42,7 @@ class DashboardController extends Controller
             ->paginate(5);
             $totalCourseFee = Payment::sum('amount');
            return view('backend.adminDashboard', compact('student','course','allEnrollment','allCourse',
-           'allEnrollments','totalCourseFee','courseShow','instructorPlan'));  
+           'allEnrollments','totalCourseFee','courseShow','instructorPlan','allCoupon'));  
         }            
         elseif ($user->role = 'Instructor'){
             $instructor = Instructor::where('id', $user_id)->first();

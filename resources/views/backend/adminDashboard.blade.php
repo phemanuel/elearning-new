@@ -24,231 +24,471 @@
     <!-- row -->
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xl-3 col-xxl-3 col-sm-6">
+            <!-- All Students -->
+            <div class="col-xl-3 col-lg-6 col-md-6 mb-4">
                 <a href="{{ route('enrollment.index') }}" class="text-decoration-none">
-                    <div class="widget-stat card bg-primary overflow-hidden text-center p-4 hover-effect">
-                        <div class="card-header border-0">
-                            <h3 class="card-title text-white">Total Students</h3>
+                    <div class="dashboard-card students-card">
+
+                        <div class="card-bg-icon">
+                            <i class="fa fa-user-graduate"></i>
                         </div>
-                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
-                            <i class="fa fa-users fa-3x text-white mb-3"></i> 
-                            <h1 class="text-white fw-bold display-6" style="text-shadow: 2px 2px 10px rgba(255,255,255,0.6);">
-                                {{ $student->count() }}
-                            </h1>
+
+                        <div class="dashboard-card-content">
+                            <span class="card-title"> Students</span>
+
+                            <h2 class="card-number">
+                                {{ number_format($student->count()) }}
+                            </h2>
+
+                            <small>Total learners registered</small>
                         </div>
-                    </div>
-                </a>                
-            </div>
-            <div class="col-xl-3 col-xxl-3 col-sm-6">
-                <a href="{{ route('enrollment.index') }}" class="text-decoration-none">
-                    <div class="widget-stat card bg-success overflow-hidden text-center p-4 hover-effect">
-                        <div class="card-header border-0">
-                            <h3 class="card-title text-white">Enrolled Students</h3>
-                        </div>
-                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
-                            <i class="fa fa-user-graduate fa-3x text-white mb-3"></i> 
-                            <h1 class="text-white fw-bold display-6" style="text-shadow: 2px 2px 10px rgba(255,255,255,0.6);">
-                                {{ $allEnrollments->count() }}
-                            </h1>
-                        </div>
+
                     </div>
                 </a>
             </div>
-            <div class="col-xl-3 col-xxl-3 col-sm-6">
+
+            <!-- Enrolled Students -->
+            <div class="col-xl-3 col-lg-6 col-md-6 mb-4">
+                <a href="{{ route('enrollment.index') }}" class="text-decoration-none">
+                    <div class="dashboard-card coupon-card">
+
+                        <div class="card-bg-icon">
+                            <i class="fa fa-user-graduate"></i>
+                        </div>
+
+                        <div class="dashboard-card-content">
+                            <span class="card-title">Enrolled Students</span>
+
+                            <h2 class="card-number">
+                                {{ number_format($allEnrollments->count()) }}
+                            </h2>
+
+                            <small>Total learners enrolled</small>
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+
+            <!-- Courses -->
+            <div class="col-xl-3 col-lg-6 col-md-6 mb-4">
                 <a href="{{ route('course.index') }}" class="text-decoration-none">
-                    <div class="widget-stat card bg-secondary overflow-hidden text-center p-4 hover-effect">
-                        <div class="card-header border-0">
-                            <h3 class="card-title text-white">Total Course</h3>
+                    <div class="dashboard-card courses-card">
+
+                        <div class="card-bg-icon">
+                            <i class="fa fa-book-open"></i>
                         </div>
-                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
-                            <i class="fa fa-book-open fa-3x text-white mb-3"></i>
-                            <h1 class="text-white fw-bold display-6" style="text-shadow: 2px 2px 10px rgba(255,255,255,0.6);">
-                                {{ $allCourse->count() }}
-                            </h1>
+
+                        <div class="dashboard-card-content">
+                            <span class="card-title">Courses</span>
+
+                            <h2 class="card-number">
+                                {{ number_format($allCourse->count()) }}
+                            </h2>
+
+                            <small>All courses</small>
                         </div>
+
                     </div>
-                </a>                
+                </a>
             </div>
-            <div class="col-xl-3 col-xxl-3 col-sm-6">
+
+            <!-- Revenue -->
+            <div class="col-xl-3 col-lg-6 col-md-6 mb-4">
                 <a href="{{ route('courseFee') }}" class="text-decoration-none">
-                    <div class="widget-stat card bg-danger overflow-hidden text-center p-4 hover-effect">
-                        <div class="card-header border-0">
-                            <h3 class="card-title text-white">Fees Collection</h3>
+                    <div class="dashboard-card revenue-card">
+
+                        <div class="card-bg-icon">
+                            <i class="fa fa-wallet"></i>
                         </div>
-                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
-                            <i class="fa fa-wallet fa-3x text-white mb-3"></i>
-                            <h1 class="text-white fw-bold display-6" style="text-shadow: 2px 2px 10px rgba(255,255,255,0.6);">
-                                ₦{{ number_format($totalCourseFee, 2) }}
-                            </h1>
+
+                        <div class="dashboard-card-content">
+                            <span class="card-title">Fees Collection</span>
+
+                            <h2 class="card-number">
+                                ₦{{ number_format($totalCourseFee,0) }}
+                            </h2>
+
+                            <small>Total earnings</small>
                         </div>
+
                     </div>
-                </a>                
+                </a>
             </div>
-            <!-- <div class="col-xl-6 col-xxl-6 col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Income/Expense Report</h3>
+
+            <!-- Coupons -->
+            <!-- <div class="col-xl-3 col-lg-6 col-md-6 mb-4">
+                <a href="{{ route('coupon.index') }}" class="text-decoration-none">
+                    <div class="dashboard-card coupon-card">
+
+                        <div class="card-bg-icon">
+                            <i class="fa fa-ticket-alt"></i>
+                        </div>
+
+                        <div class="dashboard-card-content">
+                            <span class="card-title">Coupons</span>
+
+                            <h2 class="card-number">
+                                {{ number_format($allCoupon->count()) }}
+                            </h2>
+
+                            <small>Available coupons</small>
+                        </div>
+
                     </div>
-                    <div class="card-body">
-                        <canvas id="barChart_2"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-6 col-xxl-6 col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Income/Expense Report</h3>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="areaChart_1"></canvas>
-                    </div>
-                </div>
+                </a>
             </div> -->
-            <div class="col-xl-8 col-xxl-8 col-lg-8 col-md-12 col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title"><strong>Enrolled Students</strong></h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="example3" class="table table-sm mb-0 table-striped">
-                            <!-- <table class="table table-sm mb-0 table-striped"> -->
-                            <thead>
-                                <tr>
-                                    <th class="px-5 py-3">#</th>
-                                    <th class="px-5 py-3">Student Name</th>
-                                    <th class="py-3">Course</th>
-                                    <th class="py-3">Total Segments</th>
-                                    <th class="py-3">Current Segment</th>
-                                    <th class="py-3">Status</th>
-                                    <th class="py-3">Date Of Enrollment</th>                                        
-                                </tr>
-                            </thead>
-                            <tbody id="customers">
-                                @foreach($allEnrollments as $enrollment)
-                                <tr class="btn-reveal-trigger">
-                                    <td class="p-3">
-                                        <a href="javascript:void(0);">
-                                            <div class="media d-flex align-items-center">
-                                                <div class="avatar avatar-xl mr-2">
-                                                    <img class="rounded-circle img-fluid" src="{{asset('uploads/students/' . $enrollment->student->image)}}" width="30" alt="">
-                                                </div>                                               
-                                            </div>
-                                        </a>
-                                    </td>
-                                    <td class="py-2">{{ $enrollment->student->name_en }}</td>
-                                    <td class="py-2">{{ $enrollment->course->title_en }}</td>
-                                    <!-- Display Total Segments -->
-                                    <td class="py-2">{{ $enrollment->course->segments_count ?? 0 }}</td>
-                                    <!-- Display Current Segment -->
-                                    <td class="py-2">{{ $enrollment->segment }}</td>
-                                    <!-- Status Check -->
-                                    <td>
-                                        @if($enrollment->completed == 1)
-                                            <span class="badge badge-rounded badge-success">Completed</span>
-                                        @else
-                                            <span class="badge badge-rounded badge-warning">Not Completed</span>
-                                        @endif
-                                    </td>
-                                    <td class="py-2">{{ $enrollment->created_at->format('d/m/Y') }}</td>                                        
-                                </tr>
-                                @endforeach
-                            </tbody>                       
-                            </table>                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-xxl-4 col-lg-4 col-md-12 col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                    <h5 class="card-title"><strong>Subscription Plans</strong></h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="widget-todo dz-scroll" style="height: 370px;" id="DZ_W_Notifications">                        
-                            <table class="table table-sm mb-0 table-striped">
-                            <thead>
-                                <tr>
-                                    <th class="px-5 py-3">#</th>
-                                    <th class="px-5 py-3">Instructor</th>
-                                    <th class="py-3">Plan</th>
-                                                                            
-                                </tr>
-                            </thead>
-                            <tbody id="customers">
-                                @foreach($instructorPlan as $key => $p)
-                                <tr class="btn-reveal-trigger">                                    
-                                    <td class="py-2">{{ $key + 1 }}</td>
-                                    <td class="py-2">{{ $p->name_en }}</td>                                    
-                                    <td class="py-2">{{ $p->currentPlan->name ?? 'No Plan' }}</td>                                       
-                                </tr>
-                                @endforeach
-                            </tbody>                       
-                            </table>   
+
+            
+                <div class="col-xl-8 col-xxl-8 col-lg-8 col-md-12 col-sm-12">
+
+                <div class="lms-card">
+
+                    <!-- Header -->
+                    <div class="lms-card-header">
+                        <div>
+                            <div class="lms-card-title">Enrolled Students</div>
+                            <div style="font-size:12px; color:#6b7280; margin-top:2px;">
+                                Track student progress across all courses
+                            </div>
                         </div>
                     </div>
 
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title"><strong>Courses</strong> </h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                        <table id="example3" class="table table-sm mb-0 table-striped">
+                    <!-- Table -->
+                    <div class="lms-table-wrapper">
+
+                        <table class="lms-table">
+
                             <thead>
                                 <tr>
-                                    <th class="px-5 py-3">#</th>
-                                    <th class="px-5 py-3"></th>
-                                    <th class="py-3">Course Name</th>
-                                    <th class="py-3">Total Segments</th>
-                                    <th class="py-3">Difficulty</th>
-                                    <th class="py-3">Category</th>
-                                    <th class="py-3">Price</th>
-                                    <th class="py-3">Status</th>                                       
+                                    <th>Student</th>
+                                    <th>Course</th>
+                                    <th>Progress</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
                                 </tr>
                             </thead>
-                            <tbody id="customers">
-                                @foreach($courseShow as $key => $d)
-                                <tr class="btn-reveal-trigger">
-                                <td class="py-2">{{$key + 1}}</td>
-                                    <td class="p-3">
-                                        <a href="javascript:void(0);">
-                                            <div class="media d-flex align-items-center">
-                                                <div class="avatar avatar-xl mr-2">
-                                                    <img class="img fluid" width="100" src="{{asset('uploads/courses/'.$d->image)}}" width="30" alt="">
-                                                </div>                                                
+
+                            <tbody>
+
+                                @foreach($allEnrollments as $enrollment)
+
+                                    @php
+                                        $total = $enrollment->course->segments_count ?? 1;
+                                        $current = $enrollment->segment ?? 0;
+                                        $percent = $total > 0 ? round(($current / $total) * 100) : 0;
+                                    @endphp
+
+                                    <tr>
+
+                                        <!-- Student Block -->
+                                        <td>
+                                            <div style="display:flex; align-items:center; gap:12px;">
+
+                                                <img
+                                                    src="{{ asset('uploads/students/' . $enrollment->student->image) }}"
+                                                    class="lms-avatar"
+                                                    alt="student"
+                                                >
+
+                                                <div>
+                                                    <div style="font-weight:600;">
+                                                        {{ $enrollment->student->name_en }}
+                                                    </div>
+                                                    <div style="font-size:12px; color:#6b7280;">
+                                                        Student ID: #{{ $enrollment->student->id }}
+                                                    </div>
+                                                </div>
+
                                             </div>
-                                        </a>
-                                    </td>
-                                    <td class="py-2">{{$d->title_en}}</td>
-                                    <!-- Display Total Segments -->
-                                    <td class="py-2">{{$d->segment_count}}</td>
-                                    <td class="py-2"><strong>{{ $d->difficulty == 'beginner' ? __('Beginner') :
-                                                        ($d->difficulty == 'intermediate' ? __('Intermediate') :
-                                                        __('Advanced')) }}</strong></td>
-                                    <!-- Status Check -->                                    
-                                    <td class="py-2">{{$d->courseCategory?->category_name}}</td>
-                                    <td class="py-2">{{ $d->price == 0 ? 'Free' : number_format($d->price, 2) }}</td>
-                                    <td>
-                                        @if($d->status == 2)
-                                            <span class="badge badge-rounded badge-success">Active</span>
-                                        @elseif($d->status == 1)
-                                            <span class="badge badge-rounded badge-warning">Pending</span>
-                                            @elseif($d->status == 0)
-                                            <span class="badge badge-rounded badge-danger">Inactive</span>
-                                        @endif
-                                    </td>                                       
-                                </tr>
+                                        </td>
+
+                                        <!-- Course -->
+                                        <td>
+                                            <div style="font-weight:500;">
+                                                {{ $enrollment->course->title_en }}
+                                            </div>
+                                            <div style="font-size:12px; color:#6b7280;">
+                                                {{ $total }} segments
+                                            </div>
+                                        </td>
+
+                                        <!-- Progress (IMPORTANT LMS UPGRADE) -->
+                                        <td>
+                                            <div style="width:140px;">
+
+                                                <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
+                                                    <span>{{ $current }}/{{ $total }}</span>
+                                                    <span>{{ $percent }}%</span>
+                                                </div>
+
+                                                <div style="height:6px; background:#e5e7eb; border-radius:999px; overflow:hidden;">
+                                                    <div style="width:{{ $percent }}%; height:100%; background:#2563eb;"></div>
+                                                </div>
+
+                                            </div>
+                                        </td>
+
+                                        <!-- Status -->
+                                        <td>
+                                            @if($enrollment->completed == 1)
+                                                <span class="lms-badge lms-badge-success">
+                                                    Completed
+                                                </span>
+                                            @else
+                                                <span class="lms-badge lms-badge-warning">
+                                                    In Progress
+                                                </span>
+                                            @endif
+                                        </td>
+
+                                        <!-- Date -->
+                                        <td>
+                                            <div style="font-size:13px;">
+                                                {{ $enrollment->created_at->format('d M Y') }}
+                                            </div>
+                                            <div style="font-size:11px; color:#9ca3af;">
+                                                {{ $enrollment->created_at->diffForHumans() }}
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
                                 @endforeach
+
                             </tbody>
-                        </table>                       
-                        </div>
+
+                        </table>
+
                     </div>
+
+                </div>
+
+            </div>
+            <div class="col-xl-4 col-xxl-4 col-lg-4 col-md-12 col-sm-12">
+
+    <div class="lms-card">
+
+        <!-- Header -->
+        <div class="lms-card-header">
+            <div>
+                <div class="lms-card-title">Subscription Plans</div>
+                <div style="font-size:12px; color:#64748b; margin-top:2px;">
+                    Instructor billing overview
                 </div>
             </div>
+        </div>
+
+        <!-- Table -->
+        <div class="lms-table-wrapper lms-scroll">
+
+            <table class="lms-table">
+
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Instructor</th>
+                        <th>Plan</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach($instructorPlan as $key => $p)
+
+                        <tr>
+
+                            <!-- Index -->
+                            <td style="width:50px;">
+                                <span style="font-weight:600; color:#64748b;">
+                                    {{ $key + 1 }}
+                                </span>
+                            </td>
+
+                            <!-- Instructor -->
+                            <td>
+                                <div style="display:flex; align-items:center; gap:10px;">
+
+                                    <div class="lms-avatar" style="display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; background:#eef2ff; color:#2563eb;">
+                                        {{ strtoupper(substr($p->name_en, 0, 1)) }}
+                                    </div>
+
+                                    <div>
+                                        <div style="font-weight:600;">
+                                            {{ $p->name_en }}
+                                        </div>
+                                        <div style="font-size:11px; color:#94a3b8;">
+                                            Instructor
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </td>
+
+                            <!-- Plan -->
+                            <td>
+                                @if($p->currentPlan)
+
+                                    <span class="lms-badge lms-badge-success">
+                                        {{ $p->currentPlan->name }}
+                                    </span>
+
+                                @else
+
+                                    <span class="lms-badge lms-badge-warning">
+                                        No Plan
+                                    </span>
+
+                                @endif
+                            </td>
+
+                        </tr>
+
+                    @endforeach
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+<hr>
+            <div class="col-lg-12 mt-2">
+
+                <div class="lms-card">
+
+                    <!-- Header -->
+                    <div class="lms-card-header">
+                        <div>
+                            <div class="lms-card-title">Courses</div>
+                            <div style="font-size:12px; color:#64748b; margin-top:2px;">
+                                Manage all published and draft courses
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Table -->
+                    <div class="lms-table-wrapper">
+
+                        <table class="lms-table" id="example3">
+
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Course</th>
+                                    <th>Title</th>
+                                    <th>Segments</th>
+                                    <th>Level</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach($courseShow as $key => $d)
+
+                                    <tr>
+
+                                        <!-- Index -->
+                                        <td style="width:40px;">
+                                            <span style="font-weight:600; color:#64748b;">
+                                                {{ $key + 1 }}
+                                            </span>
+                                        </td>
+
+                                        <!-- Course Image -->
+                                        <td style="width:70px;">
+                                            <img
+                                                src="{{ asset('uploads/courses/'.$d->image) }}"
+                                                class="lms-avatar"
+                                                style="border-radius:12px; width:46px; height:46px;"
+                                                alt="course"
+                                            >
+                                        </td>
+
+                                        <!-- Title -->
+                                        <td>
+                                            <div style="font-weight:600;">
+                                                {{ $d->title_en }}
+                                            </div>
+                                            <div style="font-size:11px; color:#94a3b8;">
+                                                Course ID: #{{ $d->id }}
+                                            </div>
+                                        </td>
+
+                                        <!-- Segments -->
+                                        <td>
+                                            <span style="font-weight:600;">
+                                                {{ $d->segment_count }}
+                                            </span>
+                                            <div style="font-size:11px; color:#94a3b8;">
+                                                lessons
+                                            </div>
+                                        </td>
+
+                                        <!-- Difficulty -->
+                                        <td>
+                                            @php
+                                                $level = $d->difficulty;
+                                            @endphp
+
+                                            @if($level == 'beginner')
+                                                <span class="lms-badge lms-badge-success">Beginner</span>
+                                            @elseif($level == 'intermediate')
+                                                <span class="lms-badge lms-badge-warning">Intermediate</span>
+                                            @else
+                                                <span class="lms-badge lms-badge-danger">Advanced</span>
+                                            @endif
+                                        </td>
+
+                                        <!-- Category -->
+                                        <td>
+                                            <span style="font-size:13px;">
+                                                {{ $d->courseCategory?->category_name }}
+                                            </span>
+                                        </td>
+
+                                        <!-- Price -->
+                                        <td>
+                                            @if($d->price == 0)
+                                                <span class="lms-badge lms-badge-success">Free</span>
+                                            @else
+                                                <span style="font-weight:600;">
+                                                    ₦{{ number_format($d->price, 2) }}
+                                                </span>
+                                            @endif
+                                        </td>
+
+                                        <!-- Status -->
+                                        <td>
+                                            @if($d->status == 2)
+                                                <span class="lms-badge lms-badge-success">Active</span>
+                                            @elseif($d->status == 1)
+                                                <span class="lms-badge lms-badge-warning">Pending</span>
+                                            @else
+                                                <span class="lms-badge lms-badge-danger">Inactive</span>
+                                            @endif
+                                        </td>
+
+                                    </tr>
+
+                                @endforeach
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
     </div>
 </div>

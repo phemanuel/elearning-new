@@ -365,15 +365,17 @@
             email: email
         })
     })
-    .then(res => {
-        if (!res.ok) {
-            throw new Error("Network error");
+    .then(res => res.json())
+    .then(data => {
+
+        if (data.success) {
+
+            // store message temporarily
+            sessionStorage.setItem('toast_success', data.message);
+
+            window.location = "{{ route('dashboard') }}";
         }
-        return res.text(); // we don't care about response content
-    })
-    .then(() => {
-        // 🔥 force redirect AFTER success
-        window.location = "{{ route('dashboard') }}";
+
     })
     .catch(err => {
         console.error(err);

@@ -28,81 +28,168 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-12">
+            <!-- <div class="col-lg-12">
                 <ul class="nav nav-pills mb-3">
                     <li class="nav-item"><a href="#list-view" data-toggle="tab"
                             class="nav-link btn-primary mr-1 show active">List View</a></li>
                     <li class="nav-item"><a href="#grid-view" data-toggle="tab" class="nav-link btn-primary">Grid
                             View</a></li>
                 </ul>
-            </div>
+            </div> -->
             <div class="col-lg-12">
                 <div class="row tab-content">
                     <div id="list-view" class="tab-pane fade active show col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">All Students List </h4>
-                                <a href="{{route('user.create')}}" class="btn btn-primary">+ Add new</a>
+
+                        <div class="lms-card">
+
+                            <!-- Header -->
+                            <div class="lms-card-header">
+
+                                <div>
+                                    <div class="lms-card-title">All Users</div>
+                                    <div style="font-size:12px; color:#64748b; margin-top:2px;">
+                                        Manage system users and permissions
+                                    </div>
+                                </div>
+
+                                <a href="{{ route('user.create') }}"
+                                style="background:#2563eb; color:#fff; padding:8px 14px; border-radius:10px; font-size:13px; font-weight:600;">
+                                    + Add User
+                                </a>
+
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 845px">
-                                        <thead>
+
+                            <!-- Table -->
+                            <div class="lms-table-wrapper">
+
+                                <table class="lms-table" id="example3">
+
+                                    <thead>
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Email</th>
+                                            <th>Contact</th>
+                                            <th>Role</th>
+                                            <th>Access</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        @forelse ($data as $d)
+
                                             <tr>
-                                                <th>{{__('#')}}</th>
-                                                <th>{{__('Name')}}</th>
-                                                <th>{{__('Email')}}</th>
-                                                <th>{{__('Contact')}}</th>
-                                                <th>{{__('Role')}}</th>
-                                                <th>{{__('Full Access')}}</th>
-                                                <th>{{__('Status')}}</th>
-                                                <th>{{__('Action')}}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($data as $d)
-                                            <tr>
-                                                <td><img class="rounded-circle" width="35" height="35"
-                                                        src="{{asset('uploads/users/'.$d->image)}}" alt=""></td>
-                                                <td><strong>{{$d->name_en}}</strong></td>
-                                                <td>{{$d->email}}</td>
-                                                <td>{{$d->contact_en}}</td>
-                                                <td>{{$d->role?->name}}</td>
+
+                                                <!-- User -->
                                                 <td>
-                                                    <span class="badge {{$d->full_access==1?"
-                                                        badge-info":"badge-warning"}}">@if($d->full_access==1){{__('Yes')}}
-                                                        @else{{__('No')}} @endif</span>
+                                                    <div style="display:flex; align-items:center; gap:12px;">
+
+                                                        <img src="{{ asset('uploads/users/'.$d->image) }}"
+                                                            class="lms-avatar"
+                                                            alt="user">
+
+                                                        <div>
+                                                            <div style="font-weight:600;">
+                                                                {{ $d->name_en }}
+                                                            </div>
+                                                            <div style="font-size:11px; color:#94a3b8;">
+                                                                ID: #{{ $d->id }}
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
                                                 </td>
+
+                                                <!-- Email -->
                                                 <td>
-                                                    <span class="badge {{$d->status==1?"
-                                                        badge-success":"badge-danger"}}">@if($d->status==1){{__('Active')}}
-                                                        @else{{__('Inactive')}} @endif</span>
+                                                    {{ $d->email }}
                                                 </td>
+
+                                                <!-- Contact -->
                                                 <td>
-                                                    <a href="{{route('user.edit', encryptor('encrypt',$d->id))}}"
-                                                        class="btn btn-sm btn-primary" title="Edit"><i
-                                                            class="la la-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"
-                                                        title="Delete" onclick="$('#form{{$d->id}}').submit()"><i
-                                                            class="la la-trash-o"></i></a>
+                                                    {{ $d->contact_en }}
+                                                </td>
+
+                                                <!-- Role -->
+                                                <td>
+                                                    <span style="font-size:13px; font-weight:500;">
+                                                        {{ $d->role?->name }}
+                                                    </span>
+                                                </td>
+
+                                                <!-- Access -->
+                                                <td>
+                                                    @if($d->full_access == 1)
+                                                        <span class="lms-badge lms-badge-success">
+                                                            Full Access
+                                                        </span>
+                                                    @else
+                                                        <span class="lms-badge lms-badge-warning">
+                                                            Limited
+                                                        </span>
+                                                    @endif
+                                                </td>
+
+                                                <!-- Status -->
+                                                <td>
+                                                    @if($d->status == 1)
+                                                        <span class="lms-badge lms-badge-success">
+                                                            Active
+                                                        </span>
+                                                    @else
+                                                        <span class="lms-badge lms-badge-danger">
+                                                            Inactive
+                                                        </span>
+                                                    @endif
+                                                </td>
+
+                                                <!-- Actions -->
+                                                <td>
+                                                    <div style="display:flex; gap:8px;">
+
+                                                        <a href="{{ route('user.edit', encryptor('encrypt',$d->id)) }}"
+                                                        style="background:#2563eb; color:#fff; padding:6px 10px; border-radius:8px; font-size:12px;">
+                                                            Edit
+                                                        </a>
+
+                                                        <a href="javascript:void(0);"
+                                                        onclick="$('#form{{$d->id}}').submit()"
+                                                        style="background:#ef4444; color:#fff; padding:6px 10px; border-radius:8px; font-size:12px;">
+                                                            Delete
+                                                        </a>
+
+                                                    </div>
+
                                                     <form id="form{{$d->id}}"
-                                                        action="{{route('user.destroy', encryptor('encrypt',$d->id))}}" 
+                                                        action="{{ route('user.destroy', encryptor('encrypt',$d->id)) }}"
                                                         method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>
                                                 </td>
+
                                             </tr>
-                                            @empty
+
+                                        @empty
+
                                             <tr>
-                                                <th colspan="7" class="text-center">No User Found</th>
+                                                <td colspan="7" style="text-align:center; padding:20px; color:#94a3b8;">
+                                                    No Users Found
+                                                </td>
                                             </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
-                                </div>
+
+                                        @endforelse
+
+                                    </tbody>
+
+                                </table>
+
                             </div>
+
                         </div>
+
                     </div>
                     <div id="grid-view" class="tab-pane fade col-lg-12">
                         <div class="row">

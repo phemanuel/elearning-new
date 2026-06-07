@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'About')
+@section('title', 'Signup')
 @section('header-attr') class="nav-shadow" @endsection
 
 @section('content')

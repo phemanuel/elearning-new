@@ -28,84 +28,160 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-12">
+            <!-- <div class="col-lg-12">
                 <ul class="nav nav-pills mb-3">
                     <li class="nav-item"><a href="#list-view" data-toggle="tab"
                             class="nav-link btn-primary show active">List View</a></li>
                     <li class="nav-item"><a href="#grid-view" data-toggle="tab" class="nav-link btn-primary mr-1">Grid
                             View</a></li>
                 </ul>
-            </div>
+            </div> -->
             <div class="col-lg-12">
                 <div class="row tab-content">
                     <div id="list-view" class="tab-pane fade active show col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">All Instructors List </h4>
-                                <a href="{{route('instructor.create')}}" class="btn btn-primary">+ Add new</a>
+
+                        <div class="lms-card">
+
+                            <!-- Header -->
+                            <div class="lms-card-header">
+
+                                <div>
+                                    <div class="lms-card-title">All Instructors</div>
+                                    <div style="font-size:12px; color:#64748b; margin-top:2px;">
+                                        Manage instructors and profiles
+                                    </div>
+                                </div>
+
+                                <a href="{{ route('instructor.create') }}"
+                                style="background:#2563eb; color:#fff; padding:8px 14px; border-radius:10px; font-size:13px; font-weight:600;">
+                                    + Add Instructor
+                                </a>
+
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 845px">
-                                        <thead>
+
+                            <!-- Table -->
+                            <div class="lms-table-wrapper">
+
+                                <table class="lms-table" id="example3">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Instructor</th>
+                                            <th>Email</th>
+                                            <th>Contact</th>
+                                            <th>Designation</th>
+                                            <th>Status</th>
+                                            @if(auth()->user()->role_id == 1)
+                                                <th>Action</th>
+                                            @endif
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        @forelse ($instructor as $d)
+
                                             <tr>
-                                                <th>{{__('#')}}</th>
-                                                <th>{{__('Name')}}</th>
-                                                <th>{{__('Email')}}</th>
-                                                <th>{{__('Contact')}}</th>
-                                                <th>{{__('Designation')}}</th>
-                                                <th>{{__('Status')}}</th>
-                                                @if(auth()->user()->role_id == 1) 
-                                                <th>{{__('Action')}}</th>
-                                                @endif
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($instructor as $d)
-                                            <tr>
+
+                                                <!-- Instructor -->
                                                 <td>
-                                                    <img src="{{ asset('public/uploads/users/' . ($d->image && file_exists(public_path('uploads/users/' . $d->image)) ? $d->image : 'blank.jpg')) }}"
-     width="50"
-     height="50"
-     class="rounded-circle"
-     alt="">
+                                                    <div style="display:flex; align-items:center; gap:12px;">
+
+                                                        <img
+                                                            src="{{ asset('uploads/users/' . ($d->image && file_exists(public_path('uploads/users/' . $d->image)) ? $d->image : 'blank.jpg')) }}"
+                                                            class="lms-avatar"
+                                                            alt="instructor"
+                                                        >
+
+                                                        <div>
+                                                            <div style="font-weight:600;">
+                                                                {{ $d->name_en }}
+                                                            </div>
+                                                            <div style="font-size:11px; color:#94a3b8;">
+                                                                Instructor ID: #{{ $d->id }}
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
                                                 </td>
-                                                <td><strong>{{$d->name_en}}</strong></td>
-                                                <td>{{$d->email}}</td>
-                                                <td>{{$d->contact_en}}</td>
-                                                <td>{{$d->designation}}</td>
+
+                                                <!-- Email -->
                                                 <td>
-                                                    <span class="badge {{$d->status==1?"
-                                                        badge-success":"badge-danger"}}">@if($d->status==1){{__('Active')}}
-                                                        @else{{__('Inactive')}} @endif</span>
-                                                </td> 
-                                                @if(auth()->user()->role_id == 1)                                               
+                                                    {{ $d->email }}
+                                                </td>
+
+                                                <!-- Contact -->
                                                 <td>
-                                                    <a href="{{route('instructor.edit', encryptor('encrypt',$d->id))}}"
-                                                        class="btn btn-sm btn-primary" title="Edit"><i
-                                                            class="la la-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"
-                                                        title="Delete" onclick="$('#form{{$d->id}}').submit()"><i
-                                                            class="la la-trash-o"></i></a>
+                                                    {{ $d->contact_en }}
+                                                </td>
+
+                                                <!-- Designation -->
+                                                <td>
+                                                    <span style="font-size:13px; font-weight:500;">
+                                                        {{ $d->designation }}
+                                                    </span>
+                                                </td>
+
+                                                <!-- Status -->
+                                                <td>
+                                                    @if($d->status == 1)
+                                                        <span class="lms-badge lms-badge-success">
+                                                            Active
+                                                        </span>
+                                                    @else
+                                                        <span class="lms-badge lms-badge-danger">
+                                                            Inactive
+                                                        </span>
+                                                    @endif
+                                                </td>
+
+                                                <!-- Actions -->
+                                                @if(auth()->user()->role_id == 1)
+                                                <td>
+                                                    <div style="display:flex; gap:8px;">
+
+                                                        <a href="{{ route('instructor.edit', encryptor('encrypt',$d->id)) }}"
+                                                        style="background:#2563eb; color:#fff; padding:6px 10px; border-radius:8px; font-size:12px;">
+                                                            Edit
+                                                        </a>
+
+                                                        <a href="javascript:void(0);"
+                                                        onclick="$('#form{{$d->id}}').submit()"
+                                                        style="background:#ef4444; color:#fff; padding:6px 10px; border-radius:8px; font-size:12px;">
+                                                            Delete
+                                                        </a>
+
+                                                    </div>
+
                                                     <form id="form{{$d->id}}"
-                                                        action="{{route('instructor.destroy', encryptor('encrypt',$d->id))}}"
+                                                        action="{{ route('instructor.destroy', encryptor('encrypt',$d->id)) }}"
                                                         method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>
                                                 </td>
-                                                   @endif
+                                                @endif
+
                                             </tr>
-                                            @empty
+
+                                        @empty
+
                                             <tr>
-                                                <th colspan="7" class="text-center">No Instructor Found</th>
+                                                <td colspan="6" style="text-align:center; padding:20px; color:#94a3b8;">
+                                                    No Instructors Found
+                                                </td>
                                             </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
-                                </div>
+
+                                        @endforelse
+
+                                    </tbody>
+
+                                </table>
+
                             </div>
+
                         </div>
+
                     </div>
                     <div id="grid-view" class="tab-pane fade col-lg-12">
                         <div class="row">

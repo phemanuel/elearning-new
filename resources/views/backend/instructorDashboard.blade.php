@@ -25,336 +25,718 @@
     <!-- row -->
     <div class="container-fluid">
         @if(!empty($instructor->instructor_url))
-        <div class="row page-titles mx-0">
-            <div class="col-sm-6 p-md-0">
-                <div class="welcome-text text-center">
-                    <!-- <h4 class="fw-bold mb-3">
-                        <i class="fa fa-user-circle text-primary"></i>
-                    </h4>  -->
-                    <div class="bg-light p-3 rounded d-flex align-items-center justify-content-between">
-                        <span class="text-truncate" style="max-width: 80%; font-size: 16px;">
-                            <a href="https://kingsdigihub.org/instructor-profile/{{ $instructor->instructor_url }}" 
-                            target="_blank" 
-                            style="text-decoration: none; color: #007bff; font-weight: bold;">
-                            https://kingsdigihub.org/instructor-profile/{{ $instructor->instructor_url }}
-                            </a>
-                        </span>
-                        <button class="btn btn-sm btn-primary" id="copyButton" onclick="copyToClipboard()">
-                            <i class="fa fa-copy"></i> Copy
-                        </button>
+        <div class="row mb-4">
+
+            <div class="col-lg-8">
+
+                <div class="profile-link-card">
+
+                    <div class="profile-link-icon">
+                        <i class="fa fa-globe"></i>
                     </div>
+
+                    <div class="profile-link-content">
+
+                        <h6 class="mb-1">
+                            Public Instructor Profile
+                        </h6>
+
+                        <a href="https://kingsdigihub.org/instructor-profile/{{ $instructor->instructor_url }}"
+                        target="_blank"
+                        class="profile-link">
+
+                            kingsdigihub.org/instructor-profile/{{ $instructor->instructor_url }}
+
+                        </a>
+
+                    </div>
+
+                    <button class="btn btn-primary btn-sm copy-profile-btn"
+                            onclick="copyToClipboard()">
+
+                        <i class="fa fa-copy me-1"></i>
+                        Copy
+
+                    </button>
+
                 </div>
-        </div>
-        @else  @endif
-            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a href="">Dashboard</a></li>
-                </ol>
+
             </div>
+
+            <div class="col-lg-4">
+
+                <div class="d-flex justify-content-lg-end mt-3 mt-lg-0">
+
+                    <ol class="breadcrumb bg-transparent mb-0">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('dashboard')}}">Home</a>
+                        </li>
+
+                        <li class="breadcrumb-item active">
+                            Dashboard
+                        </li>
+                    </ol>
+
+                </div>
+
+            </div>
+
         </div>
-        <div class="row">            
-            <div class="col-xl-3 col-xxl-3 col-sm-6">
+        @endif
+        <div class="row">
+
+            <!-- Enrolled Students -->
+            <div class="col-xl-3 col-lg-6 col-md-6 mb-4">
                 <a href="{{ route('enrollment.index') }}" class="text-decoration-none">
-                    <div class="widget-stat card bg-success overflow-hidden text-center p-4 hover-effect">
-                        <div class="card-header border-0">
-                            <h3 class="card-title text-white">Enrolled Students</h3>
+                    <div class="dashboard-card students-card">
+
+                        <div class="card-bg-icon">
+                            <i class="fa fa-user-graduate"></i>
                         </div>
-                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
-                            <i class="fa fa-user-graduate fa-3x text-white mb-3"></i> 
-                            <h1 class="text-white fw-bold display-6" style="text-shadow: 2px 2px 10px rgba(255,255,255,0.6);">
-                                {{ $enrollments->count() }}
-                            </h1>
+
+                        <div class="dashboard-card-content">
+                            <span class="card-title">Enrolled Students</span>
+
+                            <h2 class="card-number">
+                                {{ number_format($enrollments->count()) }}
+                            </h2>
+
+                            <small>Total learners enrolled</small>
                         </div>
+
                     </div>
                 </a>
             </div>
-            <div class="col-xl-3 col-xxl-3 col-sm-6">
+
+            <!-- Courses -->
+            <div class="col-xl-3 col-lg-6 col-md-6 mb-4">
                 <a href="{{ route('course.index') }}" class="text-decoration-none">
-                    <div class="widget-stat card bg-secondary overflow-hidden text-center p-4 hover-effect">
-                        <div class="card-header border-0">
-                            <h3 class="card-title text-white">My Course</h3>
+                    <div class="dashboard-card courses-card">
+
+                        <div class="card-bg-icon">
+                            <i class="fa fa-book-open"></i>
                         </div>
-                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
-                            <i class="fa fa-book-open fa-3x text-white mb-3"></i>
-                            <h1 class="text-white fw-bold display-6" style="text-shadow: 2px 2px 10px rgba(255,255,255,0.6);">
-                                {{ $course->count() }}
-                            </h1>
+
+                        <div class="dashboard-card-content">
+                            <span class="card-title">My Courses</span>
+
+                            <h2 class="card-number">
+                                {{ number_format($course->count()) }}
+                            </h2>
+
+                            <small>Published courses</small>
                         </div>
+
                     </div>
-                </a>                
+                </a>
             </div>
-            <div class="col-xl-3 col-xxl-3 col-sm-6">
+
+            <!-- Revenue -->
+            <div class="col-xl-3 col-lg-6 col-md-6 mb-4">
                 <a href="{{ route('courseFee') }}" class="text-decoration-none">
-                    <div class="widget-stat card bg-danger overflow-hidden text-center p-4 hover-effect">
-                        <div class="card-header border-0">
-                            <h3 class="card-title text-white">Fees Collection</h3>
+                    <div class="dashboard-card revenue-card">
+
+                        <div class="card-bg-icon">
+                            <i class="fa fa-wallet"></i>
                         </div>
-                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
-                            <i class="fa fa-wallet fa-3x text-white mb-3"></i>
-                            <h1 class="text-white fw-bold display-6" style="text-shadow: 2px 2px 10px rgba(255,255,255,0.6);">
-                                ₦{{ number_format($totalCourseFee, 2) }}
-                            </h1>
+
+                        <div class="dashboard-card-content">
+                            <span class="card-title">Fees Collection</span>
+
+                            <h2 class="card-number">
+                                ₦{{ number_format($totalCourseFee,0) }}
+                            </h2>
+
+                            <small>Total earnings</small>
                         </div>
+
                     </div>
-                </a>                
+                </a>
             </div>
-            <div class="col-xl-3 col-xxl-3 col-sm-6">
+
+            <!-- Coupons -->
+            <div class="col-xl-3 col-lg-6 col-md-6 mb-4">
                 <a href="{{ route('coupon.index') }}" class="text-decoration-none">
-                    <div class="widget-stat card bg-primary overflow-hidden text-center p-4 hover-effect">
-                        <div class="card-header border-0">
-                            <h3 class="card-title text-white">Coupons</h3>
+                    <div class="dashboard-card coupon-card">
+
+                        <div class="card-bg-icon">
+                            <i class="fa fa-ticket-alt"></i>
                         </div>
-                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
-                            <i class="fa fa-ticket-alt fa-3x text-white mb-3"></i> 
-                            <h1 class="text-white fw-bold display-6" style="text-shadow: 2px 2px 10px rgba(255,255,255,0.6);">
-                                {{ $coupons->count() }}
-                            </h1>
+
+                        <div class="dashboard-card-content">
+                            <span class="card-title">Coupons</span>
+
+                            <h2 class="card-number">
+                                {{ number_format($coupons->count()) }}
+                            </h2>
+
+                            <small>Available coupons</small>
                         </div>
+
                     </div>
-                </a>                
+                </a>
             </div>
-            <!-- <div class="col-xl-6 col-xxl-6 col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Income/Expense Report</h3>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="barChart_2"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-6 col-xxl-6 col-sm-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Income/Expense Report</h3>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="areaChart_1"></canvas>
-                    </div>
-                </div>
-            </div> -->
+
             <div class="col-xl-8 col-xxl-8 col-lg-8 col-md-12 col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title"><strong>Enrolled Students</strong></h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="example3" class="table table-sm mb-0 table-striped">
-                            <!-- <table class="table table-sm mb-0 table-striped"> -->
-                            <thead>
-                                <tr>
-                                    <th class="px-5 py-3">#</th>
-                                    <th class="px-5 py-3">Student Name</th>
-                                    <th class="py-3">Course</th>
-                                    <th class="py-3">Total Segments</th>
-                                    <th class="py-3">Current Segment</th>
-                                    <th class="py-3">Status</th>
-                                    <th class="py-3">Date Of Enrollment</th>                                        
-                                </tr>
-                            </thead>
-                            <tbody id="customers">
-                                @foreach($enrollments as $enrollment)
-                                <tr class="btn-reveal-trigger">
-                                    <td class="p-3">
-                                        <a href="javascript:void(0);">
-                                            <div class="media d-flex align-items-center">
-                                                <div class="avatar avatar-xl mr-2">
-                                                    <img class="rounded-circle img-fluid" src="{{asset('uploads/students/' . $enrollment->student->image)}}" width="30" alt="">
-                                                </div>                                               
-                                            </div>
-                                        </a>
-                                    </td>
-                                    <td class="py-2">{{ $enrollment->student->name_en }}</td>
-                                    <td class="py-2">{{ $enrollment->course->title_en }}</td>
-                                    <!-- Display Total Segments -->
-                                    <td class="py-2">{{ $enrollment->course->segments_count ?? 0 }}</td>
-                                    <!-- Display Current Segment -->
-                                    <td class="py-2">{{ $enrollment->segment }}</td>
-                                    <!-- Status Check -->
-                                    <td>
-                                        @if($enrollment->completed == 1)
-                                            <span class="badge badge-rounded badge-success text-white">Completed</span>
-                                        @else
-                                            <span class="badge badge-rounded badge-warning text-white">Not Completed</span>
-                                        @endif
-                                    </td>
-                                    <td class="py-2">{{ $enrollment->created_at->format('d/m/Y') }}</td>                                        
-                                </tr>
-                                @endforeach
-                            </tbody>                       
-                            </table>
-                            {{$enrollments->links()}}
+
+                <div class="card enrolled-card border-0">
+
+                    <div class="card-header bg-white border-0 py-4">
+
+                        <div class="d-flex justify-content-between align-items-center flex-wrap w-100">
+
+                            <div>
+                                <h4 class="fw-bold mb-1">
+                                    Enrolled Students
+                                </h4>
+
+                                <p class="text-muted mb-0">
+                                    Monitor student progress and engagement
+                                </p>
+                            </div>
+
+                            <div class="student-counter mt-2 mt-md-0">
+                                <i class="fa fa-user-graduate me-2"></i>
+                                {{ $enrollments->total() }} Students
+                            </div>
+
                         </div>
+
                     </div>
+
+                    <div class="card-body pt-0">
+
+                        <div class="table-responsive">
+
+                            <table id="example3" class="table modern-table align-middle">
+
+                                <thead>
+                                    <tr>
+                                        <th>Student</th>
+                                        <th>Course</th>
+                                        <th>Total Segments</th>
+                                        <th>Current Segment</th>
+                                        <th>Progress</th>
+                                        <th>Status</th>
+                                        <th>Enrolled</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    @foreach($enrollments as $enrollment)
+
+                                    @php
+                                        $totalSegments = $enrollment->course->segments_count ?? 0;
+
+                                        $progress = $totalSegments > 0
+                                            ? min(100, round(($enrollment->segment / $totalSegments) * 100))
+                                            : 0;
+                                    @endphp
+
+                                    <tr>
+
+                                        <!-- Student -->
+                                        <td>
+
+                                            <div class="d-flex align-items-center">
+
+                                                <img
+                                                    src="{{ asset('uploads/students/' . $enrollment->student->image) }}"
+                                                    class="student-avatar me-3"
+                                                    alt="">
+
+                                                <div>
+
+                                                    <div class="fw-semibold">
+                                                        {{ $enrollment->student->name_en }}
+                                                    </div>
+
+                                                    <small class="text-muted">
+                                                        Student
+                                                    </small>
+
+                                                </div>
+
+                                            </div>
+
+                                        </td>
+
+                                        <!-- Course -->
+                                        <td>
+
+                                            <div class="course-pill">
+                                                {{ $enrollment->course->title_en }}
+                                            </div>
+
+                                        </td>
+
+                                        <!-- Total Segments -->
+                                        <td>
+
+                                            <span class="metric-badge">
+                                                {{ $totalSegments }}
+                                            </span>
+
+                                        </td>
+
+                                        <!-- Current Segment -->
+                                        <td>
+
+                                            <span class="metric-badge active-segment">
+                                                {{ $enrollment->segment }}
+                                            </span>
+
+                                        </td>
+
+                                        <!-- Progress -->
+                                        <td width="180">
+
+                                            <div class="progress modern-progress">
+
+                                                <div class="progress-bar"
+                                                    role="progressbar"
+                                                    style="width: {{ $progress }}%">
+                                                </div>
+
+                                            </div>
+
+                                            <small class="fw-bold text-primary">
+                                                {{ $progress }}%
+                                            </small>
+
+                                        </td>
+
+                                        <!-- Status -->
+                                        <td>
+
+                                            @if($enrollment->completed == 1)
+
+                                                <span class="status-completed">
+                                                    Completed
+                                                </span>
+
+                                            @else
+
+                                                <span class="status-progress">
+                                                    In Progress
+                                                </span>
+
+                                            @endif
+
+                                        </td>
+
+                                        <!-- Date -->
+                                        <td>
+
+                                            <div class="text-muted">
+                                                {{ $enrollment->created_at->format('d M Y') }}
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                    @endforeach
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <div class="mt-4">
+                            {{ $enrollments->links() }}
+                        </div>
+
+                    </div>
+
                 </div>
+
             </div>
             <div class="col-xl-4 col-xxl-4 col-lg-4 col-md-12 col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                    <h5 class="card-title"><strong>Current Subscription Plan</strong></h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="widget-todo dz-scroll" style="height: 370px;" id="DZ_W_Notifications">
-                            @if(empty($subscriptions))
-                            <h4>You have no active subscription plan.</h4>
-                            <div class="mt-3">
-                                    <a href="{{route('subscription.view')}}" class="btn btn-success btn-lg text-white">
-                                        <i class="la la-shopping-cart"></i> Subscribe Now
-                                    </a>
-                                </div>                       
-                               
-                            @else
-                                @if($subscriptions->amount == 0)
-                                    <!-- Image representing the plan -->
-                                    <div class="text-center mb-4">
-                                        <h4><i class="{{$subscriptions->subscriptionPlan->icon}}"></i> {{$subscriptions->subscriptionPlan->name}}</h4>
-                                        </div>
 
-                                        <!-- Plan details -->
-                                        <div class="plan-details text-center">
-                                            <!-- Features -->
-                                            <ul class="list-group text-left mt-3">
-                                                <li class="list-group-item"><i class="fas fa-upload text-primary"></i> {{$subscriptions->subscriptionPlan->course_upload}} Courses Upload</li>
-                                                <li class="list-group-item"><i class="fas fa-users text-success"></i> {{$subscriptions->subscriptionPlan->student_upload}} Students On-board </li>
-                                                <li class="list-group-item"><i class="fas fa-hdd text-info"></i> {{$subscriptions->subscriptionPlan->allocated_space}} GB storage for materials</li>
-                                                <!-- <li class="list-group-item"><i class="la la-chart-bar mr-2"></i> Basic analytics</li> -->
-                                                <!-- <li class="list-group-item"><i class="la la-envelope mr-2"></i> Email support</li> -->
-                                                <li class="list-group-item">
-                                                    <i class="la la-calendar mr-2"></i>{{ \Carbon\Carbon::parse($subscriptions->start_date)->format('F d, Y') }} 
-                                                    <i class="la la-arrow-right mx-2"></i>
-                                                    {{ \Carbon\Carbon::parse($subscriptions->end_date)->format('F d, Y') }}
-                                                </li>
-                                            </ul>
+                <div class="card subscription-widget border-0">
 
-                                            <!-- Pricing -->
-                                            <div class="mt-3">
-                                            <!-- <h5 class="text-primary"><strong>=N={{ number_format($subscriptions->subscriptionPlan->amount, 2) }}/month 
-                                                or =N={{ number_format($subscriptions->subscriptionPlan->amount * 12 * 0.9, 2) }}/year</strong>
-                                                
-                                            </h5> -->
-                                                <!-- <h6 class="text-muted">or $100/year</h6> -->
-                                            </div>
-                                            <!-- Upgrade Button -->
-                                            <div class="mt-3">
-                                                <a href="{{route('subscription.view')}}" class="btn btn-success btn-lg text-white">
-                                                    <i class="la la-arrow-up mr-2"></i> Upgrade Plan
-                                                </a>
-                                            </div>
-                                        </div>
-                                @else
-                                    @if($subscriptions->end_date < $currentDate)
-                                        <h4>You subscription plan has expired.</h4>
-                                        <div class="mt-3">
-                                            <a href="{{route('subscription.view')}}" class="btn btn-success btn-lg text-white">
-                                                <i class="la la-shopping-cart"></i> Renew Now
-                                            </a>
-                                        </div>
-                                    @else
-                                        <!-- Image representing the plan -->
-                                        <div class="text-center mb-4">
-                                        <h4><i class="{{$subscriptions->subscriptionPlan->icon}}"></i> {{$subscriptions->subscriptionPlan->name}}</h4>
-                                        </div>
+                    <div class="card-header bg-white border-0">
 
-                                        <!-- Plan details -->
-                                        <div class="plan-details text-center">
-                                            <!-- Features -->
-                                            <ul class="list-group text-left mt-3">
-                                                <li class="list-group-item"><i class="fas fa-upload text-primary"></i> {{$subscriptions->subscriptionPlan->course_upload}} Courses Upload</li>
-                                                <li class="list-group-item"><i class="fas fa-users text-success"></i> {{$subscriptions->subscriptionPlan->student_upload}} Students On-board </li>
-                                                <li class="list-group-item"><i class="fas fa-hdd text-info"></i> {{$subscriptions->subscriptionPlan->allocated_space}} GB storage for materials</li>
-                                                <!-- <li class="list-group-item"><i class="la la-chart-bar mr-2"></i> Basic analytics</li> -->
-                                                <!-- <li class="list-group-item"><i class="la la-envelope mr-2"></i> Email support</li> -->
-                                                <li class="list-group-item">
-                                                    <i class="la la-calendar mr-2"></i>{{ \Carbon\Carbon::parse($subscriptions->start_date)->format('F d, Y') }} 
-                                                    <i class="la la-arrow-right mx-2"></i>
-                                                    {{ \Carbon\Carbon::parse($subscriptions->end_date)->format('F d, Y') }}
-                                                </li>
-                                            </ul>
+                        <div class="d-flex justify-content-between align-items-center">
 
-                                            <!-- Pricing -->
-                                            <div class="mt-3">
-                                            <!-- <h5 class="text-primary"><strong>=N={{ number_format($subscriptions->subscriptionPlan->amount, 2) }}/month 
-                                                or =N={{ number_format($subscriptions->subscriptionPlan->amount * 12 * 0.9, 2) }}/year</strong>
-                                                
-                                            </h5> -->
-                                                <!-- <h6 class="text-muted">or $100/year</h6> -->
-                                            </div>
-                                            <!-- Upgrade Button -->
-                                            <div class="mt-3">
-                                                <a href="{{route('subscription.view')}}" class="btn btn-success btn-lg text-white">
-                                                    <i class="la la-arrow-up mr-2"></i> Upgrade Plan
-                                                </a>
-                                            </div>
-                                        </div>
-                                    @endif
+                            <div>
+                                <h4 class="fw-bold mb-1">
+                                    Subscription Plan
+                                </h4>
 
-                                @endif
-                            
-                            @endif
+                                <small class="text-muted">
+                                    Manage your LMS subscription
+                                </small>
+                            </div>
+
+                            <i class="fas fa-crown text-warning fs-3"></i>
+
                         </div>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        @if(empty($subscriptions))
+
+                            <div class="empty-plan">
+
+                                <div class="plan-icon">
+                                    <i class="fas fa-box-open"></i>
+                                </div>
+
+                                <h4>No Active Plan</h4>
+
+                                <p>
+                                    Subscribe to start uploading courses and onboarding students.
+                                </p>
+
+                                <a href="{{route('subscription.view')}}"
+                                class="btn btn-primary btn-lg rounded-pill">
+                                    Subscribe Now
+                                </a>
+
+                            </div>
+
+                        @elseif($subscriptions->amount > 0 && $subscriptions->end_date < $currentDate)
+
+                            <div class="expired-plan">
+
+                                <div class="plan-icon bg-danger-soft">
+                                    <i class="fas fa-exclamation-circle text-danger"></i>
+                                </div>
+
+                                <h4>Plan Expired</h4>
+
+                                <p>
+                                    Your subscription has expired.
+                                </p>
+
+                                <a href="{{route('subscription.view')}}"
+                                class="btn btn-danger rounded-pill">
+                                    Renew Now
+                                </a>
+
+                            </div>
+
+                        @else
+
+                            @php
+                            $daysLeft = now()->diffInDays(
+                                \Carbon\Carbon::parse($subscriptions->end_date),
+                                false
+                            );
+                            @endphp
+
+                            <div class="compact-subscription">
+
+                                <!-- Top Row -->
+                                <div class="subscription-top">
+
+                                    <div class="d-flex align-items-center">
+
+                                        <div class="subscription-icon">
+                                            <i class="{{$subscriptions->subscriptionPlan->icon}}"></i>
+                                        </div>
+
+                                        <div class="ms-3">
+
+                                            <h5 class="mb-1">
+                                                {{$subscriptions->subscriptionPlan->name}}
+                                            </h5>
+
+                                            <span class="subscription-status">
+                                                Active
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                    <a href="{{route('subscription.view')}}"
+                                    class="btn btn-sm btn-primary">
+                                        Upgrade
+                                    </a>
+
+                                </div>
+
+                                <!-- Quick Stats -->
+
+                                <div class="subscription-stats">
+
+                                    <div class="mini-stat">
+                                        <i class="fas fa-upload"></i>
+                                        <strong>{{$subscriptions->subscriptionPlan->course_upload}}</strong>
+                                        <small>Courses</small>
+                                    </div>
+
+                                    <div class="mini-stat">
+                                        <i class="fas fa-users"></i>
+                                        <strong>{{$subscriptions->subscriptionPlan->student_upload}}</strong>
+                                        <small>Students</small>
+                                    </div>
+
+                                    <div class="mini-stat">
+                                        <i class="fas fa-hdd"></i>
+                                        <strong>{{$subscriptions->subscriptionPlan->allocated_space}}GB</strong>
+                                        <small>Storage</small>
+                                    </div>
+
+                                </div>
+
+                                <!-- Dates -->
+
+                                <div class="subscription-footer">
+
+                                    <div>
+                                        <small>Expires</small>
+                                        <div>
+                                            {{ \Carbon\Carbon::parse($subscriptions->end_date)->format('d M Y') }}
+                                        </div>
+                                    </div>
+
+                                    <div class="text-end">
+                                        <small>Remaining</small>
+                                        <div class="text-success fw-bold">
+                                            {{ $daysLeft }} Days
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="mt-4">
+
+                                <a href="{{route('subscription.view')}}"
+                                class="btn btn-success w-100 rounded-pill">
+
+                                    <i class="fas fa-arrow-up me-2"></i>
+
+                                    Upgrade Plan
+
+                                </a>
+
+                            </div>
+
+                        @endif
+
                     </div>
 
                 </div>
+
             </div>
             <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title"><strong>My Courses</strong> </h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                        <table id="example3" class="table table-sm mb-0 table-striped">
-                            <thead>
-                                <tr>
-                                    <th class="px-5 py-3">#</th>
-                                    <th class="px-5 py-3"></th>
-                                    <th class="py-3">Course Name</th>
-                                    <th class="py-3">Total Segments</th>
-                                    <th class="py-3">Difficulty</th>
-                                    <th class="py-3">Category</th>
-                                    <th class="py-3">Price</th>
-                                    <th class="py-3">Status</th>                                       
-                                </tr>
-                            </thead>
-                            <tbody id="customers">
-                                @foreach($courseShow as $key => $d)
-                                <tr class="btn-reveal-trigger">
-                                <td class="py-2">{{$key + 1}}</td>
-                                    <td class="p-3">
-                                        <a href="javascript:void(0);">
-                                            <div class="media d-flex align-items-center">
-                                                <div class="avatar avatar-xl mr-2">
-                                                    <img class="img fluid" width="100" src="{{asset('uploads/courses/'.$d->image)}}" width="30" alt="">
-                                                </div>                                                
-                                            </div>
-                                        </a>
-                                    </td>
-                                    <td class="py-2">{{$d->title_en}}</td>
-                                    <!-- Display Total Segments -->
-                                    <td class="py-2">{{$d->segment_count}}</td>
-                                    <td class="py-2"><strong>{{ $d->difficulty == 'beginner' ? __('Beginner') :
-                                                        ($d->difficulty == 'intermediate' ? __('Intermediate') :
-                                                        __('Advanced')) }}</strong></td>
-                                    <!-- Status Check -->                                    
-                                    <td class="py-2">{{$d->courseCategory?->category_name}}</td>
-                                    <td class="py-2">{{number_format($d->price,2)}}</td>
-                                    <td>
-                                        @if($d->status == 2)
-                                            <span class="badge badge-rounded badge-success">Active</span>
-                                        @elseif($d->status == 1)
-                                            <span class="badge badge-rounded badge-warning">Pending</span>
-                                        @endif
-                                    </td>                                       
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        {{$courseShow->links()}}
+
+                <div class="card courses-dashboard-card border-0">
+
+                    <div class="card-header bg-white border-0 py-4">
+
+                        <div class="d-flex justify-content-between align-items-center w-100">
+
+                            <div>
+                                <h4 class="fw-bold mb-1">
+                                    My Courses
+                                </h4>
+
+                                <p class="text-muted mb-0">
+                                    Manage and monitor your learning content
+                                </p>
+                            </div>
+
+                            <div class="student-counter ms-auto">
+                                <i class="fa fa-book-open me-2"></i>
+                                {{ $courseShow->total() }} Courses
+                            </div>
+
                         </div>
+
                     </div>
+
+                    <div class="card-body pt-0">
+
+                        <div class="table-responsive">
+
+                            <table id="example3" class="table course-table align-middle">
+
+                                <thead>
+
+                                    <tr>
+                                        <th>Course</th>
+                                        <th>Segments</th>
+                                        <th>Difficulty</th>
+                                        <th>Category</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                    @foreach($courseShow as $d)
+
+                                    <tr>
+
+                                        <!-- Course -->
+
+                                        <td>
+
+                                            <div class="d-flex align-items-center">
+
+                                                <img
+                                                    src="{{asset('uploads/courses/'.$d->image)}}"
+                                                    class="course-thumb me-3"
+                                                    alt="">
+
+                                                <div>
+
+                                                    <h6 class="mb-1 fw-bold">
+                                                        {{$d->title_en}}
+                                                    </h6>
+
+                                                    <small class="text-muted">
+                                                        Course Content
+                                                    </small>
+
+                                                </div>
+
+                                            </div>
+
+                                        </td>
+
+                                        <!-- Segments -->
+
+                                        <td>
+
+                                            <span class="segments-pill">
+
+                                                {{$d->segment_count}}
+
+                                            </span>
+
+                                        </td>
+
+                                        <!-- Difficulty -->
+
+                                        <td>
+
+                                            @if($d->difficulty == 'beginner')
+
+                                                <span class="difficulty beginner">
+
+                                                    Beginner
+
+                                                </span>
+
+                                            @elseif($d->difficulty == 'intermediate')
+
+                                                <span class="difficulty intermediate">
+
+                                                    Intermediate
+
+                                                </span>
+
+                                            @else
+
+                                                <span class="difficulty advanced">
+
+                                                    Advanced
+
+                                                </span>
+
+                                            @endif
+
+                                        </td>
+
+                                        <!-- Category -->
+
+                                        <td>
+
+                                            <span class="category-pill">
+
+                                                {{$d->courseCategory?->category_name}}
+
+                                            </span>
+
+                                        </td>
+
+                                        <!-- Price -->
+
+                                        <td>
+
+                                            @if($d->price > 0)
+
+                                                <span class="price-tag">
+
+                                                    ₦{{ number_format($d->price,2) }}
+
+                                                </span>
+
+                                            @else
+
+                                                <span class="free-course">
+
+                                                    Free
+
+                                                </span>
+
+                                            @endif
+
+                                        </td>
+
+                                        <!-- Status -->
+
+                                        <td>
+
+                                            @if($d->status == 2)
+
+                                                <span class="status-active">
+
+                                                    Active
+
+                                                </span>
+
+                                            @elseif($d->status == 1)
+
+                                                <span class="status-pending">
+
+                                                    Pending
+
+                                                </span>
+
+                                            @else
+
+                                                <span class="status-inactive">
+
+                                                    Inactive
+
+                                                </span>
+
+                                            @endif
+
+                                        </td>
+
+                                    </tr>
+
+                                    @endforeach
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <div class="mt-4">
+                            {{$courseShow->links()}}
+                        </div>
+
+                    </div>
+
                 </div>
+
             </div>
         </div>
     </div>
