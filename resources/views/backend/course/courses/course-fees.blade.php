@@ -28,60 +28,136 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-12">
+            <!-- <div class="col-lg-12">
                 <ul class="nav nav-pills mb-3">
                     <li class="nav-item"><a href="#list-view" data-toggle="tab"
                             class="nav-link btn-primary mr-1 show active">List View</a></li>
-                    <!-- <li class="nav-item"><a href="javascript:void(0);" data-toggle="tab"
+                    <li class="nav-item"><a href="javascript:void(0);" data-toggle="tab"
                             class="nav-link btn-primary">Grid
-                            View</a></li> -->
+                            View</a></li>
                 </ul>
-            </div>
+            </div> -->
             <div class="col-lg-12">
                 <div class="row tab-content">
                     <div id="list-view" class="tab-pane fade active show col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">All Course Payment List </h4>                               
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">                                    
-                                    <table id="example3" class="display" style="min-width: 845px">
-                                        <thead>
-                                            <tr>
-                                                <th>{{__('#')}}</th>
-                                                <th>{{__('Student Name')}}</th>
-                                                <th>{{__('Course')}}</th>
-                                                @if(auth()->user()->role_id == 1)
-                                                <th>{{__('Instructor')}}</th>
-                                                @endif
-                                                <th>{{__('Amount')}}</th>
-                                                <th>{{__('Payout')}}</th>
-                                                <th>{{__('Payment Date')}}</th>
-                                                <!-- <th>{{__('Action')}}</th> -->
-                                            </tr>
-                                        </thead>
-                                        <tbody>                                            
-                                        @foreach($payments as $index => $payment)
-                                        <tr>
-                                            <td>{{ $index + 1 }}</td>
-                                            <!-- Check if student exists before displaying the name -->
-                                            <td>{{ $payment->student ? $payment->student->name_en : 'N/A' }}</td>
-                                            <td>{{ $payment->course->title_en }}</td>
-                                            @if(auth()->user()->role_id == 1)
-                                            <td>{{ $payment->course->instructor->name_en ?? 'N/A' }}</td>
-                                            @endif
-                                            <td>{{ number_format($payment->amount, 2) }}</td>
-                                            <td>{{ number_format($payment->amount, 2) }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($payment->created_at)->format('jS F, Y') }}</td>
-                                        </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                    
+
+                        <div class="lms-card">
+
+                            <!-- Header -->
+                            <div class="lms-card-header">
+
+                                <div>
+                                    <div class="lms-card-title">Course Payments</div>
+                                    <div style="font-size:12px; color:#64748b;">
+                                        Track student payments and instructor earnings
+                                    </div>
                                 </div>
+
                             </div>
+
+                            <!-- Table -->
+                            <div class="lms-table-wrapper">
+
+                                <table class="lms-table" id="example3">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Student</th>
+                                            <th>Course</th>
+
+                                            @if(auth()->user()->role_id == 1)
+                                                <th>Instructor</th>
+                                            @endif
+
+                                            <th>Amount</th>
+                                            <th>Payout Status</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        @forelse($payments as $index => $payment)
+
+                                            <tr>
+
+                                                <!-- Student -->
+                                                <td>
+                                                    <div style="font-weight:600;">
+                                                        {{ $payment->student?->name_en ?? 'N/A' }}
+                                                    </div>
+                                                    <div style="font-size:11px; color:#94a3b8;">
+                                                        Student
+                                                    </div>
+                                                </td>
+
+                                                <!-- Course -->
+                                                <td>
+                                                    <div style="font-weight:600;">
+                                                        {{ $payment->course?->title_en }}
+                                                    </div>
+                                                    <div style="font-size:11px; color:#94a3b8;">
+                                                        Course Payment
+                                                    </div>
+                                                </td>
+
+                                                <!-- Instructor (Admin only) -->
+                                                @if(auth()->user()->role_id == 1)
+                                                    <td>
+                                                        <div style="font-weight:600;">
+                                                            {{ $payment->course->instructor->name_en ?? 'N/A' }}
+                                                        </div>
+                                                        <div style="font-size:11px; color:#94a3b8;">
+                                                            Instructor
+                                                        </div>
+                                                    </td>
+                                                @endif
+
+                                                <!-- Amount -->
+                                                <td>
+                                                    <div style="font-weight:700; color:#0f172a;">
+                                                        ₦{{ number_format($payment->amount, 2) }}
+                                                    </div>
+                                                </td>
+
+                                                <!-- Payout -->
+                                                <td>
+                                                    <span class="lms-badge lms-badge-success">
+                                                        Paid
+                                                    </span>
+                                                </td>
+
+                                                <!-- Date -->
+                                                <td>
+                                                    <div style="font-size:13px;">
+                                                        {{ \Carbon\Carbon::parse($payment->created_at)->format('jS M, Y') }}
+                                                    </div>
+                                                    <div style="font-size:11px; color:#94a3b8;">
+                                                        Transaction Date
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+
+                                        @empty
+
+                                            <tr>
+                                                <td colspan="6"
+                                                    style="text-align:center; padding:20px; color:#94a3b8;">
+                                                    No Payments Found
+                                                </td>
+                                            </tr>
+
+                                        @endforelse
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>

@@ -30,72 +30,147 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-12">
+            <!-- <div class="col-lg-12">
                 <ul class="nav nav-pills mb-3">
                     <li class="nav-item"><a href="#list-view" data-toggle="tab"
                             class="nav-link btn-primary mr-1 show active">List View</a></li>
-                    <!-- <li class="nav-item"><a href="#grid-view" data-toggle="tab" class="nav-link btn-primary">Grid
-                            View</a></li> -->
+                    <li class="nav-item"><a href="#grid-view" data-toggle="tab" class="nav-link btn-primary">Grid
+                            View</a></li>
                 </ul>
-            </div>
+            </div> -->
             <div class="col-lg-12">
                 <div class="row tab-content">
                     <div id="list-view" class="tab-pane fade active show col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">All Subscription Plans </h4>
-                                <a href="{{route('subscriptionPlan.create')}}" class="btn btn-primary">+ Add new</a>
+
+                        <div class="lms-card">
+
+                            <!-- Header -->
+                            <div class="lms-card-header">
+
+                                <div>
+                                    <div class="lms-card-title">Subscription Plans</div>
+                                    <div style="font-size:12px; color:#64748b;">
+                                        Manage pricing tiers and feature limits
+                                    </div>
+                                </div>
+
+                                <a href="{{route('subscriptionPlan.create')}}" class="lms-btn">
+                                    + Add Plan
+                                </a>
+
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 900px">
-                                        <thead>
+
+                            <!-- Table -->
+                            <div class="lms-table-wrapper">
+
+                                <table class="lms-table" id="example3">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Plan</th>
+                                            <th>Limits</th>
+                                            <th>Features</th>
+                                            <th>Pricing</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        @forelse ($subscriptionPlan as $key => $d)
+
                                             <tr>
-                                                <th>{{__('#')}}</th>
-                                                <th>{{__('Subscription Name')}}</th>
-                                                <th>{{__('Course Upload')}}</th>
-                                                <th>{{__('Student Upload')}}</th>
-                                                <th>{{__('Allocated Space')}}</th>
-                                                <th>{{__('Certificate Status')}}</th>
-                                                <th>{{__('Transaction Fee')}}</th>
-                                                <th>{{__('Extra Days')}}</th>
-                                                <th>{{__('Manual Enrollment')}}</th>
-                                                <th>{{__('Amount/Month')}}</th>
-                                                <th>{{__('Action')}}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($subscriptionPlan as $key => $d)
-                                            <tr>
-                                                <td><strong>{{$key + 1}}</strong></td>
-                                                <td><strong>{{$d->name}}</strong></td> 
-                                                <td><strong>{{ $d->course_upload >= 50 ? 'Unlimited' : $d->course_upload }}</strong></td>
-                                                <td><strong>{{ $d->student_upload >= 2000 ? 'Unlimited' : $d->student_upload }}</strong></td>
-                                                <td><strong>{{ $d->allocated_space >= 50 ? 'Unlimited' : $d->allocated_space . 'Gb' }}</strong></td>
+
+                                                <!-- PLAN NAME -->
                                                 <td>
-                                                    @if($d->certificate == 1)
-                                                        <span class="badge badge-rounded badge-success text-white">Yes</span>
-                                                    @else
-                                                        <span class="badge badge-rounded badge-warning text-white">No</span>
-                                                    @endif
+                                                    <div style="font-weight:700;">
+                                                        {{ $d->name }}
+                                                    </div>
+                                                    <div style="font-size:11px; color:#94a3b8;">
+                                                        Tier {{ $key + 1 }}
+                                                    </div>
                                                 </td>
-                                                <td><strong>{{$d->transaction_fee}}%</strong></td>
-                                                <td><strong>{{ $d->extra_day >= 20 ? '-' : $d->extra_day }}</strong></td>
+
+                                                <!-- LIMITS (GROUPED) -->
                                                 <td>
-                                                    @if($d->enrollment == 1)
-                                                        <span class="badge badge-rounded badge-success text-white">Yes</span>
-                                                    @else
-                                                        <span class="badge badge-rounded badge-warning text-white">No</span>
-                                                    @endif
+                                                    <div style="font-size:13px; line-height:1.7;">
+
+                                                        <div>
+                                                            📚 Courses:
+                                                            <strong>
+                                                                {{ $d->course_upload >= 50 ? 'Unlimited' : $d->course_upload }}
+                                                            </strong>
+                                                        </div>
+
+                                                        <div>
+                                                            👥 Students:
+                                                            <strong>
+                                                                {{ $d->student_upload >= 2000 ? 'Unlimited' : $d->student_upload }}
+                                                            </strong>
+                                                        </div>
+
+                                                        <div>
+                                                            💾 Storage:
+                                                            <strong>
+                                                                {{ $d->allocated_space >= 50 ? 'Unlimited' : $d->allocated_space . 'GB' }}
+                                                            </strong>
+                                                        </div>
+
+                                                    </div>
                                                 </td>
-                                                <td><strong>{{ $d->amount >= 50000 ? '-' : '₦' . number_format($d->amount,2) }}</strong></td>
+
+                                                <!-- FEATURES -->
                                                 <td>
-                                                    <a href="{{route('subscriptionPlan.edit', encryptor('encrypt', $d->id))}}"
-                                                        class="btn btn-sm btn-primary" title="Edit"><i
-                                                            class="la la-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"
-                                                        title="Delete" onclick="$('#form{{$d->id}}').submit()"><i
-                                                            class="la la-trash-o"></i></a>
+                                                    <div style="display:flex; flex-direction:column; gap:6px;">
+
+                                                        <span class="lms-badge {{ $d->certificate ? 'lms-badge-success' : 'lms-badge-danger' }}">
+                                                            Certificate: {{ $d->certificate ? 'Enabled' : 'Disabled' }}
+                                                        </span>
+
+                                                        <span class="lms-badge {{ $d->enrollment ? 'lms-badge-success' : 'lms-badge-danger' }}">
+                                                            Manual Enrollment: {{ $d->enrollment ? 'Yes' : 'No' }}
+                                                        </span>
+
+                                                    </div>
+                                                </td>
+
+                                                <!-- PRICING -->
+                                                <td>
+                                                    <div style="font-weight:700; font-size:16px;">
+                                                        {{ $d->amount >= 50000 ? 'Custom' : '₦' . number_format($d->amount,2) }}
+                                                    </div>
+
+                                                    <div style="font-size:11px; color:#94a3b8;">
+                                                        / month
+                                                    </div>
+
+                                                    <div style="margin-top:6px; font-size:12px;">
+                                                        Fee: {{ $d->transaction_fee }}%
+                                                    </div>
+
+                                                    <div style="font-size:12px;">
+                                                        Extra Days: {{ $d->extra_day }}
+                                                    </div>
+                                                </td>
+
+                                                <!-- ACTION -->
+                                                <td>
+                                                    <div style="display:flex; gap:8px;">
+
+                                                        <a href="{{route('subscriptionPlan.edit', encryptor('encrypt', $d->id))}}"
+                                                        class="lms-btn">
+                                                            Edit
+                                                        </a>
+
+                                                        <a href="javascript:void(0);"
+                                                        onclick="$('#form{{$d->id}}').submit()"
+                                                        class="lms-btn-danger"
+                                                        style="padding:6px 10px; border-radius:8px; font-size:12px;">
+                                                            Delete
+                                                        </a>
+
+                                                    </div>
+
                                                     <form id="form{{$d->id}}"
                                                         action="{{route('subscriptionPlan.destroy', $d->id)}}"
                                                         method="post">
@@ -103,17 +178,28 @@
                                                         @method('DELETE')
                                                     </form>
                                                 </td>
+
                                             </tr>
-                                            @empty
+
+                                        @empty
+
                                             <tr>
-                                                <th colspan="7" class="text-center">No subscription plan Found</th>
+                                                <td colspan="5"
+                                                    style="text-align:center; padding:20px; color:#94a3b8;">
+                                                    No Subscription Plans Found
+                                                </td>
                                             </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
-                                </div>
+
+                                        @endforelse
+
+                                    </tbody>
+
+                                </table>
+
                             </div>
+
                         </div>
+
                     </div>
                     
                 </div>

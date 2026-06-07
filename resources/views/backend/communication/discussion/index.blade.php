@@ -29,7 +29,7 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-12">
+            <!-- <div class="col-lg-12">
                 <ul class="nav nav-pills mb-3">
                     <li class="nav-item"><a href="#list-view" data-toggle="tab"
                             class="nav-link btn-primary mr-1 show active">List View</a></li>
@@ -37,60 +37,154 @@
                             class="nav-link btn-primary">Grid
                             View</a></li>
                 </ul>
-            </div>
+            </div> -->
             <div class="col-lg-12">
                 <div class="row tab-content">
                     <div id="list-view" class="tab-pane fade active show col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">All Discussions List </h4>
+
+                        <div class="lms-card">
+
+                            <!-- Header -->
+                            <div class="lms-card-header">
+
+                                <div>
+                                    <div class="lms-card-title">Discussions</div>
+                                    <div style="font-size:12px; color:#64748b;">
+                                        Student and instructor conversations across courses
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 845px">
-                                        <thead>
+
+                            <!-- Table -->
+                            <div class="lms-table-wrapper">
+
+                                <table class="lms-table" id="example3">
+
+                                    <thead>
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Course</th>
+                                            <th>Discussion</th>
+                                            <th>Preview</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        @forelse ($discussion as $d)
+
                                             <tr>
-                                                <th>{{__('User')}}</th>
-                                                <th>{{__('Role')}}</th>
-                                                <th>{{__('Course')}}</th>
-                                                <th>{{__('Title')}}</th>
-                                                <th>{{__('Comment')}}</th>
-                                                <th>{{__('Action')}}</th> 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($discussion as $d)
-                                            <tr>
-                                                <td>{{$d->user?->name_en}}</td>
-                                                <td>{{$d->user?->role?->name}}</td>
-                                                <td>{{$d->course?->title_en}}</td>
-                                                <td>{{$d->title}}</td>
-                                                <td>{{$d->content}}</td>
+
+                                                <!-- User -->
                                                 <td>
-                                                    <a href="{{route('discussion.edit', encryptor('encrypt',$d->id))}}"
-                                                        class="btn btn-sm btn-primary" title="Edit"><i
-                                                            class="la la-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"
-                                                        title="Delete" onclick="$('#form{{$d->id}}').submit()"><i
-                                                            class="la la-trash-o"></i></a>
-                                                    <form id="form{{$d->id}}"
-                                                        action="{{route('discussion.destroy', encryptor('encrypt',$d->id))}}"
+                                                    <div style="display:flex; align-items:center; gap:10px;">
+
+                                                        <div style="
+                                                            width:38px;
+                                                            height:38px;
+                                                            border-radius:50%;
+                                                            background:#e2e8f0;
+                                                            display:flex;
+                                                            align-items:center;
+                                                            justify-content:center;
+                                                            font-weight:600;
+                                                            color:#334155;
+                                                        ">
+                                                            {{ strtoupper(substr($d->user?->name_en ?? 'U', 0, 1)) }}
+                                                        </div>
+
+                                                        <div>
+                                                            <div style="font-weight:600;">
+                                                                {{ $d->user?->name_en }}
+                                                            </div>
+
+                                                            <span class="lms-badge lms-badge-success" style="font-size:10px;">
+                                                                {{ $d->user?->role?->name }}
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                </td>
+
+                                                <!-- Course -->
+                                                <td>
+                                                    <div style="font-weight:600;">
+                                                        {{ $d->course?->title_en }}
+                                                    </div>
+                                                    <div style="font-size:11px; color:#94a3b8;">
+                                                        Course Thread
+                                                    </div>
+                                                </td>
+
+                                                <!-- Title -->
+                                                <td>
+                                                    <div style="font-weight:600;">
+                                                        {{ $d->title }}
+                                                    </div>
+                                                </td>
+
+                                                <!-- Comment Preview -->
+                                                <td>
+                                                    <div style="
+                                                        max-width:260px;
+                                                        white-space:nowrap;
+                                                        overflow:hidden;
+                                                        text-overflow:ellipsis;
+                                                        color:#64748b;
+                                                        font-size:13px;
+                                                    ">
+                                                        {{ $d->content }}
+                                                    </div>
+                                                </td>
+
+                                                <!-- Action -->
+                                                <td>
+                                                    <div style="display:flex; gap:8px;">
+
+                                                        <a href="{{ route('discussion.edit', encryptor('encrypt',$d->id)) }}"
+                                                        class="lms-btn">
+                                                            Edit
+                                                        </a>
+
+                                                        <a href="javascript:void(0);"
+                                                        onclick="$('#form{{ $d->id }}').submit()"
+                                                        class="lms-btn-danger"
+                                                        style="padding:6px 10px; border-radius:8px; font-size:12px;">
+                                                            Delete
+                                                        </a>
+
+                                                    </div>
+
+                                                    <form id="form{{ $d->id }}"
+                                                        action="{{ route('discussion.destroy', encryptor('encrypt',$d->id)) }}"
                                                         method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>
                                                 </td>
+
                                             </tr>
-                                            @empty
+
+                                        @empty
+
                                             <tr>
-                                                <th colspan="6" class="text-center"><h1>No Discussion Found</h1></th>
+                                                <td colspan="5" style="text-align:center; padding:20px; color:#94a3b8;">
+                                                    No Discussions Found
+                                                </td>
                                             </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
-                                </div>
+
+                                        @endforelse
+
+                                    </tbody>
+
+                                </table>
+
                             </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>
