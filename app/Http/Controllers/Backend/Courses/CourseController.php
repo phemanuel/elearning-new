@@ -73,7 +73,7 @@ class CourseController extends Controller
             return view('backend.course.courses.index', compact('course', 'noOfCourses','noOfCoursesInstructor'));
         }        
         
-    }
+    } 
 
     public function indexForAdmin()
     {

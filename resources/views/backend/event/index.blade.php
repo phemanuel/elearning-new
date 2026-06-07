@@ -34,57 +34,140 @@
             <div class="col-lg-12">
                 <div class="row tab-content">
                     <div id="list-view" class="tab-pane fade active show col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">All Events List </h4>
-                                <a href="{{route('event.create')}}" class="btn btn-primary">+ Add new</a>
+
+                        <div class="lms-card">
+
+                            <!-- Header -->
+                            <div class="lms-card-header">
+
+                                <div>
+                                    <div class="lms-card-title">Events</div>
+                                    <div style="font-size:12px; color:#64748b;">
+                                        Manage upcoming and past events
+                                    </div>
+                                </div>
+
+                                <a href="{{ route('event.create') }}" class="lms-btn">
+                                    + Add Event
+                                </a>
+
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 845px">
-                                        <thead>
+
+                            <!-- Table -->
+                            <div class="lms-table-wrapper">
+
+                                <table class="lms-table" id="example3">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Event</th>
+                                            <th>Topic</th>
+                                            <th>Location</th>
+                                            <th>Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        @forelse ($event as $e)
+
                                             <tr>
-                                                <th>{{__('#')}}</th>
-                                                <th>{{__('Event Title')}}</th>
-                                                <th>{{__('Topic')}}</th>
-                                                <th>{{__('Location Type')}}</th>
-                                                <th>{{__('Date')}}</th>
-                                                <th>{{__('Action')}}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($event as $e)
-                                            <tr>
-                                                <td><img src="{{asset('uploads/events/'.$e->image)}}"
-                                                        class="w-100" height="50"></td>
-                                                <td><strong>{{$e->title}}</strong></td>
-                                                <td><strong>{{$e->topic}}</strong></td>
-                                                <td>{{$e->location}}</td>
-                                                <td>{{ \Carbon\Carbon::parse($e->date)->format('j F, Y, l') }}</td>
+
+                                                <!-- Event -->
                                                 <td>
-                                                    <a href="{{route('event.edit', $e->id)}}"
-                                                        class="btn btn-sm btn-primary" title="Edit"><i
-                                                            class="la la-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"
-                                                        title="Delete" onclick="$('#form{{$e->id}}').submit()"><i
-                                                            class="la la-trash-o"></i></a>
-                                                    <form id="form{{$e->id}}"
-                                                        action="{{route('event.destroy', $e->id)}}" method="post">
+                                                    <div style="display:flex; align-items:center; gap:10px;">
+
+                                                        <img src="{{ asset('uploads/events/' . ($e->image ?? 'default.png')) }}"
+                                                            style="width:42px; height:42px; border-radius:10px; object-fit:cover;"
+                                                            alt="event">
+
+                                                        <div>
+                                                            <div style="font-weight:600;">
+                                                                {{ $e->title }}
+                                                            </div>
+                                                            <div style="font-size:11px; color:#94a3b8;">
+                                                                Event
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </td>
+
+                                                <!-- Topic -->
+                                                <td>
+                                                    <div style="font-weight:600;">
+                                                        {{ $e->topic }}
+                                                    </div>
+                                                </td>
+
+                                                <!-- Location -->
+                                                <td>
+                                                    @if($e->location == 'online')
+                                                        <span class="lms-badge lms-badge-success">Online</span>
+                                                    @else
+                                                        <span class="lms-badge lms-badge-warning">
+                                                            {{ ucfirst($e->location) }}
+                                                        </span>
+                                                    @endif
+                                                </td>
+
+                                                <!-- Date -->
+                                                <td>
+                                                    <div style="font-weight:600;">
+                                                        {{ \Carbon\Carbon::parse($e->date)->format('j F Y') }}
+                                                    </div>
+                                                    <div style="font-size:11px; color:#94a3b8;">
+                                                        {{ \Carbon\Carbon::parse($e->date)->format('l') }}
+                                                    </div>
+                                                </td>
+
+                                                <!-- Action -->
+                                                <td>
+                                                    <div style="display:flex; gap:8px;">
+
+                                                        <a href="{{ route('event.edit', $e->id) }}"
+                                                        class="lms-btn">
+                                                            Edit
+                                                        </a>
+
+                                                        <a href="javascript:void(0);"
+                                                        onclick="$('#form{{ $e->id }}').submit()"
+                                                        class="lms-btn-danger"
+                                                        style="padding:6px 10px; border-radius:8px; font-size:12px;">
+                                                            Delete
+                                                        </a>
+
+                                                    </div>
+
+                                                    <form id="form{{ $e->id }}"
+                                                        action="{{ route('event.destroy', $e->id) }}"
+                                                        method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>
                                                 </td>
+
                                             </tr>
-                                            @empty
+
+                                        @empty
+
                                             <tr>
-                                                <th colspan="6" class="text-center">No Event Found</th>
+                                                <td colspan="5" style="text-align:center; padding:20px; color:#94a3b8;">
+                                                    No Events Found
+                                                </td>
                                             </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
-                                </div>
+
+                                        @endforelse
+
+                                    </tbody>
+
+                                </table>
+
                             </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>

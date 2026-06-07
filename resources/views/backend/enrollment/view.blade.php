@@ -39,142 +39,118 @@
             <div class="col-lg-12">
                 <div class="row tab-content">
                     <div id="list-view" class="tab-pane fade active show col-lg-12">
-                        <div class="card">
-                            <!-- <div class="card-header">
-                                <h4 class="card-title">All Students List </h4>
-                                <a href="{{route('student.create')}}" class="btn btn-primary">+ Add new</a>
-                            </div> -->
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                <table id="example3" class="display" style="min-width: 845px">
-                                    <thead>
+
+                    <div class="lms-card">
+
+                        <div class="lms-card-header">
+                            <div>
+                                <div class="lms-card-title">Students</div>
+                                <div style="font-size:12px; color:#64748b;">
+                                    Manage learners and enrollments
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lms-table-wrapper">
+
+                            <table class="lms-table" id="example3">
+
+                                <thead>
+                                    <tr>
+                                        <th>Student</th>
+                                        <th>Email</th>
+                                        <th>Contact</th>
+                                        <th>Courses</th>
+                                        <th>Enroll</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    @forelse ($data as $d)
+
                                         <tr>
-                                            <th>{{__('#')}}</th>
-                                            <th>{{__('Name')}}</th>
-                                            <th>{{__('Email')}}</th>
-                                            <th>{{__('Contact')}}</th>
-                                            <th>{{__('Enrolled Courses')}}</th>
-                                            <th>{{__('Course')}}</th>
-                                            <th>{{__('Action')}}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($data as $d)
-                                        <tr>
+
+                                            <!-- Student -->
                                             <td>
-                                                <img class="rounded-circle" width="35" height="35"
-                                                    src="{{ asset('uploads/students/' . $d->image) }}" alt="">
-                                            </td>
-                                            <td><strong>{{ $d->name_en }}</strong></td>
-                                            <td>{{ $d->email }}</td>
-                                            <td>{{ $d->contact_en }}</td>
-                                            <td>
-                                                <div class="scrollable-list">
-                                                    @if ($d->enrollments->isNotEmpty())
-                                                        <ul>
-                                                            @foreach ($d->enrollments as $enrollment)
-                                                                @if ($enrollment->course)
-                                                                    <li>● {{ $enrollment->course->title_en }}</li>
-                                                                @endif
-                                                            @endforeach
-                                                        </ul>
-                                                    @else
-                                                        <span>No course/s enrolled</span>
-                                                    @endif
+                                                <div style="display:flex; align-items:center; gap:10px;">
+
+                                                    <img src="{{ asset('uploads/students/' . $d->image) }}"
+                                                        style="width:40px; height:40px; border-radius:50%; object-fit:cover;"
+                                                        alt="student">
+
+                                                    <span style="font-weight:600;">
+                                                        {{ $d->name_en }}
+                                                    </span>
+
                                                 </div>
                                             </td>
+
+                                            <!-- Email -->
+                                            <td>{{ $d->email }}</td>
+
+                                            <!-- Contact -->
+                                            <td>{{ $d->contact_en }}</td>
+
+                                            <!-- Courses -->
                                             <td>
-                                                <select name="courseId" id="courseId" class="form_control">
+                                                @if ($d->enrollments->isNotEmpty())
+                                                    <div style="max-height:60px; overflow:auto; font-size:12px; color:#475569;">
+                                                        @foreach ($d->enrollments as $enrollment)
+                                                            @if ($enrollment->course)
+                                                                • {{ $enrollment->course->title_en }}<br>
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                @else
+                                                    <span class="lms-badge lms-badge-warning">No Courses</span>
+                                                @endif
+                                            </td>
+
+                                            <!-- Enroll -->
+                                            <td>
+                                                <select class="lms-select courseId" data-student-id="{{ $d->id }}">
                                                     @foreach ($course as $c)
-                                                    <option value="{{ $c->id }}">{{ $c->title_en }}</option>
+                                                        <option value="{{ $c->id }}">{{ $c->title_en }}</option>
                                                     @endforeach
                                                 </select>
+
+                                                <button class="lms-btn enroll-btn"
+                                                        data-student-id="{{ $d->id }}"
+                                                        style="margin-top:6px;">
+                                                    Enroll
+                                                </button>
                                             </td>
+
+                                            <!-- Action -->
                                             <td>
-                                                <a href="#"
-                                                    class="btn btn-sm btn-primary enroll-btn" title="Enroll" data-student-id="{{ $d->id }}">
-                                                    <i class="fas fa-user-plus"></i> &nbsp;Enroll
+                                                <a href="{{ route('student.edit', encryptor('encrypt',$d->id)) }}"
+                                                class="lms-btn">
+                                                    Edit
                                                 </a>
                                             </td>
+
                                         </tr>
-                                        @empty
+
+                                    @empty
+
                                         <tr>
-                                            <th colspan="7" class="text-center">No Student Found</th>
+                                            <td colspan="6" style="text-align:center; padding:20px; color:#94a3b8;">
+                                                No Students Found
+                                            </td>
                                         </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                                </div>
-                            </div>
+
+                                    @endforelse
+
+                                </tbody>
+
+                            </table>
+
                         </div>
+
                     </div>
-                    <div id="grid-view" class="tab-pane fade col-lg-12">
-                        <div class="row">
-                            @forelse ($data as $d)
-                            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                                <div class="card card-profile">
-                                    <div class="card-header justify-content-end pb-0">
-                                        <div class="dropdown">
-                                            <button class="btn btn-link" type="button" data-toggle="dropdown">
-                                                <span class="dropdown-dots fs--1"></span>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right border py-0">
-                                                <div class="py-2">
-                                                    <a class="dropdown-item"
-                                                        href="{{route('student.edit', encryptor('encrypt',$d->id))}}">Edit</a>
-                                                    <a class="dropdown-item text-danger"
-                                                        href="javascript:void(0);">Delete</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body pt-2">
-                                        <div class="text-center">
-                                            <div class="profile-photo">
-                                                <img src="{{asset('uploads/students/'.$d->image)}}" width="100"
-                                                    height="100" class="rounded-circle" alt="">
-                                            </div>
-                                            <h3 class="mt-4 mb-1">{{$d->name_en}}</h3>
-                                            <p class="text-muted">{{$d->role?->name}}</p>
-                                            <ul class="list-group mb-3 list-group-flush">
-                                                <li class="list-group-item px-0 d-flex justify-content-between">
-                                                    <span>Phone No. :</span>
-                                                    <strong>{{$d->contact_en}}</strong>
-                                                </li>
-                                                <li class="list-group-item px-0 d-flex justify-content-between">
-                                                    <span class="mb-0">Email :</span>
-                                                    <strong>{{$d->email}}</strong>
-                                                </li>
-                                                <li class="list-group-item px-0 d-flex justify-content-between">
-                                                    <span class="mb-0">Gender :</span>
-                                                    <strong>{{$d->gender}}</strong>
-                                                </li>
-                                                <li class="list-group-item px-0 d-flex justify-content-between">
-                                                    <span class="mb-0">Status :</span>
-                                                    <span class="badge {{$d->status==1?"
-                                                        badge-success":"badge-danger"}}">@if($d->status==1){{__('Active')}}
-                                                        @else{{__('Inactive')}} @endif</span>
-                                                </li>
-                                            </ul>
-                                            <a class="btn btn-outline-primary btn-rounded mt-3 px-4"
-                                                href="#">Read More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @empty
-                            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                                <div class="card card-profile">
-                                    <div class="card-body pt-2">
-                                        <div class="text-center">
-                                            <p class="mt-3 px-4">Student Not Found</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforelse
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>

@@ -1048,6 +1048,69 @@ body {
 }
 
 /* =========================
+   LMS BUTTON SYSTEM
+========================= */
+
+.lms-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    padding: 8px 14px;
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    background: #2563eb; /* PRIMARY BLUE */
+    color: #ffffff;
+
+    border: 1px solid transparent;
+
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.lms-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+/* Danger button */
+.lms-btn-danger {
+    background: #ef4444;
+    color: #fff;
+}
+
+.lms-btn-danger:hover {
+    background: #dc2626;
+}
+
+/* Secondary button */
+.lms-btn-secondary {
+    background: #f1f5f9;
+    color: #0f172a;
+    border: 1px solid #e2e8f0;
+}
+
+.lms-btn-secondary:hover {
+    background: #e2e8f0;
+}
+
+/* Success button */
+.lms-btn-success {
+    background: #10b981;
+    color: #fff;
+}
+
+.lms-btn-success:hover {
+    background: #059669;
+}
+
+/* =========================
    RESPONSIVE
 ========================= */
 
@@ -1097,163 +1160,190 @@ body {
         <!--**********************************
             Header start
         ***********************************-->
-        <div class="header">
-            <div class="header-content">
-                <nav class="navbar navbar-expand">
-                    <div class="collapse navbar-collapse justify-content-between">
-                        <div class="header-left">
-                            <div class="search_bar dropdown">
-                                <span class="search_icon p-3 c-pointer" data-toggle="dropdown">
-                                    <i class="mdi mdi-magnify"></i>
-                                </span>
-                                <div class="dropdown-menu p-0 m-0">
-                                    <form>
-                                        <input class="form-control" type="search" placeholder="Search"
-                                            aria-label="Search">
-                                    </form>
-                                </div>
-                            </div>
+        <!-- HEADER START -->
+<div class="header">
+    <div class="header-content">
+
+        <nav class="navbar navbar-expand">
+
+            <div class="collapse navbar-collapse justify-content-between">
+
+                {{-- ================= LEFT ================= --}}
+                <div class="header-left d-flex align-items-center">
+
+                    {{-- MOBILE MENU TOGGLE --}}
+                    <button class="btn btn-light btn-sm mr-3 d-md-none" id="menu-toggle">
+                        <i class="las la-bars"></i>
+                    </button>
+
+                    {{-- GLOBAL SEARCH --}}
+                    <div class="search_bar">
+
+                        <div class="input-group shadow-sm rounded">
+
+                            <span class="input-group-text bg-white border-0">
+                                <i class="las la-search text-muted"></i>
+                            </span>
+
+                            <input type="text"
+                                   class="form-control border-0"
+                                   placeholder="Search courses, students, quizzes..."
+                                   aria-label="Search">
+
+                            <span class="input-group-text bg-white border-0 text-muted small">
+                                Ctrl + K
+                            </span>
+
                         </div>
 
-                        <ul class="navbar-nav header-right">
-                            <!-- <li class="nav-item dropdown notification_dropdown">
-                                <a class="nav-link bell ai-icon" href="#" role="button" data-toggle="dropdown">
-                                    <svg id="icon-user" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                        viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
-                                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-                                    </svg>
-                                    <div class="pulse-css"></div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <ul class="list-unstyled">
-                                        <li class="media dropdown-item">
-                                            <span class="success"><i class="ti-user"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>Martin</strong> has added a <strong>customer</strong>
-                                                        Successfully
-                                                    </p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                        <li class="media dropdown-item">
-                                            <span class="primary"><i class="ti-shopping-cart"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>Jennifer</strong> purchased Light Dashboard 2.0.</p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                        <li class="media dropdown-item">
-                                            <span class="danger"><i class="ti-bookmark"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>Robin</strong> marked a <strong>ticket</strong> as
-                                                        unsolved.
-                                                    </p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                        <li class="media dropdown-item">
-                                            <span class="primary"><i class="ti-heart"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>David</strong> purchased Light Dashboard 1.0.</p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                        <li class="media dropdown-item">
-                                            <span class="success"><i class="ti-image"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong> James.</strong> has added a<strong>customer</strong>
-                                                        Successfully
-                                                    </p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                    </ul>
-                                    <a class="all-notification" href="#">See all notifications <i
-                                            class="ti-arrow-right"></i></a>
-                                </div>
-                            </li> -->
-                            <li class="nav-item dropdown header-profile">
-                                <a class="nav-link" title="Profile Info" href="#" role="button" data-toggle="dropdown">
-                                    <img src="{{asset('uploads/users/'.request()->session()->get('image'))}}"
-                                        width="20" alt="">
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                @if(Auth::check() && auth()->user()->role_id == 1)
-                                    <a href="{{route('user.edit', encryptor('encrypt',auth()->user()->id))}}" class="dropdown-item ai-icon">
-                                        <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                            viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
-                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                            <circle cx="12" cy="7" r="4"></circle>
-                                        </svg>
-                                        <span class="ml-2">Profile</span>
-                                    </a>
-                                    @elseif(Auth::check() && auth()->user()->role_id == 2) 
-                                    <a href="{{route('user.edit', encryptor('encrypt',auth()->user()->id))}}" class="dropdown-item ai-icon">
-                                        <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                            viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
-                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                            <circle cx="12" cy="7" r="4"></circle>
-                                        </svg>
-                                        <span class="ml-2">Profile</span>
-                                    </a>
-                                    @elseif(Auth::check() && auth()->user()->role_id == 3)
-                                    <a href="{{route('instructor.edit', encryptor('encrypt',auth()->user()->instructor_id))}}" class="dropdown-item ai-icon">
-                                        <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                            viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
-                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                            <circle cx="12" cy="7" r="4"></circle>
-                                        </svg>
-                                        <span class="ml-2">Profile</span>
-                                    </a>
-                                    @else
-                                    <script>
-                                        window.location.href = "{{ route('logOut') }}";
-                                    </script>
-                                    @endif
-                                    <!-- <a href="email-inbox.html" class="dropdown-item ai-icon">
-                                        <svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                            viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail">
-                                            <path
-                                                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
-                                            </path>
-                                            <polyline points="22,6 12,13 2,6"></polyline>
-                                        </svg>
-                                        <span class="ml-2">Inbox </span>
-                                    </a> -->
-                                    <a href="{{route('logOut')}}" class="dropdown-item ai-icon">
-                                        <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                            viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-log-out">
-                                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                                            <polyline points="16 17 21 12 16 7"></polyline>
-                                            <line x1="21" y1="12" x2="9" y2="12"></line>
-                                        </svg>
-                                        <span class="ml-2">Logout </span>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
                     </div>
-                </nav>
+
+                </div>
+
+
+                {{-- ================= RIGHT ================= --}}
+                <ul class="navbar-nav header-right align-items-center">
+
+
+                    {{-- ================= QUICK ACTIONS ================= --}}
+                    <li class="nav-item mr-3">
+                        <a href="{{ route('course.index') }}" class="btn btn-primary btn-sm">
+                            <i class="las la-plus"></i>
+                            Create Course
+                        </a>
+                    </li>
+
+
+                    {{-- ================= NOTIFICATIONS ================= --}}
+                    <li class="nav-item dropdown notification_dropdown">
+
+                        <a class="nav-link position-relative" href="#" data-toggle="dropdown">
+
+                            {{-- FIXED ICON (always visible) --}}
+                            <i class="las la-bell"
+                               style="font-size:22px; color:#374151;"></i>
+
+                            {{-- BADGE --}}
+                            <span class="badge badge-danger"
+                                  style="position:absolute; top:2px; right:0px; font-size:10px; border-radius:50%;">
+                                1
+                            </span>
+
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right shadow border-0" style="min-width:320px;">
+
+                            <div class="p-3 border-bottom">
+                                <strong>Notifications</strong>
+                            </div>
+
+                            <ul class="list-unstyled mb-0">
+
+                                <li class="dropdown-item">
+                                    <div class="d-flex align-items-start">
+
+                                        <div class="mr-2">
+                                            <span class="badge badge-success">
+                                                <i class="las la-user"></i>
+                                            </span>
+                                        </div>
+
+                                        <div>
+                                            <strong>New User Registered</strong>
+                                            <div class="small text-muted">
+                                                A student just joined your platform
+                                            </div>
+                                            <small class="text-muted">Just now</small>
+                                        </div>
+
+                                    </div>
+                                </li>
+
+                            </ul>
+
+                            <div class="p-2 text-center border-top">
+                                <a href="#" class="small">View all notifications</a>
+                            </div>
+
+                        </div>
+                    </li>
+
+
+                    {{-- ================= MESSAGES (LMS ESSENTIAL) ================= --}}
+                    <li class="nav-item mr-3">
+                        <a href="{{ route('message.index') }}" class="position-relative">
+
+                            <i class="las la-envelope"
+                               style="font-size:22px; color:#374151;"></i>
+
+                            <span class="badge badge-primary"
+                                  style="position:absolute; top:-6px; right:-8px; font-size:10px;">
+                                0
+                            </span>
+
+                        </a>
+                    </li>
+
+
+                    {{-- ================= PROFILE ================= --}}
+                    @php $user = auth()->user(); @endphp
+
+                    <li class="nav-item dropdown header-profile">
+
+                        <a class="nav-link d-flex align-items-center" href="#" data-toggle="dropdown">
+
+                            <img src="{{ asset('uploads/users/' . request()->session()->get('image')) }}"
+                                 class="rounded-circle"
+                                 width="38"
+                                 height="38"
+                                 alt="profile">
+
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right shadow border-0">
+
+                            {{-- PROFILE --}}
+                            @if(Auth::check())
+                                <a class="dropdown-item"
+                                   href="{{ $user->role_id == 3
+                                        ? route('instructor.edit', encryptor('encrypt', $user->instructor_id))
+                                        : route('user.edit', encryptor('encrypt', $user->id)) }}">
+
+                                    <i class="las la-user-circle mr-2"></i>
+                                    My Profile
+                                </a>
+                            @endif
+
+                            <a class="dropdown-item" href="#">
+                                <i class="las la-cog mr-2"></i>
+                                Settings
+                            </a>
+
+                            <a class="dropdown-item" href="#">
+                                <i class="las la-life-ring mr-2"></i>
+                                Support
+                            </a>
+
+                            <div class="dropdown-divider"></div>
+
+                            <a class="dropdown-item text-danger" href="{{ route('logOut') }}">
+                                <i class="las la-sign-out-alt mr-2"></i>
+                                Logout
+                            </a>
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
             </div>
-        </div>
+
+        </nav>
+
+    </div>
+</div>
+<!-- HEADER END -->
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
@@ -1261,260 +1351,209 @@ body {
         <!--**********************************
             Sidebar start
         ***********************************-->
-        @if(fullAccess())
+       @if(fullAccess())
         <div class="dlabnav">
             <div class="dlabnav-scroll">
+
                 <ul class="metismenu" id="menu">
-                    <li class="nav-label first">Admin Panel</li>
-                    <li><a class="ai-icon" href="{{route('home')}}" aria-expanded="false">
-                            <i class="las la-home"></i>
-                            <span class="nav-text">Home</span>
+
+                    {{-- ================= ADMIN BLOCK ================= --}}
+                    <li class="nav-label first"
+                        style="background:#1e293b; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                        ADMIN PANEL
+                    </li>
+
+                    <li class="mt-2">
+                        <a class="ai-icon" href="{{ route('home') }}">
+                            <i class="las la-home"
+                            style="background:#e0f2fe; color:#0284c7; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text font-weight-bold">Home</span>
                         </a>
                     </li>
-                    <li><a class="ai-icon" href="{{route('dashboard')}}" aria-expanded="false">
-                            <i class="las la-tachometer-alt"></i>
-                            <span class="nav-text">Dashboard</span>
+
+                    <li>
+                        <a class="ai-icon" href="{{ route('dashboard') }}">
+                            <i class="las la-tachometer-alt"
+                            style="background:#dcfce7; color:#16a34a; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text font-weight-bold">Dashboard</span>
                         </a>
-                    </li> 
-                    @if(Auth::check() && auth()->user()->role_id == 1) 
-                    <li><a href="{{route('user.edit', encryptor('encrypt',auth()->user()->id))}}"><i
-                                        class="las la-chalkboard-teacher"></i>Profile</a>
-                            </li>   
-                    @elseif(Auth::check() && auth()->user()->role_id == 2) 
-                    <li><a href="{{route('user.edit', encryptor('encrypt',auth()->user()->id))}}"><i
-                                        class="las la-chalkboard-teacher"></i>Profile</a>
-                            </li>  
-                    @elseif(Auth::check() && auth()->user()->role_id == 3)     
-                    <li><a href="{{route('instructor.edit', encryptor('encrypt',auth()->user()->instructor_id))}}"><i
-                                        class="las la-chalkboard-teacher"></i>Profile</a>
-                            </li> 
-                    @else
-                    <script>
-                        window.location.href = "{{ route('logOut') }}";
-                    </script>
-                    @endif        
-                    <li class="nav-label">Main Menu</li>
-                    <li><a class="" href="{{route('role.index')}}" aria-expanded="false">
-                            <i class="las la-cog"></i>
+                    </li>
+
+                    @php $user = auth()->user(); @endphp
+
+                    @if(Auth::check())
+                    <li>
+                        <a class="ai-icon"
+                        href="{{ $user->role_id == 3
+                                ? route('instructor.edit', encryptor('encrypt', $user->instructor_id))
+                                : route('user.edit', encryptor('encrypt', $user->id)) }}">
+                            <i class="las la-user-circle"
+                            style="background:#fef3c7; color:#f59e0b; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text">Profile</span>
+                        </a>
+                    </li>
+                    @endif
+
+
+                    {{-- ================= MANAGEMENT BLOCK ================= --}}
+                    <li class="nav-label mt-3"
+                        style="background:#0f172a; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                        MANAGEMENT
+                    </li>
+
+                    <li class="mt-2">
+                        <a class="ai-icon" href="{{ route('role.index') }}">
+                            <i class="las la-shield-alt"
+                            style="background:#fee2e2; color:#ef4444; padding:6px; border-radius:8px;"></i>
                             <span class="nav-text">Permissions</span>
                         </a>
                     </li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="la la-universal-access"></i>
-                            <span class="nav-text">Roles</span>
+
+                    <li>
+                        <a class="has-arrow ai-icon" href="javascript:void(0)">
+                            <i class="las la-users"
+                            style="background:#ede9fe; color:#7c3aed; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text">User Management</span>
                         </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{route('user.index')}}"><i class="la la-users"></i>Users</a></li>
-                            <li><a href="{{route('instructor.index')}}"><i
-                                        class="las la-chalkboard-teacher"></i>Instructors</a>
-                            </li>
-                            <li><a href="{{route('student.index')}}"><i class="las la-book-reader"></i>Students</a></li>
+                        <ul>
+                            <li><a href="{{ route('user.index') }}">Users</a></li>
+                            <li><a href="{{ route('instructor.index') }}">Instructors</a></li>
+                            <li><a href="{{ route('student.index') }}">Students</a></li>
                         </ul>
                     </li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="las la-school"></i>
+
+
+                    {{-- ================= LEARNING BLOCK ================= --}}
+                    <li class="nav-label mt-3"
+                        style="background:#0f172a; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                        LEARNING
+                    </li>
+
+                    <li class="mt-2">
+                        <a class="has-arrow ai-icon" href="javascript:void(0)">
+                            <i class="las la-school"
+                            style="background:#dbeafe; color:#2563eb; padding:6px; border-radius:8px;"></i>
                             <span class="nav-text">Courses</span>
                         </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{route('courseCategory.index')}}"><i class="la la-list"></i>Course
-                                    Category</a>
-                            </li>
-                            <li><a href="{{route('courseList')}}"><i class="las la-school"></i>Courses List</a></li>
-                            <li><a href="{{route('course.index')}}"><i class="las la-book-open"></i>All Courses</a></li>
-                            <!-- <li><a href="{{route('lesson.index')}}"><i class="las la-chalkboard"></i>Lessons</a></li> -->
-                            <!-- <li><a href="{{route('material.index')}}"><i class="las la-atom"></i></i>Materials</a></li> -->
+                        <ul>
+                            <li><a href="{{ route('courseCategory.index') }}">Categories</a></li>
+                            <li><a href="{{ route('courseList') }}">All Courses</a></li>
+                            <li><a href="{{ route('course.index') }}">Course Setup</a></li>
                         </ul>
                     </li>
-                    <li><a class="" href="{{route('enrollment.index')}}" aria-expanded="false">
-                            <i class="las la-bullseye"></i>
+
+                    <li>
+                        <a class="ai-icon" href="{{ route('enrollment.index') }}">
+                            <i class="las la-bullseye"
+                            style="background:#dcfce7; color:#16a34a; padding:6px; border-radius:8px;"></i>
                             <span class="nav-text">Enrollments</span>
                         </a>
                     </li>
-                    <li><a class="" href="{{route('event.index')}}" aria-expanded="false">
-                            <i class="las la-icons"></i>
+
+                    <li>
+                        <a class="has-arrow ai-icon" href="javascript:void(0)">
+                            <i class="las la-tasks"
+                            style="background:#fef9c3; color:#ca8a04; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text">Assessments</span>
+                        </a>
+                        <ul>
+                            <li><a href="{{ route('quiz.index') }}">Quizzes</a></li>
+                            <li><a href="{{ route('question.index') }}">Questions</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="ai-icon" href="{{ route('certificates.index') }}">
+                            <i class="las la-certificate"
+                            style="background:#f3e8ff; color:#9333ea; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text">Certificates</span>
+                        </a>
+                    </li>
+
+
+                    {{-- ================= ENGAGEMENT BLOCK ================= --}}
+                    <li class="nav-label mt-3"
+                        style="background:#0f172a; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                        ENGAGEMENT
+                    </li>
+
+                    <li class="mt-2">
+                        <a class="ai-icon" href="{{ route('event.index') }}">
+                            <i class="las la-calendar"
+                            style="background:#ffe4e6; color:#e11d48; padding:6px; border-radius:8px;"></i>
                             <span class="nav-text">Events</span>
                         </a>
                     </li>
-                    <li><a class="" href="{{route('coupon.index')}}" aria-expanded="false">
-                            <i class="las la-tags"></i>
+
+                    <li>
+                        <a class="has-arrow ai-icon" href="javascript:void(0)">
+                            <i class="las la-comments"
+                            style="background:#e0f2fe; color:#0284c7; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text">Community</span>
+                        </a>
+                        <ul>
+                            <li><a href="{{ route('discussion.index') }}">Discussions</a></li>
+                            <li><a href="{{ route('message.index') }}">Messages</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="has-arrow ai-icon" href="javascript:void(0)">
+                            <i class="las la-star"
+                            style="background:#fff7ed; color:#f97316; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text">Reviews</span>
+                        </a>
+                        <ul>
+                            <li><a href="{{ route('review.index') }}">All Reviews</a></li>
+                            <li><a href="{{ route('review.index') }}">Ratings</a></li>
+                        </ul>
+                    </li>
+
+
+                    {{-- ================= FINANCE BLOCK ================= --}}
+                    <li class="nav-label mt-3"
+                        style="background:#0f172a; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                        FINANCE
+                    </li>
+
+                    <li class="mt-2">
+                        <a class="has-arrow ai-icon" href="javascript:void(0)">
+                            <i class="las la-money-check"
+                            style="background:#dcfce7; color:#16a34a; padding:6px; border-radius:8px;"></i>
+                            <span class="nav-text">Payments</span>
+                        </a>
+                        <ul>
+                            <li><a href="{{ route('courseFee') }}">Course Payments</a></li>
+                            <li><a href="{{ route('subscriptionPlan.index') }}">Subscription Plans</a></li>
+                            <li><a href="{{ route('subscription.index') }}">Subscriptions</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="ai-icon" href="{{ route('coupon.index') }}">
+                            <i class="las la-tags"
+                            style="background:#fee2e2; color:#ef4444; padding:6px; border-radius:8px;"></i>
                             <span class="nav-text">Coupons</span>
                         </a>
                     </li>
-                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="las la-tasks"></i>
-                            <span class="nav-text">Quizzes</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{route('quiz.index')}}"><i class="las la-icons"></i>All Quizzes</a></li>
-                            <li><a href="{{route('question.index')}}"><i
-                                        class="las la-question-circle"></i>Questions</a></li>
-                        </ul>
+
+
+                    {{-- ================= SYSTEM ================= --}}
+                    <li class="nav-label mt-3"
+                        style="background:#0f172a; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                        SYSTEM
                     </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="las la-clipboard-list"></i> <!-- Clipboard list icon for project -->
-                            <span class="nav-text">Project</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li>
-                                <a href="#"><i class="las la-folder-open"></i> All Projects</a> <!-- Folder open icon -->
-                            </li>
-                            <!-- Uncomment if needed -->
-                            <!-- <li>
-                                <a href="{{route('question.index')}}"><i class="las la-question-circle"></i> Questions</a>
-                            </li> -->
-                        </ul>
-                    </li>
-                    <li><a class="" href="{{route('certificates.index')}}" aria-expanded="false">
-                    <i class="las la-atom"></i>
-                            <span class="nav-text">Certificates</span>
-                        </a>
-                    </li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="las la-star-half-alt"></i>
-                            <span class="nav-text">Reviews</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{route('review.index')}}"><i class="las la-wave-square"></i>All Review</a>
-                            </li>
-                            <li><a href="{{route('review.index')}}"><i class="las la-star"></i>Ratings</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="las la-comment"></i>
-                            <span class="nav-text">Forum</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{route('discussion.index')}}"><i class="las la-comment-alt"></i>Discussion</a>
-                            </li>
-                            <li><a href="{{route('message.index')}}"><i class="las la-envelope"></i>Messages</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="las la-money-check"></i>
-                            <span class="nav-text">Payments</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{route('courseFee')}}"><i class="las la-money-bill"></i>Course Payments</a></li>
-                            <li><a href="{{route('subscriptionPlan.index')}}"><i class="las la-money-bill"></i>Subscription Plans</a></li>
-                            <li><a href="{{route('subscription.index')}}"><i class="las la-money-bill"></i>Subscription Fees</a></li>
-                            <li><a href="{{route('coupon.index')}}"><i class="las la-tags"></i>Coupons</a></li>
-                        </ul>
-                    </li> 
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="las la-file-alt"></i>
-                            <span class="nav-text">Report</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li>
-                                <a href="{{route('customPlan')}}">
-                                    <i class="las la-file-signature"></i> Custom Plan Request
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{route('contactReport')}}">
-                                    <i class="las la-address-book"></i> Contact Report
-                                </a>
-                            </li>                            
-                        </ul>
-                    </li>
-                    <li><a class="" href="{{route('logOut')}}" aria-expanded="false">
-                            <i class="lab la-gg-circle"></i>
+
+                    <li class="mt-2">
+                        <a class="ai-icon" href="{{ route('logOut') }}">
+                            <i class="lab la-gg-circle"
+                            style="background:#fee2e2; color:#ef4444; padding:6px; border-radius:8px;"></i>
                             <span class="nav-text">Logout</span>
                         </a>
                     </li>
+
                 </ul>
             </div>
-        </div>
-        @endif
-
-        @if(!fullAccess())
-        <div class="dlabnav">
-        <div class="dlabnav-scroll">
-            <ul class="metismenu" id="menu">
-                <li class="nav-label first">Instructor Panel</li>
-                <li><a class="ai-icon" href="{{route('home')}}" aria-expanded="false">
-                        <i class="las la-home"></i><span class="nav-text">Home</span>
-                    </a>
-                </li>
-                <li><a class="ai-icon" href="{{route('dashboard')}}" aria-expanded="false">
-                        <i class="las la-tachometer-alt"></i> <span class="nav-text">Dashboard</span>
-                    </a>
-                </li>  
-                @if(Auth::check() && auth()->user()->role_id == 1) 
-                    <li><a href="{{route('user.edit', encryptor('encrypt',auth()->user()->id))}}"><i
-                                        class="las la-chalkboard-teacher"></i>Profile</a>
-                            </li>   
-                    @elseif(Auth::check() && auth()->user()->role_id == 2) 
-                    <li><a href="{{route('user.edit', encryptor('encrypt',auth()->user()->id))}}"><i
-                                        class="las la-chalkboard-teacher"></i>Profile</a>
-                            </li>  
-                    @elseif(Auth::check() && auth()->user()->role_id == 3)     
-                    <li><a href="{{route('instructor.edit', encryptor('encrypt',auth()->user()->instructor_id))}}"><i
-                                        class="las la-chalkboard-teacher"></i>Profile</a>
-                            </li> 
-                    @else
-                    <script>
-                        window.location.href = "{{ route('logOut') }}";
-                    </script>
-                    @endif                     
-                <li class="nav-label">Main Menu</li>                
-                <!-- <li><a href="{{route('student.index')}}"><i class="las la-book-reader"></i>Students List</a></li> -->
-                <li><a href="{{route('course.index')}}"><i class="las la-book-open"></i>My Courses</a></li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="las la-tasks"></i>
-                            <span class="nav-text">Quiz</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{route('quiz.index')}}"><i class="las la-icons"></i>All Quiz</a></li>
-                            <!-- <li><a href="{{route('question.index')}}"><i
-                                        class="las la-question-circle"></i>Questions</a></li> -->
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="las la-clipboard-list"></i> <!-- Clipboard list icon for project -->
-                            <span class="nav-text">Project</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li>
-                                <a href="{{route('project.index')}}"><i class="las la-folder-open"></i> All Projects</a> <!-- Folder open icon -->
-                            </li>
-                            <!-- Uncomment if needed -->
-                            <!-- <li>
-                                <a href="{{route('question.index')}}"><i class="las la-question-circle"></i> Questions</a>
-                            </li> -->
-                        </ul>
-                    </li>
-                    <li><a class="" href="{{route('certificates.index')}}" aria-expanded="false">
-                    <i class="las la-atom"></i>
-                            <span class="nav-text">Certificates</span>
-                        </a>
-                    </li>
-                    <li><a href="{{route('coupon.index')}}"><i class="las la-tags"></i>Coupons</a></li>
-                    <li><a class="" href="{{route('enrollment.index')}}" aria-expanded="false">
-                            <i class="las la-bullseye"></i>
-                            <span class="nav-text">Enrollments</span>
-                        </a>
-                    </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="las la-money-check"></i>
-                            <span class="nav-text">Payments</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{route('courseFee')}}"><i class="las la-money-bill"></i>Course Payments</a></li>
-                            <li><a href="{{route('subscription.view')}}"><i class="las la-money-bill"></i>Subscription</a></li>                            
-                        </ul>
-                    </li> 
-                    <li><a href="{{route('instructor.index')}}">
-                        <i class="las la-chalkboard-teacher"></i>Instructors List
-                    </a>
-                </li>
-                <!-- <li><a href="{{route('enrollment.index')}}"><i class="las la-bullseye"></i>Enrollments</a></li> -->
-                <li><a href="{{route('logOut')}}"><i class="lab la-gg-circle"></i>Logout</a></li>
-            </ul>
-        </div>
         </div>
         @endif
         <!--**********************************

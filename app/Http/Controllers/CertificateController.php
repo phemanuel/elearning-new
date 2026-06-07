@@ -21,7 +21,10 @@ class CertificateController extends Controller
     {   $userRoleId = auth()->user()->role_id;
         
         if ($userRoleId == 1){
-            $data = Certificate::with(['instructor', 'course'])->get();
+            $data = Certificate::with(['instructor', 'course'])
+            ->whereHas('instructor')
+            ->whereHas('course')
+            ->get();
         return view('backend.certificate.index', compact('data'));
         }
         elseif ($userRoleId == 3) {

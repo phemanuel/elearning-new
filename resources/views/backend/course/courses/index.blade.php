@@ -1,5 +1,5 @@
 @extends('backend.layouts.app')
-@section('title', 'Course List')
+@section('title', 'Course Setup')
 
 @push('styles')
 <!-- Datatable -->
@@ -15,13 +15,13 @@
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
-                    <h4>Course List</h4>                 
+                    <h4>Course Setup</h4>                 
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active"><a href="">All Course</a></li>
+                    <li class="breadcrumb-item active"><a href="">Course Setup</a></li>
                 </ol>
             </div>
         </div>
@@ -29,6 +29,33 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="row tab-content">  
+                    @if(auth()->user()->role_id == 1) 
+                        <!-- Add Course -->
+                        <div class="col-xl-3 col-md-6">
+                            <a href="{{route('course.create')}}"
+                            class="text-decoration-none">
+
+                                <div class="dashboard-card card-action">
+
+                                    <div class="card-icon">
+                                        <i class="material-icons">add</i>
+                                    </div>
+
+                                    <div class="card-content">
+                                        <span class="card-label">
+                                            Course Management
+                                        </span>
+
+                                        <h5 class="mb-0 fw-bold">
+                                            Add New Course
+                                        </h5>
+                                    </div>
+
+                                </div>
+
+                            </a>
+                        </div>
+                    @endif
                     @if(auth()->user()->role_id != 1)
 
                     <div class="row g-4 mb-4">

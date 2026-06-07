@@ -30,98 +30,174 @@
             <div class="col-lg-12">
                 <div class="row tab-content">
                     <div id="list-view" class="tab-pane fade active show col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">All Course List </h4>
-                                <!-- <a href="{{route('enrollment.create')}}" class="btn btn-primary">+ Add new course</a> -->
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 845px">
-                                        <thead>
-                                            <tr>
-                                                <th>{{__('#')}}</th>
-                                                <th>{{__('Course Name')}}</th>
-                                                <th>{{__('Instructor')}}</th>
-                                                <th>{{__('Category')}}</th>
-                                                <th>{{__('Price')}}</th>
-                                                <th>{{__('Link')}}</th>
-                                                <th>{{__('Project')}}</th>
-                                                <th>{{__('Status')}}</th>
-                                                <th>{{__('Action')}}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($course as $d)
-                                            <tr>
-                                                <td><img class="img fluid" width="100" src="{{asset('uploads/courses/'.$d->image)}}" alt="">
-                                            </td>
-                                                <td><strong>{{$d->title_en}}</strong></td>
-                                                <td><strong>{{$d->instructor?->name_en}}</strong></td>
-                                                <td><strong>{{$d->courseCategory?->category_name}}</strong>
-                                                </td>
-                                                <td><strong>{{$d->price?'=N='.$d->price:'Free'}}</strong></td>
-                                                <td><div class="d-flex align-items-center bg-light rounded p-3 gap-3" style="overflow: hidden; white-space: nowrap;">
-    <i class="fa fa-link text-primary fs-5"></i> 
-    
-    <div class="text-truncate flex-grow-1" style="max-width: 70%;">
-        <a href="https://kingsdigihub.org/courses/{{ $d->course_url }}" 
-           target="_blank" 
-           class="text-decoration-none text-dark fw-bold"
-           title="https://kingsdigihub.org/courses/{{ $d->course_url }}">
-           https://kingsdigihub.org/courses/{{ $d->course_url }}
-        </a>
-    </div>
 
-    <button class="btn btn-sm btn-outline-primary copy-btn px-3" 
-            data-url="https://kingsdigihub.org/courses/{{ $d->course_url }}">
-        <i class="fa fa-copy"></i> Copy
-    </button>
-</div>               </td>
-<td>
-@if($d->project == 1)
- <i class="fa fa-check-circle text-success fs-5"></i> 
-@else
-  <i class="fa fa-times-circle text-danger fs-5"></i>
-@endif
-</td>
+                        <div class="lms-card">
+
+                            <!-- Header -->
+                            <div class="lms-card-header">
+
+                                <div>
+                                    <div class="lms-card-title">All Courses</div>
+                                    <div style="font-size:12px; color:#64748b; margin-top:2px;">
+                                        Manage course content, pricing and visibility
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Table -->
+                            <div class="lms-table-wrapper">
+
+                                <table class="lms-table" id="example3">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Course</th>
+                                            <th>Instructor</th>
+                                            <th>Category</th>
+                                            <th>Price</th>
+                                            <th>Link</th>
+                                            <th>Project</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        @forelse ($course as $d)
+
+                                            <tr>
+
+                                                <!-- Course -->
                                                 <td>
-                                                    <span class="badge 
-                                                    @if($d->status == 0) badge-warning 
-                                                    @elseif($d->status == 1) badge-danger 
-                                                    @elseif($d->status == 2) badge-success 
-                                                    @endif">
-                                                        @if($d->status == 0) {{__('Pending')}}
-                                                        @elseif($d->status == 1) {{__('Inactive')}}
-                                                        @elseif($d->status == 2) {{__('Active')}}
-                                                        @endif
+                                                    <div style="display:flex; align-items:center; gap:12px;">
+
+                                                        <img src="{{ asset('uploads/courses/'.$d->image) }}"
+                                                            style="width:48px; height:48px; border-radius:10px; object-fit:cover;"
+                                                            alt="course">
+
+                                                        <div>
+                                                            <div style="font-weight:600;">
+                                                                {{ $d->title_en }}
+                                                            </div>
+                                                            <div style="font-size:11px; color:#94a3b8;">
+                                                                {{ $d->course_url }}
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </td>
+
+                                                <!-- Instructor -->
+                                                <td>
+                                                    <span style="font-weight:500;">
+                                                        {{ $d->instructor?->name_en }}
                                                     </span>
                                                 </td>
+
+                                                <!-- Category -->
                                                 <td>
-                                                    <a href="{{route('course.edit', encryptor('encrypt',$d->id))}}"
-                                                        class="btn btn-sm btn-primary" title="Edit"><i
-                                                            class="la la-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"
-                                                        title="Delete" onclick="$('#form{{$d->id}}').submit()"><i
-                                                            class="la la-trash-o"></i></a>
+                                                    {{ $d->courseCategory?->category_name }}
+                                                </td>
+
+                                                <!-- Price -->
+                                                <td>
+                                                    @if($d->price)
+                                                        <span style="font-weight:600;">
+                                                            ₦{{ number_format($d->price) }}
+                                                        </span>
+                                                    @else
+                                                        <span class="lms-badge lms-badge-success">
+                                                            Free
+                                                        </span>
+                                                    @endif
+                                                </td>
+
+                                                <!-- Link -->
+                                                <td>
+                                                    <div style="display:flex; align-items:center; gap:8px;">
+
+                                                        <a href="https://kingsdigihub.org/courses/{{ $d->course_url }}"
+                                                        target="_blank"
+                                                        style="font-size:12px; color:#2563eb; text-decoration:none; max-width:140px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                                                            Open Link
+                                                        </a>
+
+                                                        <button class="copy-btn"
+                                                                data-url="https://kingsdigihub.org/courses/{{ $d->course_url }}"
+                                                                style="background:#f1f5f9; border:1px solid #e5e7eb; padding:4px 8px; border-radius:6px; font-size:12px;">
+                                                            Copy
+                                                        </button>
+
+                                                    </div>
+                                                </td>
+
+                                                <!-- Project -->
+                                                <td>
+                                                    @if($d->project == 1)
+                                                        <span class="lms-badge lms-badge-success">Yes</span>
+                                                    @else
+                                                        <span class="lms-badge lms-badge-danger">No</span>
+                                                    @endif
+                                                </td>
+
+                                                <!-- Status -->
+                                                <td>
+                                                    @if($d->status == 2)
+                                                        <span class="lms-badge lms-badge-success">Active</span>
+                                                    @elseif($d->status == 1)
+                                                        <span class="lms-badge lms-badge-danger">Inactive</span>
+                                                    @else
+                                                        <span class="lms-badge lms-badge-warning">Pending</span>
+                                                    @endif
+                                                </td>
+
+                                                <!-- Actions -->
+                                                <td>
+                                                    <div style="display:flex; gap:8px;">
+
+                                                        <a href="{{ route('course.edit', encryptor('encrypt',$d->id)) }}"
+                                                        style="background:#2563eb; color:#fff; padding:6px 10px; border-radius:8px; font-size:12px;">
+                                                            Edit
+                                                        </a>
+
+                                                        <a href="javascript:void(0);"
+                                                        onclick="$('#form{{$d->id}}').submit()"
+                                                        style="background:#ef4444; color:#fff; padding:6px 10px; border-radius:8px; font-size:12px;">
+                                                            Delete
+                                                        </a>
+
+                                                    </div>
+
                                                     <form id="form{{$d->id}}"
-                                                        action="{{route('course.destroy', encryptor('encrypt',$d->id))}}"
+                                                        action="{{ route('course.destroy', encryptor('encrypt',$d->id)) }}"
                                                         method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>
                                                 </td>
+
                                             </tr>
-                                            @empty
+
+                                        @empty
+
                                             <tr>
-                                                <th colspan="6" class="text-center">No Enrollment Found</th>
+                                                <td colspan="8" style="text-align:center; padding:20px; color:#94a3b8;">
+                                                    No Courses Found
+                                                </td>
                                             </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
-                                </div>
+
+                                        @endforelse
+
+                                    </tbody>
+
+                                </table>
+
                             </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>

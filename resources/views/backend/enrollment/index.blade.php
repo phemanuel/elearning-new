@@ -30,98 +30,150 @@
             <div class="col-lg-12">
                 <div class="row tab-content">
                     <div id="list-view" class="tab-pane fade active show col-lg-12">
-                        <div class="card">                            
-                            <div class="card-header">
-                                <h4 class="card-title">All Enrollments List</h4>
 
-                                @if(auth()->user()->role_id != 1)
-                                <a class="btn text-white" style="background-color: #006400;"> <!-- Deep Green -->
-                                    <i class="material-icons">people</i> <!-- Icon for "students" -->
-                                    <strong>Total Students to Enroll: {{$noOfStudent}}</strong>
-                                </a>
-                                @endif
+                        <div class="lms-card">
 
-                                @if(auth()->user()->role_id != 1)
-                                <a class="btn text-white" style="background-color: #5C4033;"> <!-- Deep Brown -->
-                                    <i class="material-icons">check_circle</i> <!-- Icon for "completed/enrolled" -->
-                                    <strong>Students Enrolled: {{$noOfStudentEnrolled}}</strong>
-                                </a>
-                                @endif
+                            <!-- Header -->
+                            <div class="lms-card-header">
 
-                                @if(auth()->user()->role_id != 1)
-                                <a class="btn text-white" style="background-color: #FF8C00;"> <!-- Deep Orange -->
-                                    <i class="material-icons">book</i> <!-- Icon for "courses" -->
-                                    <strong>Total Students Left: {{$noOfStudent - $noOfStudentEnrolled}}</strong>
-                                </a>
-                                @endif 
-                                @if(auth()->user()->role_id != 1)
-                                <a href="{{route('enrollment.create')}}" class="btn btn-primary">
-                                    <strong>+ Enroll New Student</strong>
-                                </a>
-                                @endif 
+                                <div>
+                                    <div class="lms-card-title">All Enrollments</div>
+                                    <div style="font-size:12px; color:#64748b; margin-top:2px;">
+                                        Track student course registrations and progress
+                                    </div>
+                                </div>
+
+                                <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+
+                                    @if(auth()->user()->role_id != 1)
+
+                                        <!-- Stats -->
+                                        <span class="lms-badge" style="background:#065f46; color:#fff;">
+                                            Total: {{ $noOfStudent }}
+                                        </span>
+
+                                        <span class="lms-badge" style="background:#7c2d12; color:#fff;">
+                                            Enrolled: {{ $noOfStudentEnrolled }}
+                                        </span>
+
+                                        <span class="lms-badge" style="background:#ea580c; color:#fff;">
+                                            Remaining: {{ $noOfStudent - $noOfStudentEnrolled }}
+                                        </span>
+
+                                        <!-- Action -->
+                                        <a href="{{ route('enrollment.create') }}"
+                                        style="background:#2563eb; color:#fff; padding:8px 14px; border-radius:10px; font-size:13px; font-weight:600;">
+                                            + Enroll Student
+                                        </a>
+
+                                    @endif
+
+                                </div>
+
                             </div>
 
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 845px">
-                                        <thead>
+                            <!-- Table -->
+                            <div class="lms-table-wrapper">
+
+                                <table class="lms-table" id="example3">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Student</th>
+                                            <th>Course</th>
+                                            <th>Segment</th>
+                                            <th>Status</th>
+                                            <th>Price</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        @forelse ($enrollment as $e)
+
                                             <tr>
-                                                <th>{{__('#')}}</th>
-                                                <th>{{__('Student Name')}}</th>
-                                                <th>{{__('Course Name')}}</th>
-                                                <th>{{__('Segment')}}</th>
-                                                <th>{{__('Completion Status')}}</th>
-                                                <th>{{__('Amount')}}</th>
-                                                <th>{{__('Enrollment Date')}}</th>
-                                                <!-- <th>{{__('Action')}}</th> -->
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($enrollment as $e)
-                                            <tr>
-                                                <td><img class="rounded-circle" width="35" height="35"
-                                                        src="{{asset('uploads/students/'.$e->student?->image)}}"
-                                                        alt="">
+
+                                                <!-- Student -->
+                                                <td>
+                                                    <div style="display:flex; align-items:center; gap:12px;">
+
+                                                        <img src="{{ asset('uploads/students/'.$e->student?->image) }}"
+                                                            style="width:40px; height:40px; border-radius:50%; object-fit:cover;"
+                                                            alt="student">
+
+                                                        <span style="font-weight:600;">
+                                                            {{ $e->student?->name_en }}
+                                                        </span>
+
+                                                    </div>
                                                 </td>
-                                                <td><strong>{{$e->student?->name_en}}</strong></td>
-                                                <td><strong>{{$e->course?->title_en}}</strong></td>
-                                                <td><strong>{{$e->segment}}</strong></td>
+
+                                                <!-- Course -->
+                                                <td>
+                                                    <span style="font-weight:500;">
+                                                        {{ $e->course?->title_en }}
+                                                    </span>
+                                                </td>
+
+                                                <!-- Segment -->
+                                                <td>
+                                                    <span style="font-weight:600;">
+                                                        {{ $e->segment }}
+                                                    </span>
+                                                </td>
+
+                                                <!-- Status -->
                                                 <td>
                                                     @if($e->completed == 1)
-                                                        <span class="badge badge-rounded badge-success text-white">Completed</span>
+                                                        <span class="lms-badge lms-badge-success">
+                                                            Completed
+                                                        </span>
                                                     @else
-                                                        <span class="badge badge-rounded badge-warning text-white">Not Completed</span>
+                                                        <span class="lms-badge lms-badge-warning">
+                                                            In Progress
+                                                        </span>
                                                     @endif
                                                 </td>
-                                                <td><strong>
-        {{ $e->course?->price == null ? 'Free': $e->course?->currency_type . number_format($e->course?->price, 2) }}
-    </strong></td>
-                                                <td><strong>{{$e->enrollment_date}}</strong></td>
-                                                <!-- <td>
-                                                    <a href="{{route('enrollment.edit', encryptor('encrypt',$e->id))}}"
-                                                        class="btn btn-sm btn-primary" title="Edit"><i
-                                                            class="la la-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"
-                                                        title="Delete" onclick="$('#form{{$e->id}}').submit()"><i
-                                                            class="la la-trash-o"></i></a>
-                                                    <form id="form{{$e->id}}"
-                                                        action="{{route('enrollment.destroy', encryptor('encrypt',$e->id))}}"
-                                                        method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
-                                                </td> -->
+
+                                                <!-- Price -->
+                                                <td>
+                                                    @if($e->course?->price == null)
+                                                        <span class="lms-badge lms-badge-success">Free</span>
+                                                    @else
+                                                        <span style="font-weight:600;">
+                                                            {{ $e->course?->currency_type }}{{ number_format($e->course?->price, 2) }}
+                                                        </span>
+                                                    @endif
+                                                </td>
+
+                                                <!-- Date -->
+                                                <td>
+                                                    <span style="font-size:13px; color:#64748b;">
+                                                        {{ $e->enrollment_date }}
+                                                    </span>
+                                                </td>
+
                                             </tr>
-                                            @empty
+
+                                        @empty
+
                                             <tr>
-                                                <th colspan="6" class="text-center">No Enrollment Found</th>
+                                                <td colspan="6" style="text-align:center; padding:20px; color:#94a3b8;">
+                                                    No Enrollments Found
+                                                </td>
                                             </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
-                                </div>
+
+                                        @endforelse
+
+                                    </tbody>
+
+                                </table>
+
                             </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>
