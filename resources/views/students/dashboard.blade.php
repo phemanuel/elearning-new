@@ -39,7 +39,7 @@ use Carbon\Carbon;
             </div>
 
             <!-- RIGHT SIDE: QUICK ACTIONS -->
-            <div class="lms-header-right">
+            <!-- <div class="lms-header-right">
 
                 <a href="#" class="lms-btn lms-btn-outline">
                     <i class="fa fa-book"></i> My Courses
@@ -49,7 +49,7 @@ use Carbon\Carbon;
                     <i class="fa fa-plus"></i> New Course
                 </a>
 
-            </div>
+            </div> -->
 
         </div>
 
@@ -112,44 +112,82 @@ use Carbon\Carbon;
 
             </div>
 
-            <nav class="students-info-intro__nav">
+            <nav class="lms-dashboard-nav">
 
-                <div class="nav" id="nav-tab" role="tablist">
-
-                    <button class="nav-link active"
+                <div class="lms-dashboard-nav-inner" id="nav-tab" role="tablist">
+                    
+                    <button class="lms-nav-item active"
                             id="nav-coursesall-tab"
                             data-bs-toggle="tab"
-                            data-bs-target="#nav-coursesall">
-                        <i class="fas fa-book-open"></i>
-                        My Courses
+                            data-bs-target="#nav-coursesall"
+                            role="tab">
+
+                        <span class="lms-nav-icon">
+                            <i class="fas fa-book-open"></i>
+                        </span>
+
+                        <span class="lms-nav-text">
+                            My Courses
+                        </span>
+
                     </button>
 
-                    <button class="nav-link"
+                    <button class="lms-nav-item"
                             id="nav-completedcourses-tab"
                             data-bs-toggle="tab"
-                            data-bs-target="#nav-completedcourses">
-                        <i class="fas fa-check-circle"></i>
-                        Completed
+                            data-bs-target="#nav-completedcourses"
+                            role="tab">
+
+                        <span class="lms-nav-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </span>
+
+                        <span class="lms-nav-text">
+                            Completed
+                        </span>
+
                     </button>
 
-                    <button class="nav-link"
+                    <button class="lms-nav-item"
                             id="nav-purchase-tab"
                             data-bs-toggle="tab"
-                            data-bs-target="#nav-purchase">
-                        <i class="fas fa-receipt"></i>
-                        Purchases
+                            data-bs-target="#nav-purchase"
+                            role="tab">
+
+                        <span class="lms-nav-icon">
+                            <i class="fas fa-receipt"></i>
+                        </span>
+
+                        <span class="lms-nav-text">
+                            Purchases
+                        </span>
+
                     </button>
 
-                    <a href="{{ route('student_profile') }}" class="nav-link">
-                        <i class="fas fa-user"></i>
-                        Profile
+                    <a href="{{ route('student_profile') }}" class="lms-nav-item">
+
+                        <span class="lms-nav-icon">
+                            <i class="fas fa-user"></i>
+                        </span>
+
+                        <span class="lms-nav-text">
+                            Profile
+                        </span>
+
                     </a>
 
-                    <a href="{{ route('home') }}" class="nav-link">
-                        <i class="fas fa-home"></i>
-                        Home
-                    </a>
+                    <a href="{{ route('home') }}" class="lms-nav-item">
 
+                        <span class="lms-nav-icon">
+                            <i class="fas fa-home"></i>
+                        </span>
+
+                        <span class="lms-nav-text">
+                            Home
+                        </span>
+
+                    </a>
+                    
                 </div>
 
             </nav>
@@ -202,27 +240,31 @@ use Carbon\Carbon;
                                     <!-- IMAGE -->
                                     <div class="lms-course-image">
 
-    <a href="{{ route('courseSegment', encryptor('encrypt', $course?->id)) }}">
-        <img src="{{ asset('uploads/courses/' . $course?->image) }}" alt="course">
-    </a>
+                                        <a href="{{ route('courseSegment', encryptor('encrypt', $course?->id)) }}"
+                                        class="lms-course-image-link">
 
-    <!-- STATUS BADGE -->
-    <span class="lms-badge
-        @if($isCompleted) success
-        @elseif($progress > 0) progress
-        @else neutral @endif">
+                                            <img src="{{ asset('uploads/courses/' . $course?->image) }}"
+                                                alt="{{ $course?->title_en }}">
 
-        @if($isCompleted)
-            Completed
-        @elseif($progress > 0)
-            In Progress
-        @else
-            Not Started
-        @endif
+                                        </a>
 
-    </span>
+                                        <!-- STATUS BADGE -->
+                                        <span class="lms-badge
+                                            @if($isCompleted) success
+                                            @elseif($progress > 0) progress
+                                            @else neutral @endif">
 
-</div>
+                                            @if($isCompleted)
+                                                Completed
+                                            @elseif($progress > 0)
+                                                In Progress
+                                            @else
+                                                Not Started
+                                            @endif
+
+                                        </span>
+
+                                    </div>
 
                                     <!-- BODY -->
                                     <div class="lms-course-body">
@@ -316,7 +358,9 @@ use Carbon\Carbon;
 
 
                 {{-- Completed Courses --}}
-                <div class="tab-pane fade" id="nav-completedcourses" role="tabpanel">
+                <div class="tab-pane fade"
+                id="nav-completedcourses"
+                role="tabpanel" aria-labelledby="nav-completedcourses-tab">
 
                     <div class="row g-4">
 
@@ -330,82 +374,107 @@ use Carbon\Carbon;
                                 $lessonCount = $course?->lessons->count() ?? 0;
                             @endphp
 
-                            <div class="col-lg-4 col-md-6">
+                            <div class="lms-course-card lms-course-card-completed">
 
-                                <div class="lms-course-card">
+                            <!-- COURSE IMAGE -->
+                            <div class="lms-course-image">
 
-                                    <!-- IMAGE -->
-                                    <div class="lms-course-image">
-                                        <a href="#">
-                                            <img src="{{ asset('uploads/courses/' . $course?->image) }}"
-                                                alt="course">
-                                        </a>
+                                <a href="{{ route('courseSegment', encryptor('encrypt', $course?->id)) }}">
+                                    <img src="{{ asset('uploads/courses/' . $course?->image) }}"
+                                        alt="{{ $course?->title_en }}">
+                                </a>
 
-                                        @if($progressPercentage == 100)
-                                            <span class="lms-badge success">Completed</span>
-                                        @else
-                                            <span class="lms-badge progress">{{ $progressPercentage }}%</span>
-                                        @endif
-                                    </div>
+                                <span class="lms-completed-ribbon">
+                                    <i class="fas fa-award"></i>
+                                    Completed
+                                </span>
 
-                                    <!-- CONTENT -->
-                                    <div class="lms-course-body">
+                            </div>
 
-                                        <!-- Instructor -->
-                                        <a href="{{ route('instructorProfile', encryptor('encrypt', $instructor?->id)) }}"
+                            <!-- CARD BODY -->
+                            <div class="lms-course-body">
+
+                                <!-- TITLE -->
+                                <h5 class="lms-course-title">
+                                    {{ $course?->title_en }}
+                                </h5>
+
+                                <!-- INSTRUCTOR -->
+                                <div class="lms-instructor-row">
+
+                                    <a href="{{ route('instructorProfile', encryptor('encrypt', $instructor?->id)) }}"
                                         class="lms-instructor">
 
-                                            <img src="{{ asset('uploads/users/' . $instructor?->image) }}"
-                                                onerror="this.src='{{ asset('uploads/students/blank_new.png') }}'">
+                                        <img src="{{ asset('uploads/users/' . $instructor?->image) }}"
+                                            onerror="this.src='{{ asset('uploads/students/blank_new.png') }}'">
 
-                                            <span>{{ $instructor?->name_en }}</span>
+                                        <span>{{ $instructor?->name_en }}</span>
 
-                                        </a>
+                                    </a>
 
-                                        <!-- Title -->
-                                        <h5 class="lms-course-title">
-                                            {{ $course?->title_en ?? 'No title available' }}
-                                        </h5>
+                                </div>
 
-                                        <!-- Stats -->
-                                        <div class="lms-course-stats">
+                                <!-- STATS -->
+                                <div class="lms-completed-stats">
 
-                                            <span>📦 {{ $segmentCount }} segments</span>
-                                            <span>📚 {{ $lessonCount }} lessons</span>
+                                    <span>
+                                        <i class="fas fa-layer-group"></i>
+                                        {{ $segmentCount }} Segments
+                                    </span>
 
+                                    <span>
+                                        <i class="fas fa-book-open"></i>
+                                        {{ $lessonCount }} Lessons
+                                    </span>
+
+                                </div>
+
+                                <!-- ACHIEVEMENT -->
+                                <div class="lms-achievement-box">
+
+                                    <div class="lms-achievement-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+
+                                    <div>
+
+                                        <div class="lms-achievement-title">
+                                            Course Successfully Completed
                                         </div>
 
-                                        <!-- Progress -->
-                                        <div class="lms-progress">
-
-                                            <div class="lms-progress-bar">
-                                                <span style="width: {{ $progressPercentage }}%"></span>
-                                            </div>
-
-                                            <div class="lms-progress-text">
-                                                @if($progressPercentage == 100)
-                                                    🎉 Completed
-                                                @elseif($progressPercentage > 0)
-                                                    ⏳ In Progress
-                                                @else
-                                                    ⚪ Not Started
-                                                @endif
-                                            </div>
-
+                                        <div class="lms-achievement-text">
+                                            100% Learning Progress Achieved
                                         </div>
-
-                                        <!-- Action -->
-                                        <a href="{{ route('certificate.show', encryptor('encrypt', $course?->id)) }}"
-                                        target="_blank"
-                                        class="lms-btn">
-                                            ⬇ Download Certificate
-                                        </a>
 
                                     </div>
 
                                 </div>
 
+                                <!-- ACTIONS -->
+                                <div class="lms-course-actions">
+
+                                    <a href="{{ route('courseSegment', encryptor('encrypt', $course?->id)) }}"
+                                        class="lms-btn-secondary">
+
+                                        <i class="fas fa-eye"></i>
+                                        Review Course
+
+                                    </a>
+
+                                    <a href="{{ route('certificate.show', encryptor('encrypt', $course?->id)) }}"
+                                        target="_blank"
+                                        class="lms-btn-primary">
+
+                                        <i class="fas fa-download"></i>
+                                        Certificate
+
+                                    </a>
+
+                                </div>
+
                             </div>
+
+                        </div>
 
                         @empty
 
@@ -432,80 +501,100 @@ use Carbon\Carbon;
 
                 {{-- Purchase History --}}
                 <div class="tab-pane fade" id="nav-purchase" role="tabpanel" aria-labelledby="nav-purchase-tab">
-                    @foreach ($checkout as $e)
-                    @if ($e->cart_data)
-                    <div class="row mb-3">
-                        <div class="col-lg-12">
-                            <div class="purchase-area">
-                                <div class="purchase-area-close">
-                                    <a href="#">
-                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M11 1L1 11" stroke="#F15C4C" stroke-width="1.5"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M1 1L11 11" stroke="#F15C4C" stroke-width="1.5"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div class="d-flex align-items-lg-center align-items-start flex-column flex-lg-row">
+                    @forelse($payment as $p)
 
+                    <div class="row mb-4">
+                        <div class="col-12">
 
-                                    <div class="purchase-area-items">
-                                        @php $i=0; @endphp
-                                        @foreach (json_decode(base64_decode($e->cart_data))->cart as $data)
-                                        @php ++$i; @endphp
-                                        <div
-                                            class="purchase-area-items-start d-flex align-items-lg-center flex-column flex-lg-row">
-                                            <div class="image">
-                                                <a href="#">
-                                                    <img src="{{asset('uploads/courses/'.$data->image)}}"
-                                                        alt="Image" />
-                                                </a>
-                                            </div>
-                                            <div class="text d-flex flex-column flex-lg-row">
-                                                <div class="text-main">
-                                                    <h6>
-                                                        <a href="#">{{$data->title_en}}</a>
-                                                    </h6>
-                                                    <p> By 
-                                                        <a href="#">
-                                                         {{$data->instructor}}</a>
-                                                    </p>
-                                                </div>
-                                                <p class="ms-2">
-    {{ $data->price && $data->price > 0 ? ($data->currency_type . number_format($data->price, 2)) : 'Free' }}
-</p>
-                                            </div>
+                            <div class="payment-history-card">
+
+                                {{-- Header --}}
+                                <div class="payment-header">
+                                    <div class="payment-course">
+
+                                        <div class="payment-icon">
+                                            <i class="fa fa-credit-card"></i>
                                         </div>
-                                        @endforeach
+
+                                        <div>
+                                            <h5 class="mb-1">
+                                                {{ $p->course->title ?? 'Course Payment' }}
+                                            </h5>
+
+                                            <small>
+                                                Instructor:
+                                                {{ $p->instructor->name ?? 'N/A' }}
+                                            </small>
+                                        </div>
+
                                     </div>
-                                    <div class="purchase-area-items-end">
-                                        <p>{{$e->created_at}}</p>
-                                        <dl class="row">
-                                            <dt class="col-sm-4">Total</dt>
-                                            <dd class="col-sm-8">
-                                                @php
-                                                    $totalAmount = json_decode(base64_decode($e->cart_data))->cart_details->total_amount;
-                                                @endphp
-                                                {{ $totalAmount == 0 ? 'Free' : number_format($totalAmount, 2) }}
-                                            </dd>
-                                            <dt class="col-sm-4">Total Courses</dt>
-                                            <dd class="col-sm-8">
-                                                {{$i}}
-                                            </dd>
-                                            <dt class="col-sm-4">Transaction Reference</dt>
-                                            <dd class="col-sm-8">
-                                                {{$e->txnid}}
-                                            </dd>
-                                        </dl>
+
+                                    <div>
+                                        @if($p->status == 'success')
+                                            <span class="badge bg-success">
+                                                Paid
+                                            </span>
+                                        @elseif($p->status == 'pending')
+                                            <span class="badge bg-warning text-dark">
+                                                Pending
+                                            </span>
+                                        @else
+                                            <span class="badge bg-danger">
+                                                Failed
+                                            </span>
+                                        @endif
                                     </div>
                                 </div>
+
+                                {{-- Body --}}
+                                <div class="payment-body">
+
+                                    <div class="payment-stat">
+                                        <span>Amount</span>
+                                        <h6>
+                                            {{ $p->currency }}
+                                            {{ number_format($p->amount, 2) }}
+                                        </h6>
+                                    </div>
+
+                                    <div class="payment-stat">
+                                        <span>Payment Method</span>
+                                        <h6>{{ ucfirst($p->method) }}</h6>
+                                    </div>
+
+                                    <div class="payment-stat">
+                                        <span>Currency Code</span>
+                                        <h6>{{ $p->currency_code }}</h6>
+                                    </div>
+
+                                    <div class="payment-stat">
+                                        <span>Reference</span>
+                                        <h6>{{ $p->txnid }}</h6>
+                                    </div>
+
+                                    <div class="payment-stat">
+                                        <span>Date</span>
+                                        <h6>
+                                            {{ $p->created_at->format('d M Y') }}
+                                        </h6>
+                                    </div>
+
+                                </div>
+
                             </div>
+
                         </div>
                     </div>
-                    @endif
-                    @endforeach
+
+                    @empty
+
+                    <div class="empty-payment-state">
+                        <i class="fa fa-receipt"></i>
+                        <h5>No Payment Records Found</h5>
+                        <p>You have not made any course payments yet.</p>
+                    </div>
+
+                    @endforelse
                     <div class="row mt-lg-5 mt-4">
                         <div class="col-lg-12 text-center">
                             <p style="color: #42414b !important; font-size: 18px !important;">

@@ -13,6 +13,7 @@ use App\Models\Progress;
 use App\Models\ProgressAll;
 use Illuminate\Http\Request;
 use App\Models\ProjectSubmission;
+use App\Models\Payment;
 use Carbon\Carbon;
 
 class DashboardController extends Controller
@@ -48,6 +49,7 @@ class DashboardController extends Controller
 
         $course = Course::get();
         $checkout = Checkout::where('student_id', currentUserId())->get();
+        $payment = Payment::where('student_id', currentUserId())->get();
 
         // Calculate progress percentage for each enrolled course
         $courseProgress = [];
@@ -69,7 +71,7 @@ class DashboardController extends Controller
         }  
 
         return view('students.dashboard', compact('student_info', 'enrollment', 'course', 
-        'checkout','progress','courseProgress','completedCourses','allCompletedCourses', 'studentId'));
+        'checkout','progress','courseProgress','completedCourses','allCompletedCourses', 'studentId','payment'));
     } 
 
     public function courseSegment($id)

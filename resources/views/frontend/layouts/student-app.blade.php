@@ -218,9 +218,9 @@
 .students-info-intro{
     background:linear-gradient(
         135deg,
-        #acba96 0%,
-        #8c8ab9 50%,
-        #8ebab3 100%
+        #6a7d4c 0%,
+        #7a74ea 50%,
+        #44622d 100%
     );
 
     border-radius:22px;
@@ -674,25 +674,43 @@
 }
 
 /* BADGE */
-.lms-badge {
+.lms-badge{
     position: absolute;
-    top: -6px;
-    right: -6px;
 
-    background: #4f46e5;
-    color: #fff;
-    font-size: 11px;
+    top: 12px;
+    left: 12px;
 
-    width: 18px;
-    height: 18px;
+    z-index: 100;
 
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
 
-    border-radius: 50%;
+    padding: 6px 12px;
+
+    border-radius: 30px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    color: #fff;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+
+    white-space: nowrap;
 }
 
+/* Status Colors */
+.lms-badge.success{
+    background: #16a34a;
+}
+
+.lms-badge.progress{
+    background: #4f46e5;
+}
+
+.lms-badge.neutral{
+    background: #64748b;
+}
 /* AVATAR */
 .lms-avatar-wrapper img {
     width: 38px;
@@ -849,20 +867,25 @@
 }
 
 /* IMAGE */
-.lms-course-image {
+.lms-course-image{
     position: relative;
-    width: 100%;
-    height: 180px;
+    height: 220px;
     overflow: hidden;
-
-    flex-shrink: 0; /* IMPORTANT */
+    padding: 0;
+    margin: 0;
 }
 
-.lms-course-image img {
+.lms-course-image-link{
+    display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+}
+
+.lms-course-image img{
+    width: 100%;
+    height: 100%;
     display: block;
+    object-fit: cover;
 }
 
 /* BADGE */
@@ -1153,6 +1176,354 @@
 .lms-cert-link:hover {
     text-decoration: underline;
 }
+
+/* lms-dashboard-nav */
+/* ===================================
+   LMS DASHBOARD NAVIGATION
+=================================== */
+
+.lms-dashboard-nav {
+    margin-bottom: 30px;
+}
+
+.lms-dashboard-nav-inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 10px;
+
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    box-shadow:
+        0 4px 20px rgba(15, 23, 42, 0.05);
+}
+
+.lms-dashboard-nav-inner::-webkit-scrollbar {
+    display: none;
+}
+
+/* NAV ITEMS */
+
+.lms-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    border: none;
+    background: transparent;
+
+    padding: 12px 18px;
+
+    border-radius: 14px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #64748b;
+    text-decoration: none;
+
+    transition: all .25s ease;
+
+    white-space: nowrap;
+}
+
+/* HOVER */
+
+.lms-nav-item:hover {
+    background: #f8fafc;
+    color: #4f46e5;
+}
+
+/* ACTIVE */
+
+.lms-nav-item.active {
+    background: linear-gradient(
+        135deg,
+        #564fdb,
+        #f1f1f7
+    );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 10px 20px rgba(79,70,229,.25);
+}
+
+/* ICON */
+
+.lms-nav-icon {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(79,70,229,.08);
+
+    font-size: 14px;
+}
+
+.lms-nav-item.active .lms-nav-icon {
+    background: rgba(255,255,255,.18);
+    color: #fff;
+}
+
+/* TEXT */
+
+.lms-nav-text {
+    font-weight: 600;
+    letter-spacing: .2px;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .lms-dashboard-nav-inner {
+        padding: 8px;
+        gap: 8px;
+    }
+
+    .lms-nav-item {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    .lms-nav-icon {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* completed courses */
+/* COMPLETED CARD */
+.lms-course-card-completed{
+    border:1px solid #e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+    background:#fff;
+    transition:.3s;
+}
+
+.lms-course-card-completed:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+/* COMPLETED RIBBON */
+.lms-completed-ribbon{
+    position:absolute;
+    top:14px;
+    right:14px;
+
+    background:#16a34a;
+    color:#fff;
+
+    padding:8px 14px;
+    border-radius:30px;
+
+    font-size:12px;
+    font-weight:700;
+}
+
+/* STATS */
+.lms-completed-stats{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:12px;
+}
+
+.lms-completed-stats span{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+
+    padding:8px 12px;
+    border-radius:999px;
+
+    font-size:13px;
+    font-weight:600;
+}
+
+/* ACHIEVEMENT */
+.lms-achievement-box{
+    display:flex;
+    gap:12px;
+
+    margin-top:18px;
+
+    background:#f0fdf4;
+    border:1px solid #bbf7d0;
+
+    padding:14px;
+    border-radius:14px;
+}
+
+.lms-achievement-icon{
+    font-size:24px;
+    color:#16a34a;
+}
+
+.lms-achievement-title{
+    font-weight:700;
+    color:#166534;
+}
+
+.lms-achievement-text{
+    font-size:13px;
+    color:#4b5563;
+}
+
+/* ACTIONS */
+.lms-course-actions{
+    display:flex;
+    gap:10px;
+    margin-top:18px;
+}
+
+.lms-btn-primary{
+    flex:1;
+    background:#4f46e5;
+    color:#fff;
+    text-align:center;
+
+    padding:12px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.lms-btn-secondary{
+    flex:1;
+    background:#f8fafc;
+    color:#334155;
+    text-align:center;
+
+    padding:12px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:600;
+
+    border:1px solid #e2e8f0;
+}
+
+/* payment-history */
+/* ==========================
+   PAYMENT HISTORY
+========================== */
+
+.payment-history-card{
+    background:#fff;
+    border-radius:18px;
+    padding:24px;
+    box-shadow:0 10px 30px rgba(15,23,42,.08);
+    border:1px solid #eef2f7;
+    transition:.3s;
+}
+
+.payment-history-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 35px rgba(15,23,42,.12);
+}
+
+.payment-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+    padding-bottom:15px;
+    border-bottom:1px solid #edf2f7;
+}
+
+.payment-course{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.payment-icon{
+    width:55px;
+    height:55px;
+    border-radius:14px;
+    background:linear-gradient(
+        135deg,
+        #4f46e5,
+        #7c3aed
+    );
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:20px;
+}
+
+.payment-course h5{
+    margin:0;
+    font-weight:700;
+    color:#0f172a;
+}
+
+.payment-course small{
+    color:#64748b;
+}
+
+.payment-body{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:18px;
+}
+
+.payment-stat{
+    background:#f8fafc;
+    padding:15px;
+    border-radius:12px;
+}
+
+.payment-stat span{
+    display:block;
+    color:#64748b;
+    font-size:13px;
+    margin-bottom:6px;
+}
+
+.payment-stat h6{
+    margin:0;
+    font-weight:700;
+    color:#0f172a;
+}
+
+.empty-payment-state{
+    text-align:center;
+    padding:60px 20px;
+    background:#fff;
+    border-radius:20px;
+    border:1px dashed #cbd5e1;
+}
+
+.empty-payment-state i{
+    font-size:50px;
+    color:#94a3b8;
+    margin-bottom:15px;
+}
+
+.empty-payment-state h5{
+    color:#0f172a;
+    margin-bottom:10px;
+}
+
+.empty-payment-state p{
+    color:#64748b;
+}
+
 </style>
 
     @stack('styles')
@@ -1206,16 +1577,16 @@
                 <li class="lms-section-title">LEARNING</li>
 
                 <li><a href="#">📖 My Courses</a></li>
-                <li><a href="#">▶️ Continue Learning</a></li>
+                <!-- <li><a href="#">▶️ Continue Learning</a></li>
                 <li><a href="#">📝 Assignments</a></li>
-                <li><a href="#">📅 Schedule</a></li>
+                <li><a href="#">📅 Schedule</a></li> -->
                 <li><a href="#">📌 Wishlist</a></li>
                 <li><a href="#">🏆 Certificates</a></li>
 
 
                 <li class="lms-section-title">PROGRESS</li>
 
-                <li><a href="#">📈 Progress Report</a></li>
+                <!-- <li><a href="#">📈 Progress Report</a></li> -->
                 <li><a href="#">🎯 Goals</a></li>
                 <li><a href="#">📊 Learning Stats</a></li>
 
@@ -1224,7 +1595,7 @@
 
                 <li><a href="{{ route('cart') }}">🛒 Cart</a></li>
                 <li><a href="#">💳 Payment History</a></li>
-                <li><a href="#">🧾 Invoices</a></li>
+                <!-- <li><a href="#">🧾 Invoices</a></li> -->
 
             @endif
 
@@ -1323,6 +1694,40 @@
     <script src="{{asset('frontend/src/js/app.js')}}"></script>
     <script src="{{asset('frontend/dist/main.js')}}"></script>
 
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    document.querySelectorAll('.lms-nav-item').forEach(button => {
+
+        button.addEventListener('click', function () {
+
+            const target = this.getAttribute('data-bs-target');
+
+            // Remove active from buttons
+            document.querySelectorAll('.lms-nav-item').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            this.classList.add('active');
+
+            // Hide all panes
+            document.querySelectorAll('.tab-pane').forEach(pane => {
+                pane.classList.remove('show', 'active');
+            });
+
+            // Show selected pane
+            const pane = document.querySelector(target);
+
+            if (pane) {
+                pane.classList.add('show', 'active');
+            }
+
+        });
+
+    });
+
+});
+</script>
     <script>
         function toggleDropdown(event) {
             event.preventDefault();

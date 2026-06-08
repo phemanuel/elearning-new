@@ -22,19 +22,17 @@ class Payment extends Model
         'status',
     ];
 
-     // Relationship to the Course model
      public function course()
-     {
-         return $this->belongsTo(Course::class, 'course_id');
-     }
- 
-     // Relationship to the Instructor model via Course model
-     public function instructor()
-     {
-         return $this->belongsToThrough(Instructor::class, Course::class);
-     }
+    {
+        return $this->belongsTo(Course::class, 'course_id');
+    }
 
-     public function student()
+    public function instructor()
+    {
+        return $this->belongsTo(Instructor::class, 'instructor_id');
+    }
+
+    public function student()
     {
         return $this->belongsTo(Student::class, 'student_id');
     }
