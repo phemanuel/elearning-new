@@ -23,6 +23,8 @@ class Student extends Model implements CanResetPassword
         'contact_en',
         'contact_bn',
         'email',
+        'email_verified_status',
+        'email_verified_at',
         'date_of_birth',
         'gender',
         'image',
@@ -35,7 +37,7 @@ class Student extends Model implements CanResetPassword
         'postcode',
         'country',
         'status',
-        // 'password',
+        'password',
     ];
 
     public function role()

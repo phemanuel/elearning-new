@@ -70,7 +70,7 @@ class DashboardController extends Controller
 
         return view('students.dashboard', compact('student_info', 'enrollment', 'course', 
         'checkout','progress','courseProgress','completedCourses','allCompletedCourses', 'studentId'));
-    }
+    } 
 
     public function courseSegment($id)
     {

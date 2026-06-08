@@ -12,10 +12,12 @@ class PaymentSuccessMail extends Mailable
     use Queueable, SerializesModels;
 
     public $form;
+    public $plainPassword;
 
-    public function __construct(SmmBlueprintForm $form)
-    {
+    public function __construct(SmmBlueprintForm $form,$plainPassword)
+    {        
         $this->form = $form;
+        $this->plainPassword = $plainPassword;
     }
 
     public function build()

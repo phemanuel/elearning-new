@@ -29,7 +29,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{route('course.index')}}">My Courses</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('lesson.show', encryptor('encrypt',$lesson->segments_id))}}">Course Lessons</a></li>
+                    <li class="breadcrumb-item active"><a href="{{route('lesson.show', encryptor('encrypt',$lesson->segments_id))}}">Course-Segment Lessons</a></li>
                     <li class="breadcrumb-item active"><a href="">All Course Material</a>
                     </li>
                 </ol>
@@ -37,84 +37,153 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-12">
+            <!-- <div class="col-lg-12">
                 <ul class="nav nav-pills mb-3">
                     <li class="nav-item"><a href="#list-view" data-toggle="tab"
                             class="nav-link btn-primary mr-1 show active">List View</a></li>
-                    <!-- <li class="nav-item"><a href="javascript:void(0);" data-toggle="tab"
+                    <li class="nav-item"><a href="javascript:void(0);" data-toggle="tab"
                             class="nav-link btn-primary">Grid
-                            View</a></li> -->
+                            View</a></li>
                 </ul>
-            </div>
+            </div> -->
             <div class="col-lg-12">
                 <div class="row tab-content">
                     <div id="list-view" class="tab-pane fade active show col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">All Course Materials List </h4>
-                                <a href="{{ route('material.createNew', encryptor('encrypt', $material->first()?->lesson?->id)) }}" 
-                                class="btn btn-primary">+ Add new material</a>
+
+                        <div class="lms-card">
+
+                            <!-- Header -->
+                            <div class="lms-card-header d-flex justify-content-between align-items-center">
+
+                                <div>
+                                    <div class="lms-card-title">Course Materials</div>
+                                    <div class="text-muted" style="font-size:12px;">
+                                        Manage videos, text content and quizzes for lessons
+                                    </div>
+                                </div>
+
+                                <a href="{{ route('material.createNew', encryptor('encrypt', $material->first()?->lesson?->id)) }}"
+                                class="lms-btn">
+                                    + Add Material
+                                </a>
+
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 845px">
-                                        <thead>
+
+                            <!-- Table -->
+                            <div class="lms-table-wrapper">
+
+                                <table id="example3" class="lms-table">
+
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Lesson</th>
+                                            <th>Title</th>
+                                            <th>Type</th>
+                                            <th>Preview</th>
+                                            <th class="text-end">Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        @forelse ($material as $key => $m)
+
                                             <tr>
-                                                <th>{{__('#')}}</th>
-                                                <th>{{__('Lesson')}}</th>
-                                                <th>{{__('Title')}}</th>
-                                                <th>{{__('Material Type')}}</th>
-                                                <th>{{__('Content')}}</th>
-                                                <th>{{__('Action')}}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($material as $key => $m)
-                                            <tr>
-                                                <td>{{$key + 1}}</td>
-                                                <td>{{$m->lesson?->title}}</td>  
-                                                <td>{{$m->title}}</td>                                                
+
+                                                <!-- Index -->
                                                 <td>
-                                                    {{ $m->type == 'video' ? __('Video') : ($m->type == 'text' ?
-                                                    __('Text') : __('Quiz')) }}
-                                                </td>  
+                                                    <span class="text-muted">
+                                                        {{ $key + 1 }}
+                                                    </span>
+                                                </td>
+
+                                                <!-- Lesson -->
                                                 <td>
-    <a href="javascript:void(0);"
-       class="btn btn-sm btn-info text-white view-material"
-       data-id="{{ $m->id }}"
-       data-title="{{ $m->title }}"
-       data-type="{{ $m->type }}"
-       data-content="{{ $m->content_data }}"
-       data-video="{{ asset('uploads/courses/contents/' . $m->content) }}">
-        <i class="la la-eye"></i> View
-    </a>
-</td>
-</td>
+                                                    <div style="font-weight:600;">
+                                                        {{ $m->lesson?->title ?? 'N/A' }}
+                                                    </div>
+                                                </td>
+
+                                                <!-- Title -->
                                                 <td>
-                                                    <a href="{{route('material.edit', encryptor('encrypt',$m->id))}}"
-                                                        class="btn btn-sm btn-primary" title="Edit"><i
-                                                            class="la la-pencil"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"
-                                                        title="Delete" onclick="$('#form{{$m->id}}').submit()"><i
-                                                            class="la la-trash-o"></i></a>
+                                                    {{ $m->title }}
+                                                </td>
+
+                                                <!-- Type -->
+                                                <td>
+                                                    @if($m->type == 'video')
+                                                        <span class="lms-badge lms-badge-success">Video</span>
+                                                    @elseif($m->type == 'text')
+                                                        <span class="lms-badge lms-badge-info">Text</span>
+                                                    @else
+                                                        <span class="lms-badge lms-badge-warning">Quiz</span>
+                                                    @endif
+                                                </td>
+
+                                                <!-- Preview -->
+                                                <td>
+                                                    <a href="javascript:void(0);"
+                                                    class="lms-btn view-material"
+                                                    style="padding:6px 10px; font-size:12px;"
+                                                    data-id="{{ $m->id }}"
+                                                    data-title="{{ $m->title }}"
+                                                    data-type="{{ $m->type }}"
+                                                    data-content="{{ $m->content_data }}"
+                                                    data-video="{{ asset('uploads/courses/contents/' . $m->content) }}">
+                                                        👁 View
+                                                    </a>
+                                                </td>
+
+                                                <!-- Actions -->
+                                                <td class="text-end">
+
+                                                    <div style="display:flex; gap:8px; justify-content:flex-end;">
+
+                                                        <a href="{{ route('material.edit', encryptor('encrypt',$m->id)) }}"
+                                                        class="lms-btn"
+                                                        style="padding:6px 10px; font-size:12px;">
+                                                            Edit
+                                                        </a>
+
+                                                        <a href="javascript:void(0);"
+                                                        onclick="$('#form{{$m->id}}').submit()"
+                                                        class="lms-btn-danger"
+                                                        style="padding:6px 10px; font-size:12px;">
+                                                            Delete
+                                                        </a>
+
+                                                    </div>
+
                                                     <form id="form{{$m->id}}"
-                                                        action="{{route('material.destroy', encryptor('encrypt',$m->id))}}"
+                                                        action="{{ route('material.destroy', encryptor('encrypt',$m->id)) }}"
                                                         method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>
+
+                                                </td>
+
+                                            </tr>
+
+                                        @empty
+
+                                            <tr>
+                                                <td colspan="6" style="text-align:center; padding:20px; color:#94a3b8;">
+                                                    No Course Materials Found
                                                 </td>
                                             </tr>
-                                            @empty
-                                            <tr>
-                                                <th colspan="6" class="text-center">No Course Material Found</th>
-                                            </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
-                                </div>
+
+                                        @endforelse
+
+                                    </tbody>
+
+                                </table>
+
                             </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>

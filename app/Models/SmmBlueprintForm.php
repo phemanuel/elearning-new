@@ -15,5 +15,8 @@ class SmmBlueprintForm extends Model
         'course',
         'payment_status',
         'transaction_reference',
+        'password',
+        'course',
+        'course_code',
     ];
 }

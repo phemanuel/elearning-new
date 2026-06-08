@@ -9,6 +9,19 @@ class Payment extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'student_id',
+        'course_id',
+        'instructor_id',
+        'currency',
+        'currency_code',
+        'amount',
+        'currency_value',
+        'method',
+        'txnid',
+        'status',
+    ];
+
      // Relationship to the Course model
      public function course()
      {

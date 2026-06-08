@@ -26,19 +26,23 @@ class LessonController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)    
-    {    
+    public function create(Request $request)
+    {
         $segmentId = $request->query('segment_id');
         $decryptedId = encryptor('decrypt', $segmentId);
-        
-        // Check if the ID is valid
+
         if (!$decryptedId) {
-            // Handle the error (redirect, return error message, etc.)
-            return redirect()->back()->withErrors(['error' => 'Invalid course ID.']);
+            return redirect()->back()->withErrors(['error' => 'Invalid segment ID.']);
         }
-        
-        $segment = Segments::findOrFail($decryptedId);        
-        return view('backend.course.lesson.create', compact('segment'));
+
+        $segment = Segments::findOrFail($decryptedId);
+
+        // ✅ Get next serial number for lessons in this segment
+        $nextSerialNo = Lesson::where('segments_id', $segment->id)->max('serial_no');
+
+        $nextSerialNo = $nextSerialNo ? $nextSerialNo + 1 : 1;
+
+        return view('backend.course.lesson.create', compact('segment', 'nextSerialNo'));
     }
 
     /**

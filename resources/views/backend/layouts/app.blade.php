@@ -16,6 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote/dist/summernote-lite.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
     @stack('styles')
     <style>
        /* Ensure long URLs wrap properly */
@@ -1694,6 +1695,63 @@ body {
     .lms-btn{
         width:100%;
         text-align:center;
+    }
+}
+
+/* =========================
+   LMS WELCOME TEXT
+   ========================= */
+.welcome-text {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+/* Heading */
+.welcome-text h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Optional subtitle support */
+.welcome-text small,
+.welcome-text p {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+    color: #64748b;
+}
+
+/* Subtle accent line (modern LMS touch) */
+.welcome-text {
+    position: relative;
+}
+
+.welcome-text::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: linear-gradient(180deg, #2563eb, #60a5fa);
+    border-radius: 12px 0 0 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .welcome-text {
+        padding: 15px;
+    }
+
+    .welcome-text h4 {
+        font-size: 16px;
     }
 }
 </style>

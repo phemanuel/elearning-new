@@ -185,6 +185,370 @@
 }
 
 </style>
+<style>
+.students-info-intro{
+    position:relative;
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    border:1px solid #e5e7eb;
+    box-shadow:0 10px 30px rgba(15,23,42,.06);
+    margin-bottom:30px;
+}
+
+.students-info-intro::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:5px;
+    background:linear-gradient(
+        90deg,
+        #2563eb,
+        #7c3aed,
+        #06b6d4
+    );
+}
+
+/* ========================
+   TOP SECTION
+======================== */
+
+.students-info-intro{
+    background:linear-gradient(
+        135deg,
+        #acba96 0%,
+        #8c8ab9 50%,
+        #8ebab3 100%
+    );
+
+    border-radius:22px;
+    overflow:hidden;
+
+    box-shadow:0 15px 40px rgba(37,99,235,.18);
+
+    margin-bottom:30px;
+}
+
+/* TOP BAR */
+
+.students-info-intro__profile{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:25px;
+
+    padding:22px 28px;
+}
+
+/* PROFILE */
+
+.students-info-intro-start{
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.students-info-intro-start .image img{
+    width:75px;
+    height:75px;
+
+    border-radius:50%;
+    object-fit:cover;
+
+    border:4px solid rgba(255,255,255,.2);
+}
+
+.students-info-intro-start .text h5{
+    margin:0;
+    color:#fff;
+    font-size:24px;
+    font-weight:700;
+}
+
+.students-info-intro-start .text p{
+    margin:4px 0 8px;
+    color:rgba(255,255,255,.85);
+}
+
+.student-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    padding:6px 12px;
+
+    background:rgba(255,255,255,.15);
+
+    color:#fff;
+
+    border-radius:50px;
+
+    font-size:12px;
+}
+
+/* STATS */
+
+.students-info-intro-end{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.enrolled-courses,
+.completed-courses{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:12px 16px;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(12px);
+
+    border-radius:16px;
+
+    border:1px solid rgba(255,255,255,.15);
+}
+
+.enrolled-courses-icon,
+.completed-courses-icon{
+    width:45px;
+    height:45px;
+
+    border-radius:12px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:18px;
+}
+
+.enrolled-courses-icon{
+    background:rgba(66, 99, 10, 0.91);
+    color:#fff;
+}
+
+.completed-courses-icon{
+    background:rgba(16,185,129,.25);
+    color:#fff;
+}
+
+.enrolled-courses-text h6,
+.completed-courses-text h5{
+    margin:0;
+    color:#fff;
+    font-size:24px;
+    font-weight:700;
+}
+
+.enrolled-courses-text p,
+.completed-courses-text p{
+    margin:0;
+    color:#fff;
+    font-size:12px;
+}
+
+/* NAVIGATION */
+
+.students-info-intro__nav{
+    padding:16px 24px;
+
+    background:rgba(255,255,255,.08);
+
+    border-top:1px solid rgba(255,255,255,.12);
+}
+
+.students-info-intro__nav .nav{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.students-info-intro__nav .nav-link{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    padding:10px 16px;
+
+    border:none !important;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,.12);
+
+    color:#fff !important;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.students-info-intro__nav .nav-link:hover{
+    background:#fff;
+    color:#4f46e5 !important;
+}
+
+.students-info-intro__nav .nav-link.active{
+    background:#fff;
+    color:#4f46e5 !important;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .students-info-intro__profile{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .students-info-intro-end{
+        width:100%;
+        justify-content:space-between;
+    }
+
+    .students-info-intro-start .image img{
+        width:65px;
+        height:65px;
+    }
+
+    .students-info-intro-start .text h5{
+        font-size:20px;
+    }
+
+    .students-info-intro__nav .nav-link{
+        width:100%;
+        justify-content:center;
+    }
+}
+
+/* breadcrumb style */
+/* ===== PAGE HEADER WRAPPER ===== */
+.lms-page-header {
+    padding: 25px 0;
+    background: linear-gradient(135deg, #f8fafc, #eef2ff);
+}
+
+/* ===== MAIN CARD ===== */
+.lms-header-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px 24px;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eef2f7;
+}
+
+/* ===== LEFT SIDE ===== */
+.lms-page-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 6px;
+}
+
+/* Breadcrumb */
+.lms-breadcrumb-nav .breadcrumb {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+.lms-breadcrumb-nav .breadcrumb-item {
+    font-size: 13px;
+}
+
+.lms-breadcrumb-nav .breadcrumb-item a {
+    color: #4f46e5;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.lms-breadcrumb-nav .breadcrumb-item a:hover {
+    text-decoration: underline;
+}
+
+.lms-breadcrumb-nav .breadcrumb-item.active {
+    color: #6b7280;
+    font-weight: 600;
+}
+
+/* Divider */
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "›";
+    color: #9ca3af;
+    font-weight: 600;
+}
+
+/* ===== RIGHT SIDE BUTTONS ===== */
+.lms-header-right {
+    display: flex;
+    gap: 10px;
+}
+
+.lms-btn {
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: 0.25s ease;
+}
+
+/* Outline button */
+.lms-btn-outline {
+    border: 1px solid #4f46e5;
+    color: #4f46e5;
+    background: transparent;
+}
+
+.lms-btn-outline:hover {
+    background: #4f46e5;
+    color: #fff;
+}
+
+/* Primary button */
+.lms-btn-primary {
+    background: #4f46e5;
+    color: #fff;
+    border: 1px solid #4f46e5;
+}
+
+.lms-btn-primary:hover {
+    background: #3730a3;
+    border-color: #3730a3;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .lms-header-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .lms-header-right {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+}
+</style>
     @stack('styles')
 
 </head>
@@ -283,8 +647,11 @@
                         @if(request()->session()->get('studentLogin'))
                         <div class="dropdown user-image ms-3" id="imageDropdown">
                             <a href="{{route('studentdashboard')}}" onclick="toggleDropdown(event)">
-                                <img src="{{asset('uploads/students/'.request()->session()->get('image'))}}"
-                                    alt="Student Profile" height="48" width="48"/>
+                                <img src="{{ asset('uploads/students/' . request()->session()->get('image')) }}"
+                                alt="Student Profile"
+                                width="48"
+                                height="48"
+                                onerror="this.onerror=null;this.src='{{ asset('uploads/students/blank_new.png') }}';">
                             </a>
                             <div class="dropdown-content">
                                 <a href="{{route('student_profile')}}">Profile</a>
@@ -296,7 +663,8 @@
                         <div class="dropdown user-image ms-3" id="imageDropdown">
                             <a href="{{route('dashboard')}}" onclick="toggleDropdown(event)">
                                 <img src="{{asset('uploads/users/'.auth()->user()->image)}}"
-                                    alt="User Profile" height="48" width="48"/>
+                                    alt="User Profile" height="48" width="48" 
+                                    onerror="this.onerror=null;this.src='{{ asset('uploads/students/blank_new.png') }}';"/>
                             </a>
                             <div class="dropdown-content">
                                 <a href="{{route('user.edit', encryptor('encrypt',auth()->user()->id))}}">Profile</a>

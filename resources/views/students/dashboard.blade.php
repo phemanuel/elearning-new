@@ -1,115 +1,159 @@
-@extends('frontend.layouts.app')
+@extends('frontend.layouts.student-app')
 @section('title', "Student's Dashboard")
-@section('body-attr') style="background-color: #ebebf2;" @endsection
+@section('body-attr') style="background-color: #f6f6f9;" @endsection
 
 @section('content')
 <?php
 use App\Models\Material;
 use Carbon\Carbon;
 ?>
-<!-- Breadcrumb Starts Here -->
-<div class="py-0">
+<!-- LMS Breadcrumb -->
+<!-- LMS PAGE HEADER -->
+<div class="lms-page-header">
+
     <div class="container">
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb align-items-center bg-transparent mb-0">
-                <li class="breadcrumb-item"><a href="{{route('home')}}" class="fs-6 text-secondary">Home</a></li>
-                <li class="breadcrumb-item fs-6 text-secondary" aria-current="page">My Dashboard</li>
-            </ol>
-        </nav>
+
+        <div class="lms-header-card">
+
+            <!-- LEFT SIDE: Title + Breadcrumb -->
+            <div class="lms-header-left">
+
+                <h1 class="lms-page-title">
+                    My Dashboard
+                </h1>
+
+                <nav aria-label="breadcrumb" class="lms-breadcrumb-nav">
+                    <ol class="breadcrumb mb-0">
+
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('home') }}">Home</a>
+                        </li>
+
+                        <li class="breadcrumb-item active" aria-current="page">
+                            Dashboard
+                        </li>
+
+                    </ol>
+                </nav>
+
+            </div>
+
+            <!-- RIGHT SIDE: QUICK ACTIONS -->
+            <div class="lms-header-right">
+
+                <a href="#" class="lms-btn lms-btn-outline">
+                    <i class="fa fa-book"></i> My Courses
+                </a>
+
+                <a href="#" class="lms-btn lms-btn-primary">
+                    <i class="fa fa-plus"></i> New Course
+                </a>
+
+            </div>
+
+        </div>
+
     </div>
+
 </div>
 
 <!-- Students Info area Starts Here -->
 <section class="section students-info">
-    <div class="container">
+    <div class="container">       
         <div class="students-info-intro">
-            <!-- profile Details   -->
+
             <div class="students-info-intro__profile">
-                <div>
-                    <div class="students-info-intro-start">
-                        <div class="image">
-                            <img src="{{ asset('uploads/students/' . $student_info->image) }}" alt="Student" />
+
+                <div class="students-info-intro-start">
+
+                    <div class="image">
+                        <img src="{{ asset('uploads/students/' . $student_info->image) }}"
+                            alt="Student"
+                            onerror="this.onerror=null;this.src='{{ asset('uploads/students/blank_new.png') }}';"/>
+                    </div>
+
+                    <div class="text">
+                        <h5>{{ $student_info->name_en }}</h5>
+                        <p>{{ $student_info->profession ?: 'Student' }}</p>
+
+                        <span class="student-badge">
+                            <i class="fas fa-graduation-cap"></i>
+                            Active Student
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="students-info-intro-end">
+
+                    <div class="enrolled-courses">
+                        <div class="enrolled-courses-icon">
+                            <i class="fas fa-book-open"></i>
                         </div>
-                        <div class="text">
-                            <h5>{{$student_info->name_en}}</h5>
-                            <p>{{$student_info->profession?$student_info->profession:'Student'}}</p>
+
+                        <div class="enrolled-courses-text">
+                            <h6>{{ $enrollment ? $enrollment->count() : 0 }}</h6>
+                            <p style="color: white; font-weight: bold;">Enrolled</p>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <div class="students-info-intro-end">
-                        <div class="enrolled-courses">
-                            <div class="enrolled-courses-icon">
-                                <svg width="28" height="26" viewBox="0 0 28 26" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M1 1.625H8.8C10.1791 1.625 11.5018 2.15764 12.477 3.10574C13.4521 4.05384 14 5.33974 14 6.68056V24.375C14 23.3694 13.5891 22.405 12.8577 21.6939C12.1263 20.9828 11.1343 20.5833 10.1 20.5833H1V1.625Z"
-                                        stroke="#1089FF" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path
-                                        d="M27 1.625H19.2C17.8209 1.625 16.4982 2.15764 15.523 3.10574C14.5479 4.05384 14 5.33974 14 6.68056V24.375C14 23.3694 14.4109 22.405 15.1423 21.6939C15.8737 20.9828 16.8657 20.5833 17.9 20.5833H27V1.625Z"
-                                        stroke="#1089FF" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </div>
-                            <div class="enrolled-courses-text">
-                                <h6 class="font-title--xs">{{$enrollment?$enrollment->count():0}}</h6>
-                                <p class="fs-6 mt-1">Enrolled Courses</p>
-                            </div>
+
+                    <div class="completed-courses">
+                        <div class="completed-courses-icon">
+                            <i class="fas fa-check-circle"></i>
                         </div>
-                        <div class="completed-courses">
-                            <div class="completed-courses-icon">
-                                <svg width="22" height="26" viewBox="0 0 22 26" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M19.1716 3.95235C19.715 4.14258 20.078 4.65484 20.078 5.23051V13.6518C20.078 16.0054 19.2226 18.2522 17.7119 19.9929C16.9522 20.8694 15.9911 21.552 14.9703 22.1041L10.5465 24.4938L6.11516 22.1028C5.09312 21.5508 4.13077 20.8694 3.36983 19.9916C1.85791 18.2509 1 16.0029 1 13.6468V5.23051C1 4.65484 1.36306 4.14258 1.90641 3.95235L10.0902 1.07647C10.3811 0.974511 10.6982 0.974511 10.9879 1.07647L19.1716 3.95235Z"
-                                        stroke="#00AF91" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M7.30688 12.4002L9.65931 14.7538L14.5059 9.90723" stroke="#00AF91"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </div>
-                            <div class="completed-courses-text">
-                                <h5 class="font-title--xs">{{$completedCourses}} </h5>
-                                <p class="fs-6 mt-1">Completed Courses</p>
-                            </div>
+
+                        <div class="completed-courses-text">
+                            <h5>{{ $completedCourses }}</h5>
+                            <p style="color: white; font-weight: bold;">Completed</p>
                         </div>
                     </div>
+
                 </div>
+
             </div>
-            <!-- Nav  -->
+
             <nav class="students-info-intro__nav">
+
                 <div class="nav" id="nav-tab" role="tablist">
-                    <!-- <button class="nav-link active" id="nav-profile-tab" data-bs-toggle="tab"
-                        data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile"
-                        aria-selected="true">Dashboard</button> -->
 
-                    <button class="nav-link active" id="nav-coursesall-tab" data-bs-toggle="tab"
-                        data-bs-target="#nav-coursesall" type="button" role="tab" aria-controls="nav-coursesall"
-                        aria-selected="false">My Courses</button>                    
-
-                    <button class="nav-link" id="nav-completedcourses-tab" data-bs-toggle="tab"
-                        data-bs-target="#nav-completedcourses" type="button" role="tab"
-                        aria-controls="nav-completedcourses" aria-selected="false">
-                        Completed Courses
+                    <button class="nav-link active"
+                            id="nav-coursesall-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#nav-coursesall">
+                        <i class="fas fa-book-open"></i>
+                        My Courses
                     </button>
 
-                    <!-- <button class="nav-link" id="nav-activecourses-tab" data-bs-toggle="tab"
-                        data-bs-target="#nav-activecourses" type="button" role="tab" aria-controls="nav-activecourses"
-                        aria-selected="false">
-                        Course Certificates
-                    </button> -->
+                    <button class="nav-link"
+                            id="nav-completedcourses-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#nav-completedcourses">
+                        <i class="fas fa-check-circle"></i>
+                        Completed
+                    </button>
 
-                    <button class="nav-link" id="nav-purchase-tab" data-bs-toggle="tab" data-bs-target="#nav-purchase"
-                        type="button" role="tab" aria-controls="nav-purchase" aria-selected="false">Purchase
-                        History</button>
+                    <button class="nav-link"
+                            id="nav-purchase-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#nav-purchase">
+                        <i class="fas fa-receipt"></i>
+                        Purchases
+                    </button>
 
-                    <button class="nav-link "><a href="{{route('student_profile')}}"
-                            class="text-secondary">Profile</a></button>
+                    <a href="{{ route('student_profile') }}" class="nav-link">
+                        <i class="fas fa-user"></i>
+                        Profile
+                    </a>
 
-                    <button class="nav-link "><a href="{{route('home')}}" class="text-secondary">Home</a></button>
+                    <a href="{{ route('home') }}" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a>
+
                 </div>
+
             </nav>
+
         </div>
 
         <div class="students-info-main">
@@ -136,223 +180,254 @@ use Carbon\Carbon;
                     </div>
                 </div>
 
-                <div class="tab-pane fade show active" id="nav-coursesall" role="tabpanel" aria-labelledby="nav-coursesall-tab">
-                    <div class="row">                    
-                    @forelse ($enrollment as $a)
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="contentCard contentCard--watch-course">                                                    
-                            <div class="contentCard-top">                               
-                                <a href="#">
-                                    <img src="{{ asset('uploads/courses/' . $a->course?->image) }}" alt="course-image" class="img-fluid" />
-                                </a>
-                            </div>
-                            <div class="contentCard-bottom">                                
-                                <div class="course-title-container">
-                                        <h5 class="course-title text-center my-4">
-                                            <a href="#" class="course-title-link">
-                                                {{ $a->course?->title_en ?? 'No title available' }}
-                                            </a>
+                <div class="tab-pane fade show active" id="nav-coursesall" role="tabpanel">
+
+                    <div class="row g-4">
+
+                        @forelse ($enrollment as $a)
+
+                            @php
+                                $course = $a->course;
+                                $progress = $courseProgress[$a->course_id] ?? 0;
+                                $segments = $course?->segments->count() ?? 0;
+                                $lessons = $course?->lessons->count() ?? 0;
+                                $instructor = $course?->instructor;
+                                $isCompleted = $a->completed == 2;
+                            @endphp
+
+                            <div class="col-lg-4 col-md-6">
+
+                                <div class="lms-course-card">
+
+                                    <!-- IMAGE -->
+                                    <div class="lms-course-image">
+
+    <a href="{{ route('courseSegment', encryptor('encrypt', $course?->id)) }}">
+        <img src="{{ asset('uploads/courses/' . $course?->image) }}" alt="course">
+    </a>
+
+    <!-- STATUS BADGE -->
+    <span class="lms-badge
+        @if($isCompleted) success
+        @elseif($progress > 0) progress
+        @else neutral @endif">
+
+        @if($isCompleted)
+            Completed
+        @elseif($progress > 0)
+            In Progress
+        @else
+            Not Started
+        @endif
+
+    </span>
+
+</div>
+
+                                    <!-- BODY -->
+                                    <div class="lms-course-body">
+
+                                        <!-- TITLE -->
+                                        <h5 class="lms-course-title">
+                                            {{ $course?->title_en ?? 'No title available' }}
                                         </h5>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <span class="btn btn-outline-primary">
-                                        <i class="fas fa-th-large"></i>
-                                        {{ $a->course->segments->count() }} {{ Str::plural('segment', $a->course->segments->count()) }}
-                                    </span>
-                                    <span class="btn btn-outline-success mx-2">
-                                        <i class="fas fa-book"></i>
-                                        {{ $a->course->lessons->count() }} {{ Str::plural('lesson', $a->course->lessons->count()) }}
-                                    </span>
-                                    <span class="btn btn-outline-dark mx-2">
-                                        @php
-                                            // Get the course progress or default to 0
-                                            $progressPercentage = $courseProgress[$a->course_id] ?? 0;
-                                        @endphp
 
-                                        @if($progressPercentage == 100)
-                                            @if($a->completed != 2)
-                                                <i class="fas fa-spinner text-warning"></i> 
-                                                {{ $progressPercentage - 10 }}%
+                                        <!-- STATS -->
+                                        <div class="lms-course-stats">
+                                            <span>📦 {{ $segments }} segments</span>
+                                            <span>📚 {{ $lessons }} lessons</span>
+                                        </div>
+
+                                        <!-- INSTRUCTOR -->
+                                        <a href="{{ route('instructorProfile', encryptor('encrypt', $instructor?->id)) }}"
+                                        class="lms-instructor">
+
+                                            <img src="{{ asset('uploads/users/' . $instructor?->image) }}"
+                                                onerror="this.src='{{ asset('uploads/students/blank_new.png') }}'">
+
+                                            <span>{{ $instructor?->name_en }}</span>
+
+                                        </a>
+
+                                        <!-- PROGRESS -->
+                                        <div class="lms-progress">
+                                            <div class="lms-progress-bar">
+                                                <span style="width: {{ $progress }}%"></span>
+                                            </div>
+
+                                            <div class="lms-progress-text">
+                                                {{ $progress }}% complete
+                                            </div>
+                                        </div>
+
+                                        <!-- ACTION BUTTON -->
+                                        <a href="{{ route('courseSegment', encryptor('encrypt', $course?->id)) }}"
+                                        class="lms-btn">
+
+                                            @if($isCompleted)
+                                                🎓 View Course
+                                            @elseif($progress > 0)
+                                                ▶ Continue Learning
                                             @else
-                                                <i class="fas fa-check-circle text-success"></i> 
-                                                {{ $progressPercentage }}%
+                                                🚀 Start Course
                                             @endif
-                                        @elseif($progressPercentage > 0)
-                                            <i class="fas fa-spinner text-warning"></i>
-                                            {{ $progressPercentage }}%
-                                        @else
-                                            <i class="far fa-clock text-danger"></i>
-                                            {{ $progressPercentage }}%
-                                        @endif
-                                        <span> Progress</span>
-                                    </span>
 
-                                </div>
-                                
-                                <div class="contentCard-info d-flex align-items-center justify-content-between">
-                                    <a href="{{ route('instructorProfile', encryptor('encrypt', $a->course?->instructor?->id)) }}" class="contentCard-user d-flex align-items-center">
-                                        <img src="{{ asset('uploads/users/' . $a->course?->instructor?->image) }}" alt="client-image" class="rounded-circle" height="34" width="34" />
-                                        <p class="font-para--md">{{ $a->course?->instructor?->name_en }}</p>
-                                    </a>
-                                    @if($a->completed == 2)
-                                    <div class="contentCard-course--status d-flex align-items-center">                                     
-                                            <a                                              
-                                            href="{{ route('certificate.show', encryptor('encrypt', $a->course?->id)) }}" target="_blank">
-                                            <i class="fas fa-download"></i> <u>Certificate</u>
-                                            </a>                                            
+                                        </a>
+
+                                        <!-- CERTIFICATE -->
+                                        @if($isCompleted)
+                                            <a href="{{ route('certificate.show', encryptor('encrypt', $course?->id)) }}"
+                                            target="_blank"
+                                            class="lms-cert-link">
+                                                ⬇ Download Certificate
+                                            </a>
+                                        @endif
+
                                     </div>
-                                    @endif
-                                </div>
-                                
-                                {{-- Check for course progress --}}
-                            
-                                @php
-                                    // Fetch the progress percentage, default to 0 if not found
-                                    $progressPercentage = $courseProgress[$a->course_id] ?? 0;
-                                @endphp
 
-                                <div class="contentCard-watch--progress-wrapper text-center">
-                                            <div class="contentCard-watch--progress" style="background-color: #d4edda; border-radius: 5px; overflow: hidden; height: 5px;"> <!-- Light green background -->
-                                                <span class="percentage" style="width: {{ $progressPercentage }}%; background-color: #28a745; height: 100%; display: block;"></span> <!-- Deep green for completion -->
-                                            </div>                                            
-                                            <!-- <p class="mt-2 font-weight-bold" style="color: {{ $progressPercentage > 0 ? '#28a745' : '#dc3545' }};">
-                                                {{ $progressPercentage }}% {{ $progressPercentage > 0 ? 'completed' : 'not started yet' }}
-                                            </p> -->
-                                        </div>               
-                                
-                                {{-- Additional content for course buttons, etc. --}}
-                                <div class="contentCard-button text-center mt-3">
-                                    <a class="button button-md button--primary-outline w-100 my-3" href="{{ route('courseSegment', encryptor('encrypt', $a->course?->id)) }}">
-                                        @if($a->completed == 2)
-                                        View Course 
-                                        @elseif ($progressPercentage > 0)
-                                        Continue Course
-                                        @else
-                                            Start Course
-                                        @endif
-                                    </a>                                    
                                 </div>
+
                             </div>
-                        </div>
-                    </div>
-                @empty
-                    <div class="col-12 py-5">
-                        <div class="col-md-6 col-12 mx-auto text-center">
-                            <h5 class="font-title--sm">You Haven't Enrolled in Any Course Yet...</h5>
-                            <p class="my-4 font-para--lg">Your Course List is Empty!</p>
-                            <a href="{{ route('searchCourse') }}" class="button button-md button--primary">Enroll Now!</a>
-                        </div>
-                    </div>
-                @endforelse
 
+                        @empty
 
-                        <div class="col-lg-12 mt-lg-5">
-                            <div class="pagination justify-content-center pb-0">
-                                <div class="pagination-group">
-                                    {{ $enrollment->links() }}
-                                </div>
+                            <div class="col-12 text-center py-5">
+
+                                <h5>No courses enrolled yet</h5>
+
+                                <p class="text-muted">Your learning journey starts here</p>
+
+                                <a href="{{ route('searchCourse') }}" class="lms-btn primary">
+                                    Enroll Now
+                                </a>
+
                             </div>
-                        </div>
+
+                        @endforelse
+
                     </div>
+
+                    <!-- PAGINATION -->
+                    <div class="lms-pagination mt-4">
+                        {{ $enrollment->links() }}
+                    </div>
+
                 </div>
 
 
                 {{-- Completed Courses --}}
-                <div class="tab-pane fade" id="nav-completedcourses" role="tabpanel"
-                    aria-labelledby="nav-completedcourses-tab">
-                    <div class="row">
-                        @forelse ($allCompletedCourses as $a)                        
-                            <div class="col-lg-4 col-md-6 mb-4">
-                                <div class="contentCard contentCard--watch-course">
-                                    <div class="contentCard-top">
+                <div class="tab-pane fade" id="nav-completedcourses" role="tabpanel">
+
+                    <div class="row g-4">
+
+                        @forelse ($allCompletedCourses as $a)
+
+                            @php
+                                $course = $a->course;
+                                $instructor = $course?->instructor;
+                                $progressPercentage = $courseProgress[$a->course_id] ?? 0;
+                                $segmentCount = $course?->segments->count() ?? 0;
+                                $lessonCount = $course?->lessons->count() ?? 0;
+                            @endphp
+
+                            <div class="col-lg-4 col-md-6">
+
+                                <div class="lms-course-card">
+
+                                    <!-- IMAGE -->
+                                    <div class="lms-course-image">
                                         <a href="#">
-                                            <img src="{{ asset('uploads/courses/' . $a->course?->image) }}" alt="course-image" class="img-fluid" />
+                                            <img src="{{ asset('uploads/courses/' . $course?->image) }}"
+                                                alt="course">
                                         </a>
-                                    </div>
-                                    <div class="contentCard-bottom">
-                                    <a href="{{ route('instructorProfile', encryptor('encrypt', $a->course?->instructor?->id)) }}" class="contentCard-user d-flex align-items-center">
-                                        <img src="{{ asset('uploads/users/' . $a->course?->instructor?->image) }}" alt="client-image" class="rounded-circle" height="34" width="34" />
-                                        <p class="font-para--md">{{ $a->course?->instructor?->name_en }}</p>
-                                    </a>
-                                        <div class="course-title-container">
-                                            <h5 class="course-title text-center my-4">
-                                                <a href="#" class="course-title-link">
-                                                    {{ $a->course?->title_en ?? 'No title available' }}
-                                                </a>
-                                            </h5>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center mt-3">
-                                            <span class="btn btn-outline-primary">
-                                                <i class="fas fa-th-large"></i>
-                                                {{ $a->course->segments->count() }} {{ Str::plural('segment', $a->course->segments->count()) }}
-                                            </span>
-                                            <span class="btn btn-outline-success mx-2">
-                                                <i class="fas fa-book"></i> 
-                                                {{ $a->course->lessons->count() }} {{ Str::plural('lesson', $a->course->lessons->count()) }}
-                                            </span>
-                                            <span class="btn btn-outline-dark mx-2">
-                                        @php
-                                            // Get the course progress or default to 0
-                                            $progressPercentage = $courseProgress[$a->course_id] ?? 0;
-                                        @endphp
+
                                         @if($progressPercentage == 100)
-                                            <i class="fas fa-check-circle text-success"></i> 
-                                            {{ $progressPercentage }}%
-                                        @elseif($progressPercentage > 0)
-                                            <i class="fas fa-spinner text-warning"></i>
-                                            {{ $progressPercentage }}%
+                                            <span class="lms-badge success">Completed</span>
                                         @else
-                                            <i class="far fa-clock text-danger"></i>
-                                            {{ $progressPercentage }}%
+                                            <span class="lms-badge progress">{{ $progressPercentage }}%</span>
                                         @endif
-                                        <span>Progress</span>
-                                    </span>
-                                        </div>
-
-                                        {{-- Check for course progress --}}
-                                    
-                                        @php
-                                            // Fetch the progress percentage, default to 0 if not found
-                                            $progressPercentage = $courseProgress[$a->course_id] ?? 0;
-                                        @endphp
-
-                                        <div class="contentCard-watch--progress-wrapper text-center">
-                                                    <div class="contentCard-watch--progress" style="background-color: #d4edda; border-radius: 5px; overflow: hidden; height: 5px;"> <!-- Light green background -->
-                                                        <span class="percentage" style="width: {{ $progressPercentage }}%; background-color: #28a745; height: 100%; display: block;"></span> <!-- Deep green for completion -->
-                                                    </div>
-                                                    <!-- <p class="mt-2 font-weight-bold" style="color: {{ $progressPercentage > 0 ? '#28a745' : '#dc3545' }};">
-                                                        {{ $progressPercentage }}% {{ $progressPercentage > 0 ? 'completed' : 'not started yet' }}
-                                                    </p> -->
-                                                </div>               
-                                        
-                                        {{-- Additional content for course buttons, etc. --}}
-                                        <div class="contentCard-button text-center mt-3">
-                                            <a class="button button-md button--primary-outline w-100 my-3" 
-                                            href="{{ route('certificate.show', encryptor('encrypt', $a->course?->id)) }}" target="_blank">
-                                            <i class="fas fa-download"></i> Download Certificate
-                                            </a>
-                                        </div>
                                     </div>
+
+                                    <!-- CONTENT -->
+                                    <div class="lms-course-body">
+
+                                        <!-- Instructor -->
+                                        <a href="{{ route('instructorProfile', encryptor('encrypt', $instructor?->id)) }}"
+                                        class="lms-instructor">
+
+                                            <img src="{{ asset('uploads/users/' . $instructor?->image) }}"
+                                                onerror="this.src='{{ asset('uploads/students/blank_new.png') }}'">
+
+                                            <span>{{ $instructor?->name_en }}</span>
+
+                                        </a>
+
+                                        <!-- Title -->
+                                        <h5 class="lms-course-title">
+                                            {{ $course?->title_en ?? 'No title available' }}
+                                        </h5>
+
+                                        <!-- Stats -->
+                                        <div class="lms-course-stats">
+
+                                            <span>📦 {{ $segmentCount }} segments</span>
+                                            <span>📚 {{ $lessonCount }} lessons</span>
+
+                                        </div>
+
+                                        <!-- Progress -->
+                                        <div class="lms-progress">
+
+                                            <div class="lms-progress-bar">
+                                                <span style="width: {{ $progressPercentage }}%"></span>
+                                            </div>
+
+                                            <div class="lms-progress-text">
+                                                @if($progressPercentage == 100)
+                                                    🎉 Completed
+                                                @elseif($progressPercentage > 0)
+                                                    ⏳ In Progress
+                                                @else
+                                                    ⚪ Not Started
+                                                @endif
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Action -->
+                                        <a href="{{ route('certificate.show', encryptor('encrypt', $course?->id)) }}"
+                                        target="_blank"
+                                        class="lms-btn">
+                                            ⬇ Download Certificate
+                                        </a>
+
+                                    </div>
+
                                 </div>
+
                             </div>
+
                         @empty
-                        <div class="col-12 py-5">
-                            <div class="col-md-6 col-12 mx-auto text-center">
-                                <h5 class="font-title--sm">You Haven't Completed Any Course Yet...</h5>
-                                
-                                <a href="{{route('studentdashboard')}}" class="button button-md button--primary">Continue</a>
+
+                            <div class="col-12 text-center py-5">
+
+                                <h5>No completed courses yet</h5>
+
+                                <a href="{{ route('studentdashboard') }}" class="lms-btn primary">
+                                    Continue Learning
+                                </a>
+
                             </div>
-                        </div>
+
                         @endforelse
 
-                        <div class="col-lg-12 mt-lg-5">
-                            <div class="pagination justify-content-center pb-0">
-                                <div class="pagination-group">
-                                    {{$enrollment->links()}}
-                                </div>
-                            </div>
-                        </div>
                     </div>
+
+                    <!-- PAGINATION -->
+                    <div class="lms-pagination mt-4">
+                        {{ $enrollment->links() }}
+                    </div>
+
                 </div>
 
                 {{-- Purchase History --}}

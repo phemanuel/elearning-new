@@ -67,8 +67,11 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label class="form-label">Serial No</label>
-                                        <input type="number" class="form-control" name="serialNo"
-                                            value="{{old('serialNo')}}">
+                                        <input type="number"
+                                        name="serialNo"
+                                        class="form-control"
+                                        value="{{ old('serialNo', $nextSerialNo) }}"
+                                        readonly>
                                     </div>
                                     @if($errors->has('serialNo'))
                                     <span class="text-danger"> {{ $errors->first('serialNo') }}</span>
