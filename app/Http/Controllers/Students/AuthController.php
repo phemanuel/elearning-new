@@ -192,12 +192,13 @@ class AuthController extends Controller
             if ($student) {
                 if ($student->status == 1) {
                     if (Hash::check($request->password, $student->password)) {
-                        $this->setSession($student);
+                        
                         if ($student->email_verified_status == 1) {
+                            $this->setSession($student);
                             // Email is verified, proceed with login 
                             $request->session()->regenerate(); 
                             // $intendedUrl = session('url.intended', '/');
-                            // return redirect()->intended($intendedUrl);
+                            // return redirect()->intended($intendedUrl);                     
                             return redirect()->route($back_route)->with('success', 'Successfully Logged In');
                         } else {                    
                             // Email is not verified, return a flash message

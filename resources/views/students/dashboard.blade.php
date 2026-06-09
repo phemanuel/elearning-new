@@ -20,9 +20,12 @@ use Carbon\Carbon;
 
                 <h1 class="lms-page-title">
                     My Dashboard
-                </h1>
+                </h1>                
 
-                <nav aria-label="breadcrumb" class="lms-breadcrumb-nav">
+            </div>
+
+            <!-- RIGHT SIDE: QUICK ACTIONS -->
+             <nav aria-label="breadcrumb" class="lms-breadcrumb-nav">
                     <ol class="breadcrumb mb-0">
 
                         <li class="breadcrumb-item">
@@ -35,10 +38,6 @@ use Carbon\Carbon;
 
                     </ol>
                 </nav>
-
-            </div>
-
-            <!-- RIGHT SIDE: QUICK ACTIONS -->
             <!-- <div class="lms-header-right">
 
                 <a href="#" class="lms-btn lms-btn-outline">
@@ -518,29 +517,30 @@ use Carbon\Carbon;
 
                                         <div>
                                             <h5 class="mb-1">
-                                                {{ $p->course->title ?? 'Course Payment' }}
+                                                {{ $p->course->title_en ?? 'Course Payment' }}
                                             </h5>
 
                                             <small>
                                                 Instructor:
-                                                {{ $p->instructor->name ?? 'N/A' }}
+                                                {{ $p->instructor->name_en ?? 'N/A' }}
                                             </small>
                                         </div>
 
                                     </div>
-
                                     <div>
-                                        @if($p->status == 'success')
-                                            <span class="badge bg-success">
-                                                Paid
+                                        @if($p->status == 1)
+                                            <span class="payment-badge success">
+                                                <i class="fa fa-check-circle"></i> Paid
                                             </span>
-                                        @elseif($p->status == 'pending')
-                                            <span class="badge bg-warning text-dark">
-                                                Pending
+
+                                        @elseif($p->status == 0)
+                                            <span class="payment-badge pending">
+                                                <i class="fa fa-clock"></i> Pending
                                             </span>
+
                                         @else
-                                            <span class="badge bg-danger">
-                                                Failed
+                                            <span class="payment-badge failed">
+                                                <i class="fa fa-times-circle"></i> Failed
                                             </span>
                                         @endif
                                     </div>

@@ -187,28 +187,40 @@
 </style>
 <style>
 .students-info-intro{
+    background:linear-gradient(
+       135deg,
+    #2563eb 0%,
+    #4f46e5 50%,
+    #7c3aed 100%
+    );
+
+    border-radius:24px;
     position:relative;
-    background:#fff;
-    border-radius:20px;
     overflow:hidden;
-    border:1px solid #e5e7eb;
-    box-shadow:0 10px 30px rgba(15,23,42,.06);
-    margin-bottom:30px;
+    margin-top:-40px !important;
+    /* border:3px solid #f79a58 !important; */
 }
 
 .students-info-intro::before{
     content:'';
     position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    height:5px;
-    background:linear-gradient(
-        90deg,
-        #2563eb,
-        #7c3aed,
-        #06b6d4
-    );
+    top:-80px;
+    right:-80px;
+    width:250px;
+    height:250px;
+    background:rgba(255,255,255,.08);
+    border-radius:50%;
+}
+
+.students-info-intro::after{
+    content:'';
+    position:absolute;
+    bottom:-60px;
+    left:-60px;
+    width:180px;
+    height:180px;
+    background:rgba(255,255,255,.05);
+    border-radius:50%;
 }
 
 /* ========================
@@ -218,17 +230,14 @@
 .students-info-intro{
     background:linear-gradient(
         135deg,
-        #6a7d4c 0%,
-        #7a74ea 50%,
-        #44622d 100%
+        #2563eb 0%,
+        #4f46e5 50%,
+        #7c3aed 100%
     );
 
-    border-radius:22px;
+    border-radius:24px;
+    position:relative;
     overflow:hidden;
-
-    box-shadow:0 15px 40px rgba(37,99,235,.18);
-
-    margin-bottom:30px;
 }
 
 /* TOP BAR */
@@ -249,6 +258,7 @@
     display:flex;
     align-items:center;
     gap:16px;
+    
 }
 
 .students-info-intro-start .image img{
@@ -293,64 +303,107 @@
 
 .students-info-intro-end{
     display:flex;
-    align-items:center;
-    gap:18px;
+    gap:15px;
 }
 
+/* ================= CARD ================= */
 .enrolled-courses,
 .completed-courses{
     display:flex;
     align-items:center;
     gap:12px;
 
-    padding:12px 16px;
-
-    background:rgba(255,255,255,.12);
-
-    backdrop-filter:blur(12px);
-
+    padding:14px 18px;
     border-radius:16px;
 
-    border:1px solid rgba(255,255,255,.15);
+    background:linear-gradient(
+        135deg,
+        #2563eb 0%,
+        #4f46e5 50%,
+        #7c3aed 100%
+    );
+
+    color:#fff;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+
+    min-width:170px;
+
+    transition:.3s ease;
+    position:relative;
+    overflow:hidden;
 }
 
+/* subtle shine overlay */
+.enrolled-courses::before,
+.completed-courses::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(255,255,255,0.08);
+    opacity:0;
+    transition:.3s ease;
+}
+
+.enrolled-courses:hover,
+.completed-courses:hover{
+    transform:translateY(-4px);
+}
+
+.enrolled-courses:hover::before,
+.completed-courses:hover::before{
+    opacity:1;
+}
+
+/* ================= ICON ================= */
 .enrolled-courses-icon,
 .completed-courses-icon{
-    width:45px;
-    height:45px;
-
-    border-radius:12px;
+    width:52px;
+    height:52px;
+    border-radius:14px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    font-size:18px;
-}
+    font-size:20px;
 
-.enrolled-courses-icon{
-    background:rgba(66, 99, 10, 0.91);
     color:#fff;
+
+    /* stronger visibility upgrade */
+    background:rgba(255,255,255,0.28);
+    border:1px solid rgba(255,255,255,0.45);
+
+    box-shadow:
+        0 8px 18px rgba(0,0,0,0.25),
+        inset 0 1px 0 rgba(255,255,255,0.35);
+
+    backdrop-filter:blur(14px);
+
+    flex-shrink:0;
+    position:relative;
 }
 
+/* optional icon variation (if you still want differentiation) */
 .completed-courses-icon{
-    background:rgba(16,185,129,.25);
-    color:#fff;
+    background:rgba(255,255,255,0.22);
 }
 
+/* ================= TEXT ================= */
 .enrolled-courses-text h6,
 .completed-courses-text h5{
     margin:0;
     color:#fff;
-    font-size:24px;
-    font-weight:700;
+    font-size:22px;
+    font-weight:800;
 }
 
 .enrolled-courses-text p,
 .completed-courses-text p{
     margin:0;
-    color:#fff;
-    font-size:12px;
+    color:rgba(255,255,255,0.85);
+    font-size:13px;
+    font-weight:500;
 }
 
 /* NAVIGATION */
@@ -433,7 +486,7 @@
 /* breadcrumb style */
 /* ===== PAGE HEADER WRAPPER ===== */
 .lms-page-header {
-    padding: 25px 0;
+    padding: 10px 0;
     background: linear-gradient(135deg, #f8fafc, #eef2ff);
 }
 
@@ -448,7 +501,8 @@
     padding: 20px 24px;
 
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    border: 1px solid #eef2f7;
+    border: 2px solid #3440e6;
+
 }
 
 /* ===== LEFT SIDE ===== */
@@ -655,8 +709,8 @@
     align-items: center;
     justify-content: center;
 
-    width: 38px;
-    height: 38px;
+    width: 20px;
+    height: 20px;
 
     border-radius: 10px;
     background: #f3f4f6;
@@ -825,27 +879,110 @@
 }
 
 /* ================= FOOTER ================= */
+/* ================= FOOTER BACKGROUND ================= */
 .lms-sidebar-footer {
     padding: 14px 16px;
-    border-top: 1px solid #eef2f7;
 
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 14px; /* 🔥 more breathing space */
 
     flex-shrink: 0;
-    background: #fff;
+
+    background: linear-gradient(
+        135deg,
+        #0f172a 0%,
+        #111827 50%,
+        #1e1b4b 100%
+    );
+
+    border-top: 1px solid rgba(255,255,255,0.08);
 }
 
+/* ================= APP INFO ================= */
+.lms-footer-top {
+    padding-bottom: 6px;
+}
+
+.lms-app-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 🔥 FIX: make text white and visible */
+.lms-app-info .app-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.4px;
+}
+
+.lms-app-info .app-version {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 999px;
+
+    color: #ffffff;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.18);
+}
+
+/* ================= LINKS WRAPPER (FIX SPACING) ================= */
+.lms-footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* 🔥 more separation between buttons */
+}
+
+/* ================= BUTTON STYLE ================= */
 .lms-sidebar-footer a {
     font-size: 13px;
     font-weight: 600;
-    color: #4b5563;
+
     text-decoration: none;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 11px 12px;
+    border-radius: 10px;
+
+    color: rgba(255,255,255,0.92);
+
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.12);
+
+    backdrop-filter: blur(10px);
+
+    transition: all 0.25s ease;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
 }
 
+/* hover effect */
 .lms-sidebar-footer a:hover {
-    color: #4f46e5;
+    transform: translateX(5px);
+
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.25);
+
+    color: #ffffff;
+
+    box-shadow: 0 10px 20px rgba(0,0,0,0.35);
+}
+
+/* ================= DANGER BUTTON ================= */
+.lms-sidebar-footer a.text-danger {
+    background: rgba(239,68,68,0.18);
+    border: 1px solid rgba(239,68,68,0.25);
+    color: #fecaca;
+}
+
+.lms-sidebar-footer a.text-danger:hover {
+    background: rgba(239,68,68,0.30);
+    color: #ffffff;
 }
 
 /* completed courses */
@@ -860,6 +997,7 @@
 
     background: #fff;
     border: 1px solid #eef2f7;
+    margin-top:-35px !important;
 }
 
 .lms-course-card:hover {
@@ -1428,6 +1566,7 @@
     box-shadow:0 10px 30px rgba(15,23,42,.08);
     border:1px solid #eef2f7;
     transition:.3s;
+    margin-top:-35px !important;
 }
 
 .payment-history-card:hover{
@@ -1523,7 +1662,375 @@
 .empty-payment-state p{
     color:#64748b;
 }
+.payment-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+    line-height:1;
+}
 
+.payment-badge.success{
+    background:#dcfce7;
+    color:#166534;
+    border:1px solid #86efac;
+}
+
+.payment-badge.pending{
+    background:#fef3c7;
+    color:#92400e;
+    border:1px solid #fcd34d;
+}
+
+.payment-badge.failed{
+    background:#fee2e2;
+    color:#991b1b;
+    border:1px solid #fca5a5;
+}
+/* Profile style */
+/* ===================================
+   STUDENT PROFILE
+=================================== */
+
+.student-profile-grid{
+    display:grid;
+    grid-template-columns:1fr 1.3fr;
+    gap:24px;
+}
+
+.profile-card{
+    background:#fff;
+    border-radius:20px;
+    padding:24px;
+    border:1px solid #edf2f7;
+    box-shadow:0 10px 30px rgba(15,23,42,.06);
+    transition:.3s ease;
+}
+
+.profile-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 35px rgba(15,23,42,.10);
+}
+
+.profile-card-header{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin-bottom:20px;
+}
+
+.profile-icon{
+    width:58px;
+    height:58px;
+    border-radius:16px;
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:22px;
+}
+
+.profile-card-header h5{
+    margin:0;
+    font-weight:700;
+    color:#0f172a;
+}
+
+.profile-card-header span{
+    color:#64748b;
+    font-size:14px;
+}
+
+.profile-card-body p{
+    margin:0;
+    color:#475569;
+    line-height:1.8;
+}
+
+.profile-info-list{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.profile-info-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 16px;
+    background:#f8fafc;
+    border-radius:12px;
+}
+
+.profile-info-item .label{
+    color:#64748b;
+    font-size:14px;
+    font-weight:500;
+}
+
+.profile-info-item .label i{
+    margin-right:8px;
+    width:18px;
+}
+
+.profile-info-item .value{
+    color:#0f172a;
+    font-weight:600;
+    text-align:right;
+}
+
+.profile-about-card{
+    background:
+        linear-gradient(
+            135deg,
+            rgba(79,70,229,.03),
+            rgba(124,58,237,.03)
+        );
+}
+
+/* Mobile */
+
+@media(max-width:991px){
+
+    .student-profile-grid{
+        grid-template-columns:1fr;
+    }
+
+    .profile-info-item{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:6px;
+    }
+
+    .profile-info-item .value{
+        text-align:left;
+    }
+
+}
+/* Profile Settings */
+.settings-layout{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:25px;
+}
+
+.settings-main{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.settings-card{
+    background:#fff;
+    border-radius:20px;
+    padding:24px;
+    border:1px solid #edf2f7;
+    box-shadow:0 10px 30px rgba(15,23,42,.06);
+}
+
+.settings-card-header{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.settings-icon{
+    width:55px;
+    height:55px;
+    border-radius:14px;
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+}
+
+.settings-icon.security{
+    background:linear-gradient(135deg,#059669,#10b981);
+}
+
+.settings-card-header h5{
+    margin:0;
+    font-weight:700;
+}
+
+.settings-card-header span{
+    color:#64748b;
+    font-size:14px;
+}
+
+.settings-form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.full-width{
+    grid-column:1 / -1;
+}
+
+.form-group-modern label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+    color:#334155;
+}
+
+.form-group-modern .form-control{
+    border-radius:12px;
+    min-height:50px;
+    border:1px solid #dbe2ea;
+}
+
+.form-group-modern textarea.form-control{
+    min-height:140px;
+}
+
+.settings-action{
+    margin-top:25px;
+}
+
+.settings-btn-primary{
+    border:none;
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+    color:#fff;
+    padding:12px 25px;
+    border-radius:12px;
+    font-weight:600;
+}
+
+.settings-btn-outline{
+    width:100%;
+    border:2px solid #4f46e5;
+    background:none;
+    color:#4f46e5;
+    padding:12px;
+    border-radius:12px;
+    font-weight:600;
+}
+
+.profile-image-card{
+    text-align:center;
+}
+
+.student-avatar-wrap img{
+    width:180px;
+    height:180px;
+    object-fit:cover;
+    border-radius:50%;
+    border:5px solid #eef2ff;
+    margin-bottom:15px;
+}
+
+.student-avatar-wrap h6{
+    margin-bottom:5px;
+    font-weight:700;
+}
+
+.student-avatar-wrap span{
+    color:#64748b;
+}
+
+.upload-note{
+    display:block;
+    margin-top:15px;
+    color:#94a3b8;
+}
+
+@media(max-width:991px){
+
+    .settings-layout{
+        grid-template-columns:1fr;
+    }
+
+    .settings-form-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+/* Header-avatar-dropdown */
+/* ================= AVATAR ================= */
+.lms-avatar-wrapper{
+    position: relative;
+    display: inline-block;
+}
+
+/* avatar image */
+.lms-avatar-toggle img{
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+
+    object-fit: cover;
+    cursor: pointer;
+
+    border: 2px solid rgba(255,255,255,0.25);
+
+    transition: 0.25s ease;
+}
+
+.lms-avatar-toggle img:hover{
+    transform: scale(1.05);
+    border-color: rgba(255,255,255,0.5);
+}
+
+/* ================= DROPDOWN ================= */
+.lms-avatar-menu{
+    position: absolute;
+    right: 0;
+    top: 55px;
+
+    min-width: 160px;
+
+    background: #0f172a;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+
+    display: none;
+    flex-direction: column;
+
+    overflow: hidden;
+    z-index: 999;
+}
+
+/* menu links */
+.lms-avatar-menu a{
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 500;
+
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    transition: 0.2s ease;
+}
+
+.lms-avatar-menu a:hover{
+    background: rgba(255,255,255,0.08);
+}
+
+/* danger logout */
+.lms-avatar-menu a.danger{
+    color: #f87171;
+}
+
+.lms-avatar-menu a.danger:hover{
+    background: rgba(248,113,113,0.12);
+    color: #fff;
+}
 </style>
 
     @stack('styles')
@@ -1611,27 +2118,53 @@
     </div>
 
 
-    <!-- ================= FOOTER ================= -->
-    <div class="lms-sidebar-footer">
+    <!-- ================= MODERN FOOTER ================= -->
+<div class="lms-sidebar-footer">
+
+    <div class="lms-footer-top">
+        <div class="lms-app-info">
+            <span class="app-name">Digi-LMS</span>
+            <span class="app-version">v1.0.0</span>
+        </div>
+    </div>
+
+    <div class="lms-footer-links">
 
         @if($isStudent)
 
-            <a href="{{ route('student_profile') }}">👤 Profile</a>
-            <a href="{{ route('studentlogOut') }}" class="text-danger">🚪 Logout</a>
+            <a href="{{ route('student_profile') }}">
+                👤 <span>Profile</span>
+            </a>
+
+            <a href="{{ route('studentlogOut') }}" class="danger">
+                🚪 <span>Logout</span>
+            </a>
 
         @elseif($isUser)
 
-            <a href="{{ route('user.edit', encryptor('encrypt',auth()->user()->id)) }}">👤 Profile</a>
-            <a href="{{ route('studentlogOut') }}" class="text-danger">🚪 Logout</a>
+            <a href="{{ route('user.edit', encryptor('encrypt',auth()->user()->id)) }}">
+                👤 <span>Profile</span>
+            </a>
+
+            <a href="{{ route('studentlogOut') }}" class="danger">
+                🚪 <span>Logout</span>
+            </a>
 
         @else
 
-            <a href="{{ route('studentLogin') }}">🔐 Sign In</a>
-            <a href="{{ route('signup') }}">✨ Sign Up</a>
+            <a href="{{ route('studentLogin') }}">
+                🔐 <span>Sign In</span>
+            </a>
+
+            <a href="{{ route('signup') }}">
+                ✨ <span>Sign Up</span>
+            </a>
 
         @endif
 
     </div>
+
+</div>
 
 </aside>
 
@@ -1657,16 +2190,44 @@
 
                 </div>
 
-                <!-- AVATAR -->
-                <div class="lms-avatar-wrapper">
+                <!-- AVATAR DROPDOWN -->
+                <div class="lms-avatar-wrapper dropdown">
 
-                    @if(request()->session()->get('studentLogin'))
-                        <img src="{{ asset('uploads/students/' . request()->session()->get('image')) }}"
-                            onerror="this.src='{{ asset('uploads/students/blank_new.png') }}'">
-                    @elseif(auth()->user())
-                        <img src="{{ asset('uploads/users/' . auth()->user()->image) }}"
-                            onerror="this.src='{{ asset('uploads/students/blank_new.png') }}'">
-                    @endif
+                    <div class="lms-avatar-toggle" id="avatarDropdown">
+                        
+                        @if(request()->session()->get('studentLogin'))
+                            <img src="{{ asset('uploads/students/' . request()->session()->get('image')) }}"
+                                onerror="this.src='{{ asset('uploads/students/blank_new.png') }}'">
+                        @elseif(auth()->user())
+                            <img src="{{ asset('uploads/users/' . auth()->user()->image) }}"
+                                onerror="this.src='{{ asset('uploads/students/blank_new.png') }}'">
+                        @endif
+
+                    </div>
+
+                    <!-- DROPDOWN MENU -->
+                    <div class="lms-avatar-menu" id="avatarMenu">
+
+                        @if(request()->session()->get('studentLogin'))
+                            <a href="{{ route('student_profile') }}">
+                                👤 My Profile
+                            </a>
+
+                            <a href="{{ route('studentlogOut') }}" class="danger">
+                                ⎋ Logout
+                            </a>
+
+                        @elseif(auth()->user())
+                            <a href="{{ route('user.edit', encryptor('encrypt',auth()->user()->id)) }}">
+                                👤 My Profile
+                            </a>
+
+                            <a href="{{ route('studentlogOut') }}" class="danger">
+                                ⎋ Logout
+                            </a>
+                        @endif
+
+                    </div>
 
                 </div>
 
@@ -1774,6 +2335,21 @@ function toggleSidebar() {
         		@endif  
     </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById("avatarDropdown");
+    const menu = document.getElementById("avatarMenu");
+
+    toggle.addEventListener("click", function (e) {
+        e.stopPropagation();
+        menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    });
+
+    document.addEventListener("click", function () {
+        menu.style.display = "none";
+    });
+});
+</script>
     @stack('scripts')
 
 

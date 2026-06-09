@@ -49,7 +49,13 @@ class DashboardController extends Controller
 
         $course = Course::get();
         $checkout = Checkout::where('student_id', currentUserId())->get();
-        $payment = Payment::where('student_id', currentUserId())->get();
+        $payment = Payment::with([
+            'course',
+            'instructor',
+            'student'
+        ])->where('student_id', currentUserId())
+        ->latest()
+        ->get();
 
         // Calculate progress percentage for each enrolled course
         $courseProgress = [];

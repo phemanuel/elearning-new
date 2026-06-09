@@ -1754,6 +1754,59 @@ body {
         font-size: 16px;
     }
 }
+
+/* Navbar grpup style *//* ================= BASE LABEL STYLE ================= */
+.dlabnav .nav-label{
+    width: 100%;
+
+    margin: 10px 0;   /* 🔥 removes left/right spacing */
+    padding: 10px 14px;
+
+    border-radius: 10px;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+
+    color: #fff;
+
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+}
+
+/* ================= ADMIN ================= */
+.dlabnav .label-admin{
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+}
+
+/* ================= MANAGEMENT ================= */
+.dlabnav .label-management{
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+}
+
+/* ================= LEARNING ================= */
+.dlabnav .label-learning{
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+/* ================= ENGAGEMENT ================= */
+.dlabnav .label-engagement{
+    background: linear-gradient(135deg, #ec4899, #ef4444);
+}
+
+/* ================= FINANCE ================= */
+.dlabnav .label-finance{
+    background: linear-gradient(135deg, #f59e0b, #f97316);
+}
+
+/* ================= SYSTEM ================= */
+.dlabnav .label-system{
+    background: linear-gradient(135deg, #ef4444, #991b1b);
+}
+
 </style>
 </head>
 
@@ -1986,8 +2039,7 @@ body {
                 <ul class="metismenu" id="menu">
 
                     {{-- ================= ADMIN BLOCK ================= --}}
-                    <li class="nav-label first"
-                        style="background:#1e293b; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                    <li class="nav-label label-admin" >                       
                         ADMIN PANEL
                     </li>
 
@@ -2024,8 +2076,7 @@ body {
 
 
                     {{-- ================= MANAGEMENT BLOCK ================= --}}
-                    <li class="nav-label mt-3"
-                        style="background:#0f172a; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                    <li class="nav-label label-management mt-3">
                         MANAGEMENT
                     </li>
 
@@ -2052,8 +2103,7 @@ body {
 
 
                     {{-- ================= LEARNING BLOCK ================= --}}
-                    <li class="nav-label mt-3"
-                        style="background:#0f172a; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                    <li class="nav-label label-learning mt-3">
                         LEARNING
                     </li>
 
@@ -2100,8 +2150,7 @@ body {
 
 
                     {{-- ================= ENGAGEMENT BLOCK ================= --}}
-                    <li class="nav-label mt-3"
-                        style="background:#0f172a; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                    <li class="nav-label label-engagement mt-3">
                         ENGAGEMENT
                     </li>
 
@@ -2139,8 +2188,7 @@ body {
 
 
                     {{-- ================= FINANCE BLOCK ================= --}}
-                    <li class="nav-label mt-3"
-                        style="background:#0f172a; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                    <li class="nav-label label-finance mt-3">
                         FINANCE
                     </li>
 
@@ -2167,8 +2215,7 @@ body {
 
 
                     {{-- ================= SYSTEM ================= --}}
-                    <li class="nav-label mt-3"
-                        style="background:#0f172a; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                    <li class="nav-label label-system mt-3">
                         SYSTEM
                     </li>
 
@@ -2192,8 +2239,7 @@ body {
                 <ul class="metismenu" id="menu">
 
                     {{-- ================= INSTRUCTOR BLOCK ================= --}}
-                    <li class="nav-label first"
-                        style="background:#1e293b; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                    <li class="nav-label label-admin">
                         INSTRUCTOR PANEL
                     </li>
 
@@ -2230,8 +2276,7 @@ body {
 
 
                     {{-- ================= TEACHING ================= --}}
-                    <li class="nav-label mt-3"
-                        style="background:#0f172a; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                    <li class="nav-label label-management mt-3">
                         TEACHING
                     </li>
 
@@ -2261,8 +2306,7 @@ body {
 
 
                     {{-- ================= ASSESSMENTS ================= --}}
-                    <li class="nav-label mt-3"
-                        style="background:#0f172a; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                    <li class="nav-label label-learning mt-3">
                         ASSESSMENTS
                     </li>
 
@@ -2298,8 +2342,7 @@ body {
 
 
                     {{-- ================= FINANCE ================= --}}
-                    <li class="nav-label mt-3"
-                        style="background:#0f172a; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                    <li class="nav-label label-finance mt-3">
                         FINANCE
                     </li>
 
@@ -2349,8 +2392,7 @@ body {
 
 
                     {{-- ================= SYSTEM ================= --}}
-                    <li class="nav-label mt-3"
-                        style="background:#0f172a; color:#fff; padding:10px 12px; border-radius:6px; font-weight:700;">
+                    <li class="nav-label label-system mt-3">
                         SYSTEM
                     </li>
 

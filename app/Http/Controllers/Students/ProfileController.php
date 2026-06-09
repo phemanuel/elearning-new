@@ -55,9 +55,9 @@ class ProfileController extends Controller
             $data = Student::find(currentUserId());
 
             // Validate current password
-            if (!Hash::check($request->current_password, $data->password)) {
-                return redirect()->back()->with('error', 'Current password is incorrect.');
-            }
+            // if (!Hash::check($request->current_password, $data->password)) {
+            //     return redirect()->back()->with('error', 'Current password is incorrect.');
+            // }
             // Proceed with password change
             $data->password = Hash::make($request->password);
             $data->language = 'en';
