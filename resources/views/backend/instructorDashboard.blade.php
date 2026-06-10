@@ -244,7 +244,8 @@
                                                 <img
                                                     src="{{ asset('uploads/students/' . $enrollment->student->image) }}"
                                                     class="student-avatar me-3"
-                                                    alt="">
+                                                    alt=""
+                                                    onerror="this.src='{{ asset('uploads/students/blank_new.png') }}'">
 
                                                 <div>
 
@@ -589,7 +590,8 @@
                                                 <img
                                                     src="{{asset('uploads/courses/'.$d->image)}}"
                                                     class="course-thumb me-3"
-                                                    alt="">
+                                                    alt=""
+                                                    onerror="this.src='{{ asset('uploads/courses/course_blank.jpg') }}'">
 
                                                 <div>
 

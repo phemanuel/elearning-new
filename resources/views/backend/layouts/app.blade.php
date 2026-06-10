@@ -1757,25 +1757,36 @@ body {
 
 /* Navbar grpup style *//* ================= BASE LABEL STYLE ================= */
 .dlabnav .nav-label{
-    width: 100%;
+    position:relative;
 
-    margin: 10px 0;   /* 🔥 removes left/right spacing */
-    padding: 10px 14px;
+    margin:30px 0 12px;
+    padding:0 20px;
 
-    border-radius: 10px;
+    color:#0f172a;
 
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.6px;
-    text-transform: uppercase;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-size:12px;
+    font-weight:800;
 
-    color: #fff;
-
-    border: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-
-    background: linear-gradient(135deg, #1e293b, #0f172a);
+    letter-spacing:1px;
+    text-transform:uppercase;
 }
+
+.dlabnav .nav-label::after{
+    content:'';
+
+    display:block;
+
+    width:28px;
+    height:3px;
+
+    margin-top:6px;
+
+    border-radius:20px;
+
+    background:#4f46e5;
+}
+
 
 /* ================= ADMIN ================= */
 .dlabnav .label-admin{
@@ -2039,7 +2050,7 @@ body {
                 <ul class="metismenu" id="menu">
 
                     {{-- ================= ADMIN BLOCK ================= --}}
-                    <li class="nav-label label-admin" >                       
+                    <li class="nav-label" >                       
                         ADMIN PANEL
                     </li>
 
@@ -2076,7 +2087,7 @@ body {
 
 
                     {{-- ================= MANAGEMENT BLOCK ================= --}}
-                    <li class="nav-label label-management mt-3">
+                    <li class="nav-label">
                         MANAGEMENT
                     </li>
 
@@ -2103,7 +2114,7 @@ body {
 
 
                     {{-- ================= LEARNING BLOCK ================= --}}
-                    <li class="nav-label label-learning mt-3">
+                    <li class="nav-label">
                         LEARNING
                     </li>
 
@@ -2150,7 +2161,7 @@ body {
 
 
                     {{-- ================= ENGAGEMENT BLOCK ================= --}}
-                    <li class="nav-label label-engagement mt-3">
+                    <li class="nav-label">
                         ENGAGEMENT
                     </li>
 
@@ -2188,7 +2199,7 @@ body {
 
 
                     {{-- ================= FINANCE BLOCK ================= --}}
-                    <li class="nav-label label-finance mt-3">
+                    <li class="nav-label">
                         FINANCE
                     </li>
 
@@ -2215,7 +2226,7 @@ body {
 
 
                     {{-- ================= SYSTEM ================= --}}
-                    <li class="nav-label label-system mt-3">
+                    <li class="nav-label">
                         SYSTEM
                     </li>
 
@@ -2239,7 +2250,7 @@ body {
                 <ul class="metismenu" id="menu">
 
                     {{-- ================= INSTRUCTOR BLOCK ================= --}}
-                    <li class="nav-label label-admin">
+                    <li class="nav-label">
                         INSTRUCTOR PANEL
                     </li>
 
@@ -2276,7 +2287,7 @@ body {
 
 
                     {{-- ================= TEACHING ================= --}}
-                    <li class="nav-label label-management mt-3">
+                    <li class="nav-label">
                         TEACHING
                     </li>
 
@@ -2306,7 +2317,7 @@ body {
 
 
                     {{-- ================= ASSESSMENTS ================= --}}
-                    <li class="nav-label label-learning mt-3">
+                    <li class="nav-label">
                         ASSESSMENTS
                     </li>
 
@@ -2342,7 +2353,7 @@ body {
 
 
                     {{-- ================= FINANCE ================= --}}
-                    <li class="nav-label label-finance mt-3">
+                    <li class="nav-label">
                         FINANCE
                     </li>
 
@@ -2392,7 +2403,7 @@ body {
 
 
                     {{-- ================= SYSTEM ================= --}}
-                    <li class="nav-label label-system mt-3">
+                    <li class="nav-label">
                         SYSTEM
                     </li>
 

@@ -197,7 +197,7 @@
     border-radius:24px;
     position:relative;
     overflow:hidden;
-    margin-top:-40px !important;
+    margin-top:-70px !important;
     /* border:3px solid #f79a58 !important; */
 }
 
@@ -1061,6 +1061,7 @@
 
     display: flex;
     flex-direction: column;
+    margin-top: -40px;
 
     gap: 8px; /* replaces random margins */
 }
@@ -2031,6 +2032,152 @@
     background: rgba(248,113,113,0.12);
     color: #fff;
 }
+
+/* footer style */
+.lms-footer{
+    margin-top:30px;
+
+    background:#ffffff;
+
+    border-top:1px solid #e2e8f0;
+
+    padding:18px 30px;
+}
+
+.lms-footer-content{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.lms-footer-left,
+.lms-footer-right{
+    color:#64748b;
+
+    font-size:13px;
+    font-weight:500;
+}
+
+/* lms course panel */
+
+/* ===========================
+   COURSE PANEL
+=========================== */
+
+.lms-course-panel{
+    background:#fff;
+    border-radius:28px;
+    border:1px solid #e5e7eb;
+
+    padding:28px;
+
+    box-shadow:
+        0 10px 40px rgba(15,23,42,.06);
+
+    position:relative;
+    overflow:hidden;
+    margin-top: -40px;
+}
+
+/* decorative gradient strip */
+
+.lms-course-panel::before{
+    content:'';
+
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+
+    height:6px;
+
+    background:linear-gradient(
+        90deg,
+        #2563eb,
+        #4f46e5,
+        #7c3aed
+    );
+}
+
+.lms-course-panel-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:30px;
+    padding-bottom:20px;
+
+    border-bottom:1px solid #eef2f7;
+}
+
+.lms-course-panel-header h4{
+    margin:0;
+    font-size:1.35rem;
+    font-weight:700;
+    color:#0f172a;
+}
+
+.lms-course-panel-header p{
+    margin:6px 0 0;
+    color:#64748b;
+    font-size:.95rem;
+}
+
+.lms-course-count{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    padding:10px 16px;
+
+    border-radius:999px;
+
+    background:#eff6ff;
+    color:#2563eb;
+
+    font-size:.9rem;
+    font-weight:700;
+}
+
+/* Optional subtle background */
+
+.lms-course-panel-body{
+    position:relative;
+}
+
+.lms-course-panel-body::after{
+    content:'';
+
+    position:absolute;
+
+    width:350px;
+    height:350px;
+
+    top:-150px;
+    right:-150px;
+
+    border-radius:50%;
+
+    background:rgba(79,70,229,.03);
+
+    pointer-events:none;
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .lms-course-panel{
+        padding:20px;
+        border-radius:22px;
+    }
+
+    .lms-course-panel-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+    }
+}
 </style>
 
     @stack('styles')
@@ -2123,7 +2270,7 @@
 
     <div class="lms-footer-top">
         <div class="lms-app-info">
-            <span class="app-name">Digi-LMS</span>
+            <span class="app-name">Digi-Hub</span>
             <span class="app-version">v1.0.0</span>
         </div>
     </div>
@@ -2239,6 +2386,22 @@
         <div class="lms-content">
             @yield('content')
         </div>
+
+        <footer class="lms-footer">
+            <div class="lms-footer-content">
+
+                <div class="lms-footer-left">
+                    © {{ date('Y') }}
+                    <strong>{{ config('app.name') }}</strong>
+                    • Learning Management System
+                </div>
+
+                <div class="lms-footer-right">
+                    Kings Digital Literacy Hub
+                </div>
+
+            </div>
+        </footer>
 
     </main>
 

@@ -13,19 +13,19 @@ use Carbon\Carbon;
 
     <div class="container">
 
-        <div class="lms-header-card">
+        <!-- <div class="lms-header-card"> -->
 
             <!-- LEFT SIDE: Title + Breadcrumb -->
-            <div class="lms-header-left">
+            <!-- <div class="lms-header-left">
 
                 <h1 class="lms-page-title">
                     My Dashboard
                 </h1>                
 
-            </div>
+            </div> -->
 
             <!-- RIGHT SIDE: QUICK ACTIONS -->
-             <nav aria-label="breadcrumb" class="lms-breadcrumb-nav">
+             <!-- <nav aria-label="breadcrumb" class="lms-breadcrumb-nav">
                     <ol class="breadcrumb mb-0">
 
                         <li class="breadcrumb-item">
@@ -37,20 +37,10 @@ use Carbon\Carbon;
                         </li>
 
                     </ol>
-                </nav>
-            <!-- <div class="lms-header-right">
+                </nav> -->
+            
 
-                <a href="#" class="lms-btn lms-btn-outline">
-                    <i class="fa fa-book"></i> My Courses
-                </a>
-
-                <a href="#" class="lms-btn lms-btn-primary">
-                    <i class="fa fa-plus"></i> New Course
-                </a>
-
-            </div> -->
-
-        </div>
+        <!-- </div> -->
 
     </div>
 
@@ -93,6 +83,17 @@ use Carbon\Carbon;
                         <div class="enrolled-courses-text">
                             <h6>{{ $enrollment ? $enrollment->count() : 0 }}</h6>
                             <p style="color: white; font-weight: bold;">Enrolled</p>
+                        </div>
+                    </div>
+
+                    <div class="enrolled-courses">
+                        <div class="enrolled-courses-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+
+                        <div class="enrolled-courses-text">
+                            <h6>{{ $enrollment->where('completed','!=',2)->count() }}</h6>
+                            <p style="color: white; font-weight: bold;">Active</p>
                         </div>
                     </div>
 
@@ -218,7 +219,23 @@ use Carbon\Carbon;
                 </div>
 
                 <div class="tab-pane fade show active" id="nav-coursesall" role="tabpanel">
+                    <div class="lms-course-panel">
 
+                    <div class="lms-course-panel-header">
+
+                        <div>
+                            <h4>My Courses</h4>
+                            <p>Continue your learning journey and track your progress.</p>
+                        </div>
+
+                        <span class="lms-course-count">
+                            {{ $enrollment->total() }} Courses
+                        </span>
+
+                    </div>
+
+                    <div class="lms-course-panel-body">
+        
                     <div class="row g-4">
 
                         @forelse ($enrollment as $a)
@@ -243,7 +260,8 @@ use Carbon\Carbon;
                                         class="lms-course-image-link">
 
                                             <img src="{{ asset('uploads/courses/' . $course?->image) }}"
-                                                alt="{{ $course?->title_en }}">
+                                                alt="{{ $course?->title_en }}"
+                                                onerror="this.src='{{ asset('uploads/courses/course_blank.jpg') }}'">
 
                                         </a>
 
@@ -346,7 +364,11 @@ use Carbon\Carbon;
 
                         @endforelse
 
+                    </div>                  
+
                     </div>
+
+                </div>
 
                     <!-- PAGINATION -->
                     <div class="lms-pagination mt-4">

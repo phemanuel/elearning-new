@@ -189,6 +189,7 @@
                                                     src="{{ asset('uploads/students/' . $enrollment->student->image) }}"
                                                     class="lms-avatar"
                                                     alt="student"
+                                                    onerror="this.src='{{ asset('uploads/students/blank_new.png') }}'"
                                                 >
 
                                                 <div>
@@ -408,6 +409,7 @@
                                                 class="lms-avatar"
                                                 style="border-radius:12px; width:46px; height:46px;"
                                                 alt="course"
+                                                onerror="this.src='{{ asset('uploads/courses/course_blank.jpg') }}'"
                                             >
                                         </td>
 
