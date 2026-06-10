@@ -205,6 +205,11 @@ Route::middleware(['checkstudent'])->prefix('students')->group(function () {
     Route::post('/profile/savePass', [stu_profile::class, 'change_password'])->name('change_password');
     Route::post('/change-image', [stu_profile::class, 'changeImage'])->name('change_image');
 
+    Route::get('/myCourses', [studashboard::class, 'myCourses'])
+    ->name('myCourses.index'); 
+    Route::get('/certificates', [studashboard::class, 'certificate'])
+    ->name('student.certificates');
+
     // ssl Routes
 //    Route::post('/payment/ssl/submit', [sslcz::class, 'store'])->name('payment.ssl.submit');
     Route::post('/payment/enrollee/submit', [PaymentController::class, 'getEnrollee'])

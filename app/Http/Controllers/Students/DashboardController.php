@@ -172,4 +172,68 @@ class DashboardController extends Controller
         ));
     }
 
+    public function myCourses()
+    {
+        $studentId = currentUserId();
+
+        $student_info = Student::find($studentId);
+
+        // ✅ Enrolled courses only (core dataset for this page)
+        $enrollments = Enrollment::with([
+                'course.lessons',
+                'course.segments',
+                'course.instructor'
+            ])
+            ->where('student_id', $studentId)
+            ->latest()
+            ->paginate(10);
+
+        // ✅ Stats (same logic, but scoped for My Courses page)
+        $activeCourses = Enrollment::where('student_id', $studentId)
+            ->where('completed', 0)
+            ->count();
+
+        $completedCourses = Enrollment::where('student_id', $studentId)
+            ->where('completed', 1)
+            ->count();
+
+        // 🔥 Progress calculation (mirroring your dashboard logic)
+        $courseProgress = [];
+
+        foreach ($enrollments as $enroll) {
+
+            $totalLessons = $enroll->course->lessons->count();
+
+            $completedLessons = ProgressAll::where('student_id', $studentId)
+                ->where('course_id', $enroll->course_id)
+                ->where('completed', 1)
+                ->count();
+
+            $courseProgress[$enroll->course_id] = $totalLessons > 0
+                ? round(($completedLessons / $totalLessons) * 100, 2)
+                : 0;
+        }
+
+        return view('students.my_courses', compact(
+            'student_info',
+            'enrollments',
+            'activeCourses',
+            'completedCourses',
+            'courseProgress'
+        ));
+    }
+
+    public function certificate()
+    {
+        $studentId = currentUserId();
+
+        $student_info = Student::find($studentId);
+
+        $certificates = Enrollment::with('course')
+            ->where('student_id', $studentId)
+            ->where('completed', 2) // completed courses
+            ->get();
+
+        return view('students.certificate', compact('certificates'));
+    }
 }

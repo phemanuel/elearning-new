@@ -75,37 +75,43 @@ use Carbon\Carbon;
 
                 <div class="students-info-intro-end">
 
-                    <div class="enrolled-courses">
-                        <div class="enrolled-courses-icon">
+                    <div class="dashboard-stat enrolled">
+
+                        <div class="dashboard-stat-icon">
                             <i class="fas fa-book-open"></i>
                         </div>
 
-                        <div class="enrolled-courses-text">
+                        <div class="dashboard-stat-content">
                             <h6>{{ $enrollment ? $enrollment->count() : 0 }}</h6>
-                            <p style="color: white; font-weight: bold;">Enrolled</p>
+                            <span>Enrolled</span>
                         </div>
+
                     </div>
 
-                    <div class="enrolled-courses">
-                        <div class="enrolled-courses-icon">
-                            <i class="fas fa-book-open"></i>
+                    <div class="dashboard-stat active">
+
+                        <div class="dashboard-stat-icon">
+                            <i class="fas fa-play-circle"></i>
                         </div>
 
-                        <div class="enrolled-courses-text">
+                        <div class="dashboard-stat-content">
                             <h6>{{ $enrollment->where('completed','!=',2)->count() }}</h6>
-                            <p style="color: white; font-weight: bold;">Active</p>
+                            <span>Active</span>
                         </div>
+
                     </div>
 
-                    <div class="completed-courses">
-                        <div class="completed-courses-icon">
+                    <div class="dashboard-stat completed">
+
+                        <div class="dashboard-stat-icon">
                             <i class="fas fa-check-circle"></i>
                         </div>
 
-                        <div class="completed-courses-text">
-                            <h5>{{ $completedCourses }}</h5>
-                            <p style="color: white; font-weight: bold;">Completed</p>
+                        <div class="dashboard-stat-content">
+                            <h6>{{ $completedCourses }}</h6>
+                            <span>Completed</span>
                         </div>
+
                     </div>
 
                 </div>

@@ -2034,14 +2034,20 @@
 }
 
 /* footer style */
-.lms-footer{
-    margin-top:30px;
+html, body {
+    height: 100%;
+}
 
-    background:#ffffff;
+/* push footer down using viewport math */
+.lms-footer {
+    width: 100%;
+    background: #111827;
+    color: #fff;
+    padding: 12px 20px;
 
-    border-top:1px solid #e2e8f0;
-
-    padding:18px 30px;
+    /* key fix */
+    position: sticky;
+    top: 100vh;
 }
 
 .lms-footer-content{
@@ -2052,7 +2058,7 @@
 
 .lms-footer-left,
 .lms-footer-right{
-    color:#64748b;
+    color:#fff;
 
     font-size:13px;
     font-weight:500;
@@ -2178,6 +2184,1073 @@
         gap:12px;
     }
 }
+
+/* dashboard stat */
+.dashboard-stat{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:14px 16px;
+
+    border-radius:16px;
+
+    min-width:0;
+    overflow:hidden;
+
+    transition:all .3s ease;
+}
+
+.dashboard-stat:hover{
+    transform:translateY(-2px);
+}
+
+.dashboard-stat-icon{
+    width:42px;
+    height:42px;
+
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,.18);
+    backdrop-filter:blur(10px);
+}
+
+.dashboard-stat-icon i{
+    font-size:18px;
+    color:#fff;
+}
+
+.dashboard-stat-content{
+    min-width:0;
+    flex:1;
+}
+
+.dashboard-stat-content h6{
+    margin:0;
+
+    color:#fff;
+
+    font-size:1.25rem;
+    font-weight:700;
+
+    line-height:1.1;
+}
+
+.dashboard-stat-content span{
+    display:block;
+
+    color:rgba(255,255,255,.92);
+
+    font-size:.8rem;
+    font-weight:600;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+/* Keep your existing colors */
+
+.dashboard-stat.enrolled{
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+}
+
+.dashboard-stat.active{
+    background:linear-gradient(
+        135deg,
+        #b992e7,
+        #7a21b1
+    );
+}
+
+.dashboard-stat.completed{
+    background:linear-gradient(
+        135deg,
+        #16537a,
+        #2c94ef
+    );
+}
+
+/* lms-search-course */
+.lms-filter-card{
+    background:#fff;
+    border-radius:24px;
+    padding:24px;
+
+    border:1px solid #e5e7eb;
+
+    box-shadow:
+    0 10px 30px rgba(15,23,42,.05);
+
+    position:sticky;
+    top:20px;
+}
+.lms-results-card{
+    background:#fff;
+
+    border-radius:24px;
+
+    padding:24px;
+
+    border:1px solid #e5e7eb;
+
+    box-shadow:
+    0 10px 30px rgba(15,23,42,.05);
+}
+
+.lms-results-header{
+    margin-bottom:25px;
+    padding-bottom:20px;
+    border-bottom:1px solid #eef2f7;
+}
+
+.lms-results-header h4{
+    margin:0;
+    font-weight:700;
+}
+
+.lms-results-header p{
+    margin:5px 0 0;
+    color:#64748b;
+}
+.course-search-hero{
+
+    background:
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5,
+        #7c3aed
+    );
+
+    border-radius:30px;
+
+    padding:50px 40px;
+
+    margin-bottom:35px;
+
+    color:#fff;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.course-search-content{
+    max-width:700px;
+}
+
+.course-search-content h2{
+    font-size:2rem;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+.course-search-content p{
+    opacity:.9;
+    margin-bottom:25px;
+}
+
+.course-search-form{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    background:#fff;
+
+    padding:10px;
+
+    border-radius:18px;
+}
+
+.course-search-form i{
+    color:#64748b;
+    padding-left:10px;
+}
+
+.course-search-form input{
+    border:none;
+    box-shadow:none;
+}
+
+.course-search-form button{
+    border:none;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    padding:12px 24px;
+
+    border-radius:12px;
+
+    font-weight:600;
+}
+/* Category row */
+.accordion-body__item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:8px 0;
+    border-bottom:1px solid #f1f5f9;
+}
+
+/* Left side */
+.check-box{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    min-width:0;
+}
+
+/* Category name */
+.check-box label{
+    margin:0;
+    font-size:.85rem;
+    font-weight:500;
+    color:#334155;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+/* Count */
+.check-details{
+    margin:0;
+
+    font-size:.8rem;
+    font-weight:600;
+    color:#64748b;
+
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+
+    padding:2px 8px;
+    border-radius:999px;
+
+    line-height:1.4;
+}
+.course-search-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+
+    margin-bottom:20px;
+}
+
+.hero-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    padding:8px 14px;
+
+    background:rgba(255,255,255,.15);
+
+    border:1px solid rgba(255,255,255,.2);
+
+    border-radius:999px;
+
+    color:#fff;
+    text-decoration:none;
+
+    font-size:.85rem;
+    font-weight:600;
+
+    backdrop-filter:blur(10px);
+
+    transition:.3s ease;
+}
+
+.hero-link:hover{
+    background:rgba(255,255,255,.25);
+    color:#fff;
+    transform:translateY(-2px);
+}
+
+.hero-link i{
+    font-size:.8rem;
+}
+
+/* my-courses */
+/* =========================
+   GLOBAL CONTAINER
+========================= */
+.mycourses-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.mycourses-header h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+}
+
+.mycourses-header p {
+    margin: 5px 0 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* Explore Button */
+.browse-course-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: linear-gradient(135deg, #4f46e5, #2563eb);
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.25s ease;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+}
+
+.browse-course-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(37, 99, 235, 0.35);
+}
+
+/* =========================
+   STATS CARDS
+========================= */
+
+/* =========================
+   MAIN CARD
+========================= */
+.mycourses-card {
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid #eef2f7;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+}
+
+/* Header */
+.mycourses-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    border-bottom: 1px solid #eef2f7;
+    background: #f8fafc;
+}
+
+.mycourses-card-header h5 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Search */
+.course-search-input {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    outline: none;
+    width: 260px;
+    transition: 0.2s ease;
+    font-size: 14px;
+    background: #fff;
+}
+
+.course-search-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* =========================
+   COURSE ITEM
+========================= */
+.my-course-item {
+    display: flex;
+    gap: 16px;
+    padding: 18px 20px;
+    border-bottom: 1px solid #f1f5f9;
+    transition: 0.25s ease;
+}
+
+.my-course-item:hover {
+    background: #f8fafc;
+}
+
+.course-thumb {
+    width: 90px;
+    height: 70px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #e2e8f0;
+}
+
+.course-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Content */
+.course-content {
+    flex: 1;
+}
+
+.course-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.course-top h6 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 5px;
+    color: #0f172a;
+}
+
+.course-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    color: #64748b;
+}
+
+.course-meta i {
+    margin-right: 4px;
+}
+
+/* Badge */
+.course-badge {
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.course-badge.active {
+    background: #fff7ed;
+    color: #f59e0b;
+}
+
+.course-badge.completed {
+    background: #ecfdf5;
+    color: #10b981;
+}
+
+/* =========================
+   PROGRESS BAR
+========================= */
+.course-progress-wrapper {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.course-progress {
+    flex: 1;
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.course-progress span {
+    display: block;
+    height: 100%;
+    background: linear-gradient(135deg, #4f46e5, #2563eb);
+    border-radius: 999px;
+}
+
+.course-progress-wrapper small {
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+.course-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+}
+
+.continue-btn {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.continue-btn:hover {
+    background: #1d4ed8;
+}
+
+.certificate-btn {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: #10b981;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.certificate-btn:hover {
+    background: #059669;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+.empty-courses {
+    text-align: center;
+    padding: 50px 20px;
+    color: #64748b;
+}
+
+.empty-courses i {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: #94a3b8;
+}
+
+.empty-courses h4 {
+    margin: 10px 0 5px;
+    color: #0f172a;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+    .mycourses-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .course-search-input {
+        width: 100%;
+    }
+
+    .my-course-item {
+        flex-direction: column;
+    }
+
+    .course-thumb {
+        width: 100%;
+        height: 160px;
+    }
+
+    .course-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+ /* =========================
+   CONTAINER
+========================= */
+.mc-container {
+    padding: 20px;
+}
+
+/* =========================
+   HEADER
+========================= */
+.mc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 20px;
+}
+
+.mc-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0;
+    color: #0f172a;
+}
+
+.mc-subtitle {
+    margin: 5px 0 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.mc-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: linear-gradient(135deg, #4f46e5, #2563eb);
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s ease;
+}
+
+.mc-action-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* =========================
+   STATS
+========================= */
+.mc-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.mc-stat-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #eef2f7;
+}
+
+.mc-stat-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.mc-stat-card.active .mc-stat-icon {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+.mc-stat-card.completed .mc-stat-icon {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.mc-stat-info h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.mc-stat-info span {
+    font-size: 13px;
+    color: #64748b;
+}
+
+/* =========================
+   GRID
+========================= */
+.mc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* =========================
+   CARD
+========================= */
+.mc-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #eef2f7;
+    transition: 0.25s ease;
+}
+
+.mc-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* =========================
+   IMAGE (FIXED COMPLETELY)
+========================= */
+.mc-card-image {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* make link fill full image area */
+.mc-card-image a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* image fully covers container */
+.mc-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border: 0;
+}
+
+/* =========================
+   BADGE (ONLY ONE CLEAN VERSION)
+========================= */
+.mc-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 5px 10px;
+    font-size: 11px;
+    border-radius: 999px;
+    color: #fff;
+    z-index: 2;
+}
+
+.mc-badge.done {
+    background: #10b981;
+}
+
+.mc-badge.progress {
+    background: #f59e0b;
+}
+
+.mc-badge.new {
+    background: #64748b;
+}
+
+/* =========================
+   BODY
+========================= */
+.mc-card-body {
+    padding: 15px;
+}
+
+.mc-course-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #0f172a;
+}
+
+/* =========================
+   META
+========================= */
+.mc-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #64748b;
+    margin-bottom: 10px;
+}
+
+/* =========================
+   INSTRUCTOR
+========================= */
+.mc-instructor {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.mc-instructor img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+}
+
+.mc-instructor span {
+    font-size: 13px;
+    color: #334155;
+}
+
+/* =========================
+   PROGRESS
+========================= */
+.mc-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.mc-progress-bar span {
+    display: block;
+    height: 100%;
+    background: linear-gradient(135deg, #4f46e5, #2563eb);
+}
+
+.mc-progress small {
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+.mc-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.mc-btn {
+    flex: 1;
+    text-align: center;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.mc-btn.primary {
+    background: #2563eb;
+    color: #fff;
+}
+
+.mc-btn.secondary {
+    background: #10b981;
+    color: #fff;
+}
+
+/* =========================
+   EMPTY
+========================= */
+.mc-empty {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+/* =========================
+   PAGINATION
+========================= */
+.mc-pagination {
+    margin-top: 20px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 992px) {
+    .mc-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .mc-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .mc-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mc-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* active links */
+.lms-sidebar-menu a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    color: #000; /* inactive links = black */
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+/* hover only subtle */
+.lms-sidebar-menu a:hover {
+    color: #2563eb;
+    background: transparent;
+}
+
+/* ACTIVE LINK (minimal style, no box) */
+.lms-sidebar-menu a.active {
+    color: #2563eb;
+    font-weight: 600;
+    position: relative;
+}
+
+/* optional subtle left indicator instead of box */
+.lms-sidebar-menu a.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 25%;
+    height: 50%;
+    width: 3px;
+    background: #2563eb;
+    border-radius: 10px;
+}
+/* certificate style */
+.cert-wrapper {
+    padding: 25px;
+}
+
+/* HERO */
+.cert-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #1e293b, #111827);
+    color: #fff;
+    padding: 20px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+}
+
+.cert-hero h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.cert-hero p {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: #cbd5e1;
+}
+
+.cert-count {
+    background: rgba(255,255,255,0.1);
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 13px;
+}
+
+/* GRID */
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 15px;
+}
+
+/* CARD */
+.cert-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 14px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.25s ease;
+}
+
+.cert-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+}
+
+/* LEFT SIDE */
+.cert-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cert-icon {
+    width: 45px;
+    height: 45px;
+    background: #f1f5f9;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.cert-info h3 {
+    margin: 0;
+    font-size: 15px;
+    color: #111827;
+}
+
+.cert-info p {
+    margin: 3px 0;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+/* BADGE */
+.cert-badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: #dcfce7;
+    color: #166534;
+    margin-top: 5px;
+}
+
+/* BUTTON */
+.cert-btn {
+    background: #2563eb;
+    color: #fff;
+    padding: 9px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.cert-btn:hover {
+    background: #1d4ed8;
+}
+
+/* EMPTY */
+.cert-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6b7280;
+}
+
+.cert-empty h2 {
+    margin-bottom: 5px;
+}
 </style>
 
     @stack('styles')
@@ -2199,16 +3272,31 @@
         </a>
     </div>
 
+        @php
+            function activeLink($routes)
+            {
+                if (is_array($routes)) {
+                    foreach ($routes as $route) {
+                        if (request()->routeIs($route)) {
+                            return 'active';
+                        }
+                    }
+                    return '';
+                }
 
+                return request()->routeIs($routes) ? 'active' : '';
+            }
+        @endphp
     <!-- ================= SCROLLABLE AREA ================= -->
     <div class="lms-sidebar-scroll">
 
         <ul class="lms-sidebar-menu">
 
-            <!-- ===== MAIN ===== -->
             <li class="lms-section-title">MAIN</li>
 
-            <li><a href="{{ route('home') }}">🏠 Home</a></li>
+            <li>
+                <a href="{{ route('home') }}" class="{{ activeLink('home') }}">🏠 Home</a>
+            </li>
 
             @php
                 $isStudent = request()->session()->get('studentLogin');
@@ -2216,49 +3304,90 @@
             @endphp
 
             @if($isStudent)
-                <li><a href="{{ route('studentdashboard') }}">📊 Dashboard</a></li>
+                <li>
+                    <a href="{{ route('studentdashboard') }}" class="{{ activeLink('studentdashboard') }}">
+                        📊 Dashboard
+                    </a>
+                </li>
             @elseif($isUser)
-                <li><a href="{{ route('dashboard') }}">📊 Dashboard</a></li>
+                <li>
+                    <a href="{{ route('dashboard') }}" class="{{ activeLink('dashboard') }}">
+                        📊 Dashboard
+                    </a>
+                </li>
             @endif
 
-            <li><a href="{{ route('searchCourse') }}">📚 Browse Courses</a></li>
-            <li><a href="{{ route('searchInstructor') }}">👨‍🏫 Instructors</a></li>
+            <li>
+                <a href="{{ route('searchCourse') }}" class="{{ activeLink('searchCourse') }}">
+                    📚 Browse Courses
+                </a>
+            </li>
 
+            <li>
+                <a href="{{ route('searchInstructor') }}" class="{{ activeLink('searchInstructor') }}">
+                    👨‍🏫 Instructors
+                </a>
+            </li>
 
-            <!-- ===== STUDENT SECTION ===== -->
             @if($isStudent)
 
                 <li class="lms-section-title">LEARNING</li>
 
-                <li><a href="#">📖 My Courses</a></li>
-                <!-- <li><a href="#">▶️ Continue Learning</a></li>
-                <li><a href="#">📝 Assignments</a></li>
-                <li><a href="#">📅 Schedule</a></li> -->
-                <li><a href="#">📌 Wishlist</a></li>
-                <li><a href="#">🏆 Certificates</a></li>
+                <li>
+                    <a href="{{ route('myCourses.index') }}" class="{{ activeLink('myCourses.index') }}">
+                        📖 My Courses
+                    </a>
+                </li>                
 
+                <li>
+                    <a href="{{route('student.certificates')}}" class="{{ activeLink('student.certificates') }}">
+                        🏆 Certificates
+                    </a>
+                </li>
 
                 <li class="lms-section-title">PROGRESS</li>
 
-                <!-- <li><a href="#">📈 Progress Report</a></li> -->
-                <li><a href="#">🎯 Goals</a></li>
-                <li><a href="#">📊 Learning Stats</a></li>
+                <li>
+                    <a href="#" class="{{ activeLink('goals') }}">
+                        🎯 Goals
+                    </a>
+                </li>
 
+                <li>
+                    <a href="#" class="{{ activeLink('learning.stats') }}">
+                        📊 Learning Stats
+                    </a>
+                </li>
 
                 <li class="lms-section-title">PAYMENTS</li>
 
-                <li><a href="{{ route('cart') }}">🛒 Cart</a></li>
-                <li><a href="#">💳 Payment History</a></li>
-                <!-- <li><a href="#">🧾 Invoices</a></li> -->
+                <li>
+                    <a href="{{ route('cart') }}" class="{{ activeLink('cart') }}">
+                        🛒 Cart
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="{{ activeLink('payment.history') }}">
+                        💳 Payment History
+                    </a>
+                </li>
 
             @endif
 
-
-            <!-- ===== GENERAL ===== -->
             <li class="lms-section-title">EXPLORE</li>
 
-            <li><a href="{{ route('about') }}">ℹ️ About</a></li>
-            <li><a href="{{ route('contact') }}">📞 Contact</a></li>
+            <li>
+                <a href="{{ route('about') }}" class="{{ activeLink('about') }}">
+                    ℹ️ About
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('contact') }}" class="{{ activeLink('contact') }}">
+                    📞 Contact
+                </a>
+            </li>
 
         </ul>
 
