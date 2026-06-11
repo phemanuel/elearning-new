@@ -1,4 +1,4 @@
-@extends('frontend.layouts.app')
+@extends('frontend.layouts.student-app')
 @section('title', 'Instructors')
 @section('body-attr') style="background-color: #ebebf2;" @endsection
 
@@ -8,430 +8,472 @@
 
 @section('content')
 <!-- Breadcrumb Starts Here -->
-<div class="event-sub-section event-sub-section--spaceY eventsearch-sub-section">
+<section class="lms-breadcrumb-wrap">
     <div class="container">
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb align-items-center bg-transparent p-0 mb-0">
-                <li class="breadcrumb-item">
-                    <a href="{{route('home')}}" class="fs-6 text-secondary">Home</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{{route('searchInstructor')}}" class="fs-6 text-secondary">Instructor</a>
-                </li>
-            </ol>
-        </nav>
+
+        <div class="lms-breadcrumb-card">
+
+            <div class="lms-breadcrumb-content">
+
+                <span class="lms-breadcrumb-label">
+                    Find Instructors
+                </span>
+
+                <h1 class="lms-breadcrumb-title">
+                    Browse Expert Instructors
+                </h1>
+
+                <p class="lms-breadcrumb-text">
+                    Discover experienced instructors, explore their profiles,
+                    and connect with the right mentor for your learning journey.
+                </p>
+
+            </div>
+
+            <!-- Search Area -->
+            <div class="lms-search-area">
+
+                <form action="#" class="lms-search-form">
+
+                    <div class="lms-search-box">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            width="22"
+                            height="22"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round">
+
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+
+                        </svg>
+
+                        <input type="text"
+                            class="lms-search-input"
+                            placeholder="Search instructors, courses, skills..." />
+
+                        <button type="submit" class="lms-search-btn">
+                            Search
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <nav aria-label="breadcrumb">
+
+                <ol class="lms-breadcrumb">
+
+                    <li>
+                        <a href="{{ route('home') }}">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('searchInstructor') }}">
+                            Instructors
+                        </a>
+                    </li>
+
+                </ol>
+
+            </nav>
+
+        </div>
+
     </div>
-</div>
+</section>
 <!-- Breadcrumb Ends Here -->
 
 <!-- Event Search Starts Here -->
 <section class="section event-search">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-9 mx-auto">
-                <div class="event-search-bar">
-                    <form action="#">
-                        <div class="form-input-group">
-                            <input type="text" class="form-control" placeholder="Search Course..." />
-                            <button class="button button-lg button--primary" type="submit" id="button-addon2">
-                                Search
-                            </button>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-search">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                            </svg>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        
         <div class="row">
             <div class="col-lg-4 d-none d-lg-block">
-                <div class="accordion sidebar-filter" id="sidebarFilter">
-                    <!-- Search by Category  -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="categoryAcc">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#categoryCollapse" aria-expanded="true"
-                                aria-controls="categoryCollapse">
-                                Category
-                            </button>
-                        </h2>
-                        <div id="categoryCollapse" class="accordion-collapse collapse show"
-                            aria-labelledby="categoryAcc" data-bs-parent="#sidebarFilter">
-                            <div class="accordion-body">
-                                <form action="{{ route('searchInstructor') }}" method="get">
-                                    @csrf
-                                    <div class="accordion-body__item">
-                                    <div class="check-box">
-                                        <!-- Handle "All" Categories Case -->
-                                        <input type="checkbox" class="checkbox-primary" name="categories[]"
-                                            value="" {{ empty($selectedCategories) || in_array('', (array)$selectedCategories) ? 'checked' : '' }}>
-                                        <label> All </label>
-                                    </div>
-                                        <p class="check-details">
-                                            {{ $allInstructors->count() }}
-                                        </p>
-                                    </div>
-                                    @foreach ($categories as $cat)
-                                        @php
-                                            $courseCount = $cat->course()->where('status', 2)->count();
-                                        @endphp
-                                        <div class="accordion-body__item">
-                                            <div class="check-box">
-                                                <input type="checkbox" class="checkbox-primary" name="categories[]" 
-                                                    value="{{ $cat->id }}" 
-                                                    {{ in_array($cat->id, (array)$selectedCategories) ? 'checked' : '' }}>
-                                                <label> {{ $cat->category_name }} </label>
-                                            </div>
-                                            <p class="check-details">
-                                                {{ $courseCount }}
-                                            </p>
+
+                <div class="lms-filter-sidebar">
+
+                    <div class="accordion lms-filter-accordion" id="lmsFilterAccordion">
+
+                        <!-- CATEGORY FILTER -->
+                        <div class="lms-filter-card">
+
+                            <h2 class="accordion-header">
+
+                                <button class="accordion-button lms-filter-toggle"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#lmsCategoryFilter"
+                                    aria-expanded="true">
+
+                                    <span>Categories</span>
+
+                                </button>
+
+                            </h2>
+
+                            <div id="lmsCategoryFilter"
+                                class="accordion-collapse collapse show"
+                                data-bs-parent="#lmsFilterAccordion">
+
+                                <div class="lms-filter-body">
+
+                                    <form action="{{ route('searchInstructor') }}" method="GET">
+
+                                        <div class="lms-filter-item">
+
+                                            <label class="lms-checkbox">
+
+                                                <input type="checkbox"
+                                                    name="categories[]"
+                                                    value=""
+                                                    {{ empty($selectedCategories) || in_array('', (array)$selectedCategories) ? 'checked' : '' }}>
+
+                                                <span class="lms-checkbox-mark"></span>
+
+                                                <span class="lms-filter-name">
+                                                    All Categories
+                                                </span>
+
+                                            </label>
+
+                                            <span class="lms-filter-count">
+                                                {{ $allInstructors->count() }}
+                                            </span>
+
                                         </div>
-                                    @endforeach
-                                    <button type="submit" class="btn btn-primary">Apply Filter</button>
-                                </form>
+
+                                        @foreach($categories as $cat)
+
+                                            @php
+                                                $courseCount = $cat->course()->where('status',2)->count();
+                                            @endphp
+
+                                            <div class="lms-filter-item">
+
+                                                <label class="lms-checkbox">
+
+                                                    <input type="checkbox"
+                                                        name="categories[]"
+                                                        value="{{ $cat->id }}"
+                                                        {{ in_array($cat->id,(array)$selectedCategories) ? 'checked' : '' }}>
+
+                                                    <span class="lms-checkbox-mark"></span>
+
+                                                    <span class="lms-filter-name">
+                                                        {{ $cat->category_name }}
+                                                    </span>
+
+                                                </label>
+
+                                                <span class="lms-filter-count">
+                                                    {{ $courseCount }}
+                                                </span>
+
+                                            </div>
+
+                                        @endforeach
+
+                                        <button type="submit" class="lms-filter-btn">
+                                            Apply Filter
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
                             </div>
+
+                        </div>
+
+                        <!-- LEVEL FILTER -->
+                        <div class="lms-filter-card">
+
+                            <h2 class="accordion-header">
+
+                                <button class="accordion-button lms-filter-toggle collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#lmsLevelFilter"
+                                    aria-expanded="false">
+
+                                    <span>Difficulty Level</span>
+
+                                </button>
+
+                            </h2>
+
+                            <div id="lmsLevelFilter"
+                                class="accordion-collapse collapse"
+                                data-bs-parent="#lmsFilterAccordion">
+
+                                <div class="lms-filter-body">
+
+                                    <div class="lms-filter-item">
+
+                                        <label class="lms-checkbox">
+
+                                            <input type="checkbox"
+                                                {{ !$selectedDifficulty ? 'checked' : '' }}>
+
+                                            <span class="lms-checkbox-mark"></span>
+
+                                            <span class="lms-filter-name">
+                                                All Levels
+                                            </span>
+
+                                        </label>
+
+                                        <span class="lms-filter-count">
+                                            {{ $allInstructors->count() }}
+                                        </span>
+
+                                    </div>
+
+                                    <div class="lms-filter-item">
+
+                                        <label class="lms-checkbox">
+
+                                            <input type="checkbox">
+
+                                            <span class="lms-checkbox-mark"></span>
+
+                                            <span class="lms-filter-name">
+                                                Beginner
+                                            </span>
+
+                                        </label>
+
+                                        <span class="lms-filter-count">
+                                            {{ $difficulty_beginner->count() }}
+                                        </span>
+
+                                    </div>
+
+                                    <div class="lms-filter-item">
+
+                                        <label class="lms-checkbox">
+
+                                            <input type="checkbox">
+
+                                            <span class="lms-checkbox-mark"></span>
+
+                                            <span class="lms-filter-name">
+                                                Intermediate
+                                            </span>
+
+                                        </label>
+
+                                        <span class="lms-filter-count">
+                                            {{ $difficulty_intermediate->count() }}
+                                        </span>
+
+                                    </div>
+
+                                    <div class="lms-filter-item">
+
+                                        <label class="lms-checkbox">
+
+                                            <input type="checkbox">
+
+                                            <span class="lms-checkbox-mark"></span>
+
+                                            <span class="lms-filter-name">
+                                                Advanced
+                                            </span>
+
+                                        </label>
+
+                                        <span class="lms-filter-count">
+                                            {{ $difficulty_advanced->count() }}
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
                         </div>
 
                     </div>
-                    <!-- Search by Level  -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="levelAcc">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#levelCollapse" aria-expanded="false" aria-controls="levelCollapse">
-                                Level
-                            </button>
-                        </h2>
-                        <div id="levelCollapse" class="accordion-collapse collapse" aria-labelledby="levelAcc"
-                            data-bs-parent="#sidebarFilter">
-                            <div class="accordion-body">
-                                <form action="#">
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                        <input type="checkbox" class="checkbox-primary" name="category" value=""
-                                        {{!$selectedDifficulty ? 'checked' : '' }}>
-                                            <label> All </label>
-                                        </div>
-                                        <p class="check-details">
-                                        {{$allInstructors->count()}}
-                                        </p>
-                                    </div>
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> Beginner </label>
-                                        </div>
-                                        <p class="check-details">
-                                            {{$difficulty_beginner->count()}}
-                                        </p>
-                                    </div>
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> Intermediate </label>
-                                        </div>
-                                        <p class="check-details">
-                                        {{$difficulty_intermediate->count()}}
-                                        </p>
-                                    </div>
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> Advanced </label>
-                                        </div>
-                                        <p class="check-details">
-                                        {{$difficulty_advanced->count()}}
-                                        </p>
-                                    </div>                                    
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Search by Price  -->
-                    <!-- <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Price
-                            </button>
-                        </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                            data-bs-parent="#sidebarFilter">
-                            <div class="accordion-body">
-                                <div class="price-range">
-                                    <div>
-                                        <div class="price-range-block">
-                                            <form class="d-flex price-range-block__inputWrapper" action="#">
-                                                <input type="number" min="0" max="5000"
-                                                    oninput="validity.valid||(value='0');" id="min_price"
-                                                    class="price-range-field"
-                                                    style="width: 105px; height: 50px; border-radius: 4px; padding: 15px;" />
-                                                <span>to</span>
-                                                <input type="number" min="0" max="5000"
-                                                    oninput="validity.valid||(value='5000');" id="max_price"
-                                                    class="price-range-field"
-                                                    style="width: 125px; height: 50px; padding: 15px; border-radius: 4px;" />
-                                                <button class="angle-btn">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-chevron-right">
-                                                        <polyline points="9 18 15 12 9 6"></polyline>
-                                                    </svg>
-                                                </button>
-                                            </form>
-                                            <div id="slider-range" class="price-filter-range"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!-- Search by Rating  -->
-                    <!-- <div class="accordion-item">
-                        <h2 class="accordion-header" id="ratingAcc">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#ratingCollapse" aria-expanded="false" aria-controls="ratingCollapse">
-                                Rating
-                            </button>
-                        </h2>
-                        <div id="ratingCollapse" class="accordion-collapse collapse" aria-labelledby="ratingAcc"
-                            data-bs-parent="#sidebarFilter">
-                            <div class="accordion-body">
-                                <form action="#">
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> All </label>
-                                        </div>
-                                        <p class="check-details">
-                                            1,54,750
-                                        </p>
-                                    </div>
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> 1 Star and higher </label>
-                                        </div>
-                                        <p class="check-details">
-                                            45,770
-                                        </p>
-                                    </div>
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> 2 Star and higher </label>
-                                        </div>
-                                        <p class="check-details">
-                                            45,770
-                                        </p>
-                                    </div>
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> 3 Star and higher </label>
-                                        </div>
-                                        <p class="check-details">
-                                            45,770
-                                        </p>
-                                    </div>
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> 4 Star and higher </label>
-                                        </div>
-                                        <p class="check-details">
-                                            45,770
-                                        </p>
-                                    </div>
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> 5 Star </label>
-                                        </div>
-                                        <p class="check-details">
-                                            45,770
-                                        </p>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!-- Search by Duration 
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="durationAcc">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#durationCollapse" aria-expanded="false"
-                                aria-controls="durationCollapse">
-                                Duration
-                            </button>
-                        </h2>
-                        <div id="durationCollapse" class="accordion-collapse collapse" aria-labelledby="durationAcc"
-                            data-bs-parent="#sidebarFilter">
-                            <div class="accordion-body">
-                                <form action="#">
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> All </label>
-                                        </div>
-                                        <p class="check-details">
-                                            1,54,750
-                                        </p>
-                                    </div>
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> 0 - 5 minutes </label>
-                                        </div>
-                                        <p class="check-details">
-                                            45,770
-                                        </p>
-                                    </div>
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> 5 - 10 minutes </label>
-                                        </div>
-                                        <p class="check-details">
-                                            35,790
-                                        </p>
-                                    </div>
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> 10 - 15 minutes </label>
-                                        </div>
-                                        <p class="check-details">
-                                            5,770
-                                        </p>
-                                    </div>
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> 15+ minutes </label>
-                                        </div>
-                                        <p class="check-details">
-                                            765
-                                        </p>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div> -->
+
                 </div>
+
             </div>
 
             <div class="col-lg-8">
-                <div class="event-search-results">
-                    <div class="event-search-results-heading">
-                        <div class="nice-select" tabindex="0">
-                            <span class="current">Most Viewed</span>
-                            <!-- <ul class="list">
-                                <li data-value="Nothing" data-display="category" class="option selected focus">
-                                    Nothing
-                                </li>
-                                <li data-value="1" class="option">Some option</li>
-                                <li data-value="2" class="option">Another option</li>
-                                <li data-value="4" class="option">Potato</li>
-                            </ul> -->
-                        </div>
-                        <p>{{$instructors->count()}} results found.</p>
-                        <button class="button button-lg button--primary button--primary-filter d-lg-none" id="filter">
-                            <span>
-                                <svg width="19" height="16" viewBox="0 0 19 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M3.3335 14.9999V9.55554" stroke="white" stroke-width="1.7"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M3.3335 6.4444V1" stroke="white" stroke-width="1.7" stroke-linecap="round"
-                                        stroke-linejoin="round"></path>
-                                    <path d="M9.55469 14.9999V8" stroke="white" stroke-width="1.7"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M9.55469 4.88886V1" stroke="white" stroke-width="1.7"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M15.7773 14.9999V11.1111" stroke="white" stroke-width="1.7"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M15.7773 7.99995V1" stroke="white" stroke-width="1.7"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M1 9.55554H5.66663" stroke="white" stroke-width="1.7"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M7.22217 4.88867H11.8888" stroke="white" stroke-width="1.7"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M13.4443 11.1111H18.111" stroke="white" stroke-width="1.7"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
-                            </span>
+
+                <!-- Results Header -->
+                <div class="lms-results-header">
+
+                    <div class="lms-results-info">
+                        <h4>Discover Instructors</h4>
+                        <span>{{ $instructors->total() }} instructors found</span>
+                    </div>
+
+                    <div class="lms-results-actions">
+
+                        <select class="lms-sort-select">
+                            <option>Most Popular</option>
+                            <option>Newest</option>
+                            <option>Highest Rated</option>
+                            <option>Most Courses</option>
+                        </select>
+
+                        <button class="lms-mobile-filter d-lg-none" id="filter">
+                            <i class="fas fa-sliders-h"></i>
                             Filter
                         </button>
+
                     </div>
+
                 </div>
 
-                {{-- Instructors --}}
-<div class="row event-search-content">
-    @forelse ($instructors as $instructor)
-    <div class="col-md-6 mb-4">
-        <div class="contentCard contentCard--course">
-            <div class="contentCard-top">
-                <a href="{{ route('instructorProfile', encryptor('encrypt', $instructor->id)) }}">
-                    <img src="{{ asset('uploads/users/' . $instructor->image) }}" alt="Instructor Image" class="img-fluid" />
-                </a>
-            </div>
-            <div class="contentCard-bottom">
-                <h5>
-                    <a href="{{ route('instructorProfile', encryptor('encrypt', $instructor->id)) }}"
-                        class="font-title--card">{{ $instructor->name_en }}</a>
-                </h5>
-                <!-- <p class="font-para--md">{{ $instructor->bio ?? 'No biography available' }}</p> -->
+                <!-- Instructor Grid -->
+                <div class="row g-4">
 
-                <div class="contentCard-info d-flex align-items-center justify-content-between">
-                        <div class="icon">
-                            <img src="{{ asset('frontend/dist/images/icon/book.png') }}" alt="Courses Icon" />
-                            {{ $instructor->total_courses ?? 0 }} Courses
-                        </div>
-                        <!-- <span>{{ $instructor->total_courses ?? 0 }} Courses</span> -->
-                    <div class="rating d-flex align-items-center">
-                        <div class="icon">
-                            <img src="{{ asset('frontend/dist/images/icon/star.png') }}" alt="star" />
-                        </div>
-                        <span>4.5</span> {{-- Example static rating --}}
-                    </div>
-                </div>
-                <!-- <div class="contentCard-more"> -->
-                    <div class="contentCard-more d-flex align-items-center justify-content-between">
-                    <!-- View Profile Button -->
-                        <div class="contentCard-button">
-                            <a href="{{ route('instructorProfile', encryptor('encrypt', $instructor->id)) }}" class="button button-sm button--primary text-left">
-                                <i class="fas fa-user-circle"></i> Profile
-                            </a>
-                        </div>
-                        <!-- View Courses Button -->
-                                <div align="right"><a href="{{ route('instructorCourse', encryptor('encrypt', $instructor->id)) }}" class="button button-sm button--secondary text-right">
-                            <i class="fas fa-book-open"></i> Courses
-                            </a>
+                    @forelse($instructors as $instructor)
+
+                    <div class="col-md-6">
+
+                        <div class="lms-instructor-card">
+
+                            <div class="lms-instructor-image">
+
+                                <a href="{{ route('instructorProfile', encryptor('encrypt', $instructor->id)) }}">
+
+                                    <img
+                                        src="{{ asset('uploads/users/' . $instructor->image) }}"
+                                        alt="{{ $instructor->name_en }}">
+
+                                </a>
+
+                            </div>
+
+                            <div class="lms-instructor-content">
+
+                                <div class="lms-instructor-top">
+
+                                    <div>
+
+                                        <h5 class="lms-instructor-name">
+
+                                            <a href="{{ route('instructorProfile', encryptor('encrypt', $instructor->id)) }}">
+                                                {{ $instructor->name_en }}
+                                            </a>
+
+                                        </h5>
+
+                                        <span class="lms-instructor-badge">
+                                            Instructor
+                                        </span>
+
+                                    </div>
+
+                                    <div class="lms-instructor-rating">
+
+                                        <i class="fas fa-star"></i>
+
+                                        <span>4.5</span>
+
+                                    </div>
+
                                 </div>
-                            </tr>
-                        </table>  
-                    </div>
-            <!-- </div> -->
-            </div>
-        </div>
-    </div>
-    @empty
-    <div class="col-md-6 mb-4">
-        <div class="contentCard contentCard--course">
-            <h3>No Instructor Found</h3>
-        </div>
-    </div>
-    @endforelse
-</div>
 
-{{-- Pagination --}}
-<div class="pagination-group mt-lg-5 mt-2">
-    <p>{{ $instructors->links() }}</p>
-</div>
+                                @if(!empty($instructor->bio))
+                                <div class="lms-instructor-bio">
+
+                                    {{ \Illuminate\Support\Str::limit(strip_tags($instructor->bio), 90) }}
+
+                                </div>
+                                @endif
+
+                                <div class="lms-instructor-stats">
+
+                                    <div class="lms-stat-item">
+
+                                        <i class="fas fa-book-open"></i>
+
+                                        <span>
+                                            {{ $instructor->total_courses ?? 0 }}
+                                            Courses
+                                        </span>
+
+                                    </div>
+
+                                    <div class="lms-stat-item">
+
+                                        <i class="fas fa-user-graduate"></i>
+
+                                        <span>Expert Mentor</span>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="lms-instructor-actions">
+
+                                    <a href="{{ route('instructorProfile', encryptor('encrypt', $instructor->id)) }}"
+                                        class="lms-btn-primary">
+
+                                        <i class="fas fa-user-circle me-2"></i>
+                                        View Profile
+
+                                    </a>
+
+                                    <a href="{{ route('instructorCourse', encryptor('encrypt', $instructor->id)) }}"
+                                        class="lms-btn-outline">
+
+                                        <i class="fas fa-book-open me-2"></i>
+                                        Courses
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    @empty
+
+                    <div class="col-12">
+
+                        <div class="lms-empty-state">
+
+                            <i class="fas fa-search"></i>
+
+                            <h4>No Instructor Found</h4>
+
+                            <p>
+                                No instructors match your current search criteria.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    @endforelse
+
+                </div>
+
+                <!-- Pagination -->
+                <div class="lms-pagination-wrap">
+
+                    {{ $instructors->links() }}
+
+                </div>
 
             </div>
         </div>

@@ -41,6 +41,7 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\SubscriptionPlanController;
 use App\Http\Controllers\SmmBlueprintFormController;
+use App\Http\Controllers\GoalController;
 
 /* students */
 use App\Http\Controllers\Students\AuthController as sauth;
@@ -208,7 +209,20 @@ Route::middleware(['checkstudent'])->prefix('students')->group(function () {
     Route::get('/myCourses', [studashboard::class, 'myCourses'])
     ->name('myCourses.index'); 
     Route::get('/certificates', [studashboard::class, 'certificate'])
-    ->name('student.certificates');
+    ->name('student.certificates'); 
+
+    Route::get('/goals', [GoalController::class, 'index'])
+        ->name('student.goals');
+    Route::get('/goals/create', [GoalController::class, 'create'])
+        ->name('student.goals.create');
+    Route::post('/goals/store', [GoalController::class, 'store'])
+        ->name('student.goals.store');
+    Route::get('/goals/{id}/edit', [GoalController::class, 'edit'])
+        ->name('student.goals.edit');
+    Route::put('/goals/{goal}', [GoalController::class, 'update'])
+        ->name('student.goals.update');
+    Route::delete('/goals/{goal}', [GoalController::class, 'destroy'])
+        ->name('student.goals.destroy');
 
     // ssl Routes
 //    Route::post('/payment/ssl/submit', [sslcz::class, 'store'])->name('payment.ssl.submit');

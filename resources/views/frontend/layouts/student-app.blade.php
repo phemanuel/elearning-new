@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }} | @yield('title', 'Home')</title>
     <link rel="stylesheet" href="{{asset('frontend/dist/main.css')}}" />
     <link rel="icon" type="image/png" href="{{asset('frontend/dist/images/favicon/favicon.png')}}" />
@@ -3251,6 +3252,1060 @@ html, body {
 .cert-empty h2 {
     margin-bottom: 5px;
 }
+
+/* instructors breadcrumb  */
+/* ==========================================
+   LMS BREADCRUMB SECTION
+========================================== */
+
+.lms-breadcrumb-wrap{
+    margin-top: -40px;
+    /* margin-bottom: 5px; */
+    padding:30px 0;
+    
+}
+
+.lms-breadcrumb-card{
+    background:#ffffff;
+    border:1px solid #e2e8f0;
+    border-radius:24px;
+    padding:30px;
+    box-shadow:
+        0 10px 30px rgba(15,23,42,0.05);
+    position:relative;
+    overflow:hidden;
+    
+}
+
+.lms-breadcrumb-card::before{
+    content:"";
+    position:absolute;
+    top:-100px;
+    right:-100px;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    background:linear-gradient(
+        135deg,
+        rgba(59,130,246,.08),
+        rgba(99,102,241,.08)
+    );
+}
+
+.lms-breadcrumb-content{
+    position:relative;
+    z-index:2;
+    margin-bottom:20px;
+}
+
+.lms-breadcrumb-label{
+    display:inline-flex;
+    align-items:center;
+    padding:6px 14px;
+    background:#eff6ff;
+    color:#2563eb;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:12px;
+}
+
+.lms-breadcrumb-title{
+    font-size:32px;
+    font-weight:700;
+    color:#0f172a;
+    margin-bottom:10px;
+    line-height:1.2;
+}
+
+.lms-breadcrumb-text{
+    max-width:700px;
+    color:#64748b;
+    font-size:15px;
+    margin-bottom:0;
+}
+
+.lms-breadcrumb{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+    list-style:none;
+    padding:0;
+    margin:0;
+    position:relative;
+    z-index:2;
+}
+
+.lms-breadcrumb li{
+    display:flex;
+    align-items:center;
+    font-size:14px;
+}
+
+.lms-breadcrumb li:not(:last-child)::after{
+    content:"/";
+    margin-left:10px;
+    color:#94a3b8;
+}
+
+.lms-breadcrumb a{
+    text-decoration:none;
+    color:#64748b;
+    font-weight:500;
+    transition:all .3s ease;
+}
+
+.lms-breadcrumb a:hover{
+    color:#2563eb;
+}
+
+.lms-breadcrumb li:last-child a{
+    color:#2563eb;
+    font-weight:600;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width:768px){
+
+    .lms-breadcrumb-card{
+        padding:24px;
+        border-radius:20px;
+    }
+
+    .lms-breadcrumb-title{
+        font-size:24px;
+    }
+
+    .lms-breadcrumb-text{
+        font-size:14px;
+    }
+
+}
+/* ==========================================
+   LMS SEARCH
+========================================== */
+
+.lms-search-area{
+    position:relative;
+    z-index:2;
+    margin:30px 0;
+}
+
+.lms-search-form{
+    max-width:750px;
+}
+
+.lms-search-box{
+    display:flex;
+    align-items:center;
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:18px;
+    padding:8px;
+    box-shadow:
+        0 8px 24px rgba(15,23,42,0.06);
+    transition:all .3s ease;
+}
+
+.lms-search-box:focus-within{
+    border-color:#3b82f6;
+    box-shadow:
+        0 0 0 4px rgba(59,130,246,.12);
+}
+
+.lms-search-box svg{
+    color:#94a3b8;
+    margin:0 14px;
+    flex-shrink:0;
+}
+
+.lms-search-input{
+    flex:1;
+    border:none;
+    outline:none;
+    background:transparent;
+    font-size:15px;
+    color:#0f172a;
+    padding:10px 0;
+}
+
+.lms-search-input::placeholder{
+    color:#94a3b8;
+}
+
+.lms-search-btn{
+    border:none;
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+    color:#fff;
+    font-weight:600;
+    padding:12px 28px;
+    border-radius:12px;
+    cursor:pointer;
+    transition:.3s ease;
+}
+
+.lms-search-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:
+        0 10px 20px rgba(37,99,235,.25);
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width:768px){
+
+    .lms-search-box{
+        flex-wrap:wrap;
+        gap:12px;
+        padding:15px;
+    }
+
+    .lms-search-box svg{
+        margin:0;
+    }
+
+    .lms-search-input{
+        width:100%;
+    }
+
+    .lms-search-btn{
+        width:100%;
+        padding:14px;
+    }
+
+}
+/* ==========================================
+   LMS FILTER SIDEBAR
+========================================== */
+
+.lms-filter-sidebar{
+    position:sticky;
+    top:100px;
+}
+
+.lms-filter-accordion{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.lms-filter-card{
+    border:none;
+    border-radius:20px;
+    overflow:hidden;
+    background:#fff;
+    box-shadow:
+        0 10px 35px rgba(15,23,42,.06);
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.lms-filter-toggle{
+    background:#fff !important;
+    padding:20px 24px !important;
+    font-size:16px;
+    font-weight:700;
+    color:#0f172a !important;
+    box-shadow:none !important;
+    border:none !important;
+}
+
+.lms-filter-toggle:not(.collapsed){
+    background:#f8fafc !important;
+}
+
+.lms-filter-toggle::after{
+    width:18px;
+    height:18px;
+    background-size:18px;
+}
+
+.lms-filter-toggle:focus{
+    box-shadow:none !important;
+}
+
+/* ==========================================
+   BODY
+========================================== */
+
+.lms-filter-body{
+    padding:10px 20px 20px;
+}
+
+/* ==========================================
+   FILTER ITEM
+========================================== */
+
+.lms-filter-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    padding:14px 0;
+    border-bottom:1px solid #eef2f7;
+}
+
+.lms-filter-item:last-child{
+    border-bottom:none;
+}
+
+/* ==========================================
+   CUSTOM CHECKBOX
+========================================== */
+
+.lms-checkbox{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    cursor:pointer;
+    margin:0;
+    flex:1;
+}
+
+.lms-checkbox input{
+    display:none;
+}
+
+.lms-checkbox-mark{
+    width:18px;
+    height:18px;
+    border:2px solid #cbd5e1;
+    border-radius:6px;
+    position:relative;
+    transition:.3s;
+    flex-shrink:0;
+}
+
+.lms-checkbox input:checked + .lms-checkbox-mark{
+    background:#2563eb;
+    border-color:#2563eb;
+}
+
+.lms-checkbox input:checked + .lms-checkbox-mark::after{
+    content:"";
+    position:absolute;
+    left:5px;
+    top:1px;
+    width:4px;
+    height:8px;
+    border:solid #fff;
+    border-width:0 2px 2px 0;
+    transform:rotate(45deg);
+}
+
+.lms-filter-name{
+    font-size:14px;
+    font-weight:500;
+    color:#334155;
+}
+
+/* ==========================================
+   COUNT BADGE
+========================================== */
+
+.lms-filter-count{
+    min-width:40px;
+    text-align:center;
+    padding:5px 10px;
+    border-radius:999px;
+    background:#f1f5f9;
+    color:#64748b;
+    font-size:12px;
+    font-weight:700;
+}
+
+/* ==========================================
+   BUTTON
+========================================== */
+
+.lms-filter-btn{
+    width:100%;
+    border:none;
+    margin-top:20px;
+    padding:14px;
+    border-radius:12px;
+    font-weight:600;
+    color:#fff;
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+    transition:.3s ease;
+}
+
+.lms-filter-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:
+        0 10px 20px rgba(37,99,235,.25);
+}
+
+/* =====================================
+   RESULTS HEADER
+===================================== */
+
+.lms-results-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+    padding:20px 25px;
+    background:#fff;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(15,23,42,.05);
+}
+
+.lms-results-info h4{
+    margin:0;
+    font-size:22px;
+    font-weight:700;
+    color:#0f172a;
+}
+
+.lms-results-info span{
+    color:#64748b;
+    font-size:14px;
+}
+
+.lms-results-actions{
+    display:flex;
+    gap:12px;
+}
+
+.lms-sort-select{
+    border:1px solid #e2e8f0;
+    border-radius:10px;
+    padding:10px 16px;
+    background:#fff;
+}
+
+/* =====================================
+   INSTRUCTOR CARD
+===================================== */
+
+.lms-instructor-card{
+    background:#fff;
+    border-radius:22px;
+    overflow:hidden;
+    border:1px solid #eef2f7;
+    transition:.35s;
+    height:100%;
+    box-shadow:0 8px 30px rgba(15,23,42,.05);
+}
+
+.lms-instructor-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 40px rgba(15,23,42,.10);
+}
+
+.lms-instructor-cover{
+    height:220px;
+    overflow:hidden;
+}
+
+.lms-instructor-cover img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.lms-instructor-card:hover .lms-instructor-cover img{
+    transform:scale(1.05);
+}
+
+.lms-instructor-body{
+    padding:22px;
+}
+
+.lms-instructor-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:18px;
+}
+
+.lms-instructor-header h5{
+    margin:0;
+    font-size:18px;
+    font-weight:700;
+}
+
+.lms-instructor-header h5 a{
+    color:#0f172a;
+    text-decoration:none;
+}
+
+.lms-instructor-role{
+    font-size:13px;
+    color:#64748b;
+}
+
+.lms-rating{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    background:#fef3c7;
+    color:#d97706;
+    padding:6px 10px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.lms-instructor-stats{
+    display:flex;
+    gap:20px;
+    margin-bottom:22px;
+}
+
+.lms-stat{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:#475569;
+    font-size:14px;
+}
+
+.lms-card-actions{
+    display:flex;
+    gap:10px;
+}
+
+.lms-btn-primary{
+    flex:1;
+    text-align:center;
+    padding:12px;
+    border-radius:12px;
+    text-decoration:none;
+    color:#fff;
+    font-weight:600;
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+}
+
+.lms-btn-outline{
+    flex:1;
+    text-align:center;
+    padding:12px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:600;
+    color:#2563eb;
+    border:1px solid #2563eb;
+}
+
+/* =====================================
+   EMPTY STATE
+===================================== */
+
+.lms-empty-state{
+    background:#fff;
+    padding:60px 30px;
+    text-align:center;
+    border-radius:20px;
+}
+
+.lms-empty-state i{
+    font-size:40px;
+    color:#94a3b8;
+    margin-bottom:15px;
+}
+
+.lms-empty-state h4{
+    margin-bottom:10px;
+    color:#0f172a;
+}
+
+.lms-empty-state p{
+    color:#64748b;
+}
+
+/* Goal page style */
+/* ==========================================
+   PAGE
+========================================== */
+
+.goalx-page{
+    padding:20px;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.goalx-header-card{
+    background:linear-gradient(
+        135deg,
+        #2563eb 0%,
+        #4f46e5 50%,
+        #7c3aed 100%
+    );
+    border-radius:24px;
+    padding:40px;
+    color:#fff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+    position:relative;
+    overflow:hidden;
+}
+
+.goalx-header-card::before{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    right:-100px;
+    top:-100px;
+}
+
+.goalx-badge{
+    display:inline-flex;
+    align-items:center;
+    padding:8px 16px;
+    border-radius:999px;
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(10px);
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.goalx-header-card h1{
+    font-size:36px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.goalx-header-card p{
+    max-width:650px;
+    opacity:.9;
+    margin:0;
+}
+
+.goalx-create-btn{
+    border:none;
+    background:#fff;
+    color:#2563eb;
+    padding:14px 22px;
+    border-radius:14px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.goalx-create-btn:hover{
+    transform:translateY(-3px);
+}
+
+/* ==========================================
+   OVERVIEW
+========================================== */
+
+.goalx-overview-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(230px,1fr));
+    gap:20px;
+    margin-bottom:35px;
+}
+
+.goalx-stat-card{
+    background:#fff;
+    border-radius:20px;
+    padding:22px;
+    display:flex;
+    gap:16px;
+    align-items:center;
+    border:1px solid #e2e8f0;
+    box-shadow:0 10px 30px rgba(15,23,42,.05);
+    transition:.3s;
+}
+
+.goalx-stat-card:hover{
+    transform:translateY(-4px);
+}
+
+.goalx-stat-icon{
+    width:58px;
+    height:58px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:22px;
+}
+
+.goalx-stat-primary .goalx-stat-icon{
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+}
+
+.goalx-stat-success .goalx-stat-icon{
+    background:linear-gradient(135deg,#16a34a,#22c55e);
+}
+
+.goalx-stat-warning .goalx-stat-icon{
+    background:linear-gradient(135deg,#d97706,#f59e0b);
+}
+
+.goalx-stat-danger .goalx-stat-icon{
+    background:linear-gradient(135deg,#dc2626,#ef4444);
+}
+
+.goalx-stat-purple .goalx-stat-icon{
+    background:linear-gradient(135deg,#7c3aed,#8b5cf6);
+}
+
+.goalx-stat-card h3{
+    margin:0;
+    font-size:28px;
+    font-weight:700;
+    color:#0f172a;
+}
+
+.goalx-stat-card span{
+    color:#64748b;
+    font-size:14px;
+}
+
+/* ==========================================
+   GOAL CARD
+========================================== */
+
+.goalx-card{
+    background:#fff;
+    border-radius:24px;
+    padding:24px;
+    border:1px solid #e2e8f0;
+    height:100%;
+    box-shadow:0 10px 30px rgba(15,23,42,.05);
+    transition:.3s;
+}
+
+.goalx-card:hover{
+    transform:translateY(-5px);
+}
+
+.goalx-card-header{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:15px;
+}
+
+.goalx-card-header h4{
+    margin:0;
+    font-size:18px;
+    font-weight:700;
+    color:#0f172a;
+}
+
+.goalx-type{
+    display:inline-block;
+    margin-top:8px;
+    background:#eff6ff;
+    color:#2563eb;
+    padding:6px 12px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.goalx-status{
+    background:#f8fafc;
+    color:#475569;
+    padding:6px 12px;
+    border-radius:999px;
+    white-space:nowrap;
+    font-size:12px;
+    font-weight:600;
+}
+
+.goalx-description{
+    color:#64748b;
+    margin-bottom:20px;
+    line-height:1.7;
+}
+
+/* ==========================================
+   PROGRESS
+========================================== */
+
+.goalx-progress{
+    background:#e2e8f0;
+    height:10px;
+    border-radius:999px;
+    overflow:hidden;
+}
+
+.goalx-progress-fill{
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        #2563eb,
+        #7c3aed
+    );
+}
+
+.goalx-progress-text{
+    display:flex;
+    justify-content:space-between;
+    margin-top:10px;
+    margin-bottom:20px;
+    color:#64748b;
+    font-size:14px;
+}
+
+.goalx-progress-text strong{
+    color:#2563eb;
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.goalx-card-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+.goalx-date{
+    color:#64748b;
+    font-size:14px;
+}
+
+.goalx-actions{
+    display:flex;
+    gap:10px;
+}
+
+.goalx-edit-btn{
+    border:none;
+    background:#eff6ff;
+    color:#2563eb;
+    padding:8px 16px;
+    border-radius:10px;
+    font-weight:600;
+}
+
+.goalx-delete-btn{
+    border:none;
+    background:#fef2f2;
+    color:#dc2626;
+    padding:8px 16px;
+    border-radius:10px;
+    font-weight:600;
+}
+
+/* ==========================================
+   EMPTY
+========================================== */
+
+.goalx-empty-state{
+    background:#fff;
+    border-radius:24px;
+    padding:70px 30px;
+    text-align:center;
+    border:1px solid #e2e8f0;
+}
+
+.goalx-empty-icon{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    margin:0 auto 20px;
+    background:#eff6ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#2563eb;
+    font-size:34px;
+}
+
+/* ==========================================
+   MODAL
+========================================== */
+
+#goalModal .modal-content{
+    border:none;
+    border-radius:24px;
+}
+
+#goalModal .modal-header{
+    border-bottom:1px solid #eef2f7;
+}
+
+#goalModal .modal-footer{
+    border-top:1px solid #eef2f7;
+}
+
+#goalModal .form-control,
+#goalModal .form-select{
+    min-height:50px;
+    border-radius:12px;
+}
+
+#goalModal textarea.form-control{
+    min-height:120px;
+}
+
+#goalModal .btn-primary{
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+    border:none;
+    border-radius:12px;
+    padding:12px 24px;
+}
+.goalx-modal{
+    border:none;
+    border-radius:24px;
+    overflow:hidden;
+}
+
+.goalx-delete-icon{
+    width:80px;
+    height:80px;
+    margin:0 auto 20px;
+    border-radius:50%;
+    background:#fef2f2;
+    color:#dc2626;
+    font-size:32px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.goalx-label{
+    font-weight:600;
+    color:#0f172a;
+    margin-bottom:8px;
+}
+
+.goalx-help{
+    display:block;
+    margin-top:6px;
+    color:#64748b;
+    font-size:13px;
+    line-height:1.5;
+}
+
+.goalx-input{
+    min-height:52px;
+    border-radius:14px;
+    border:1px solid #dbe2ea;
+}
+
+.goalx-input:focus{
+    border-color:#4f46e5;
+    box-shadow:0 0 0 4px rgba(79,70,229,.08);
+}
+
+textarea.goalx-input{
+    min-height:120px;
+}
+
+.goalx-primary-btn{
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+    border:none;
+    color:#fff;
+    border-radius:12px;
+    padding:12px 24px;
+    font-weight:600;
+}
+
+/* ==========================================
+   SCROLLABLE GOAL MODALS
+========================================== */
+
+#createGoalModal .modal-content,
+#editGoalModal .modal-content{
+    height:80vh;
+    max-height:90vh;
+
+    display:flex;
+    flex-direction:column;
+}
+
+/* Header fixed */
+
+#createGoalModal .modal-header,
+#editGoalModal .modal-header{
+    flex-shrink:0;
+    border-bottom:1px solid #eef2f7;
+    background:#fff;
+}
+
+/* Body scrollable */
+
+#createGoalModal .modal-content,
+#editGoalModal .modal-content{
+    height:80vh;
+}
+
+#createGoalModal .modal-body,
+#editGoalModal .modal-body{
+    height:calc(80vh - 160px);
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+
+/* Footer fixed */
+
+#createGoalModal .modal-footer,
+#editGoalModal .modal-footer{
+    flex-shrink:0;
+    border-top:1px solid #eef2f7;
+    background:#fff;
+}
+
+/* Modern scrollbar */
+
+#createGoalModal .modal-body::-webkit-scrollbar,
+#editGoalModal .modal-body::-webkit-scrollbar{
+    width:8px;
+}
+
+#createGoalModal .modal-body::-webkit-scrollbar-thumb,
+#editGoalModal .modal-body::-webkit-scrollbar-thumb{
+    background:#cbd5e1;
+    border-radius:999px;
+}
+
+#createGoalModal .modal-body::-webkit-scrollbar-thumb:hover,
+#editGoalModal .modal-body::-webkit-scrollbar-thumb:hover{
+    background:#94a3b8;
+}
 </style>
 
     @stack('styles')
@@ -3348,7 +4403,7 @@ html, body {
                 <li class="lms-section-title">PROGRESS</li>
 
                 <li>
-                    <a href="#" class="{{ activeLink('goals') }}">
+                    <a href="{{route('student.goals')}}" class="{{ activeLink('student.goals') }}">
                         🎯 Goals
                     </a>
                 </li>
@@ -3612,6 +4667,7 @@ function toggleSidebar() {
     {{-- TOASTER --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" />
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> -->
     <script>
         @if(Session::has('success'))  
         				toastr.success("{{ Session::get('success') }}");  
@@ -3642,6 +4698,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+
     @stack('scripts')
 
 

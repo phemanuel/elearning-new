@@ -1,5 +1,5 @@
 @extends('frontend.layouts.student-app')
-@section('title', "Student's Dashboard")
+@section('title', "My Dashboard")
 @section('body-attr') style="background-color: #f6f6f9;" @endsection
 
 @section('content')

@@ -69,4 +69,9 @@ class Student extends Model implements CanResetPassword
     {
         return $this->hasMany(ProjectSubmission::class, 'student_id', 'id');
     }
+
+    public function goals()
+    {
+        return $this->hasMany(Goal::class, 'student_id');
+    }
 }
