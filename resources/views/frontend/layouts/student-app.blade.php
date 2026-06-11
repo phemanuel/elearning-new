@@ -198,7 +198,7 @@
     border-radius:24px;
     position:relative;
     overflow:hidden;
-    margin-top:-70px !important;
+    margin-top:-40px !important;
     /* border:3px solid #f79a58 !important; */
 }
 
@@ -669,26 +669,10 @@
     padding: 25px;
 }
 
-/* ===== MOBILE ===== */
-@media (max-width: 992px) {
-
-    .lms-sidebar {
-        position: fixed;
-        left: -260px;
-        top: 0;
-        height: 100vh;
-        z-index: 9999;
-        transition: 0.3s ease;
-    }
-
-    .lms-sidebar.active {
-        left: 0;
-    }
-
-    .lms-main {
-        margin-left: 0;
-    }
-}
+/* Mobile hidden state */
+/* ==========================================
+   MOBILE SIDEBAR FIX (NON-DESTRUCTIVE)
+========================================== */
 
 /* RIGHT SIDE WRAPPER */
 .lms-topbar-right {
@@ -984,6 +968,77 @@
 .lms-sidebar-footer a.text-danger:hover {
     background: rgba(239,68,68,0.30);
     color: #ffffff;
+}
+
+.lms-sidebar-mobile-header{
+    display:none;
+}
+
+/* ==========================================
+   MOBILE SIDEBAR
+========================================== */
+@media (max-width:991px){
+
+    #lmsSidebar{
+        transform: translateX(-100%);
+        transition: transform .3s ease;
+        z-index: 9999;
+    }
+
+    #lmsSidebar.is-open{
+        transform: translateX(0);
+    }
+
+    .lms-main{
+        margin-left: 0;
+        width: 100%;
+    }
+
+      .lms-sidebar-mobile-header{
+        display:flex;
+        justify-content:flex-end;
+        align-items:center;
+        padding:14px 16px;
+        border-bottom:1px solid #e5e7eb;
+        background:#fff;
+    }
+
+    .lms-sidebar-close-btn{
+        width:40px;
+        height:40px;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        border:none;
+        border-radius:12px;
+
+        background:#f1f5f9;
+        color:#0f172a;
+
+        cursor:pointer;
+
+        transition:all .25s ease;
+
+        box-shadow:0 2px 8px rgba(0,0,0,.08);
+    }
+
+    .lms-sidebar-close-btn span{
+        font-size:24px;
+        line-height:1;
+        font-weight:700;
+    }
+
+    .lms-sidebar-close-btn:hover{
+        background:#e2e8f0;
+        transform:scale(1.05);
+    }
+
+    .lms-sidebar-close-btn:active{
+        transform:scale(.95);
+    }
+
 }
 
 /* completed courses */
@@ -4310,6 +4365,7 @@ textarea.goalx-input{
 
     @stack('styles')
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 <body @yield('body-attr')>
@@ -4497,7 +4553,16 @@ textarea.goalx-input{
 
 </div>
 
+    <div class="lms-sidebar-mobile-header">
+    <button id="closeSidebarBtn" class="lms-sidebar-close-btn">
+        <span>&times;</span>
+    </button>
+</div>
+
+
 </aside>
+
+<div id="sidebarOverlay"></div>
 
     <!-- MAIN CONTENT -->
     <main class="lms-main">
@@ -4505,7 +4570,10 @@ textarea.goalx-input{
         <!-- TOP BAR (minimal replacement of navbar tools) -->
         <div class="lms-topbar">
 
-            <button class="lms-toggle-btn" onclick="toggleSidebar()">☰</button>
+           <button id="mobileSidebarToggle">
+            ☰
+        </button>
+            
 
             <div class="lms-topbar-right">
 
@@ -4651,17 +4719,48 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     </script>
 
-    <script>
-function toggleSidebar() {
-    const sidebar = document.getElementById('lmsSidebar');
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
 
-    if (!sidebar) {
-        console.error('Sidebar not found: #lmsSidebar');
-        return;
-    }
+        const sidebar = document.getElementById("lmsSidebar");
+        const toggle = document.getElementById("mobileSidebarToggle");
 
-    sidebar.classList.toggle('active');
-}
+        toggle.addEventListener("click", function () {
+            sidebar.classList.toggle("is-open");
+        });
+
+    });
+</script>
+<script>
+   document.addEventListener("DOMContentLoaded", function () {
+
+    const sidebar = document.getElementById("lmsSidebar");
+    const toggle = document.getElementById("mobileSidebarToggle");
+    const closeBtn = document.getElementById("closeSidebarBtn");
+    const overlay = document.getElementById("sidebarOverlay");
+
+    toggle.addEventListener("click", function () {
+
+        sidebar.classList.add("is-open");
+        overlay.classList.add("active");
+
+    });
+
+    closeBtn.addEventListener("click", function () {
+
+        sidebar.classList.remove("is-open");
+        overlay.classList.remove("active");
+
+    });
+
+    overlay.addEventListener("click", function () {
+
+        sidebar.classList.remove("is-open");
+        overlay.classList.remove("active");
+
+    });
+
+});
 </script>
 
     {{-- TOASTER --}}
