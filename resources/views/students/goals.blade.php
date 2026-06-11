@@ -243,7 +243,7 @@
                             </button>
 
                             <button
-                                class="goalx-delete-btn"
+                                class="goalx-delete-btn deleteGoalBtn"
                                 data-id="{{ $goal->id }}">
 
                                 Delete
@@ -626,8 +626,21 @@
                             id="edit_target_date"
                             class="form-control goalx-input">
 
-                        <small class="goalx-help">
-                            When would you like to achieve this goal?
+                            <!-- 🔥 CURRENT DATE DISPLAY -->
+                            <!-- <small class="text-muted d-block mt-1">
+                                
+                            </small> -->
+
+                       <small class="goalx-help d-block">
+                            <span>
+                                Current Date: <strong id="current_goal_date"></strong>
+                            </span>
+
+                            <span class="mx-1">•</span>
+
+                            <span>
+                                When would you like to achieve this goal?
+                            </span>
                         </small>
 
                     </div>
@@ -678,6 +691,40 @@
     </div>
 
 </div>
+
+<div class="modal fade" id="deleteGoalModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content goalx-modal">
+
+            <div class="modal-header">
+                <h5 class="modal-title">🗑️ Delete Goal</h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <p class="mb-0">
+                    Are you sure you want to delete this goal?
+                    This action cannot be undone.
+                </p>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-light" data-bs-dismiss="modal">
+                    Cancel
+                </button>
+
+                <button class="btn btn-danger" id="confirmDeleteGoalBtn">
+                    Yes, Delete
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
@@ -753,11 +800,24 @@
 
 <!-- Edit Goal -->
 <script>
- $(document).on('click', '.editGoalBtn', function () {
+function formatDate(dateString) {
+
+    if (!dateString) return 'No date set';
+
+    let date = new Date(dateString);
+
+    if (isNaN(date)) return dateString;
+
+    return date.toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric'
+    });
+}
+
+$(document).on('click', '.editGoalBtn', function () {
 
     let goalId = $(this).data('id');
-
-    console.log('📌 Loading goal:', goalId);
 
     let url = "{{ route('student.goals.edit', ':id') }}";
     url = url.replace(':id', goalId);
@@ -768,23 +828,18 @@
 
         success: function (res) {
 
-            console.log('✅ Goal loaded:', res);
+            window.editGoalData = res.goal;
 
             $('#edit_goal_id').val(res.goal.id);
             $('#edit_title').val(res.goal.title);
             $('#edit_goal_type').val(res.goal.goal_type);
             $('#edit_target_value').val(res.goal.target_value);
-            $('#edit_target_date').val(res.goal.target_date);
             $('#edit_description').val(res.goal.description);
 
+            // 🔥 formatted display
+            $('#current_goal_date').text(formatDate(res.goal.target_date));
+
             $('#editGoalModal').modal('show');
-        },
-
-        error: function (xhr) {
-
-            console.log('❌ Load failed:', xhr.responseText);
-
-            toastr.error('Failed to load goal');
         }
     });
 
@@ -797,45 +852,79 @@
 
     e.preventDefault();
 
-    let goalId = $('#edit_goal_id').val();
+    let id = $('#edit_goal_id').val();
+
     let url = "{{ route('student.goals.update', ':id') }}";
-    url = url.replace(':id', goalId);
+    url = url.replace(':id', id);
 
     $.ajax({
         url: url,
-        method: 'POST',
-        data: $(this).serialize() + '&_method=PUT',
+        type: "POST",
+        data: $(this).serialize() + "&_method=PUT",
+
+        success: function (res) {
+
+            toastr.success(res.message);
+            $('#editGoalModal').modal('hide');
+
+            setTimeout(() => location.reload(), 500);
+        },
+
+        error: function (xhr) {
+            console.log(xhr.responseText);
+            toastr.error('Update failed');
+        }
+    });
+
+});
+</script>
+<script>
+   let deleteGoalId = null;
+
+$(document).on('click', '.deleteGoalBtn', function () {
+
+    deleteGoalId = $(this).data('id');
+
+    $('#deleteGoalModal').modal('show');
+});
+
+$('#confirmDeleteGoalBtn').on('click', function () {
+
+    if (!deleteGoalId) return;
+
+    let url = "{{ route('student.goals.destroy', ':id') }}";
+    url = url.replace(':id', deleteGoalId);
+
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: {
+            _token: "{{ csrf_token() }}",
+            _method: "DELETE"
+        },
 
         beforeSend: function () {
-            console.log('🚀 Updating goal...');
+            $('#confirmDeleteGoalBtn').text('Deleting...');
         },
 
         success: function (res) {
 
-            console.log('✅ Updated:', res);
+            $('#deleteGoalModal').modal('hide');
 
-            if (res.status === 'success') {
+            toastr.success(res.message || 'Goal deleted');
 
-                $('#editGoalModal').modal('hide');
-
-                toastr.success(res.message);
-
-                // 🔥 reload page after update
-                setTimeout(() => {
-                    location.reload();
-                }, 600);
-
-                // 🔥 UPDATE UI LIVE (no reload)
-                let card = $(`#goal-${goalId}`);
-
-                card.find('.goal-title').text(res.goal.title);
-                card.find('.goal-type').text(res.goal.goal_type);
-            }
+            setTimeout(() => {
+                location.reload();
+            }, 500);
         },
 
         error: function (xhr) {
-            console.log('❌ Update error:', xhr.responseText);
-            toastr.error('Update failed');
+            console.log(xhr.responseText);
+            toastr.error('Delete failed');
+        },
+
+        complete: function () {
+            $('#confirmDeleteGoalBtn').text('Yes, Delete');
         }
     });
 

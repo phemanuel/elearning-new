@@ -134,30 +134,45 @@ class GoalController extends Controller
     public function update(Request $request, $id)
     {
         $studentId = currentUserId();
-
         $goal = Goal::where('student_id', $studentId)
                     ->findOrFail($id);
 
-        $request->validate([
+        $data = $request->validate([
             'title' => 'required|string|max:255',
             'goal_type' => 'required|string',
             'target_value' => 'required|integer|min:1',
-            'target_date' => 'required|date',
             'description' => 'nullable|string',
+            'target_date' => 'nullable|date', // 🔥 important
         ]);
 
-        $goal->update([
-            'title' => $request->title,
-            'goal_type' => $request->goal_type,
-            'target_value' => $request->target_value,
-            'target_date' => $request->target_date,
-            'description' => $request->description,
-        ]);
+        // 🔥 ONLY update date if provided
+        if ($request->filled('target_date')) {
+            $data['target_date'] = $request->target_date;
+        } else {
+            unset($data['target_date']);
+        }
+
+        $goal->update($data);
 
         return response()->json([
             'status' => 'success',
             'message' => 'Goal updated successfully',
             'goal' => $goal
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $studentId = currentUserId();
+        $goal = Goal::where('id', $id)
+            ->where('student_id', $studentId)
+            ->firstOrFail();
+
+        $goal->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Goal deleted successfully'
         ]);
     }
 
