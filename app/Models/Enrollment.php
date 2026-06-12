@@ -30,11 +30,6 @@ class Enrollment extends Model
         return $this->belongsTo(Segments::class);
     }
 
-    // public function student()
-    // {
-    //     return $this->belongsTo(Student::class);
-    // }
-
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_id');

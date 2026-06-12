@@ -42,6 +42,8 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\SubscriptionPlanController;
 use App\Http\Controllers\SmmBlueprintFormController;
 use App\Http\Controllers\GoalController;
+use App\Http\Controllers\StudentLearningStatController;
+use App\Http\Controllers\StudentActivityController;
 
 /* students */
 use App\Http\Controllers\Students\AuthController as sauth;
@@ -223,6 +225,11 @@ Route::middleware(['checkstudent'])->prefix('students')->group(function () {
         ->name('student.goals.update');
     Route::delete('/goals/{goal}', [GoalController::class, 'destroy'])
         ->name('student.goals.destroy');
+
+    Route::get('/learning-stats', [StudentLearningStatController::class, 'index'])
+    ->name('student.learning.stats');
+    Route::get('/activity', [StudentActivityController::class, 'index'])
+    ->name('student.activity');
 
     // ssl Routes
 //    Route::post('/payment/ssl/submit', [sslcz::class, 'store'])->name('payment.ssl.submit');

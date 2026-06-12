@@ -4361,6 +4361,352 @@ textarea.goalx-input{
 #editGoalModal .modal-body::-webkit-scrollbar-thumb:hover{
     background:#94a3b8;
 }
+
+/* Learning Stats Style */
+
+/* BASE */
+.stats {
+    padding: 28px;
+    background: #f8fafc;
+    font-family: Inter, system-ui, sans-serif;
+    color: #0f172a;
+}
+
+/* HEADER */
+.stats__header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.stats__header {
+    margin-bottom: 22px;
+}
+
+/* TITLE ROW (adds modern layout feel) */
+.stats__titleRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+/* MAIN TITLE */
+.stats__header h1 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+    letter-spacing: -0.3px;
+}
+
+/* BADGE */
+.stats__badge {
+    font-size: 11px;
+    font-weight: 600;
+    color: #4f46e5;
+    background: #eef2ff;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid #c7d2fe;
+}
+
+/* DESCRIPTION */
+.stats__header p {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0;
+    max-width: 600px;
+    line-height: 1.5;
+}
+
+/* KPI STRIP */
+.stats__kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+/* KPI CARD */
+
+/* KPI CARD BASE */
+.kpi {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 16px;
+    transition: 0.2s ease;
+}
+
+.kpi:hover {
+    transform: translateY(-2px);
+}
+
+/* TOP ROW (ICON + TREND) */
+.kpi__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+/* ICON */
+.kpi__icon {
+    font-size: 16px;
+}
+
+/* VALUE (STRONG FOCUS) */
+.kpi__value {
+    font-size: 28px;
+    font-weight: 900;
+    color: #0f172a;
+    line-height: 1.1;
+}
+
+/* LABEL */
+.kpi__label {
+    font-size: 12px;
+    color: #64748b;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+/* TREND BADGES */
+.kpi__trend {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+}
+
+/* TREND STATES */
+.kpi__trend--up {
+    background: #ecfdf5;
+    color: #059669;
+    border: 1px solid #a7f3d0;
+}
+
+.kpi__trend--down {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+.kpi__trend--neutral {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+/* OPTIONAL COLOR VARIANTS (KEEP YOUR EXISTING ONES) */
+.kpi--primary {
+    background: #eef2ff;
+    border-color: #c7d2fe;
+}
+
+.kpi--blue {
+    background: #eff6ff;
+    border-color: #bfdbfe;
+}
+
+.kpi--purple {
+    background: #f5f3ff;
+    border-color: #ddd6fe;
+}
+
+/* GRID */
+.stats__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 18px;
+}
+
+/* PANEL */
+.panel {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 18px;
+}
+
+/* TITLE */
+.panel__title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: #334155;
+}
+
+/* PROGRESS */
+.progress__top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 8px;
+    color: #475569;
+}
+
+.progress__bar {
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress__bar div {
+    height: 100%;
+    background: #4f46e5;
+}
+
+/* MINI BOXES */
+.mini {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.mini__box {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 12px;
+}
+
+.mini__box span {
+    font-size: 11px;
+    color: #64748b;
+}
+
+.mini__box strong {
+    font-size: 18px;
+    font-weight: 800;
+    display: block;
+    margin-top: 4px;
+}
+
+/* INSIGHTS */
+.insight {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.insight__title {
+    font-size: 12px;
+    color: #64748b;
+    margin-bottom: 6px;
+}
+
+.insight__text {
+    font-size: 13px;
+    color: #0f172a;
+}
+
+.insight__badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: #eef2ff;
+    color: #4f46e5;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* PAGE */
+.activity {
+    padding: 28px;
+    background: #f8fafc;
+    font-family: Inter, system-ui, sans-serif;
+    color: #0f172a;
+}
+
+/* HEADER */
+.activity__header h1 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.activity__header p {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* TIMELINE WRAPPER */
+.timeline {
+    max-width: 900px;
+}
+
+/* ITEM */
+.timeline__item {
+    display: flex;
+    gap: 14px;
+    padding: 14px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    transition: 0.2s ease;
+}
+
+.timeline__item:hover {
+    transform: translateY(-2px);
+}
+
+/* ICON */
+.timeline__icon {
+    width: 38px;
+    height: 38px;
+    background: #f1f5f9;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+/* CONTENT */
+.timeline__content {
+    flex: 1;
+}
+
+/* TITLE */
+.timeline__title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 4px;
+}
+
+/* META */
+.timeline__meta {
+    font-size: 12px;
+    color: #64748b;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* TIME */
+.timeline__meta .time {
+    margin-left: auto;
+    color: #94a3b8;
+    font-size: 11px;
+}
+
+/* EMPTY */
+.empty {
+    text-align: center;
+    padding: 30px;
+    color: #94a3b8;
+}
+
 </style>
 
     @stack('styles')
@@ -4465,8 +4811,14 @@ textarea.goalx-input{
                 </li>
 
                 <li>
-                    <a href="#" class="{{ activeLink('learning.stats') }}">
+                    <a href="{{route('student.learning.stats')}}" class="{{ activeLink('student.learning.stats') }}">
                         📊 Learning Stats
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('student.activity') }}" class="{{ activeLink('student.activity') }}">
+                        🧾 Activity Feed
                     </a>
                 </li>
 
