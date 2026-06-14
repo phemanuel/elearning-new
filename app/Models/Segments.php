@@ -23,6 +23,11 @@ class Segments extends Model
         return $this->hasMany(Lesson::class, 'segments_id');
     }
 
+    public function lessons()
+{
+    return $this->hasMany(Lesson::class, 'segments_id');
+}
+
     public function courseCategory()
     {
         return $this->belongsTo(CourseCategory::class); 

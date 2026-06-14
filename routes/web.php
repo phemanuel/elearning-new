@@ -133,6 +133,14 @@ Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     Route::resource('instructor', instructor::class);
     Route::resource('courseCategory', courseCategory::class);
     Route::resource('course', course::class);
+    Route::get('/course/review/{id}', [courseReview::class, 'review'])
+        ->name('admin.course.review');
+    Route::post('/course/activate', [courseReview::class, 'activate'])
+        ->name('admin.course.activate');
+    Route::post('/course/reject', [courseReview::class, 'reject'])
+        ->name('admin.course.reject');
+    Route::get('material/preview/{id}', [courseReview::class, 'materialPreview']);
+
     Route::get('course-fee/', [course::class, 'courseFee'])->name('courseFee');
     Route::resource('certificates', CertificateController::class);
     Route::resource('segment', segment::class);

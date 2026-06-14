@@ -1818,6 +1818,282 @@ body {
     background: linear-gradient(135deg, #ef4444, #991b1b);
 }
 
+/* Course Review */
+/* PAGE WRAPPER */
+.crv-page{
+    padding:20px;
+    background:#f6f8fb;
+    font-family:inherit;
+}
+
+/* HEADER */
+.crv-header{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:18px;
+}
+
+.crv-title{
+    font-size:22px;
+    font-weight:600;
+    margin:0;
+}
+
+.crv-breadcrumb{
+    font-size:13px;
+    color:#64748b;
+}
+
+.crv-breadcrumb a{
+    color:#2563eb;
+    text-decoration:none;
+}
+
+/* COURSE CARD */
+.crv-course-card{
+    display:flex;
+    gap:15px;
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    padding:15px;
+    margin-bottom:20px;
+    align-items:center;
+}
+
+.crv-course-img{
+    width:75px;
+    height:75px;
+    border-radius:10px;
+    object-fit:cover;
+}
+
+.crv-course-title{
+    margin:0;
+    font-size:18px;
+}
+
+.crv-meta{
+    font-size:13px;
+    color:#64748b;
+    margin-top:5px;
+}
+
+.crv-meta span{
+    margin-right:10px;
+}
+
+/* LAYOUT */
+.crv-layout{
+    display:flex;
+    gap:20px;
+    align-items:flex-start;
+}
+
+/* MAIN */
+.crv-main{
+    flex:1;
+    min-width:0;
+}
+
+/* MODULE */
+.crv-module{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    margin-bottom:15px;
+    overflow:hidden;
+}
+
+.crv-module-head{
+    background:#f1f5f9;
+    padding:12px 15px;
+}
+
+.crv-tag{
+    font-size:10px;
+    background:#2563eb;
+    color:#fff;
+    padding:2px 6px;
+    border-radius:4px;
+    margin-right:8px;
+}
+
+.crv-module-head h4{
+    display:inline;
+    font-size:15px;
+}
+
+/* LESSON */
+.crv-lesson{
+    padding:12px 15px;
+    border-top:1px solid #f1f5f9;
+}
+
+.crv-lesson-title{
+    font-weight:500;
+    margin-bottom:6px;
+}
+
+/* MATERIAL */
+.crv-material{
+    font-size:13px;
+    color:#475569;
+    margin-left:18px;
+    padding:3px 0;
+}
+
+/* SIDEBAR */
+.crv-side{
+    width:320px;
+    flex-shrink:0;
+    position:sticky;
+    top:20px;
+}
+
+.crv-panel{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    padding:15px;
+}
+
+/* STATUS */
+.crv-status{
+    font-size:13px;
+    margin:10px 0;
+}
+
+.crv-status span{
+    background:#e2e8f0;
+    padding:3px 8px;
+    border-radius:6px;
+    font-size:12px;
+}
+
+/* BUTTONS */
+.crv-btn{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:500;
+    margin-top:10px;
+}
+
+.crv-approve{
+    background:#16a34a;
+    color:#fff;
+}
+
+.crv-reject{
+    background:#dc2626;
+    color:#fff;
+}
+
+/* META */
+.crv-panel .crv-meta p{
+    font-size:13px;
+    color:#64748b;
+    margin:6px 0;
+}
+.crv-material-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 12px;
+    margin-left:15px;
+    border-left:2px solid #e2e8f0;
+    margin-bottom:6px;
+    background:#f9fafb;
+    border-radius:8px;
+}
+
+.crv-material-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.crv-material-icon{
+    font-size:18px;
+}
+
+.crv-material-title{
+    font-size:13px;
+    font-weight:500;
+}
+
+.crv-material-type{
+    font-size:10px;
+    color:#94a3b8;
+}
+
+.crv-preview-btn{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    padding:5px 10px;
+    border-radius:6px;
+    font-size:12px;
+    cursor:pointer;
+    text-decoration:none;
+}
+
+.crv-preview-btn:hover{
+    background:#1d4ed8;
+}
+
+.crv-modal{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(15,23,42,0.6);
+    z-index:9999;
+    justify-content:center;
+    align-items:center;
+}
+
+.crv-modal-content{
+    background:#fff;
+    width:700px;
+    max-width:95%;
+    border-radius:12px;
+    overflow:hidden;
+    animation:fadeIn 0.2s ease-in-out;
+}
+
+.crv-modal-header{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 15px;
+    border-bottom:1px solid #e5e7eb;
+    font-weight:600;
+}
+
+.crv-close{
+    cursor:pointer;
+    font-size:20px;
+}
+
+.crv-modal-body{
+    padding:15px;
+    max-height:70vh;
+    overflow:auto;
+}
+
+@keyframes fadeIn{
+    from{transform:scale(0.95); opacity:0;}
+    to{transform:scale(1); opacity:1;}
+}
+
+/* ---------------------- */
+
+/* ---------------------- */
 </style>
 </head>
 
@@ -2040,7 +2316,10 @@ body {
             Header end ti-comment-alt
         ***********************************-->
 
-        <!--**********************************
+       <div class="app-wrapper">
+
+            <!-- sidebar -->
+              <!--**********************************
             Sidebar start
         ***********************************-->
        @if(fullAccess())
@@ -2423,8 +2702,7 @@ body {
         <!--**********************************
             Sidebar end
         ***********************************-->
-
-        <!--**********************************
+<!--**********************************
             Content body start
         ***********************************-->
 
@@ -2433,6 +2711,11 @@ body {
         <!--**********************************
             Content body end
         ***********************************-->
+           
+
+        </div>
+
+        
 
         <!--**********************************
             Footer start

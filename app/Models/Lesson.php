@@ -9,7 +9,9 @@ class Lesson extends Model
 {
     use HasFactory;
 
-    
+    protected $fillable = [
+        'serial_no', 'title','course_id', 'segments_id', 'description', 'notes',
+    ];
 
     public function segments()
     {
@@ -19,6 +21,11 @@ class Lesson extends Model
     public function material()
     {
         return $this->hasMany(Material::class);
+    }
+
+    public function materials()
+    {
+        return $this->hasMany(Material::class, 'lesson_id');
     }
 
     public function progress()
