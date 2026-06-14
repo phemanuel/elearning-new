@@ -282,5 +282,30 @@ class PaymentController extends Controller
             ]
         );
     }
+
+    public function paymentHistory()
+    {
+        $payments = Payment::with([
+            'course',
+            'instructor',
+            'student'
+        ])
+        ->where('student_id', currentUserId())
+        ->latest()
+        ->get();
+
+        $totalPayments = $payments->count();
+
+        $totalSpent = $payments->sum('amount');
+
+        $latestPurchase = optional($payments->first())->created_at;
+
+        return view('students.payment_history', compact(
+            'payments',
+            'totalPayments',
+            'totalSpent',
+            'latestPurchase'
+        ));
+    }
     
 }

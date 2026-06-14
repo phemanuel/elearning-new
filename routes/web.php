@@ -231,6 +231,9 @@ Route::middleware(['checkstudent'])->prefix('students')->group(function () {
     Route::get('/activity', [StudentActivityController::class, 'index'])
     ->name('student.activity');
 
+    Route::get('/payments', [PaymentController::class, 'paymentHistory'])
+    ->name('student.payments');
+
     // ssl Routes
 //    Route::post('/payment/ssl/submit', [sslcz::class, 'store'])->name('payment.ssl.submit');
     Route::post('/payment/enrollee/submit', [PaymentController::class, 'getEnrollee'])

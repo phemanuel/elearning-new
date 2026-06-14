@@ -4707,6 +4707,926 @@ textarea.goalx-input{
     color: #94a3b8;
 }
 
+/* cart page style */
+
+.cart-page{
+
+    background:#f8fafc;
+
+    padding:40px 0;
+
+}
+
+
+/* HEADER */
+
+.cart-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+.cart-header h3{
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
+
+.cart-header span{
+
+    background:#eef2ff;
+
+    color:#4f46e5;
+
+    padding:6px 14px;
+
+    border-radius:30px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+
+/* COURSE CARD */
+
+.lms-cart-card{
+
+    background:#fff;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    display:flex;
+
+    gap:18px;
+
+    margin-bottom:20px;
+
+    transition:.3s;
+
+}
+
+.lms-cart-card:hover{
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transform:translateY(-2px);
+
+}
+
+
+.lms-cart-image{
+
+    width:220px;
+
+    height:140px;
+
+    border-radius:14px;
+
+    overflow:hidden;
+
+    flex-shrink:0;
+
+}
+
+.lms-cart-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+/* BODY */
+
+.lms-cart-body{
+
+    flex:1;
+
+}
+
+
+.lms-cart-body h4{
+
+    font-size:20px;
+
+    font-weight:700;
+
+    margin-bottom:12px;
+
+    line-height:1.5;
+
+}
+
+.lms-cart-body h4 a{
+
+    color:#111827;
+
+    text-decoration:none;
+
+}
+
+.instructor{
+
+    color:#64748b;
+
+    font-size:15px;
+
+}
+
+
+.price-row{
+
+    margin-top:22px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.price{
+
+    font-size:28px;
+
+    font-weight:800;
+
+    color:#4f46e5;
+
+}
+
+.old-price{
+
+    margin-left:10px;
+
+    color:#94a3b8;
+
+    text-decoration:line-through;
+
+}
+
+
+/* REMOVE */
+
+.remove-btn{
+
+    width:45px;
+
+    height:45px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#fef2f2;
+
+    color:#dc2626;
+
+}
+
+
+/* SUMMARY */
+
+.summary-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:28px;
+
+    position:sticky;
+
+    top:100px;
+
+    border:1px solid #e5e7eb;
+
+}
+
+
+.summary-card h4{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    margin-bottom:25px;
+
+}
+
+
+.summary-row,
+
+.summary-total{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:18px;
+
+}
+
+.summary-total{
+
+    padding-top:20px;
+
+    border-top:1px solid #e5e7eb;
+
+}
+
+
+.checkout-btn{
+
+    display:block;
+
+    width:100%;
+
+    text-align:center;
+
+    padding:15px;
+
+    background:linear-gradient(
+
+    135deg,
+
+    #4f46e5,
+
+    #7c3aed
+
+    );
+
+    color:#fff;
+
+    border-radius:14px;
+
+    font-weight:700;
+
+    margin:25px 0;
+
+    text-decoration:none;
+
+}
+
+
+/* COUPON */
+
+.coupon-box{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.coupon-box input{
+
+    flex:1;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:12px;
+
+    padding:12px;
+
+}
+
+.coupon-box button{
+
+    border:none;
+
+    padding:0 20px;
+
+    border-radius:12px;
+
+    background:#111827;
+
+    color:#fff;
+
+}
+
+
+/* EMPTY */
+
+.empty-cart{
+
+    text-align:center;
+
+    padding:100px 0;
+
+}
+
+.empty-icon{
+
+    font-size:70px;
+
+}
+
+.empty-cart h2{
+
+    font-size:34px;
+
+    font-weight:700;
+
+    margin-top:20px;
+
+}
+
+.empty-cart p{
+
+    color:#64748b;
+
+    margin:20px 0;
+
+}
+
+
+.browse-btn{
+
+    display:inline-block;
+
+    background:#4f46e5;
+
+    color:#fff;
+
+    padding:14px 30px;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+}
+
+/* ==========================
+   HERO
+========================== */
+
+.cart-hero{
+
+    background: linear-gradient(
+        135deg,
+        #eef2ff 0%,
+        #f5f3ff 50%,
+        #ffffff 100%
+    );
+
+    border-bottom:1px solid #e5e7eb;
+
+    padding:50px 0;
+
+}
+
+
+/* ==========================
+   CONTENT
+========================== */
+
+.cart-hero__content{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:30px;
+
+}
+
+
+/* ==========================
+   LEFT
+========================== */
+
+.cart-hero__tag{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    background:#ffffff;
+
+    border:1px solid #dbeafe;
+
+    color:#4f46e5;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    margin-bottom:18px;
+
+}
+
+
+.cart-hero__left h1{
+
+    font-size:38px;
+
+    font-weight:800;
+
+    color:#111827;
+
+    margin-bottom:14px;
+
+    line-height:1.2;
+
+}
+
+
+.cart-hero__left p{
+
+    max-width:600px;
+
+    font-size:16px;
+
+    color:#64748b;
+
+    line-height:1.8;
+
+    margin:0;
+
+}
+
+
+/* ==========================
+   RIGHT
+========================== */
+
+.cart-hero__link{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    text-decoration:none;
+
+    padding:16px 28px;
+
+    border-radius:16px;
+
+    background:#4f46e5;
+
+    color:#fff;
+
+    font-weight:700;
+
+    transition:.3s ease;
+
+}
+
+
+.cart-hero__link span{
+
+    transition:.3s ease;
+
+}
+
+
+.cart-hero__link:hover{
+
+    color:#fff;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+
+    0 12px 30px rgba(79,70,229,.25);
+
+}
+
+
+.cart-hero__link:hover span{
+
+    transform:translateX(4px);
+
+}
+
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media(max-width:768px){
+
+    .cart-hero{
+
+        padding:35px 0;
+
+    }
+
+    .cart-hero__content{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .cart-hero__left h1{
+
+        font-size:28px;
+
+    }
+
+}
+
+/* Payment History Page */
+
+.pay-page{
+
+    padding:30px;
+
+    background:#f8fafc;
+
+}
+
+
+/* HEADER */
+
+.pay-header{
+
+    margin-bottom:30px;
+
+}
+
+
+.pay-tag{
+
+    display:inline-block;
+
+    background:#eef2ff;
+
+    color:#4f46e5;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    margin-bottom:18px;
+
+}
+
+
+.pay-header h1{
+
+    font-size:34px;
+
+    font-weight:800;
+
+    color:#0f172a;
+
+    margin-bottom:10px;
+
+}
+
+
+.pay-header p{
+
+    color:#64748b;
+
+    font-size:15px;
+
+}
+
+
+/* SUMMARY */
+
+.pay-summary{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+    margin-bottom:30px;
+
+}
+
+
+.pay-card{
+
+    padding:28px;
+
+    border-radius:20px;
+
+    color:#fff;
+
+}
+
+
+.pay-card small{
+
+    display:block;
+
+    opacity:.9;
+
+    margin-bottom:12px;
+
+    font-size:13px;
+
+}
+
+
+.pay-card h2{
+
+    font-size:30px;
+
+    font-weight:800;
+
+    margin:0;
+
+}
+
+
+.pay-card-primary{
+
+    background:linear-gradient(
+    135deg,
+    #4f46e5,
+    #6366f1
+    );
+
+}
+
+
+.pay-card-green{
+
+    background:linear-gradient(
+    135deg,
+    #059669,
+    #10b981
+    );
+
+}
+
+
+.pay-card-purple{
+
+    background:linear-gradient(
+    135deg,
+    #7c3aed,
+    #a855f7
+    );
+
+}
+
+
+/* HISTORY */
+
+.payment-item{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:22px;
+
+    margin-bottom:18px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    border:1px solid #e5e7eb;
+
+    transition:.3s;
+
+}
+
+
+.payment-item:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+
+    0 10px 30px rgba(0,0,0,.07);
+
+}
+
+
+.payment-course{
+
+    display:flex;
+
+    gap:18px;
+
+    align-items:center;
+
+}
+
+
+.payment-course img{
+
+    width:110px;
+
+    height:70px;
+
+    border-radius:12px;
+
+    object-fit:cover;
+
+}
+
+
+.payment-course h4{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+    color:#111827;
+
+}
+
+
+.payment-course p{
+
+    color:#64748b;
+
+    margin:0;
+
+}
+
+
+.payment-meta{
+
+    display:flex;
+
+    gap:40px;
+
+}
+
+
+.payment-meta small{
+
+    display:block;
+
+    color:#94a3b8;
+
+    margin-bottom:6px;
+
+}
+
+
+.payment-meta strong{
+
+    color:#0f172a;
+
+}
+
+
+.status{
+
+    padding:6px 14px;
+
+    border-radius:999px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+}
+
+
+.status.success{
+
+    background:#ecfdf5;
+
+    color:#059669;
+
+}
+
+
+/* EMPTY */
+
+.empty-pay{
+
+    text-align:center;
+
+    padding:80px;
+
+}
+
+
+.empty-icon{
+
+    font-size:60px;
+
+    margin-bottom:20px;
+
+}
+
+
+.empty-pay h3{
+
+    font-weight:800;
+
+    margin-bottom:10px;
+
+}
+
+
+.empty-pay p{
+
+    color:#64748b;
+
+}
+
+.status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    padding:7px 14px;
+
+    border-radius:999px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+}
+
+
+/* SUCCESS */
+
+.status.success{
+
+    background:#ecfdf5;
+
+    color:#059669;
+
+    border:1px solid #a7f3d0;
+
+}
+
+
+/* PENDING */
+
+.status.pending{
+
+    background:#fffbeb;
+
+    color:#d97706;
+
+    border:1px solid #fde68a;
+
+}
+
+
+/* FAILED */
+
+.status.failed{
+
+    background:#fef2f2;
+
+    color:#dc2626;
+
+    border:1px solid #fecaca;
+
+}
 </style>
 
     @stack('styles')
@@ -4831,7 +5751,7 @@ textarea.goalx-input{
                 </li>
 
                 <li>
-                    <a href="#" class="{{ activeLink('payment.history') }}">
+                    <a href="{{route('student.payments')}}" class="{{ activeLink('student.payments') }}">
                         💳 Payment History
                     </a>
                 </li>
