@@ -155,27 +155,29 @@
 
                                                 <!-- Actions -->
                                                 <td>
-                                                    <div style="display:flex; gap:8px;">
+                                                    <div class="d-flex gap-2">
 
-                                                        <a href="{{ route('course.edit', encryptor('encrypt',$d->id)) }}"
-                                                        style="background:#2563eb; color:#fff; padding:6px 10px; border-radius:8px; font-size:12px;">
-                                                            Edit
+                                                        <a href="{{ route('admin.course.review',
+                                                            encryptor('encrypt',$d->id)) }}"
+                                                            class="btn-view-course">
+
+                                                            <i class="fa fa-eye"></i>
+                                                            View
                                                         </a>
 
-                                                        <a href="javascript:void(0);"
-                                                        onclick="$('#form{{$d->id}}').submit()"
-                                                        style="background:#ef4444; color:#fff; padding:6px 10px; border-radius:8px; font-size:12px;">
-                                                            Delete
-                                                        </a>
+                                                        @if($d->status == 2)
+
+                                                            <button class="btn-deactivate-course"
+                                                                data-id="{{$d->id}}">
+
+                                                                <i class="fa fa-ban"></i>
+                                                                Deactivate
+
+                                                            </button>
+
+                                                        @endif
 
                                                     </div>
-
-                                                    <form id="form{{$d->id}}"
-                                                        action="{{ route('course.destroy', encryptor('encrypt',$d->id)) }}"
-                                                        method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
                                                 </td>
 
                                             </tr>

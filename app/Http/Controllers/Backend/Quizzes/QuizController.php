@@ -92,7 +92,10 @@ class QuizController extends Controller
             if ($existingQuiz) {
                 return redirect()->back()->withInput()->with('error', 'A quiz already exists for the selected course and segment.');
             }
-
+            
+            $quizTitle = $request->quizTitle;
+            $course = Course::where('id', $request->course_id)->first();
+            $courseTitle = $course->title_en;
             // If no existing quiz, proceed to create a new one
             $quiz = new Quiz;
             $quiz->title = $request->quizTitle;
@@ -102,6 +105,14 @@ class QuizController extends Controller
             $quiz->pass_mark = $request->passMark;
 
             if ($quiz->save()) {
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Quiz-' . $quizTitle . ' for '. $courseTitle .' created by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 $this->notice::success('Data Saved');
                 return redirect()->route('quiz.index');
             } else {
@@ -142,6 +153,10 @@ class QuizController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $course = Course::where('id', $request->courseId)->first();
+            $courseTitle = $course->title_en;
+            $quizTitle = $request->quizTitle;
+
             $quiz = Quiz::findOrFail(encryptor('decrypt', $id));
             $quiz->title = $request->quizTitle;
             $quiz->course_id = $request->courseId;
@@ -150,6 +165,14 @@ class QuizController extends Controller
             $quiz->pass_mark = $request->passMark;
 
             if ($quiz->save()) {
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Quiz-' . $quizTitle . ' for '. $courseTitle .' updated by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 $this->notice::success('Data Saved');
                 return redirect()->route('quiz.index');
             } else {
@@ -169,7 +192,16 @@ class QuizController extends Controller
     public function destroy($id)
     {
         $data = Quiz::findOrFail(encryptor('decrypt', $id));
+        $quizTitle = $data->title;
         if ($data->delete()) {
+            if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Quiz-' . $quizTitle . ' deleted by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
             $this->notice::error('Data Deleted!');
             return redirect()->back();
         }

@@ -82,6 +82,7 @@ class ProjectController extends Controller
         try {
             // check if quiz is enabled for the segment---
             $projectEnabled = Course::where('id', $request->courseId)->first();
+            $courseTitle= $projectEnabled->title_en;
             if($projectEnabled->project == 0){
                 return redirect()->back()->with('error', 'Project is not enabled for this course.');
             }
@@ -104,6 +105,14 @@ class ProjectController extends Controller
             $project->instructor_id = auth()->user()->instructor_id;
 
             if ($project->save()) {
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Project Enable for' . $courseTitle .' by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 $this->notice::success('Data Saved');
                 return redirect()->route('project.index');
             } else {
@@ -136,6 +145,7 @@ class ProjectController extends Controller
             $project = Project::findOrFail(encryptor('decrypt', $id));  
             $course = Course::where('id', $request->courseId)->first; 
 
+            $courseTitle = $project->title_en;
             $project->course_id = $request->courseId;
             $project->course_title = $course->title_en;
             $project->project_content = $request->projectContent;
@@ -143,6 +153,14 @@ class ProjectController extends Controller
             $project->instructor_id = auth()->user()->instructor_id;
 
             if ($project->save()) {
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Project for ' . $courseTitle .' updated by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 $this->notice::success('Data Saved');
                 return redirect()->route('project.index');
             } else {
@@ -162,7 +180,16 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         $data = Project::findOrFail(encryptor('decrypt', $id));
+        $courseTitle = $data->course_title;
         if ($data->delete()) {
+            if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Project for ' . $courseTitle .' updated by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
             $this->notice::error('Data Deleted!');
             return redirect()->back();
         }
@@ -199,6 +226,9 @@ class ProjectController extends Controller
             $studentId = $submission->student_id;
             $courseId = $submission->course_id;
 
+            $student = Student::where('id', $studentId)->first();
+            $studentName = $student->name_en;
+
             // Log::info("Student ID: $studentId, Course ID: $courseId");
 
             // Update project status and comment
@@ -211,6 +241,15 @@ class ProjectController extends Controller
                 $updated = Enrollment::where('student_id', $studentId)
                     ->where('course_id', $courseId)
                     ->update(['completed' => 1]);
+
+                    if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Project for ' . $studentName .' reviewed by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
 
                 if ($updated) {
                     Log::info("Enrollment updated for student $studentId in course $courseId.");

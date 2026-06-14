@@ -43,6 +43,7 @@ class StudentController extends Controller
     public function store(AddNewRequest $request)
     {
         try {
+            $studentName = $request->fullName_en;
             $student = new Student();
             $student->name_en = $request->fullName_en;
             // $student->name_bn = $request->fullName_bn;
@@ -68,7 +69,7 @@ class StudentController extends Controller
                     \App\Models\LogActivity::create([
                         'user_id' => auth()->id(),
                         'ip_address' => request()->ip(),
-                        'activity' => 'New student created by ' . auth()->user()->name_en,
+                        'activity' => 'New student' . $studentName . ' created by ' . auth()->user()->name_en,
                         'activity_date' => now(),
                     ]);
                 }
@@ -110,6 +111,7 @@ class StudentController extends Controller
             // Find the student by ID
             $student = Student::findOrFail(encryptor('decrypt', $id));
             
+            $studentName = $request->fullName_en;
             // Update student fields
             $student->name_en = $request->fullName_en;
             $student->contact_en = $request->contactNumber_en;
@@ -150,6 +152,14 @@ class StudentController extends Controller
 
             // Save the student record
             if ($student->save()) {
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => $studentName . ' updated by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 return redirect()->route('student.index')->with('success', 'Data Saved');
             } else {
                 return redirect()->back()->withInput()->with('error', 'Please try again');
@@ -167,9 +177,18 @@ class StudentController extends Controller
     public function destroy($id)
     {
         $data = Student::findOrFail(encryptor('decrypt', $id));
+        $studentName = $data->name_en;
         $image_path = public_path('uploads/students') . $data->image;
 
         if ($data->delete()) {
+            if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => $studentName . ' deleted by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
             if (File::exists($image_path))
                 File::delete($image_path);
 

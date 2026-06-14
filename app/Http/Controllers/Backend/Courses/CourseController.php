@@ -121,6 +121,8 @@ class CourseController extends Controller
     public function store(AddNewRequest $request)
     {
         try {
+            
+            $courseTitle = $request->courseTitle_en;
             $course = new Course;
             $course->title_en = $request->courseTitle_en;
             $course->title_bn = $request->courseTitle_bn;
@@ -163,7 +165,7 @@ class CourseController extends Controller
                     \App\Models\LogActivity::create([
                         'user_id' => auth()->id(),
                         'ip_address' => request()->ip(),
-                        'activity' => 'New Course Created by ' . auth()->user()->name_en,
+                        'activity' => 'New Course'. $courseTitle . ' Created by ' . auth()->user()->name_en,
                         'activity_date' => now(),
                     ]);
                 }
@@ -266,6 +268,7 @@ class CourseController extends Controller
             if ($request->has('start_from') && !empty($request->start_from)) {
                 $course->start_from = $request->start_from; // Update if the date is chosen
             }
+            $courseTitle = $request->courseTitle_en;
             $course->title_en = $request->courseTitle_en;
             $course->title_bn = $request->courseTitle_bn;
             $course->description_en = $request->courseDescription_en;
@@ -309,7 +312,7 @@ class CourseController extends Controller
                     \App\Models\LogActivity::create([
                         'user_id' => auth()->id(),
                         'ip_address' => request()->ip(),
-                        'activity' => 'Course updated by ' . auth()->user()->name_en,
+                        'activity' => 'Course-' . $courseTitle .' updated by ' . auth()->user()->name_en,
                         'activity_date' => now(),
                     ]);
                 }
@@ -331,6 +334,8 @@ class CourseController extends Controller
             if ($request->has('start_from') && !empty($request->start_from)) {
                 $course->start_from = $request->start_from; // Update if the date is chosen
             }
+
+            $courseTitle = $request->courseTitle_en;
             $course->title_en = $request->courseTitle_en;
             $course->title_bn = $request->courseTitle_bn;
             $course->description_en = $request->courseDescription_en;
@@ -368,7 +373,7 @@ class CourseController extends Controller
                     \App\Models\LogActivity::create([
                         'user_id' => auth()->id(),
                         'ip_address' => request()->ip(),
-                        'activity' => 'Course updated by ' . auth()->user()->name_en,
+                        'activity' => 'Course-' . $courseTitle . ' updated by ' . auth()->user()->name_en,
                         'activity_date' => now(),
                     ]);
                 }
@@ -460,6 +465,7 @@ class CourseController extends Controller
     public function destroy($id)
     {
         $data = Course::findOrFail(encryptor('decrypt', $id));
+        $courseTitle = $request->title_en;
         $image_path = public_path('uploads/courses') . $data->image;
 
         if ($data->delete()) {
@@ -467,7 +473,7 @@ class CourseController extends Controller
                 \App\Models\LogActivity::create([
                     'user_id' => auth()->id(),
                     'ip_address' => request()->ip(),
-                    'activity' => 'Course Deleted by ' . auth()->user()->name_en,
+                    'activity' => 'Course-' . $courseTitle .' Deleted by ' . auth()->user()->name_en,
                     'activity_date' => now(),
                 ]);
             }

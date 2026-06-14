@@ -107,6 +107,7 @@ class SegmentController extends Controller
                 return redirect()->back()->withInput()->with('error', 'A segment already has this number for this course.');
             }
 
+            $segmentTitle = $request->title_en;
             $segment = new Segments;
             $segment->title_en = $request->title_en;
             $segment->description_en = $request->description_en;
@@ -132,6 +133,14 @@ class SegmentController extends Controller
 
             // Save the segment
             if ($segment->save()) {
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'New Segment-' . $segmentTitle .' created by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 return redirect()->route('segment.show', encryptor('encrypt', $request->courseId))->with('success', 'Data Saved');
             } else {
                 return redirect()->back()->withInput()->with('error', 'Please try again');
@@ -215,6 +224,7 @@ class SegmentController extends Controller
             if ($request->has('start_from') && !empty($request->start_from)) {
                 $course->start_from = $request->start_from; // Update if the date is chosen
             }
+            $segmentTitle = $request->title_en;
             $segment->title_en = $request->title_en;
             $segment->description_en = $request->description_en;
             $segment->segment_no = $request->segmentNo;
@@ -230,10 +240,20 @@ class SegmentController extends Controller
                 $request->thumbnail_image->move(public_path('uploads/courses/thumbnails'), $thumbnailImageName);
                 $segment->thumbnail_image = $thumbnailImageName;
             }
-            if ($segment->save())
+            if ($segment->save()) {
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Segment-' . $segmentTitle .' updated by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 return redirect()->route('segment.show', encryptor('encrypt', $courseId))->with('success', 'Data Saved');
-            else
+            }  else{
                 return redirect()->back()->withInput()->with('error', 'Please try again');
+            }
+                
         } catch (Exception $e) {
             // dd($e);
             return redirect()->back()->withInput()->with('error', 'Please try again');
@@ -295,9 +315,19 @@ class SegmentController extends Controller
     public function destroy($id)
     {
         $data = Segments::findOrFail(encryptor('decrypt', $id));
+        $segmentTitle = $data->title_en;
         $image_path = public_path('uploads/courses') . $data->image;
 
         if ($data->delete()) {
+            if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Segment-' . $segmentTitle .' deleted by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
+
             if (File::exists($image_path))
                 File::delete($image_path);
 

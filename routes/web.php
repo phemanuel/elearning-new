@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\Students\StudentController as student;
 use App\Http\Controllers\Backend\Instructors\InstructorController as instructor;
 use App\Http\Controllers\Backend\Courses\CourseCategoryController as courseCategory;
 use App\Http\Controllers\Backend\Courses\CourseController as course;
+use App\Http\Controllers\Backend\Courses\CourseReviewController as courseReview;
 use App\Http\Controllers\Backend\Courses\SegmentController as segment;
 use App\Http\Controllers\Backend\Courses\MaterialController as material;
 use App\Http\Controllers\Backend\Quizzes\QuizController as quiz;

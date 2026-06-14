@@ -55,6 +55,7 @@ class MaterialController extends Controller
     public function store(AddNewRequest $request)
     {
         try {
+            $materialTitle = $request->materialTitle;
             $material = new Material;
             $material->title = $request->materialTitle;
             $material->lesson_id = $request->lessonId;
@@ -96,6 +97,14 @@ class MaterialController extends Controller
             }
 
             if ($material->save()) {
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'New Material' . $materialTitle . ' Created by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 return response()->json([
                     'success' => true,
                     'message' => 'Material saved successfully.',
@@ -151,6 +160,7 @@ class MaterialController extends Controller
             // Find the existing material
             $material = Material::findOrFail(encryptor('decrypt', $id));
             
+            $materialTitle = $request->materialTitle;
             // Update the material attributes
             $material->title = $request->materialTitle;
             $material->lesson_id = $request->lessonId;
@@ -223,7 +233,14 @@ class MaterialController extends Controller
             if ($material->save()) {
                 // $this->notice::success('Data Saved');
                 // return redirect()->route('lesson.show', encryptor('encrypt', $segmentId))->with('success', 'Data Saved');
-
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Lesson Material-'. $materialTitle . ' ' .  'Updated by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 return response()->json([
                     'success' => true,
                     'message' => 'Material updated successfully.',
@@ -247,7 +264,7 @@ class MaterialController extends Controller
     public function destroy($id)
     {
         $data = Material::findOrFail(encryptor('decrypt', $id));
-
+        $materialTitle = $data->title;
         // Check if the material type is 'video'
         if ($data->type === 'video') {
             // Retrieve the video filename or ID from the content
@@ -261,6 +278,14 @@ class MaterialController extends Controller
 
         // Delete the material record
         if ($data->delete()) {
+            if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Lesson Material-' . $materialTitle .' deleted by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
             $this->notice::error('Data Deleted!');
             return redirect()->back();
         }

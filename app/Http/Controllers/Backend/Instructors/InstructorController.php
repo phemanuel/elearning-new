@@ -91,7 +91,7 @@ class InstructorController extends Controller
             while (User::where('name_en', $uniqueUsername)->exists()) {
                 $counter++;
                 $uniqueUsername = $username . '-' . $counter;
-            }
+            }           
             
             DB::beginTransaction();
             $instructor = new Instructor;
@@ -142,7 +142,7 @@ class InstructorController extends Controller
                         \App\Models\LogActivity::create([
                             'user_id' => auth()->id(),
                             'ip_address' => request()->ip(),
-                            'activity' => 'New Instructor created by ' . auth()->user()->name_en,
+                            'activity' => 'New Instructor-' . $username. ' created by ' . auth()->user()->name_en,
                             'activity_date' => now(),
                         ]);
                     }
@@ -205,7 +205,7 @@ class InstructorController extends Controller
         try {
             // Fetch the instructor using the decrypted ID
             $instructor = Instructor::findOrFail(encryptor('decrypt', $id));
-    
+            $instructorName = $request->fullName_en;
             // Update instructor fields
             $instructor->name_en = $request->fullName_en;
             $instructor->name_bn = $request->fullName_bn;
@@ -271,7 +271,7 @@ class InstructorController extends Controller
                         \App\Models\LogActivity::create([
                             'user_id' => auth()->id(),
                             'ip_address' => request()->ip(),
-                            'activity' => 'Instructor updated by ' . auth()->user()->name_en,
+                            'activity' => 'Instructor-' . $instructorName .' updated by ' . auth()->user()->name_en,
                             'activity_date' => now(),
                         ]);
                     }
@@ -298,6 +298,7 @@ class InstructorController extends Controller
     public function destroy($id)
     {
         $data = Instructor::findOrFail(encryptor('decrypt', $id));
+        $instructorName = $data->name_en;
         $image_path = public_path('uploads/instructors') . $data->image;
 
         if ($data->delete()) {
@@ -306,7 +307,7 @@ class InstructorController extends Controller
                 \App\Models\LogActivity::create([
                     'user_id' => auth()->id(),
                     'ip_address' => request()->ip(),
-                    'activity' => 'Instructor deleted by ' . auth()->user()->name_en,
+                    'activity' => 'Instructor-' . $instructorName . ' deleted by ' . auth()->user()->name_en,
                     'activity_date' => now(),
                 ]);
             }

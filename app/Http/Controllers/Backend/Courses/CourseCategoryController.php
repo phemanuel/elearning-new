@@ -37,6 +37,7 @@ class CourseCategoryController extends Controller
     {
         try {
             $data = new CourseCategory;
+            $categoryName = $request->category_name;
             $data->category_name = $request->category_name;
             $data->category_status = $request->category_status;
 
@@ -50,7 +51,7 @@ class CourseCategoryController extends Controller
                     \App\Models\LogActivity::create([
                         'user_id' => auth()->id(),
                         'ip_address' => request()->ip(),
-                        'activity' => 'Course Category Created by ' . auth()->user()->name_en,
+                        'activity' => 'Course Category-' . $categoryName . ' Created by ' . auth()->user()->name_en,
                         'activity_date' => now(),
                     ]);
                 }
@@ -90,6 +91,7 @@ class CourseCategoryController extends Controller
     {
         try {
             $data = CourseCategory::findOrFail($id);
+            $categoryName = $request->category_name;
             $data->category_name = $request->category_name;
             $data->category_status = $request->category_status;
 
@@ -103,7 +105,7 @@ class CourseCategoryController extends Controller
                     \App\Models\LogActivity::create([
                         'user_id' => auth()->id(),
                         'ip_address' => request()->ip(),
-                        'activity' => 'Course Category Updated by ' . auth()->user()->name_en,
+                        'activity' => 'Course Category-' . $categoryName . ' Updated by ' . auth()->user()->name_en,
                         'activity_date' => now(),
                     ]);
                 }
@@ -124,6 +126,7 @@ class CourseCategoryController extends Controller
     public function destroy($id)
     {
         $data = CourseCategory::findOrFail($id);
+        $categoryName = $data->category_name;
         $image_path = public_path('uploads/courseCategories/') . $data->category_image;
 
         if ($data->delete()) {
@@ -131,7 +134,7 @@ class CourseCategoryController extends Controller
                 \App\Models\LogActivity::create([
                     'user_id' => auth()->id(),
                     'ip_address' => request()->ip(),
-                    'activity' => 'Course Category Deleted by ' . auth()->user()->name_en,
+                    'activity' => 'Course Category-' . $categoryName . ' deleted by ' . auth()->user()->name_en,
                     'activity_date' => now(),
                 ]);
             }

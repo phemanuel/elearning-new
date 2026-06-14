@@ -61,6 +61,7 @@ class LessonController extends Controller
     public function store(AddNewRequest $request)
     {
         try {
+            $lessonTitle = $request->lessonTitle;
             $lesson = new Lesson;
             $lesson->title = $request->lessonTitle;
             $lesson->serial_no = $request->serialNo;
@@ -70,6 +71,14 @@ class LessonController extends Controller
             $lesson->notes = $request->lessonNotes;
 
             if ($lesson->save()) {
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'New Lesson-'. $lessonTitle .  ' Created by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 $this->notice::success('Data Saved');
                 return redirect()->route('lesson.show', encryptor('encrypt', $request->segmentId));
             } else {
@@ -124,6 +133,7 @@ class LessonController extends Controller
     {
         try {
             $lesson = Lesson::findOrFail(encryptor('decrypt', $id));
+            $lessonTitle = $request->lessonTitle;
             $lesson->title = $request->lessonTitle;
             $lesson->serial_no = $request->serialNo;
             $lesson->course_id = $request->courseId;
@@ -132,6 +142,14 @@ class LessonController extends Controller
             $lesson->notes = $request->lessonNotes;
 
             if ($lesson->save()) {
+                if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Lesson-'. $lessonTitle .  ' Updated by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
                 $this->notice::success('Data Saved');
                 return redirect()->route('lesson.show', encryptor('encrypt', $request->courseId));
             } else {
@@ -206,7 +224,16 @@ class LessonController extends Controller
     public function destroy($id)
     {
         $data = Lesson::findOrFail(encryptor('decrypt', $id));
+        $lessonTitle = $data->title;
         if ($data->delete()) {
+            if (auth()->check()) {
+                    \App\Models\LogActivity::create([
+                        'user_id' => auth()->id(),
+                        'ip_address' => request()->ip(),
+                        'activity' => 'Lesson-' . $lessonTitle .' deleted by ' . auth()->user()->name_en,
+                        'activity_date' => now(),
+                    ]);
+                }
             $this->notice::error('Data Deleted!');
             return redirect()->back();
         }
