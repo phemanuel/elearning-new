@@ -165,7 +165,7 @@
                                                             View
                                                         </a>
 
-                                                        @if($d->status == 2)
+                                                        <!-- @if($d->status == 2)
 
                                                             <button class="btn-deactivate-course"
                                                                 data-id="{{$d->id}}">
@@ -175,7 +175,7 @@
 
                                                             </button>
 
-                                                        @endif
+                                                        @endif -->
 
                                                     </div>
                                                 </td>

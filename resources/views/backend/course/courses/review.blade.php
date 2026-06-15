@@ -166,7 +166,7 @@
 
                 <div class="crv-status">
                     Status:
-                    <span>
+                    <span class="crv-status-badge">
                         @if($course->status == 2)
                             Active
                         @elseif($course->status == 1)
@@ -177,21 +177,34 @@
                     </span>
                 </div>
 
-                <button id="activateBtn" data-id="{{ $course->id }}" class="crv-btn crv-approve">
-                    Approve Course
-                </button>
-
-                <button id="rejectBtn" data-id="{{ $course->id }}" class="crv-btn crv-reject">
-                    Reject Course
-                </button>
-
-                <hr>
-
                 <div class="crv-meta">
                     <p>Instructor: {{ $course->instructor?->name_en }}</p>
                     <p>Category: {{ $course->courseCategory?->category_name }}</p>
                     <p>Price: {{ $course->price ? '₦'.number_format($course->price) : 'Free' }}</p>
                 </div>
+
+                <hr>
+                <div class="crv-action-group">
+
+                    <div class="crv-action-group">
+
+                    <button
+                        id="approveBtn"
+                        class="crv-btn crv-approve crv-activate"
+                        data-id="{{ $course->id }}">
+                        ✔ Approve Course
+                    </button>     
+                    
+                    <button
+                        id="rejectBtn"
+                        class="crv-btn crv-reject crv-reject-btn"
+                        data-id="{{ $course->id }}">
+                        ✖ Reject Course
+                    </button>                  
+
+                </div>
+
+                </div>            
 
             </div>
 
@@ -219,6 +232,37 @@
     </div>
 
 </div>
+
+<!-- Reject modal----- -->
+<div id="rejectModal" class="crv-modal">
+
+    <div class="crv-modal-content">
+
+        <div class="crv-modal-header">
+            <h3>Reject Course</h3>
+            <button type="button" class="crv-close-modal">×</button>
+        </div>
+
+        <div class="crv-modal-body">
+
+            <input type="hidden" id="rejectCourseId">
+
+            <label>Reason for rejection</label>
+
+            <textarea id="rejectReason"
+                      rows="5"
+                      placeholder="Write why this course is being rejected..."></textarea>
+
+            <button class="crv-btn crv-reject-confirm">
+                Submit Rejection
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -286,4 +330,175 @@
 });
 
 });
+</script>
+
+<script>
+
+// =========================
+// INIT STATUS ON LOAD
+// =========================
+$(document).ready(function () {
+    let status = {{ $course->status }};
+    updateStatusUI(status);
+});
+
+
+// =========================
+// STATUS UI HANDLER
+// =========================
+function updateStatusUI(status)
+{
+    let badge = $('.crv-status-badge');
+
+    // reset buttons
+    $('#approveBtn').show().prop('disabled', false).html('✔ Approve Course');
+    $('#rejectBtn').show().prop('disabled', false).html('✖ Reject Course');
+
+    if(status == 2)
+    {
+        // APPROVED
+        badge.text('Active')
+        .css({
+            background:'#dcfce7',
+            color:'#166534',
+            padding:'5px 12px',
+            borderRadius:'20px',
+            fontWeight:'600'
+        });
+
+        $('#approveBtn').hide();
+    }
+
+    else if(status == 1)
+    {
+        // REJECTED
+        badge.text('Rejected')
+        .css({
+            background:'#fee2e2',
+            color:'#dc2626',
+            padding:'5px 12px',
+            borderRadius:'20px',
+            fontWeight:'600'
+        });
+
+        $('#rejectBtn').hide();
+    }
+
+    else
+    {
+        // PENDING
+        badge.text('Pending')
+        .css({
+            background:'#fef3c7',
+            color:'#92400e',
+            padding:'5px 12px',
+            borderRadius:'20px',
+            fontWeight:'600'
+        });
+    }
+}
+
+
+// =========================
+// APPROVE COURSE (status = 2)
+// =========================
+$(document).on('click', '.crv-activate', function () {
+
+    let btn = $(this);
+
+    $.ajax({
+        url: "{{ route('admin.course.activate') }}",
+        type: "POST",
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            course_id: btn.data('id')
+        },
+
+        beforeSend:function(){
+            btn.prop('disabled', true).html('Processing...');
+        },
+
+        success:function(res){
+
+            btn.prop('disabled', false).html('✔ Approve Course');
+
+            if(res.success){
+                updateStatusUI(2);
+                alert('Course approved successfully');
+            }
+
+        },
+
+        error:function(){
+            btn.prop('disabled', false).html('✔ Approve Course');
+        }
+
+    });
+
+});
+
+
+// =========================
+// OPEN REJECT MODAL
+// =========================
+$(document).on('click', '.crv-reject-btn', function () {
+
+    let id = $(this).data('id');
+
+    $('#rejectCourseId').val(id);
+    $('#rejectReason').val('');
+
+    $('#rejectModal').fadeIn();
+
+});
+
+
+// =========================
+// CLOSE MODAL
+// =========================
+$(document).on('click', '.crv-close-modal', function () {
+    $('#rejectModal').fadeOut();
+});
+
+
+// =========================
+// SUBMIT REJECTION
+// =========================
+$(document).on('click', '.crv-reject-confirm', function () {
+
+    let btn = $(this);
+
+    $.ajax({
+        url: "{{ route('admin.course.reject') }}",
+        type: "POST",
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            course_id: $('#rejectCourseId').val(),
+            reason: $('#rejectReason').val()
+        },
+
+        beforeSend:function(){
+            btn.prop('disabled', true).html('Submitting...');
+        },
+
+        success:function(res){
+
+            btn.prop('disabled', false).html('Submit Rejection');
+
+            if(res.success){
+                $('#rejectModal').fadeOut();
+                updateStatusUI(1);
+                alert('Course rejected successfully');
+            }
+
+        },
+
+        error:function(){
+            btn.prop('disabled', false).html('Submit Rejection');
+        }
+
+    });
+
+});
+
 </script>

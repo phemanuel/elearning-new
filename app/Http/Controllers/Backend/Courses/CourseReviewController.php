@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Material;
+use App\Models\Instructor;
 
 
 class CourseReviewController extends Controller
@@ -44,37 +45,55 @@ class CourseReviewController extends Controller
         ]);
     }
 
-        public function activate(Request $request)
+    public function activate(Request $request)
+    {
+            $course = Course::findOrFail($request->course_id);
+            $courseTitle = $course->title_en;
+            $instructorId = $course->instructor_id;
+            $instructor = Instructor::where('id', $instructorId)->first();
+            $instructorName = $instructor->name_en;
+
+            // YOUR RULE: approve = 2
+            $course->status = 2;
+            $course->save();
+
+            if (auth()->check()) {
+                \App\Models\LogActivity::create([
+                    'user_id' => auth()->id(),
+                    'ip_address' => request()->ip(),
+                    'activity' => 'Course-' . $courseTitle . ' Created by ' . $instructorName . ' approved by ' . auth()->user()->name_en,
+                    'activity_date' => now(),
+                ]);
+            }
+
+            return response()->json([
+                'success' => true
+            ]);
+    }    
+
+    public function reject(Request $request)
     {
         $course = Course::findOrFail($request->course_id);
+        $courseTitle = $course->title_en;
+        $instructorId = $course->instructor_id;
+        $instructor = Instructor::where('id', $instructorId)->first();
+        $instructorName = $instructor->name_en;
 
-        $course->update([
-            'status' => 2,
-        ]);
+        $course->status = 1; // rejected
+        $course->rejection_reason = $request->reason; // NEW FIELD
+        $course->save();
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Course activated successfully'
-        ]);
-    }
-
-        public function reject(Request $request)
-    {
-        $request->validate([
-            'course_id' => 'required',
-            'note' => 'required'
-        ]);
-
-        $course = Course::findOrFail($request->course_id);
-
-        $course->update([
-            'status' => 1,
-            'review_note' => $request->note ?? null,
-        ]);
+        if (auth()->check()) {
+                \App\Models\LogActivity::create([
+                    'user_id' => auth()->id(),
+                    'ip_address' => request()->ip(),
+                    'activity' => 'Course-' . $courseTitle . ' Created by ' . $instructorName . ' rejected by ' . auth()->user()->name_en,
+                    'activity_date' => now(),
+                ]);
+        }
 
         return response()->json([
-            'status' => 'success',
-            'message' => 'Course rejected successfully'
+            'success' => true
         ]);
     }
 

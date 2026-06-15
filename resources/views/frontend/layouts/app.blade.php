@@ -186,367 +186,1145 @@
 
 </style>
 <style>
-.students-info-intro{
-    position:relative;
-    background:#fff;
-    border-radius:20px;
-    overflow:hidden;
-    border:1px solid #e5e7eb;
-    box-shadow:0 10px 30px rgba(15,23,42,.06);
-    margin-bottom:30px;
+/* =========================
+   HEADER WRAPPER
+========================= */
+.lmsHeader{
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: #fff;
+    border-bottom: 1px solid #eef1f6;
 }
 
-.students-info-intro::before{
-    content:'';
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    height:5px;
-    background:linear-gradient(
-        90deg,
-        #2563eb,
-        #7c3aed,
-        #06b6d4
-    );
-}
+/* container */
+.lmsHeader__container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 20px;
 
-/* ========================
-   TOP SECTION
-======================== */
-
-.students-info-intro{
-    background:linear-gradient(
-        135deg,
-        #acba96 0%,
-        #8c8ab9 50%,
-        #8ebab3 100%
-    );
-
-    border-radius:22px;
-    overflow:hidden;
-
-    box-shadow:0 15px 40px rgba(37,99,235,.18);
-
-    margin-bottom:30px;
-}
-
-/* TOP BAR */
-
-.students-info-intro__profile{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    gap:25px;
-
-    padding:22px 28px;
-}
-
-/* PROFILE */
-
-.students-info-intro-start{
-    display:flex;
-    align-items:center;
-    gap:16px;
-}
-
-.students-info-intro-start .image img{
-    width:75px;
-    height:75px;
-
-    border-radius:50%;
-    object-fit:cover;
-
-    border:4px solid rgba(255,255,255,.2);
-}
-
-.students-info-intro-start .text h5{
-    margin:0;
-    color:#fff;
-    font-size:24px;
-    font-weight:700;
-}
-
-.students-info-intro-start .text p{
-    margin:4px 0 8px;
-    color:rgba(255,255,255,.85);
-}
-
-.student-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-
-    padding:6px 12px;
-
-    background:rgba(255,255,255,.15);
-
-    color:#fff;
-
-    border-radius:50px;
-
-    font-size:12px;
-}
-
-/* STATS */
-
-.students-info-intro-end{
-    display:flex;
-    align-items:center;
-    gap:18px;
-}
-
-.enrolled-courses,
-.completed-courses{
-    display:flex;
-    align-items:center;
-    gap:12px;
-
-    padding:12px 16px;
-
-    background:rgba(255,255,255,.12);
-
-    backdrop-filter:blur(12px);
-
-    border-radius:16px;
-
-    border:1px solid rgba(255,255,255,.15);
-}
-
-.enrolled-courses-icon,
-.completed-courses-icon{
-    width:45px;
-    height:45px;
-
-    border-radius:12px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:18px;
-}
-
-.enrolled-courses-icon{
-    background:rgba(66, 99, 10, 0.91);
-    color:#fff;
-}
-
-.completed-courses-icon{
-    background:rgba(16,185,129,.25);
-    color:#fff;
-}
-
-.enrolled-courses-text h6,
-.completed-courses-text h5{
-    margin:0;
-    color:#fff;
-    font-size:24px;
-    font-weight:700;
-}
-
-.enrolled-courses-text p,
-.completed-courses-text p{
-    margin:0;
-    color:#fff;
-    font-size:12px;
-}
-
-/* NAVIGATION */
-
-.students-info-intro__nav{
-    padding:16px 24px;
-
-    background:rgba(255,255,255,.08);
-
-    border-top:1px solid rgba(255,255,255,.12);
-}
-
-.students-info-intro__nav .nav{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.students-info-intro__nav .nav-link{
-    display:flex;
-    align-items:center;
-    gap:8px;
-
-    padding:10px 16px;
-
-    border:none !important;
-
-    border-radius:12px;
-
-    background:rgba(255,255,255,.12);
-
-    color:#fff !important;
-
-    font-weight:600;
-
-    transition:.3s;
-}
-
-.students-info-intro__nav .nav-link:hover{
-    background:#fff;
-    color:#4f46e5 !important;
-}
-
-.students-info-intro__nav .nav-link.active{
-    background:#fff;
-    color:#4f46e5 !important;
-
-    box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-    .students-info-intro__profile{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .students-info-intro-end{
-        width:100%;
-        justify-content:space-between;
-    }
-
-    .students-info-intro-start .image img{
-        width:65px;
-        height:65px;
-    }
-
-    .students-info-intro-start .text h5{
-        font-size:20px;
-    }
-
-    .students-info-intro__nav .nav-link{
-        width:100%;
-        justify-content:center;
-    }
-}
-
-/* breadcrumb style */
-/* ===== PAGE HEADER WRAPPER ===== */
-.lms-page-header {
-    padding: 25px 0;
-    background: linear-gradient(135deg, #f8fafc, #eef2ff);
-}
-
-/* ===== MAIN CARD ===== */
-.lms-header-card {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 20px 24px;
-
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    border: 1px solid #eef2f7;
+    justify-content: space-between;
 }
 
-/* ===== LEFT SIDE ===== */
-.lms-page-title {
-    font-size: 22px;
-    font-weight: 800;
-    color: #111827;
-    margin-bottom: 6px;
-}
-
-/* Breadcrumb */
-.lms-breadcrumb-nav .breadcrumb {
-    background: transparent;
-    padding: 0;
-    margin: 0;
-}
-
-.lms-breadcrumb-nav .breadcrumb-item {
-    font-size: 13px;
-}
-
-.lms-breadcrumb-nav .breadcrumb-item a {
-    color: #4f46e5;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.lms-breadcrumb-nav .breadcrumb-item a:hover {
-    text-decoration: underline;
-}
-
-.lms-breadcrumb-nav .breadcrumb-item.active {
-    color: #6b7280;
-    font-weight: 600;
-}
-
-/* Divider */
-.breadcrumb-item + .breadcrumb-item::before {
-    content: "›";
-    color: #9ca3af;
-    font-weight: 600;
-}
-
-/* ===== RIGHT SIDE BUTTONS ===== */
-.lms-header-right {
+/* =========================
+   LEFT SECTION
+========================= */
+.lmsHeader__left{
     display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.lmsHeader__logo img{
+    height: 38px;
+}
+
+/* mobile toggle */
+.lmsHeader__toggle{
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.lmsHeader__toggle span{
+    width: 24px;
+    height: 2px;
+    background: #222;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+.lmsNav{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.lmsNav__list{
+    display: flex;
+    gap: 22px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.lmsNav__link{
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    transition: 0.2s ease;
+}
+
+.lmsNav__link:hover{
+    color: #2563eb;
+}
+
+/* =========================
+   RIGHT ACTIONS
+========================= */
+.lmsActions{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* icon button */
+.lmsActions__iconBtn{
+    border: none;
+    background: #f3f4f6;
+    padding: 8px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* cart */
+.lmsActions__cart{
+    position: relative;
+    text-decoration: none;
+    font-size: 18px;
+    color: #111;
+}
+
+.lmsActions__badge{
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 999px;
+}
+
+/* =========================
+   USER DROPDOWN
+========================= */
+.lmsUser{
+    position: relative;
+    display: flex;
+    align-items: center;
     gap: 10px;
 }
 
-.lms-btn {
+/* avatar */
+.lmsUser__trigger img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #eef1f6;
+    cursor: pointer;
+}
+
+/* dropdown hidden */
+.lmsUser__dropdown{
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+
+    width: 200px;
+    background: #fff;
+    border: 1px solid #eef1f6;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+
+    display: flex;
+    flex-direction: column;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    pointer-events: none;
+
+    transition: 0.2s ease;
+    z-index: 999;
+}
+
+/* open state */
+.lmsUser.open .lmsUser__dropdown{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* links */
+.lmsUser__dropdown a{
+    padding: 11px 14px;
+    font-size: 13px;
+    text-decoration: none;
+    color: #2b2b2b;
+    transition: 0.2s ease;
+}
+
+.lmsUser__dropdown a:hover{
+    background: #f5f7fb;
+    color: #2563eb;
+}
+
+.lmsUser__dropdown .danger{
+    color: #dc2626;
+}
+
+.lmsUser__dropdown .danger:hover{
+    background: #fef2f2;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.lmsBtn{
     padding: 8px 14px;
     border-radius: 10px;
     font-size: 13px;
-    font-weight: 600;
     text-decoration: none;
-    display: inline-flex;
+    font-weight: 500;
+}
+
+.lmsBtn--primary{
+    background: #2563eb;
+    color: #fff;
+}
+
+.lmsBtn--ghost{
+    background: #f3f4f6;
+    color: #111;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 992px){
+    .lmsNav{
+        display: none;
+    }
+
+    .lmsHeader__toggle{
+        display: flex;
+    }
+}
+
+/* =========================
+   HERO WRAPPER
+========================= */
+.lmsHero{
+    position: relative;
+    padding: 80px 0;
+    overflow: hidden;
+    background: #f9fafb;
+}
+
+/* background image layer */
+.lmsHero__bg{
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.08;
+    z-index: 0;
+}
+
+/* container */
+.lmsHero__container{
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    z-index: 1;
+}
+
+/* grid layout */
+.lmsHero__grid{
+    display: flex;
     align-items: center;
-    gap: 6px;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+/* =========================
+   CONTENT
+========================= */
+.lmsHero__content{
+    flex: 1;
+    max-width: 600px;
+}
+
+.lmsHero__title{
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #111827;
+    margin-bottom: 16px;
+}
+
+.lmsHero__subtitle{
+    font-size: 16px;
+    line-height: 1.6;
+    color: #6b7280;
+    margin-bottom: 28px;
+}
+
+/* =========================
+   SEARCH
+========================= */
+.lmsHero__searchForm{
+    width: 100%;
+}
+
+.lmsHero__searchBox{
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 6px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+}
+
+.lmsHero__input{
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: #111827;
+}
+
+.lmsHero__searchBtn{
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.lmsHero__searchBtn:hover{
+    background: #1d4ed8;
+}
+
+/* =========================
+   IMAGE
+========================= */
+.lmsHero__media{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.lmsHero__media img{
+    max-width: 100%;
+    height: auto;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 992px){
+
+    .lmsHero{
+        padding: 60px 0;
+    }
+
+    .lmsHero__grid{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .lmsHero__title{
+        font-size: 34px;
+    }
+
+    .lmsHero__searchBox{
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .lmsHero__searchBtn{
+        width: 100%;
+    }
+}
+
+.lmsCategories{
+    padding: 70px 0;
+    background: #f9fafb;
+}
+
+.lmsCategories__container{
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+/* header row */
+.lmsCategories__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.lmsCategories__title{
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.lmsCategories__viewAll{
+    font-size: 14px;
+    color: #2563eb;
+    text-decoration: none;
+}
+
+/* grid */
+.lmsCategories__grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+/* card */
+.lmsCategoryCard{
+    background: #fff;
+    border: 1px solid #eef1f6;
+    border-radius: 14px;
+
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.lmsCategoryCard:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+}
+
+.lmsCategoryCard__img{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.lmsCategoryCard__info h4{
+    font-size: 15px;
+    margin: 0;
+    color: #111827;
+}
+
+.lmsCategoryCard__info p{
+    font-size: 13px;
+    color: #6b7280;
+    margin: 2px 0 0;
+}
+
+/* responsive */
+@media (max-width: 992px){
+    .lmsCategories__grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px){
+    .lmsCategories__grid{
+        grid-template-columns: 1fr;
+    }
+}
+
+.lmsCourseTabs{
+    margin-top: 20px;
+}
+
+/* HEADER ROW */
+.lmsCourseTabs__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* TITLE */
+.lmsCourseTabs__title{
+    font-size: 24px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+/* NAV WRAPPER */
+.lmsCourseTabs__nav{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* TAB BUTTON */
+.lmsTab{
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    padding: 8px 14px;
+    border-radius: 999px;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+    color: #374151;
+}
+
+/* HOVER */
+.lmsTab:hover{
+    background: #f3f4f6;
+}
+
+/* ACTIVE STATE */
+.lmsTab.is-active{
+    background: #2563eb;
+    color: #fff;
+    border-color: #2563eb;
+}
+
+/* MOBILE */
+@media (max-width: 768px){
+    .lmsCourseTabs__header{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .lmsCourseTabs__nav{
+        width: 100%;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 6px;
+    }
+
+    .lmsTab{
+        flex: 0 0 auto;
+    }
+}
+
+/* =========================
+   TAB CONTENT SYSTEM
+========================= */
+.lmsTabContent{
+    display: none;
+}
+
+.lmsTabContent.is-active{
+    display: block;
+}
+
+/* =========================
+   GRID
+========================= */
+.lmsCourseGrid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 25px;
+}
+
+/* =========================
+   COURSE CARD
+========================= */
+.lmsCourseCard{
+    background: #fff;
+    border: 1px solid #eef1f6;
+    border-radius: 14px;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
     transition: 0.25s ease;
 }
 
-/* Outline button */
-.lms-btn-outline {
-    border: 1px solid #4f46e5;
-    color: #4f46e5;
-    background: transparent;
+.lmsCourseCard:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
 }
 
-.lms-btn-outline:hover {
-    background: #4f46e5;
-    color: #fff;
+/* IMAGE */
+.lmsCourseCard__image img{
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
 }
 
-/* Primary button */
-.lms-btn-primary {
-    background: #4f46e5;
-    color: #fff;
-    border: 1px solid #4f46e5;
+/* BODY */
+.lmsCourseCard__body{
+    padding: 16px;
 }
 
-.lms-btn-primary:hover {
-    background: #3730a3;
-    border-color: #3730a3;
+/* TITLE */
+.lmsCourseCard__title{
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-    .lms-header-card {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
+.lmsCourseCard__title a{
+    text-decoration: none;
+    color: #111827;
+}
+
+/* META */
+.lmsCourseCard__meta{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 10px;
+}
+
+/* instructor */
+.lmsCourseCard__instructor{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    color: #374151;
+}
+
+.lmsCourseCard__instructor img{
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* price */
+.lmsCourseCard__price{
+    font-size: 13px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.lmsCourseCard__price del{
+    font-size: 12px;
+    color: #9ca3af;
+    margin-left: 4px;
+}
+
+/* STATS */
+.lmsCourseCard__stats{
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 14px;
+}
+
+/* BUTTON */
+.lmsCourseCard__btn{
+    width: 100%;
+    text-align: center;
+}
+
+/* EMPTY */
+.lmsEmptyState{
+    grid-column: 1 / -1;   /* spans full grid width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+}
+
+.lmsEmptyState__box{
+    text-align: center;
+    max-width: 420px;
+    padding: 30px;
+    border: 1px dashed #e5e7eb;
+    border-radius: 12px;
+    background: #fafafa;
+}
+
+.lmsEmptyState__box h3{
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #111827;
+}
+
+.lmsEmptyState__box p{
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* FOOTER */
+.lmsTabContent__footer{
+    text-align: center;
+    margin-top: 50px;     /* increased spacing */
+    padding-bottom: 20px; /* prevents touching section bottom */
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 992px){
+    .lmsCourseGrid{
+        grid-template-columns: repeat(2, 1fr);
     }
+}
 
-    .lms-header-right {
-        width: 100%;
-        justify-content: flex-start;
-        flex-wrap: wrap;
+@media (max-width: 576px){
+    .lmsCourseGrid{
+        grid-template-columns: 1fr;
     }
+}
+</style>
+<style>
+    /* Floating button */
+.cat-fab{
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    z-index: 9999;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Drawer wrapper */
+.cat-drawer{
+    position: fixed;
+    inset: 0;
+    display: none;
+    z-index: 10000;
+}
+
+/* dark overlay */
+.cat-drawer__overlay{
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+}
+
+/* panel */
+.cat-drawer__panel{
+    position: absolute;
+    right: -380px;
+    top: 0;
+    width: 360px;
+    height: 100%;
+    background: #fff;
+    transition: 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+/* open state */
+.cat-drawer.open{
+    display: block;
+}
+
+.cat-drawer.open .cat-drawer__panel{
+    right: 0;
+}
+
+/* header */
+.cat-drawer__header{
+    padding: 16px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cat-drawer__close{
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* body */
+.cat-drawer__body{
+    padding: 10px;
+    overflow-y: auto;
+}
+
+/* category item */
+.cat-item{
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #333;
+    align-items: center;
+    transition: 0.2s;
+}
+
+.cat-item img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.cat-item:hover{
+    background: #f3f6ff;
+}
+
+.cat-item .title{
+    font-weight: 600;
+    margin: 0;
+}
+
+.cat-item span{
+    font-size: 12px;
+    color: #666;
+}
+
+.empty{
+    text-align: center;
+    padding: 20px;
+    color: #999;
+}
+</style>
+<style>
+    /* Back to top button */
+.back-to-top{
+    position: fixed;
+    right: 20px;
+    bottom: 80px; /* sits just above category button */
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: #111827;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    transition: 0.3s ease;
+}
+
+.back-to-top:hover{
+    background: #2563eb;
+}
+
+.feature--modern .featureCard{
+    background: #fff;
+    border-radius: 14px;
+    padding: 25px;
+    height: 100%;
+    transition: 0.3s ease;
+    border: 1px solid #eef1f6;
+}
+
+.feature--modern .featureCard:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.featureCard__icon{
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.featureCard__icon--green{ background: #e8f7ee; color: #16a34a; }
+.featureCard__icon--blue{ background: #e8f1ff; color: #2563eb; }
+.featureCard__icon--red{ background: #ffe8e8; color: #dc2626; }
+
+.featureCard h5{
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.featureCard p{
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+.learningSteps__content{
+    padding-right: 20px;
+}
+
+.learningSteps__list{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Step item */
+.stepItem{
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    position: relative;
+}
+
+/* number circle */
+.stepItem__num{
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #2563eb;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+/* text */
+.stepItem__body h6{
+    margin: 0;
+    font-weight: 600;
+}
+
+.stepItem__body p{
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+/* image styling */
+.learningSteps__image{
+    position: relative;
+}
+
+.floatingShape{
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(37,99,235,0.1);
+    animation: float 4s ease-in-out infinite;
+}
+
+.shape1{
+    width: 80px;
+    height: 80px;
+    top: 20px;
+    left: -20px;
+}
+
+.shape2{
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: -10px;
+}
+
+@keyframes float{
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(-10px); }
+}
+
+.testimonial-modern-section{
+    background: #ffffff;
+    padding: 90px 0;
+    overflow: hidden;
+}
+
+/* Titles */
+.testimonial-modern-title{
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.testimonial-modern-subtitle{
+    color: #6b7280;
+    margin-bottom: 50px;
+}
+
+/* MARQUEE */
+.testimonial-marquee{
+    overflow: hidden;
+}
+
+.testimonial-track{
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    animation: scrollLeft 28s linear infinite;
+}
+
+/* CARD (MODERN LUX STYLE) */
+.testimonial-card{
+    width: 340px;
+    padding: 22px;
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+
+    transition: 0.3s ease;
+    position: relative;
+}
+
+/* subtle accent line */
+.testimonial-card::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    background: linear-gradient(90deg, #4f46e5, #06b6d4);
+    border-radius: 18px 18px 0 0;
+}
+
+.testimonial-card:hover{
+    transform: translateY(-6px) scale(1.02);
+}
+
+/* TEXT */
+.testimonial-card p{
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.7;
+    margin-bottom: 18px;
+}
+
+/* FOOTER */
+.testimonial-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* USER */
+.user{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user img{
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e5e7eb;
+}
+
+.user h6{
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.user span{
+    font-size: 12px;
+    color: #6b7280;
+}
+
+/* STARS */
+.stars{
+    font-size: 14px;
+    color: #fbbf24;
+    letter-spacing: 1px;
+}
+
+/* ANIMATION */
+@keyframes scrollLeft{
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* pause on hover */
+.testimonial-marquee:hover .testimonial-track{
+    animation-play-state: paused;
+}
+
+.instructor-card-modern{
+    background:#fff;
+    border-radius:14px;
+    padding:18px;
+    text-align:center;
+    box-shadow:0 8px 25px rgba(0,0,0,0.06);
+    transition:0.3s;
+    height:100%;
+}
+
+.instructor-card-modern:hover{
+    transform:translateY(-6px);
+}
+
+.instructor-img-wrapper{
+    position:relative;
+}
+
+.instructor-img-wrapper img{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-bottom:12px;
+}
+
+.instructor-social{
+    position:absolute;
+    right:0;
+    top:0;
+    list-style:none;
+    padding:0;
+}
+
+.instructor-social li{
+    margin-bottom:6px;
+}
+
+.instructor-social a{
+    display:inline-block;
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    background:#f1f1f1;
+    font-size:12px;
+    line-height:26px;
+    text-align:center;
+}
+
+.instructor-info h5{
+    font-size:16px;
+    margin-bottom:4px;
+}
+
+.instructor-info p{
+    font-size:13px;
+    color:#777;
+}
+.bg-offwhite{
+    background:#f7f8fc;
 }
 </style>
     @stack('styles')
@@ -555,318 +1333,107 @@
 
 <body @yield('body-attr')>
 
-    <!-- Header Starts Here -->
-    <header @yield('header-attr')>
-        <nav class="navbar navbar-expand-xl navbar-light bg-transparent">
-            <div class="container">
-                <!-- Logo -->
-                <a class="navbar-brand" href="{{route('home')}}">
-                    <img src="{{asset('frontend/dist/images/logo/logo.png')}}" alt="Logo" class="img-fluid" />
-                </a>
-                <button class="menu-icon-container">
-                    <span class="menu-icon"></span>
-                </button>
-                <!-- Navbar Item -->
-                <div class="collapse navbar-collapse d-none d-xl-block d-none d-xl-block" id="navbarSupportedContent">
-                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{route('home')}}">Home</a>
-                        </li>
-                        @if(request()->session()->get('studentLogin'))
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{route('studentdashboard')}}">Dashboard</a>
-                        </li>                        
-                        @elseif(auth()->user())
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{route('dashboard')}}">Dashboard</a>
-                        </li>
-                        @endif
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{route('searchCourse')}}">Courses</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{route('searchInstructor')}}">Instructors</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{route('about')}}">About</a>
-                        </li>
-                        {{-- <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Events
-                            </a>
-                        </li> --}}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('contact')}}">Contact</a>
-                        </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="{{route('dashboard')}}">Admin</a>
-                        </li> -->
-                    </ul>
-                    <div class="d-flex align-items-center justify-content-between rightContent">
-                        <form class="header__Search-form" id="searchForm">
-                            <button type="button" class="border-0 bg-transparent header__Search-button"
-                                onclick="openSearch()">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="9.19522" cy="9.19518" r="7.61714" stroke="#35343E" stroke-width="1.6"
-                                        stroke-linecap="round" stroke-linejoin="round"></circle>
-                                    <path d="M15.0493 15.4866L18.3493 18.778" stroke="#35343E" stroke-width="1.6"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
-                            </button>
-                            <div id="myOverlay" class="overlay">
-                                <span class="closebtn" onclick="closeSearch()" title="Close Overlay">×</span>
-                                <div class="overlay-content">
-                                    <div>
-                                        <input type="text" placeholder="Search.." name="search" />
-                                        <button type="button">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none" stroke="#ffff" stroke-width="2"
-                                                stroke-linecap="round" stroke-linejoin="round"
-                                                class="feather feather-search">
-                                                <circle cx="11" cy="11" r="8"></circle>
-                                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        @if(request()->session()->get('studentLogin'))
-                        <a href="{{route('cart')}}" class="cart-nav border-0 bg-transparent mx-3">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M2.87778 2.51099L2.77634 2.50038C2.40716 2.48688 2.07562 2.74796 2.01087 3.12209L2.00026 3.22354C1.98676 3.59272 2.24784 3.92426 2.62197 3.98901L4.13098 4.25L5.04551 15.1457L5.06443 15.3095C5.24843 16.5519 6.31708 17.486 7.58988 17.486H18.5019L18.6662 17.4808C19.8626 17.4044 20.8545 16.4996 21.0291 15.2978L21.9781 8.73941L21.9945 8.58877C22.0819 7.38969 21.132 6.349 19.9089 6.349H5.81198L5.57725 3.54727L5.55956 3.43641C5.49112 3.14809 5.25673 2.92273 4.95778 2.87099L2.87778 2.51099ZM7.47394 15.9797C6.97867 15.9255 6.58258 15.5277 6.54028 15.0207L5.93798 7.849H19.9089L19.997 7.85548C20.3128 7.90242 20.5409 8.19769 20.4936 8.52465L19.5446 15.0826L19.5208 15.1998C19.4005 15.6584 18.985 15.986 18.5019 15.986H7.58988L7.47394 15.9797ZM5.90828 20.5853C5.90828 19.7492 6.58595 19.0703 7.42228 19.0703C8.25849 19.0703 8.93728 19.7491 8.93728 20.5853C8.93728 21.4216 8.25838 22.0993 7.42228 22.0993C6.58606 22.0993 5.90828 21.4215 5.90828 20.5853ZM17.1597 20.5853C17.1597 19.7491 17.8385 19.0703 18.6747 19.0703C19.5109 19.0703 20.1897 19.7491 20.1897 20.5853C20.1897 21.4216 19.5108 22.0993 18.6747 22.0993C17.8386 22.0993 17.1597 21.4216 17.1597 20.5853ZM17.6484 10.795C17.6484 10.3808 17.3126 10.045 16.8984 10.045H14.1254L14.0236 10.0518C13.6575 10.1015 13.3754 10.4153 13.3754 10.795C13.3754 11.2092 13.7112 11.545 14.1254 11.545H16.8984L17.0001 11.5382C17.3662 11.4885 17.6484 11.1747 17.6484 10.795Z"
-                                    fill="#35343E"></path>
-                            </svg>
-                            <span class="badge bg-primary">{{ count((array) session('cart')) }}</span>
-                            <span class="visually-hidden">Items Added</span>
-                        </a>
-                        @endif
-                        @if(request()->session()->get('studentLogin'))
-                        <div class="dropdown user-image ms-3" id="imageDropdown">
-                            <a href="{{route('studentdashboard')}}" onclick="toggleDropdown(event)">
-                                <img src="{{ asset('uploads/students/' . request()->session()->get('image')) }}"
-                                alt="Student Profile"
-                                width="48"
-                                height="48"
-                                onerror="this.onerror=null;this.src='{{ asset('uploads/students/blank_new.png') }}';">
-                            </a>
-                            <div class="dropdown-content">
-                                <a href="{{route('student_profile')}}">Profile</a>
-                                <a href="{{route('studentdashboard')}}">Dashboard</a>
-                                <a href="{{route('studentlogOut')}}" class="text-danger">Logout</a>
-                            </div>
-                        </div>
-                        @elseif(auth()->user())
-                        <div class="dropdown user-image ms-3" id="imageDropdown">
-                            <a href="{{route('dashboard')}}" onclick="toggleDropdown(event)">
-                                <img src="{{asset('uploads/users/'.auth()->user()->image)}}"
-                                    alt="User Profile" height="48" width="48" 
-                                    onerror="this.onerror=null;this.src='{{ asset('uploads/students/blank_new.png') }}';"/>
-                            </a>
-                            <div class="dropdown-content">
-                                <a href="{{route('user.edit', encryptor('encrypt',auth()->user()->id))}}">Profile</a>
-                                <a href="{{route('dashboard')}}">Dashboard</a>
-                                <a href="{{route('studentlogOut')}}" class="text-danger">Logout</a>
-                            </div>
-                        </div>
-                        @else
-                        <a href="{{route('studentLogin')}}" class="button button--text">Sign in</a>
-                        <a href="{{route('signup')}}" class="button button--dark">Sign Up</a>
-                        @endif
-                    </div>
-                </div>
+    <!-- LMS HEADER -->
+<header class="lmsHeader">
+    <div class="lmsHeader__container">
 
-                {{-- Mobile Navbar --}}
-                <div class="navbar-mobile">
-                    <div>
-                        <div class="navbar-mobile__top">
-                            <a href="{{route('home')}}">
-                                <img src="{{asset('frontend/dist/images/logo/logo.png')}}" alt="brand"
-                                    class="img-fluid" />
-                            </a>
-                            <div>
-                                <a href="{{ route('cart') }}" class="cart-nav">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M2.87778 2.51099L2.77634 2.50038C2.40716 2.48688 2.07562 2.74796 2.01087 3.12209L2.00026 3.22354C1.98676 3.59272 2.24784 3.92426 2.62197 3.98901L4.13098 4.25L5.04551 15.1457L5.06443 15.3095C5.24843 16.5519 6.31708 17.486 7.58988 17.486H18.5019L18.6662 17.4808C19.8626 17.4044 20.8545 16.4996 21.0291 15.2978L21.9781 8.73941L21.9945 8.58877C22.0819 7.38969 21.132 6.349 19.9089 6.349H5.81198L5.57725 3.54727L5.55956 3.43641C5.49112 3.14809 5.25673 2.92273 4.95778 2.87099L2.87778 2.51099ZM7.47394 15.9797C6.97867 15.9255 6.58258 15.5277 6.54028 15.0207L5.93798 7.849H19.9089L19.997 7.85548C20.3128 7.90242 20.5409 8.19769 20.4936 8.52465L19.5446 15.0826L19.5208 15.1998C19.4005 15.6584 18.985 15.986 18.5019 15.986H7.58988L7.47394 15.9797ZM5.90828 20.5853C5.90828 19.7492 6.58595 19.0703 7.42228 19.0703C8.25849 19.0703 8.93728 19.7491 8.93728 20.5853C8.93728 21.4216 8.25838 22.0993 7.42228 22.0993C6.58606 22.0993 5.90828 21.4215 5.90828 20.5853ZM17.1597 20.5853C17.1597 19.7491 17.8385 19.0703 18.6747 19.0703C19.5109 19.0703 20.1897 19.7491 20.1897 20.5853C20.1897 21.4216 19.5108 22.0993 18.6747 22.0993C17.8386 22.0993 17.1597 21.4216 17.1597 20.5853ZM17.6484 10.795C17.6484 10.3808 17.3126 10.045 16.8984 10.045H14.1254L14.0236 10.0518C13.6575 10.1015 13.3754 10.4153 13.3754 10.795C13.3754 11.2092 13.7112 11.545 14.1254 11.545H16.8984L17.0001 11.5382C17.3662 11.4885 17.6484 11.1747 17.6484 10.795Z"
-                                            fill="#35343E"></path>
-                                    </svg>
-                                    {{-- <span class="badge bg-primary">2</span> --}}
-                                    <span class="badge bg-primary">{{ count((array) session('cart')) }}</span>
-                                    <span class="visually-hidden">Items Added</span>
-                                </a>
-                                <button class="navbar-mobile--cross">
-                                    <svg width="20" height="19" viewBox="0 0 20 19" fill="currentColor"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M14.5967 4.59668L5.40429 13.7891" stroke="currentColor"
-                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M5.40332 4.59668L14.5957 13.7891" stroke="currentColor"
-                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="navbar-mobile__menu">
-                            <ul class="navbar-mobile__menu-list">
-                                <li class="active navbar-mobile__menu-item">
-                                    <a href="{{route('home')}}">
-                                        <span class="navbar-mobile__menu-link"> Home</span>
-                                    </a>
-                                </li>
-                                @if(request()->session()->get('studentLogin'))
-                                <li class="navbar-mobile__menu-item">
-                                    <a href="{{route('studentdashboard')}}">
-                                        <span class="navbar-mobile__menu-link"> Dashboard</span>
-                                    </a>
-                                </li>
-                                @elseif(auth()->user())
-                                <li class="navbar-mobile__menu-item">
-                                    <a href="{{route('dashboard')}}">
-                                        <span class="navbar-mobile__menu-link"> Dashboard</span>
-                                    </a>
-                                </li>
-                                @endif
-                                <li class="navbar-mobile__menu-item">
-                                    <a href="{{route('searchCourse')}}">
-                                        <span class="navbar-mobile__menu-link"> Courses </span>
-                                    </a>
-                                </li>
-                                <li class="navbar-mobile__menu-item">
-                                    <a href="{{route('searchInstructor')}}">
-                                        <span class="navbar-mobile__menu-link"> Instructors</span>
-                                    </a>
-                                </li>
-                                <li class="navbar-mobile__menu-item">
-                                    <a href="{{route('about')}}">
-                                        <span class="navbar-mobile__menu-link"> About </span>
-                                    </a>
-                                </li>
-                                
-                                <li class="navbar-mobile__menu-item">
-                                    <a href="{{route('contact')}}">
-                                        <span class="navbar-mobile__menu-link"> Contact </span>
-                                    </a>
-                                </li>
-                                @if(request()->session()->get('studentLogin'))
-                                <li class="navbar-mobile__menu-item">
-                                    <a href="{{route('student_profile')}}">
-                                        <span class="navbar-mobile__menu-link"> Profile </span>
-                                    </a>
-                                </li>                                
-                                @elseif(auth()->user())
-                                <li class="navbar-mobile__menu-item">
-                                    <a href="{{route('user.edit', encryptor('encrypt',auth()->user()->id))}}">
-                                        <span class="navbar-mobile__menu-link"> Profile </span>
-                                    </a>
-                                </li>                                
-                                @endif
-                                @if(request()->session()->get('studentLogin'))
-                                
-                                @elseif(auth()->user())
-                                
-                                @else
-                                <li class="navbar-mobile__menu-item">
-                                    <a href="{{route('studentLogin')}}">
-                                        <span class="navbar-mobile__menu-link"> Signin </span>
-                                    </a>
-                                </li>
-                                <li class="navbar-mobile__menu-item">
-                                    <a href="{{route('signup')}}">
-                                        <span class="navbar-mobile__menu-link"> Signup </span>
-                                    </a>
-                                </li>
-                                @endif
-                                @if(request()->session()->get('studentLogin'))
-                                <li class="navbar-mobile__menu-item">
-                                    <a href="{{route('studentlogOut')}}">
-                                        <span class="navbar-mobile__menu-link"> Logout</span>
-                                    </a>
-                                </li>
-                                @elseif(auth()->user())
-                                <li class="navbar-mobile__menu-item">
-                                    <a href="{{route('studentlogOut')}}">
-                                        <span class="navbar-mobile__menu-link"> Logout</span>
-                                    </a>
-                                </li>
-                                @endif
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="nav-mobile__footer">
-                        <ul class="social-icons social-icons--outline justify-content-center">
-                            <li>
-                                <a href="#">
-                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M17.9507 5.29205C17.9086 4.33564 17.7539 3.67812 17.5324 3.10836C17.3038 2.50359 16.9522 1.96213 16.4915 1.51201C16.0414 1.05489 15.4963 0.699691 14.8986 0.474702C14.3255 0.253147 13.6714 0.0984842 12.715 0.0563159C11.7515 0.0105764 11.4456 0 9.00174 0C6.55791 0 6.25202 0.0105764 5.29204 0.0527447C4.33563 0.0949129 3.67811 0.249713 3.1085 0.471131C2.50358 0.699691 1.96213 1.05132 1.51201 1.51201C1.05489 1.96213 0.699827 2.50716 0.474701 3.10493C0.253147 3.67812 0.098484 4.33207 0.0563158 5.28848C0.0105764 6.25203 0 6.55792 0 9.00176C0 11.4456 0.0105764 11.7515 0.0527446 12.7115C0.0949128 13.6679 0.249713 14.3254 0.471267 14.8952C0.699827 15.4999 1.05489 16.0414 1.51201 16.4915C1.96213 16.9486 2.50715 17.3038 3.10493 17.5288C3.67811 17.7504 4.33206 17.905 5.28861 17.9472C6.24845 17.9895 6.55448 17.9999 8.99831 17.9999C11.4421 17.9999 11.748 17.9895 12.708 17.9472C13.6644 17.905 14.3219 17.7504 14.8916 17.5288C16.1012 17.0611 17.0577 16.1047 17.5254 14.8952C17.7468 14.322 17.9016 13.6679 17.9437 12.7115C17.9859 11.7515 17.9965 11.4456 17.9965 9.00176C17.9965 6.55792 17.9929 6.25203 17.9507 5.29205ZM16.3298 12.6411C16.2911 13.5202 16.1434 13.9949 16.0203 14.3114C15.7179 15.0956 15.0955 15.7179 14.3114 16.0204C13.9949 16.1434 13.5168 16.2911 12.6411 16.3297C11.6917 16.372 11.407 16.3824 9.00531 16.3824C6.60365 16.3824 6.31534 16.372 5.36937 16.3297C4.4903 16.2911 4.01559 16.1434 3.69913 16.0204C3.3089 15.8761 2.9537 15.6476 2.66539 15.3487C2.3665 15.0568 2.13794 14.7052 1.99372 14.315C1.87065 13.9985 1.72299 13.5202 1.68439 12.6447C1.64209 11.6953 1.63165 11.4104 1.63165 9.00876C1.63165 6.60709 1.64209 6.31878 1.68439 5.37295C1.72299 4.49387 1.87065 4.01917 1.99372 3.7027C2.13794 3.31234 2.3665 2.95727 2.66896 2.66883C2.9607 2.36994 3.31233 2.14138 3.7027 1.99729C4.01917 1.87422 4.49744 1.72656 5.37294 1.68783C6.32235 1.64566 6.60722 1.63508 9.00875 1.63508C11.414 1.63508 11.6987 1.64566 12.6447 1.68783C13.5238 1.72656 13.9985 1.87422 14.3149 1.99729C14.7052 2.14138 15.0604 2.36994 15.3487 2.66883C15.6476 2.96071 15.8761 3.31234 16.0203 3.7027C16.1434 4.01917 16.2911 4.49731 16.3298 5.37295C16.372 6.32236 16.3826 6.60709 16.3826 9.00876C16.3826 11.4104 16.372 11.6917 16.3298 12.6411Z"
-                                            fill="currentColor"></path>
-                                        <path
-                                            d="M9.00188 4.37744C6.44912 4.37744 4.37793 6.44849 4.37793 9.00139C4.37793 11.5543 6.44912 13.6253 9.00188 13.6253C11.5548 13.6253 13.6258 11.5543 13.6258 9.00139C13.6258 6.44849 11.5548 4.37744 9.00188 4.37744ZM9.00188 12.0008C7.34578 12.0008 6.00244 10.6576 6.00244 9.00139C6.00244 7.34515 7.34578 6.00195 9.00188 6.00195C10.6581 6.00195 12.0013 7.34515 12.0013 9.00139C12.0013 10.6576 10.6581 12.0008 9.00188 12.0008Z"
-                                            fill="currentColor"></path>
-                                        <path
-                                            d="M14.8876 4.19521C14.8876 4.79133 14.4043 5.27469 13.808 5.27469C13.2119 5.27469 12.7285 4.79133 12.7285 4.19521C12.7285 3.59894 13.2119 3.11572 13.808 3.11572C14.4043 3.11572 14.8876 3.59894 14.8876 4.19521Z"
-                                            fill="currentColor"></path>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M17.9955 18.0002V17.9994H18V11.3979C18 8.16841 17.3047 5.68066 13.5292 5.68066C11.7142 5.68066 10.4962 6.67666 9.99896 7.62091H9.94646V5.98216H6.3667V17.9994H10.0942V12.0489C10.0942 10.4822 10.3912 8.96716 12.3315 8.96716C14.2432 8.96716 14.2717 10.7552 14.2717 12.1494V18.0002H17.9955Z"
-                                            fill="currentColor"></path>
-                                        <path d="M0.296875 5.98291H4.02888V18.0002H0.296875V5.98291Z"
-                                            fill="currentColor">
-                                        </path>
-                                        <path
-                                            d="M2.1615 0C0.96825 0 0 0.96825 0 2.1615C0 3.35475 0.96825 4.34325 2.1615 4.34325C3.35475 4.34325 4.323 3.35475 4.323 2.1615C4.32225 0.96825 3.354 0 2.1615 0V0Z"
-                                            fill="currentColor"></path>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <svg width="18" height="15" viewBox="0 0 18 15" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M18 1.73137C17.3306 2.025 16.6174 2.21962 15.8737 2.31412C16.6388 1.85737 17.2226 1.13962 17.4971 0.2745C16.7839 0.69975 15.9964 1.00013 15.1571 1.16775C14.4799 0.446625 13.5146 0 12.4616 0C10.4186 0 8.77387 1.65825 8.77387 3.69113C8.77387 3.98363 8.79862 4.26487 8.85938 4.53262C5.7915 4.383 3.07687 2.91263 1.25325 0.67275C0.934875 1.22513 0.748125 1.85738 0.748125 2.538C0.748125 3.816 1.40625 4.94887 2.38725 5.60475C1.79437 5.5935 1.21275 5.42138 0.72 5.15025C0.72 5.1615 0.72 5.17613 0.72 5.19075C0.72 6.984 1.99912 8.4735 3.6765 8.81662C3.37612 8.89875 3.04875 8.93812 2.709 8.93812C2.47275 8.93812 2.23425 8.92463 2.01038 8.87512C2.4885 10.3365 3.84525 11.4109 5.4585 11.4457C4.203 12.4279 2.60888 13.0196 0.883125 13.0196C0.5805 13.0196 0.29025 13.0061 0 12.969C1.63462 14.0231 3.57188 14.625 5.661 14.625C12.4515 14.625 16.164 9 16.164 4.12425C16.164 3.96112 16.1584 3.80363 16.1505 3.64725C16.8829 3.1275 17.4982 2.47837 18 1.73137Z"
-                                            fill="currentColor"></path>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <svg width="18" height="14" viewBox="0 0 18 14" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M16.0427 0.885481C16.8137 1.09312 17.4216 1.70094 17.6291 2.47204C18.0148 3.88048 17.9999 6.81629 17.9999 6.81629C17.9999 6.81629 17.9999 9.73713 17.6293 11.1457C17.4216 11.9167 16.8138 12.5246 16.0427 12.7321C14.6341 13.1029 8.99996 13.1029 8.99996 13.1029C8.99996 13.1029 3.38048 13.1029 1.95721 12.7174C1.18611 12.5098 0.57829 11.9018 0.37065 11.1309C0 9.73713 0 6.80146 0 6.80146C0 6.80146 0 3.88048 0.37065 2.47204C0.578153 1.70108 1.20094 1.07829 1.95707 0.870787C3.36565 0.5 8.99983 0.5 8.99983 0.5C8.99983 0.5 14.6341 0.5 16.0427 0.885481ZM11.8913 6.80154L7.20605 9.50006V4.10303L11.8913 6.80154Z"
-                                            fill="currentColor"></path>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <svg width="9" height="18" viewBox="0 0 9 18" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M7.3575 2.98875H9.00075V0.12675C8.71725 0.08775 7.74225 0 6.60675 0C4.2375 0 2.6145 1.49025 2.6145 4.22925V6.75H0V9.9495H2.6145V18H5.82V9.95025H8.32875L8.727 6.75075H5.81925V4.5465C5.82 3.62175 6.069 2.98875 7.3575 2.98875Z"
-                                            fill="currentColor"></path>
-                                    </svg>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <!-- LEFT: Logo + Menu -->
+        <div class="lmsHeader__left">
+            <a href="{{ route('home') }}" class="lmsHeader__logo">
+                <img src="{{ asset('frontend/dist/images/logo/logo.png') }}" alt="Logo">
+            </a>
+
+            <button class="lmsHeader__toggle" id="lmsMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <!-- CENTER: Navigation -->
+        <nav class="lmsNav">
+            <ul class="lmsNav__list">
+
+                <li class="lmsNav__item">
+                    <a href="{{ route('home') }}" class="lmsNav__link">Home</a>
+                </li>
+
+                @if(request()->session()->get('studentLogin'))
+                    <li class="lmsNav__item">
+                        <a href="{{ route('studentdashboard') }}" class="lmsNav__link">Dashboard</a>
+                    </li>
+                @elseif(auth()->user())
+                    <li class="lmsNav__item">
+                        <a href="{{ route('dashboard') }}" class="lmsNav__link">Dashboard</a>
+                    </li>
+                @endif
+
+                <li class="lmsNav__item"><a href="{{ route('searchCourse') }}" class="lmsNav__link">Courses</a></li>
+                <li class="lmsNav__item"><a href="{{ route('searchInstructor') }}" class="lmsNav__link">Instructors</a></li>
+                <li class="lmsNav__item"><a href="{{ route('about') }}" class="lmsNav__link">About</a></li>
+                <li class="lmsNav__item"><a href="{{ route('contact') }}" class="lmsNav__link">Contact</a></li>
+
+            </ul>
         </nav>
-    </header>
 
+        <!-- RIGHT: Actions -->
+        <div class="lmsActions">
+
+            <!-- Search -->
+            <button class="lmsActions__iconBtn" onclick="openSearch()">
+                🔍
+            </button>
+
+            <!-- Cart -->
+            @if(request()->session()->get('studentLogin'))
+            <a href="{{ route('cart') }}" class="lmsActions__cart">
+                🛒
+                <span class="lmsActions__badge">{{ count((array) session('cart')) }}</span>
+            </a>
+            @endif
+
+            <!-- USER -->
+            <div class="lmsUser" id="lmsUser">
+
+                @if(request()->session()->get('studentLogin'))
+
+                    <!-- STUDENT -->
+                    <div class="lmsUser__trigger" id="lmsUserTrigger">
+                        <img src="{{ asset('uploads/students/' . request()->session()->get('image')) }}"
+                            onerror="this.src='{{ asset('uploads/students/blank_new.png') }}'">
+                    </div>
+
+                    <div class="lmsUser__dropdown" id="lmsUserDropdown">
+                        <a href="{{ route('student_profile') }}">Profile</a>
+                        <a href="{{ route('studentdashboard') }}">Dashboard</a>
+                        <a href="{{ route('studentlogOut') }}" class="danger">Logout</a>
+                    </div>
+
+                @elseif(auth()->user())
+
+                    <!-- ADMIN / USER -->
+                    <div class="lmsUser__trigger" id="lmsUserTrigger">
+                        <img src="{{ asset('uploads/users/' . auth()->user()->image) }}"
+                            onerror="this.src='{{ asset('uploads/students/blank_new.png') }}'">
+                    </div>
+
+                    <div class="lmsUser__dropdown" id="lmsUserDropdown">
+                        <a href="{{ route('user.edit', encryptor('encrypt',auth()->user()->id)) }}">Profile</a>
+                        <a href="{{ route('dashboard') }}">Dashboard</a>
+                        <a href="{{ route('studentlogOut') }}" class="danger">Logout</a>
+                    </div>
+
+                @else
+                    <!-- GUEST -->
+                    <a href="{{ route('studentLogin') }}" class="lmsBtn lmsBtn--ghost">Sign in</a>
+                    <a href="{{ route('signup') }}" class="lmsBtn lmsBtn--primary">Sign up</a>
+                @endif
+
+            </div>
+
+        </div>
+    </div>
+</header>
     @yield('content')
 
     <!-- Footer Starts Here -->
@@ -1117,6 +1684,64 @@
         		@endif  
     </script>
 
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const user = document.getElementById("lmsUser");
+    const trigger = document.getElementById("lmsUserTrigger");
+
+    if (!user || !trigger) return;
+
+    // toggle dropdown
+    trigger.addEventListener("click", function (e) {
+        e.stopPropagation();
+        user.classList.toggle("open");
+    });
+
+    // close on outside click
+    document.addEventListener("click", function (e) {
+        if (!user.contains(e.target)) {
+            user.classList.remove("open");
+        }
+    });
+
+});
+</script>
+<script>
+    const drawer = document.getElementById('categoryDrawer');
+
+    document.getElementById('openCategoryDrawer').addEventListener('click', () => {
+        drawer.classList.add('open');
+    });
+
+    document.getElementById('closeCategoryDrawer').addEventListener('click', () => {
+        drawer.classList.remove('open');
+    });
+
+    document.getElementById('closeCategoryBtn').addEventListener('click', () => {
+        drawer.classList.remove('open');
+    });
+</script>
+<script>
+    const backToTopBtn = document.getElementById("backToTopBtn");
+
+    // Show button on scroll
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.style.display = "flex";
+        } else {
+            backToTopBtn.style.display = "none";
+        }
+    });
+
+    // Scroll to top
+    backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+</script>
     @stack('scripts')
 
 

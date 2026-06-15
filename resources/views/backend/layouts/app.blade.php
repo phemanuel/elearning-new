@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }} | @yield('title')</title>
 
     <!-- Favicon icon -->
@@ -2060,7 +2061,7 @@ body {
 
 .crv-modal-content{
     background:#fff;
-    width:700px;
+    width:800px;
     max-width:95%;
     border-radius:12px;
     overflow:hidden;
@@ -2092,8 +2093,65 @@ body {
 }
 
 /* ---------------------- */
+.crv-action-group{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
 
+.crv-action-group .crv-btn{
+    flex:1;
+    margin-top:0;
+    white-space:nowrap;
+}
 /* ---------------------- */
+.crv-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.5);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+/* .crv-modal-content{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+
+    background:#fff;
+    width:420px;
+    max-width:90%;
+    border-radius:12px;
+    padding:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+} */
+
+.crv-modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.crv-close-modal{
+    border:none;
+    background:none;
+    font-size:20px;
+    cursor:pointer;
+}
+
+textarea{
+    width:100%;
+    padding:10px;
+    border:1px solid #e5e7eb;
+    border-radius:8px;
+    margin-top:10px;
+    resize:none;
+}
 </style>
 </head>
 
