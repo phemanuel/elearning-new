@@ -5784,6 +5784,9 @@ textarea.goalx-input{
         <div class="lms-app-info">
             <span class="app-name">Digi-Hub</span>
             <span class="app-version">v1.0.0</span>
+            <span class="app-version"><button id="closeSidebarBtn" class="lms-sidebar-close-btn">
+                    <span>&times;</span>
+                </button></span>
         </div>
     </div>
 
@@ -5825,11 +5828,11 @@ textarea.goalx-input{
 
 </div>
 
-    <div class="lms-sidebar-mobile-header">
+    <!-- <div class="lms-sidebar-mobile-header">
     <button id="closeSidebarBtn" class="lms-sidebar-close-btn">
         <span>&times;</span>
     </button>
-</div>
+</div> -->
 
 
 </aside>

@@ -176,35 +176,76 @@ class HomeController extends Controller
     }
 
     public function contactAction(Request $request)
-    {        
-        try {
-            // Validate input
-            $request->validate([
-                'fullName'      => 'required|string|max:255',
-                'email'         => 'required|email|max:255',
-                'subject'       => 'required|string|max:1000',               
-                'message'       => 'required|string|max:1000',
-            ]);
+    {
+        $request->validate([
 
-            // Save to DB
+            'fullName' => [
+                'required',
+                'string',
+                'max:255',
+                'regex:/^[a-zA-Z\s\.\-]+$/'
+            ],
+
+            'email' => [
+                'required',
+                'email:rfc,dns',
+                'max:255'
+            ],
+
+            'subject' => [
+                'required',
+                'string',
+                'max:255'
+            ],
+
+            'message' => [
+                'required',
+                'string',
+                'max:1000'
+            ]
+
+        ]);
+
+        try{
+
             Contact::create([
-                'name'      => $request->input('fullName'),
-                'email'          => $request->input('email'),
-                'subject'  => $request->input('subject'),
-                'message' => $request->input('message'),
+
+                'name' => strip_tags($request->fullName),
+
+                'email' => strip_tags($request->email),
+
+                'subject' => strip_tags($request->subject),
+
+                'message' => strip_tags($request->message),
+
             ]);
 
-            // Redirect with success message
-            return redirect()->back()->with('success', 'Your message has been sent successfully.');
-        } catch (\Exception $e) {
-            // Log the error
-            Log::error('Contact Submission Error: ', [
-                'message' => $e->getMessage(),
-                'input'   => $request->all(),
+            return back()
+            ->with('success',
+            'Your message has been sent successfully.');
+
+        }
+
+        catch(\Exception $e){
+
+            Log::error('Contact Submission Error',[
+
+                'error'=>$e->getMessage(),
+
+                'email'=>$request->email,
+
+                'ip'=>$request->ip()
+
             ]);
 
-            // Redirect with error message
-            return redirect()->back()->with('error', 'Something went wrong. Please try again later.');
+            return back()
+
+            ->withInput()
+
+            ->with('error',
+
+            'Something went wrong. Please try again later.');
+
         }
     }
 

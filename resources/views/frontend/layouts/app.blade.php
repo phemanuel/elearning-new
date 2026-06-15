@@ -526,34 +526,6 @@
     height: auto;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-@media (max-width: 992px){
-
-    .lmsHero{
-        padding: 60px 0;
-    }
-
-    .lmsHero__grid{
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .lmsHero__title{
-        font-size: 34px;
-    }
-
-    .lmsHero__searchBox{
-        flex-direction: column;
-        gap: 8px;
-        padding: 10px;
-    }
-
-    .lmsHero__searchBtn{
-        width: 100%;
-    }
-}
 
 .lmsCategories{
     padding: 70px 0;
@@ -629,6 +601,35 @@
     font-size: 13px;
     color: #6b7280;
     margin: 2px 0 0;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 992px){
+
+    .lmsHero{
+        padding: 60px 0;
+    }
+
+    .lmsHero__grid{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .lmsHero__title{
+        font-size: 34px;
+    }
+
+    .lmsHero__searchBox{
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .lmsHero__searchBtn{
+        width: 100%;
+    }
 }
 
 /* responsive */
@@ -1326,6 +1327,711 @@
 .bg-offwhite{
     background:#f7f8fc;
 }
+
+.newsletter-section{
+    background:#f7f8fc;
+    padding:90px 0;
+}
+
+.newsletter-card{
+    position:relative;
+    overflow:hidden;
+
+    background:#fff;
+    border-radius:30px;
+
+    padding:60px;
+
+    box-shadow:
+    0 15px 50px rgba(0,0,0,.06);
+
+    border:1px solid #eef0f6;
+}
+
+.newsletter-content{
+    position:relative;
+    z-index:2;
+}
+
+.newsletter-badge{
+    display:inline-block;
+
+    background:#eef4ff;
+
+    color:#3b82f6;
+
+    padding:10px 18px;
+
+    border-radius:50px;
+
+    font-size:14px;
+    font-weight:600;
+
+    margin-bottom:25px;
+}
+
+.newsletter-content h2{
+    font-size:42px;
+
+    font-weight:700;
+
+    color:#1e293b;
+
+    margin-bottom:20px;
+
+    line-height:1.2;
+}
+
+.newsletter-content p{
+    font-size:17px;
+
+    color:#64748b;
+
+    line-height:1.9;
+
+    max-width:520px;
+}
+
+.newsletter-form{
+    position:relative;
+    z-index:2;
+}
+
+.newsletter-input-group{
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.newsletter-input{
+    flex:1;
+
+    display:flex;
+
+    align-items:center;
+
+    background:#fff;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:60px;
+
+    padding:0 20px;
+
+    height:65px;
+
+    transition:.3s;
+}
+
+.newsletter-input:hover,
+.newsletter-input:focus-within{
+
+    border-color:#3b82f6;
+
+    box-shadow:
+    0 0 0 4px rgba(59,130,246,.1);
+}
+
+.newsletter-input i{
+
+    color:#94a3b8;
+
+    margin-right:12px;
+}
+
+.newsletter-input input{
+
+    width:100%;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    font-size:16px;
+}
+
+.newsletter-btn{
+
+    border:none;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    height:65px;
+
+    padding:0 35px;
+
+    border-radius:60px;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.newsletter-btn:hover{
+
+    transform:translateY(-2px);
+
+    background:#1d4ed8;
+
+    box-shadow:
+    0 15px 30px rgba(37,99,235,.25);
+}
+
+.newsletter-note{
+
+    display:block;
+
+    margin-top:15px;
+
+    color:#94a3b8;
+
+    font-size:14px;
+}
+
+/* Decorative shapes */
+
+.newsletter-shape{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(10px);
+
+    z-index:1;
+}
+
+.shape-1{
+
+    width:220px;
+
+    height:220px;
+
+    background:rgba(59,130,246,.08);
+
+    top:-90px;
+
+    right:-70px;
+}
+
+.shape-2{
+
+    width:160px;
+
+    height:160px;
+
+    background:rgba(14,165,233,.08);
+
+    bottom:-70px;
+
+    left:-60px;
+}
+
+@media(max-width:991px){
+
+    .newsletter-card{
+
+        padding:40px 25px;
+    }
+
+    .newsletter-content{
+
+        text-align:center;
+
+        margin-bottom:30px;
+    }
+
+    .newsletter-content h2{
+
+        font-size:32px;
+    }
+
+    .newsletter-input-group{
+
+        flex-direction:column;
+    }
+
+    .newsletter-btn{
+
+        width:100%;
+    }
+}
+
+.lmsHeader{
+    background:#fff;
+    border-bottom:1px solid #eee;
+    position:relative;
+    z-index:1000;
+}
+
+/* MAIN LAYOUT FIX */
+.lmsHeader__container{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px 20px;
+    gap:20px;
+}
+
+/* LEFT */
+.lmsHeader__left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.lmsHeader__logo img{
+    height:42px;
+}
+
+/* TOGGLE */
+.lmsHeader__toggle{
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    gap:4px;
+    background:none;
+    border:none;
+    cursor:pointer;
+}
+
+.lmsHeader__toggle span{
+    width:24px;
+    height:2px;
+    background:#111;
+}
+
+/* CENTER NAV */
+.lmsNav{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.lmsNav__list{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+.lmsNav__link{
+    text-decoration:none;
+    font-size:14px;
+    font-weight:500;
+    color:#222;
+    transition:.3s;
+}
+
+.lmsNav__link:hover{
+    color:#4f46e5;
+}
+
+/* RIGHT SIDE */
+.lmsActions{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.lmsActions__cart{
+    position:relative;
+    font-size:18px;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+}
+
+.lmsActions__badge{
+    position:absolute;
+    top:-6px;
+    right:-10px;
+    background:red;
+    color:#fff;
+    font-size:10px;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* USER */
+.lmsUser{
+    position:relative;
+    display:flex;
+    align-items:center;
+    cursor:pointer;
+}
+
+.lmsUser img{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    object-fit:cover;
+    display:block;
+}
+
+/* DROPDOWN */
+.lmsUser__dropdown{
+    position:absolute;
+    top:50px;
+    right:0;
+    background:#fff;
+    border:1px solid #eee;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    min-width:160px;
+    border-radius:8px;
+    display:none;
+    overflow:hidden;
+}
+
+.lmsUser__dropdown a{
+    display:block;
+    padding:10px 14px;
+    text-decoration:none;
+    color:#333;
+    font-size:14px;
+}
+
+.lmsUser__dropdown a:hover{
+    background:#f5f5f5;
+}
+
+/* BUTTONS */
+.lmsBtn{
+    padding:8px 14px;
+    border-radius:6px;
+    font-size:14px;
+    text-decoration:none;
+}
+
+.lmsBtn--primary{
+    background:#4f46e5;
+    color:#fff;
+}
+
+.lmsBtn--ghost{
+    border:1px solid #ddd;
+    color:#333;
+}
+
+/* MOBILE */
+@media(max-width:992px){
+
+    .lmsHeader__toggle{
+        display:flex;
+    }
+
+    .lmsNav{
+        position:absolute;
+        top:70px;
+        left:0;
+        right:0;
+        background:#fff;
+        border-top:1px solid #eee;
+        display:none;
+        padding:15px;
+    }
+
+    .lmsNav.active{
+        display:block;
+    }
+
+    .lmsNav__list{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+    }
+
+    .lmsActions{
+        display:none;
+    }
+}
+
+/* ACTIVE STATES */
+.lmsUser__dropdown.active{
+    display:block;
+}
+
+
+/* =========================
+   BASE HEADER
+========================= */
+.kdHeader{
+    background:#fff;
+    border-bottom:1px solid #eee;
+    position:sticky;
+    top:0;
+    z-index:9999;
+}
+
+/* =========================
+   CONTAINER LAYOUT
+========================= */
+.kdHeader__container{
+    max-width:1200px;
+    margin:auto;
+    padding:12px 20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+/* =========================
+   LOGO
+========================= */
+.kdHeader__logo img{
+    height:42px;
+}
+
+/* =========================
+   NAV (DESKTOP DEFAULT)
+========================= */
+.kdHeader__navList{
+    display:flex;
+    align-items:center;
+    gap:22px;
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+.kdHeader__navList li a{
+    text-decoration:none;
+    color:#222;
+    font-weight:500;
+    font-size:15px;
+    transition:.2s;
+}
+
+.kdHeader__navList li a:hover{
+    color:#4f46e5;
+}
+
+/* =========================
+   RIGHT ACTIONS (DESKTOP)
+========================= */
+.kdHeader__actions{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+/* cart */
+.kdHeader__cart{
+    text-decoration:none;
+    font-size:14px;
+    color:#222;
+    position:relative;
+}
+
+.kdHeader__cart span{
+    background:#4f46e5;
+    color:#fff;
+    font-size:12px;
+    padding:2px 6px;
+    border-radius:20px;
+    margin-left:5px;
+}
+
+/* =========================
+   USER DROPDOWN (DESKTOP)
+========================= */
+.kdUser{
+    position:relative;
+}
+
+.kdUser img{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    cursor:pointer;
+    object-fit:cover;
+    border:2px solid #eee;
+}
+
+.kdUser__dropdown{
+    position:absolute;
+    right:0;
+    top:50px;
+    width:170px;
+    background:#fff;
+    border:1px solid #eee;
+    border-radius:10px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    display:none;
+    flex-direction:column;
+    overflow:hidden;
+}
+
+.kdUser__dropdown a{
+    padding:10px 12px;
+    text-decoration:none;
+    color:#333;
+    font-size:14px;
+    transition:.2s;
+}
+
+.kdUser__dropdown a:hover{
+    background:#f5f5f5;
+}
+
+.kdUser__dropdown.active{
+    display:flex;
+}
+
+/* =========================
+   AUTH BUTTONS (DESKTOP)
+========================= */
+.kdHeader__authDesktop a{
+    text-decoration:none;
+    margin-left:10px;
+    font-size:14px;
+}
+
+.kdBtn{
+    padding:8px 14px;
+    border-radius:6px;
+    font-weight:500;
+    display:inline-block;
+}
+
+.kdBtn--primary{
+    background:#4f46e5;
+    color: #fff !important;
+}
+
+.kdBtn--ghost{
+    border:1px solid #ddd;
+    color:#333;
+}
+
+/* =========================
+   TOGGLE BUTTON
+========================= */
+.kdHeader__toggle{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    background:none;
+    border:none;
+    cursor:pointer;
+}
+
+.kdHeader__toggle span{
+    width:26px;
+    height:2px;
+    background:#222;
+    display:block;
+}
+
+/* =========================
+   OVERLAY
+========================= */
+.kdOverlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.4);
+    display:none;
+    z-index:999;
+}
+
+.kdOverlay.active{
+    display:block;
+}
+
+/* =========================
+   MOBILE MENU
+========================= */
+@media (max-width: 992px){
+
+    .kdHeader__toggle{
+        display:flex;
+    }
+
+    /* NAV becomes drawer */
+    .kdHeader__nav{
+        position:fixed;
+        top:0;
+        left:-100%;
+        width:280px;
+        height:100%;
+        background:#fff;
+        padding:80px 20px;
+        transition:.3s ease;
+        z-index:1000;
+        overflow-y:auto;
+    }
+
+    .kdHeader__nav.active{
+        left:0;
+    }
+
+    .kdHeader__navList{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    /* divider */
+    .kdHeader__divider{
+        width:100%;
+        height:1px;
+        background:#eee;
+        margin:10px 0;
+    }
+
+    /* hide desktop auth */
+    .kdHeader__authDesktop{
+        display:none;
+    }
+
+    /* mobile cart */
+    .kdMobileCart a{
+        display:block;
+        padding:10px 0;
+        font-weight:600;
+        color:#222;
+        text-decoration:none;
+    }
+
+    /* mobile user block */
+    .kdMobileUser__box{
+        display:flex;
+        gap:10px;
+        align-items:center;
+        padding:10px 0;
+    }
+
+    .kdMobileUser__box img{
+        width:40px;
+        height:40px;
+        border-radius:50%;
+        object-fit:cover;
+    }
+
+    /* layout fix */
+    .kdHeader__container{
+        align-items:center;
+    }
+
+    .kdHeader__actions{
+        gap:10px;
+    }
+}
 </style>
     @stack('styles')
 
@@ -1334,106 +2040,137 @@
 <body @yield('body-attr')>
 
     <!-- LMS HEADER -->
-<header class="lmsHeader">
-    <div class="lmsHeader__container">
+<header class="kdHeader">
+    <div class="kdHeader__container">
 
-        <!-- LEFT: Logo + Menu -->
-        <div class="lmsHeader__left">
-            <a href="{{ route('home') }}" class="lmsHeader__logo">
+        <!-- LEFT -->
+        <div class="kdHeader__left">
+            <a href="{{ route('home') }}" class="kdHeader__logo">
                 <img src="{{ asset('frontend/dist/images/logo/logo.png') }}" alt="Logo">
             </a>
-
-            <button class="lmsHeader__toggle" id="lmsMenuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </div>
 
-        <!-- CENTER: Navigation -->
-        <nav class="lmsNav">
-            <ul class="lmsNav__list">
+        <!-- NAV (NOW CONTAINS EVERYTHING FOR MOBILE) -->
+        <nav class="kdHeader__nav" id="kdNav">
+            <ul class="kdHeader__navList">
 
-                <li class="lmsNav__item">
-                    <a href="{{ route('home') }}" class="lmsNav__link">Home</a>
-                </li>
+                <li><a href="{{ route('home') }}">Home</a></li>
 
                 @if(request()->session()->get('studentLogin'))
-                    <li class="lmsNav__item">
-                        <a href="{{ route('studentdashboard') }}" class="lmsNav__link">Dashboard</a>
-                    </li>
+                    <li><a href="{{ route('studentdashboard') }}">Dashboard</a></li>
                 @elseif(auth()->user())
-                    <li class="lmsNav__item">
-                        <a href="{{ route('dashboard') }}" class="lmsNav__link">Dashboard</a>
+                    <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                @endif
+
+                <li><a href="{{ route('searchCourse') }}">Courses</a></li>
+                <li><a href="{{ route('searchInstructor') }}">Instructors</a></li>
+                <li><a href="{{ route('about') }}">About</a></li>
+                <li><a href="{{ route('contact') }}">Contact</a></li>
+
+                <!-- CART (NOW INSIDE NAV) -->
+                <!--@if(request()->session()->get('studentLogin'))-->
+                <!--<li class="kdMobileCart">-->
+                <!--    <a href="{{ route('cart') }}">-->
+                <!--        🛒 Cart ({{ count((array) session('cart')) }})-->
+                <!--    </a>-->
+                <!--</li>-->
+                <!--@endif-->
+
+                <!-- AUTH (GUEST ONLY) -->
+                @if(!request()->session()->get('studentLogin') && !auth()->user())
+
+                    <li class="kdHeader__divider"></li>
+
+                    <li>
+                        <a class="kdBtn kdBtn--ghost" href="{{ route('studentLogin') }}">Sign in</a>
+                    </li>
+
+                    <li>
+                        <a class="kdBtn kdBtn--primary" href="{{ route('signup') }}">Sign up</a>
                     </li>
                 @endif
 
-                <li class="lmsNav__item"><a href="{{ route('searchCourse') }}" class="lmsNav__link">Courses</a></li>
-                <li class="lmsNav__item"><a href="{{ route('searchInstructor') }}" class="lmsNav__link">Instructors</a></li>
-                <li class="lmsNav__item"><a href="{{ route('about') }}" class="lmsNav__link">About</a></li>
-                <li class="lmsNav__item"><a href="{{ route('contact') }}" class="lmsNav__link">Contact</a></li>
+                <!-- PROFILE (MOBILE VIEW INSIDE MENU) -->
+                <!--@if(request()->session()->get('studentLogin'))-->
+
+                <!--<li class="kdMobileUser">-->
+                <!--    <div class="kdMobileUser__box">-->
+                <!--        <img src="{{ asset('public/uploads/students/' . request()->session()->get('image')) }}">-->
+                <!--        <div>-->
+                <!--            <a href="{{ route('student_profile') }}">Profile</a><br>-->
+                <!--            <a href="{{ route('studentdashboard') }}">Dashboard</a><br>-->
+                <!--            <a href="{{ route('studentlogOut') }}">Logout</a>-->
+                <!--        </div>-->
+                <!--    </div>-->
+                <!--</li>-->
+
+                <!--@elseif(auth()->user())-->
+
+                <!--<li class="kdMobileUser">-->
+                <!--    <div class="kdMobileUser__box">-->
+                <!--        <img src="{{ asset('public/uploads/users/' . auth()->user()->image) }}">-->
+                <!--        <div>-->
+                <!--            <a href="{{ route('dashboard') }}">Dashboard</a><br>-->
+                <!--            <a href="{{ route('studentlogOut') }}">Logout</a>-->
+                <!--        </div>-->
+                <!--    </div>-->
+                <!--</li>-->
+
+                <!--@endif-->
 
             </ul>
         </nav>
 
-        <!-- RIGHT: Actions -->
-        <div class="lmsActions">
+        <!-- RIGHT (DESKTOP ONLY ACTIONS) -->
+        <div class="kdHeader__actions">
 
-            <!-- Search -->
-            <button class="lmsActions__iconBtn" onclick="openSearch()">
-                🔍
-            </button>
-
-            <!-- Cart -->
+            <!-- CART (DESKTOP ONLY) -->
             @if(request()->session()->get('studentLogin'))
-            <a href="{{ route('cart') }}" class="lmsActions__cart">
-                🛒
-                <span class="lmsActions__badge">{{ count((array) session('cart')) }}</span>
+            <a class="kdHeader__cart" href="{{ route('cart') }}">
+                🛒 <span>{{ count((array) session('cart')) }}</span>
             </a>
             @endif
 
-            <!-- USER -->
-            <div class="lmsUser" id="lmsUser">
-
-                @if(request()->session()->get('studentLogin'))
-
-                    <!-- STUDENT -->
-                    <div class="lmsUser__trigger" id="lmsUserTrigger">
-                        <img src="{{ asset('uploads/students/' . request()->session()->get('image')) }}"
-                            onerror="this.src='{{ asset('uploads/students/blank_new.png') }}'">
-                    </div>
-
-                    <div class="lmsUser__dropdown" id="lmsUserDropdown">
+            <!-- PROFILE (DESKTOP DROPDOWN) -->
+            @if(request()->session()->get('studentLogin'))
+                <div class="kdUser">
+                    <img id="kdUserTrigger"
+                         src="{{ asset('uploads/students/' . request()->session()->get('image')) }}"
+                         onerror="this.src='{{ asset('uploads/students/blank_new.png') }}'">
+                    <div class="kdUser__dropdown" id="kdUserDropdown">
                         <a href="{{ route('student_profile') }}">Profile</a>
                         <a href="{{ route('studentdashboard') }}">Dashboard</a>
-                        <a href="{{ route('studentlogOut') }}" class="danger">Logout</a>
+                        <a href="{{ route('studentlogOut') }}">Logout</a>
                     </div>
+                </div>
 
-                @elseif(auth()->user())
+            @elseif(auth()->user())
 
-                    <!-- ADMIN / USER -->
-                    <div class="lmsUser__trigger" id="lmsUserTrigger">
-                        <img src="{{ asset('uploads/users/' . auth()->user()->image) }}"
-                            onerror="this.src='{{ asset('uploads/students/blank_new.png') }}'">
-                    </div>
-
-                    <div class="lmsUser__dropdown" id="lmsUserDropdown">
-                        <a href="{{ route('user.edit', encryptor('encrypt',auth()->user()->id)) }}">Profile</a>
-                        <a href="{{ route('dashboard') }}">Dashboard</a>
-                        <a href="{{ route('studentlogOut') }}" class="danger">Logout</a>
-                    </div>
-
-                @else
-                    <!-- GUEST -->
-                    <a href="{{ route('studentLogin') }}" class="lmsBtn lmsBtn--ghost">Sign in</a>
-                    <a href="{{ route('signup') }}" class="lmsBtn lmsBtn--primary">Sign up</a>
-                @endif
-
-            </div>
+                <li class="kdUser">
+                   <div class="kdMobileUser__box">
+                       <img src="{{ asset('uploads/users/' . auth()->user()->image) }}"
+                       onerror="this.src='{{ asset('uploads/students/blank_new.png') }}'">
+                       <div class="kdUser__dropdown" id="kdUserDropdown">
+                           <a href="{{ route('dashboard') }}">Dashboard</a><br>
+                           <a href="{{ route('studentlogOut') }}">Logout</a>
+                       </div>
+                   </div>
+                </li>
+           
+            @endif
 
         </div>
+
+        <!-- TOGGLE -->
+        <button class="kdHeader__toggle" id="kdToggle">
+            <span></span><span></span><span></span>
+        </button>
+
     </div>
 </header>
+
+<!-- OVERLAY -->
+<div class="kdOverlay" id="kdOverlay"></div>
     @yield('content')
 
     <!-- Footer Starts Here -->
@@ -1651,20 +2388,29 @@
     <script src="{{asset('frontend/src/js/app.js')}}"></script>
     <script src="{{asset('frontend/dist/main.js')}}"></script>
 
-    <script>
-        function toggleDropdown(event) {
-            event.preventDefault();
-            var dropdown = document.getElementById('imageDropdown');
-            dropdown.classList.toggle('active');
-    
-            // Close the dropdown when clicking somewhere else on the page
-            document.body.addEventListener('click', function (e) {
-                if (!dropdown.contains(e.target)) {
-                    dropdown.classList.remove('active');
-                }
-            });
-        }
-    </script>
+ <script>
+const toggle = document.getElementById('kdToggle');
+const nav = document.getElementById('kdNav');
+const overlay = document.getElementById('kdOverlay');
+const userTrigger = document.getElementById('kdUserTrigger');
+const userDropdown = document.getElementById('kdUserDropdown');
+
+toggle.addEventListener('click', () => {
+    nav.classList.toggle('active');
+    overlay.classList.toggle('active');
+});
+
+overlay.addEventListener('click', () => {
+    nav.classList.remove('active');
+    overlay.classList.remove('active');
+});
+
+if(userTrigger){
+    userTrigger.addEventListener('click', () => {
+        userDropdown.classList.toggle('active');
+    });
+}
+</script>
 
     {{-- TOASTER --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

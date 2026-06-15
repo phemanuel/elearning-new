@@ -1066,107 +1066,8 @@
     </div>
 </section>
 
-<!--  About Services Starts Here -->
-<section class="testimonial-modern-section">
-    <div class="container">
-
-        <div class="row">
-            <div class="col-lg-7 mx-auto text-center">
-                <h2 class="testimonial-modern-title">
-                    What Our Students Say
-                </h2>
-                <p class="testimonial-modern-subtitle">
-                    Real feedback from learners using Kings Digi Hub
-                </p>
-            </div>
-        </div>
-
-        <div class="testimonial-marquee">
-            <div class="testimonial-track">
-
-                <!-- 1 -->
-                <div class="testimonial-card">
-                    <p>“The courses are very practical. I got my first freelance job after completing the web development track.”</p>
-                    <div class="testimonial-footer">
-                        <div class="user">
-                            <img src="{{ asset('frontend/dist/images/avatar/blank.png') }}">
-                            <div>
-                                <h6>Michael A.</h6>
-                                <span>Web Dev Student</span>
-                            </div>
-                        </div>
-                        <div class="stars">★★★★★</div>
-                    </div>
-                </div>
-
-                <!-- 2 -->
-                <div class="testimonial-card">
-                    <p>“Very clear lessons. I love how simple the UI is and how easy it is to follow each course.”</p>
-                    <div class="testimonial-footer">
-                        <div class="user">
-                            <img src="{{ asset('frontend/dist/images/avatar/blank.png') }}">
-                            <div>
-                                <h6>Sarah K.</h6>
-                                <span>Design Student</span>
-                            </div>
-                        </div>
-                        <div class="stars">★★★★★</div>
-                    </div>
-                </div>
-
-                <!-- 3 -->
-                <div class="testimonial-card">
-                    <p>“Affordable and powerful platform. The instructors really know what they are doing.”</p>
-                    <div class="testimonial-footer">
-                        <div class="user">
-                            <img src="{{ asset('frontend/dist/images/avatar/blank.png') }}">
-                            <div>
-                                <h6>John D.</h6>
-                                <span>Data Science</span>
-                            </div>
-                        </div>
-                        <div class="stars">★★★★★</div>
-                    </div>
-                </div>
-
-                <!-- 4 -->
-                <div class="testimonial-card">
-                    <p>“I like the lifetime access. I can always come back to revise my lessons anytime.”</p>
-                    <div class="testimonial-footer">
-                        <div class="user">
-                            <img src="{{ asset('frontend/dist/images/avatar/blank.png') }}">
-                            <div>
-                                <h6>Grace E.</h6>
-                                <span>Marketing Student</span>
-                            </div>
-                        </div>
-                        <div class="stars">★★★★★</div>
-                    </div>
-                </div>
-
-                <!-- 5 -->
-                <div class="testimonial-card">
-                    <p>“Best learning experience I’ve had online. The structure is very beginner friendly.”</p>
-                    <div class="testimonial-footer">
-                        <div class="user">
-                            <img src="{{ asset('frontend/dist/images/avatar/blank.png') }}">
-                            <div>
-                                <h6>Daniel T.</h6>
-                                <span>IT Student</span>
-                            </div>
-                        </div>
-                        <div class="stars">★★★★★</div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-</section>
-
 <!-- Best Instructors Starts Here -->
-<section class="section best-instructor-featured overflow-hidden main-instructor-featured bg-offwhite">
+<!-- <section class="section best-instructor-featured overflow-hidden main-instructor-featured bg-offwhite">
     <div class="container">
 
         <div class="row align-items-center mb-5">
@@ -1251,7 +1152,7 @@
         </div>        
 
     </div>
-</section>
+</section> -->
 
 <!--  Latest Events Featured Starts Here -->
 <!-- <section class="section section--bg-offwhite-three latest-events-featured main-events-featured">
@@ -1358,28 +1259,170 @@
     </div>
 </section>
 
-<!-- News Letter Starts Here -->
-<section style="background-color: #ebebf2;">
+<!--  About Services Starts Here -->
+<section class="testimonial-modern-section">
     <div class="container">
+
         <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <div class="newsletter-area">
-                    <h4>Subscribe to our Newsletter</h4>
-                    <p class="mt-2 mb-lg-4 mb-3">
-                    Stay updated with the latest news, tips, and resources from Kings Digital Literacy Hub! Subscribe to our newsletter for exclusive content, upcoming courses, and special offers delivered straight to your inbox. 
-                    Don’t miss out—join our community today!
-                    </p>
-                    <form action="{{route('mail-subscribe')}}" method="POST">
+            <div class="col-lg-7 mx-auto text-center">
+                <h2 class="testimonial-modern-title">
+                    What Our Students Say
+                </h2>
+                <p class="testimonial-modern-subtitle">
+                    Real feedback from learners using Kings Digi Hub
+                </p>
+            </div>
+        </div>
+
+        <div class="testimonial-marquee">
+            <div class="testimonial-track">
+
+                <!-- 1 -->
+                <div class="testimonial-card">
+                    <p>“The courses are very practical. I got my first freelance job after completing the web development track.”</p>
+                    <div class="testimonial-footer">
+                        <div class="user">
+                            <img src="{{ asset('frontend/dist/images/avatar/blank.png') }}">
+                            <div>
+                                <h6>Michael A.</h6>
+                                <span>Web Dev Student</span>
+                            </div>
+                        </div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+
+                <!-- 2 -->
+                <div class="testimonial-card">
+                    <p>“Very clear lessons. I love how simple the UI is and how easy it is to follow each course.”</p>
+                    <div class="testimonial-footer">
+                        <div class="user">
+                            <img src="{{ asset('frontend/dist/images/avatar/blank.png') }}">
+                            <div>
+                                <h6>Sarah K.</h6>
+                                <span>Design Student</span>
+                            </div>
+                        </div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+
+                <!-- 3 -->
+                <div class="testimonial-card">
+                    <p>“Affordable and powerful platform. The instructors really know what they are doing.”</p>
+                    <div class="testimonial-footer">
+                        <div class="user">
+                            <img src="{{ asset('frontend/dist/images/avatar/blank.png') }}">
+                            <div>
+                                <h6>John D.</h6>
+                                <span>Data Science</span>
+                            </div>
+                        </div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+
+                <!-- 4 -->
+                <div class="testimonial-card">
+                    <p>“I like the lifetime access. I can always come back to revise my lessons anytime.”</p>
+                    <div class="testimonial-footer">
+                        <div class="user">
+                            <img src="{{ asset('frontend/dist/images/avatar/blank.png') }}">
+                            <div>
+                                <h6>Grace E.</h6>
+                                <span>Marketing Student</span>
+                            </div>
+                        </div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+
+                <!-- 5 -->
+                <div class="testimonial-card">
+                    <p>“Best learning experience I’ve had online. The structure is very beginner friendly.”</p>
+                    <div class="testimonial-footer">
+                        <div class="user">
+                            <img src="{{ asset('frontend/dist/images/avatar/blank.png') }}">
+                            <div>
+                                <h6>Daniel T.</h6>
+                                <span>IT Student</span>
+                            </div>
+                        </div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- News Letter Starts Here -->
+<section class="newsletter-section">
+    <div class="container">
+        <div class="newsletter-card">
+
+            <!-- Decorative shapes -->
+            <span class="newsletter-shape shape-1"></span>
+            <span class="newsletter-shape shape-2"></span>
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-6">
+                    <div class="newsletter-content">
+
+                        <span class="newsletter-badge">
+                            🚀 Join 10,000+ Learners
+                        </span>
+
+                        <h2>
+                            Subscribe to Our Newsletter
+                        </h2>
+
+                        <p>
+                            Stay updated with the latest courses, tech trends,
+                            career tips, and exclusive offers from
+                            <strong>Kings Digi Hub.</strong>
+                            Be the first to know about new learning opportunities.
+                        </p>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+
+                    <form action="{{route('mail-subscribe')}}" method="POST" class="newsletter-form">
                         @csrf
-                        <div class="input-group">
-                            <input type="email" class="form-control border-lowBlack" placeholder="Your email" name="email" />
-                            <button type="submit" class="button button-lg button--primary" type="button">
+
+                        <div class="newsletter-input-group">
+
+                            <div class="newsletter-input">
+                                <i class="fas fa-envelope"></i>
+
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="Enter your email address"
+                                    required>
+                            </div>
+
+                            <button type="submit" class="newsletter-btn">
                                 Subscribe
                             </button>
+
                         </div>
+
+                        <small class="newsletter-note">
+                            No spam. Unsubscribe anytime.
+                        </small>
+
                     </form>
+
                 </div>
+
             </div>
+
         </div>
     </div>
 </section>
